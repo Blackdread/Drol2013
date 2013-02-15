@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Blackdread/Documents/Programmation/Slick and LWJGL/slick/lib/slick.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/Blackdread/Documents/Programmation/Slick and LWJGL/slick/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Blackdread/Documents/Programmation/Slick and LWJGL/lwjgl-2.8.3/jar/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/Blackdread/Documents/Programmation/Slick and LWJGL/lwjgl-2.8.3/native/macosx"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
