@@ -17,8 +17,12 @@ import org.newdawn.slick.gui.MouseOverArea;
  */
 public class ListeDeroulante extends MouseOverArea {
 	
-	private static int DECALAGE_Y = -4, DECALAGE_X = -1;	// decalage du a mes images pour un autre programme,
-	// a mettre comme une variable non static
+	/**
+	 * Decalage de l'image pour la liste deroulante
+	 * A voir si on met un boolean pour decaler aussi les elements (Les elements ont aussi leurs propres variables de decalage)
+	 * car les elements ont normalement une image differente de celle de base
+	 */
+	private int DECALAGE_Y, DECALAGE_X;
 	
 	private static ArrayList<Elements> elements;
 	private Elements currentElementUsed;
