@@ -17,7 +17,7 @@ import base.views.*;
 
 /**
  * 
- * @author Yoann CAPLAIN
+ * @author Yoann CAPLAIN kjkj
  * @since 27 10 2012
  */
 public class Game extends StateBasedGame {
