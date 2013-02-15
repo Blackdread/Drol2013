@@ -22,7 +22,11 @@ public class ListeDeroulante extends MouseOverArea {
 	 * A voir si on met un boolean pour decaler aussi les elements (Les elements ont aussi leurs propres variables de decalage)
 	 * car les elements ont normalement une image differente de celle de base
 	 */
-	private int DECALAGE_Y, DECALAGE_X;
+	private int decalageY, decalageX;
+	/**
+	 * Not used. A faire pour plus tard
+	 */
+	private boolean decalerElements;
 	
 	private static ArrayList<Elements> elements;
 	private Elements currentElementUsed;
@@ -115,7 +119,7 @@ public class ListeDeroulante extends MouseOverArea {
 		int i=0;
 		for(Elements v : elements)
 			if(v!=null){
-				v.setLocation(super.getX() + DECALAGE_X, super.getY() + i*v.getHeight() + super.getHeight() + DECALAGE_Y);
+				v.setLocation(super.getX() + decalageX, super.getY() + i*v.getHeight() + super.getHeight() + decalageY);
 				i++;
 			}
 	}
@@ -206,6 +210,30 @@ public class ListeDeroulante extends MouseOverArea {
 	}
 	public void setCurrentElementUsed(Elements ele){
 		this.currentElementUsed = ele;
+	}
+
+	public int getDecalageY() {
+		return decalageY;
+	}
+
+	public int getDecalageX() {
+		return decalageX;
+	}
+
+	public void setDecalageY(int decalageY) {
+		this.decalageY = decalageY;
+	}
+
+	public void setDecalageX(int decalageX) {
+		this.decalageX = decalageX;
+	}
+
+	public boolean isDecalerElements() {
+		return decalerElements;
+	}
+
+	public void setDecalerElements(boolean decalerElements) {
+		this.decalerElements = decalerElements;
 	}
 
 	public void applyImageAllElement(final Image image){

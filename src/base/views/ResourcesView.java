@@ -82,7 +82,6 @@ public class ResourcesView extends View {
 					view.initResources();
 				}
 
-				//game.initAllTWLComponents();
 				GameMusic.initMusics();
 				ready = true;
 			}
