@@ -42,7 +42,10 @@ public class ProgressBarFillRect extends ProgressBar{
 			g.fillRect(x + widthRect*i, y, widthRect, heightRect);
 		}
 	}
-
+	
+	/**
+	 * La couleur doit etre mise avant l'appel de ce render
+	 */
 	@Override
 	public void renderAndValue(GUIContext container, Graphics g) {
 		this.render(container, g);

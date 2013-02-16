@@ -39,7 +39,13 @@ public abstract class ProgressBar {
 	public abstract int getWidht();
 	public abstract int getHeight();
 	
+	/**
+	 * La couleur doit etre mise avant l'appel de ce render
+	 */
 	public abstract void render(GUIContext container, Graphics g);
+	/**
+	 * La couleur doit etre mise avant l'appel de ce render
+	 */
 	public abstract void renderAndValue(GUIContext container, Graphics g);
 	
 	public boolean isComplete(){
