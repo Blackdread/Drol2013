@@ -6,7 +6,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
 import org.newdawn.slick.Image;
 
-import base.engine.layers.entities.Data;
+import base.engine.entities.Data;
 import base.utils.ResourceManager;
 
 public class Cursors extends Cursor{

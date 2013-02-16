@@ -6,9 +6,6 @@ import org.newdawn.slick.gui.GUIContext;
 
 
 /**
- * background et barInterne doivent etre de la meme hauteur. 
- * Il faut donc que l'image de la bar gere la transparencesur le haut et le bas.
- * Les bars sont colees entre elles et par rapport au background
  * 
  * @author Yoann CAPLAIN
  * @since 26 10 2012
@@ -18,21 +15,25 @@ public class ProgressBarImage extends ProgressBar {
 	private Image background;
 	private Image barInterne;
 	
+	/**
+	 * Decalage sur les x de la bar interne
+	 */
+	private int decalageBarX;
+	/**
+	 * Decalage sur les y de la bar interne
+	 */
+	private int decalageBarY;
+	
 	public ProgressBarImage(Image back, Image bar) {
 		background = back;
 		barInterne = bar;
 	}
 
-	/**
-	 * background et barInterne doivent etre de la meme hauteur. 
-	 * Il faut donc que l'image de la bar gere la transparencesur le haut et le bas.
-	 * Les bars sont colees entre elles et par rapport au background
-	 */
 	@Override
 	public void render(GUIContext container, Graphics g) {
 		g.drawImage(background, x, y);
 		for(int i=0;i<value;i++){
-			g.drawImage(barInterne, x + barInterne.getWidth()*i, y);
+			g.drawImage(barInterne, x + barInterne.getWidth()*i + decalageBarX, y + decalageBarY);
 		}
 	}
 	@Override
@@ -41,15 +42,35 @@ public class ProgressBarImage extends ProgressBar {
 		g.drawString(""+value, barInterne.getWidth()*MAX_VALUE/2-container.getDefaultFont().getWidth(""+value)/2, y-container.getDefaultFont().getHeight(""+value) - DECALAGE_RENDER_VALUE);
 	}
 	
+	/**
+	 * width of background image
+	 */
 	@Override
 	public int getWidht() {
-		// TODO Auto-generated method stub
 		return background.getWidth();
 	}
 
+	/**
+	 * height of background image
+	 */
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return background.getHeight();
+	}
+
+	public int getDecalageBarX() {
+		return decalageBarX;
+	}
+
+	public int getDecalageBarY() {
+		return decalageBarY;
+	}
+
+	public void setDecalageBarX(int decalageBarX) {
+		this.decalageBarX = decalageBarX;
+	}
+
+	public void setDecalageBarY(int decalageBarY) {
+		this.decalageBarY = decalageBarY;
 	}
 }

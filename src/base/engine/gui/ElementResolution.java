@@ -72,8 +72,7 @@ public class ElementResolution extends Elements{
 			
 			return true;
 		}
-		return false;
-		
+		return false;	
 	}
 	
 	public boolean isElementUsed(){
@@ -83,15 +82,15 @@ public class ElementResolution extends Elements{
 	@Override
 	public void render(GUIContext container, Graphics g){
 		super.render(container, g);
-		g.drawString(""+resolution.toString(), super.getX()+25, super.getY() + super.getHeight()/4);
+		g.drawString(""+resolution.toString(), super.getX()+25 +decalageX, super.getY() + super.getHeight()/4 +decalageY);
 	}
 	public void render(GUIContext container, Graphics g, int x, int y){
 		super.render(container, g);
-		g.drawString(""+resolution.toString(), x+25, y + super.getHeight()/4);
+		g.drawString(""+resolution.toString(), x+25 +decalageX, y + super.getHeight()/4 +decalageY);
 	}
 	@Override
 	public void renderString(GUIContext container, Graphics g, int x, int y) {
-		g.drawString(""+resolution.toString(), x+25, y + super.getHeight()/4 + 6);
+		g.drawString(""+resolution.toString(), x+25 +decalageX, y + super.getHeight()/4 + 6 +decalageY);
 	}
 
 	@Override

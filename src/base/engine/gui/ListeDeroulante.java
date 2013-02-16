@@ -25,6 +25,7 @@ public class ListeDeroulante extends MouseOverArea {
 	private int decalageY, decalageX;
 	/**
 	 * Not used. A faire pour plus tard
+	 * Decale les elements par rapport a ceux de la liste deroulante
 	 */
 	private boolean decalerElements;
 	
@@ -119,7 +120,10 @@ public class ListeDeroulante extends MouseOverArea {
 		int i=0;
 		for(Elements v : elements)
 			if(v!=null){
-				v.setLocation(super.getX() + decalageX, super.getY() + i*v.getHeight() + super.getHeight() + decalageY);
+				if(decalerElements)
+					v.setLocation(super.getX() + decalageX, super.getY() + i*v.getHeight() + super.getHeight() + decalageY);
+				else
+					v.setLocation(super.getX(), super.getY() + i*v.getHeight() + super.getHeight());
 				i++;
 			}
 	}
@@ -262,6 +266,7 @@ public class ListeDeroulante extends MouseOverArea {
 				}
 	}
 
+	@Deprecated
 	public void addElementResolution(GUIContext container, Image image, int withReso, int heightReso,
 			int width, int height){
 		elements.add(new ElementResolution(container, image, 0, 0, withReso, heightReso, width, height));

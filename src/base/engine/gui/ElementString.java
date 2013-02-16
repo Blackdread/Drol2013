@@ -53,19 +53,19 @@ public class ElementString extends Elements {
 	@Override
 	public void render(GUIContext container, Graphics g){
 		super.render(container, g);
-		g.drawString(""+chaine, super.getX()+25, super.getY() + super.getHeight()/4);
+		g.drawString(""+chaine, super.getX()+25+decalageX, super.getY() + super.getHeight()/4 +decalageY);
 	}
 	@Override
 	public void render(GUIContext container, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		super.render(container, g);
-		g.drawString(""+chaine, x, y + super.getHeight()/4);
+		g.drawString(""+chaine, x+decalageX, y + super.getHeight()/4 +decalageY);
 	}
 
 	@Override
 	public void renderString(GUIContext container, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		g.drawString(""+chaine, x, y + super.getHeight()/4 + 6);
+		g.drawString(""+chaine, x+decalageX, y + super.getHeight()/4 + 6 +decalageY);
 	}
 
 	@Override

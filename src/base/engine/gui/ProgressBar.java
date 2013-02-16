@@ -4,6 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.gui.GUIContext;
 
 public abstract class ProgressBar {
+	protected final int MIN_VALUE = 0;
 	protected final int MAX_VALUE = 100;
 	protected final int DECALAGE_RENDER_VALUE = 5;
 	
@@ -42,9 +43,9 @@ public abstract class ProgressBar {
 	public abstract void renderAndValue(GUIContext container, Graphics g);
 	
 	public boolean isComplete(){
-		return value>=100;
+		return value>=MAX_VALUE;
 	}
 	public void reset(){
-		value=0;
+		value=MIN_VALUE;
 	}
 }

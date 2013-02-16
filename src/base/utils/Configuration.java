@@ -19,13 +19,28 @@ public class Configuration {
 	private static String fileLocation;
 	private static Properties configurationFile;
 	
+	public static final int WIDTH_WINDOW_PREFERER = 1024;
+	public static final int HEIGHT_WINDOW_PREFERER = 768;
+	/**
+	 * Pour ne pas avoir des images trop grandes et qui se pixelisent
+	 */
+	public static final float MAX_SCALE = 3;
+	/**
+	 * Pour ne pas avoir des images trop petites
+	 */
+	public static final float MIN_SCALE = 0.3f;
 	
-	
+	/**
+	 * Retourne un scale par rapport a une dimension de fenetre approprie a la taille des images de base pour le projet
+	 * @return float taille du scale
+	 */
 	public static float getScaleFenetre(){
-		//return (float)((float)getWidth()/(float)getHeight())-0.789f;
-		//return (float)((float)getWidth()/(float)getHeight())-0.989f;
-		return (float)((float)getWidth()/(float)getHeight()) / (float)(1024/768);
-		//return 1;
+		float t = (float)((float)getWidth()/(float)getHeight()) / (float)(WIDTH_WINDOW_PREFERER/HEIGHT_WINDOW_PREFERER);
+		if(t < MAX_SCALE && t > MIN_SCALE)
+			return t;
+		if(t >= MAX_SCALE)
+			return MAX_SCALE;
+		return MIN_SCALE;
 	}
 
 	/**

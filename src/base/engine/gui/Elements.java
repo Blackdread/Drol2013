@@ -10,6 +10,7 @@ import org.newdawn.slick.gui.MouseOverArea;
 public abstract class Elements extends MouseOverArea{
 	
 	//private int heightElement;	// supposer etre la hauteur du texte ou autre pour centrer tout ca mais pas utile ici pour le moment
+	protected int decalageY, decalageX;
 	
 	public Elements(GUIContext container, Image image, Shape shape) {
 		super(container, image, shape);
@@ -54,5 +55,21 @@ public abstract class Elements extends MouseOverArea{
 	public abstract void render(GUIContext container, Graphics g, int x, int y);
 	
 	public abstract void renderString(GUIContext container, Graphics g, int x, int y);
+
+	public int getDecalageY() {
+		return decalageY;
+	}
+
+	public int getDecalageX() {
+		return decalageX;
+	}
+
+	public void setDecalageY(int decalageY) {
+		this.decalageY = decalageY;
+	}
+
+	public void setDecalageX(int decalageX) {
+		this.decalageX = decalageX;
+	}
 	
 }
