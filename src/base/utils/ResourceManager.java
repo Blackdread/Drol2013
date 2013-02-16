@@ -29,7 +29,6 @@ import org.newdawn.slick.particles.ParticleSystem;
  * 
  * Example: SpriteSheet sheet = Resources.getSprite("mySpriteSheet");
  * 
- * BE CAREFUL !
  * 
  * The jar must contain the following directory structure:
  * 

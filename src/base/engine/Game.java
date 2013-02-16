@@ -26,7 +26,7 @@ public class Game extends StateBasedGame {
 	/**
 	 * The current name of the project.
 	 */
-	public static final String NAME = "Bunker Defense By Yoann CAPLAIN 20-11-2012";
+	public static final String NAME = "Drol By Yoann CAPLAIN and Nicolas DUPIN 16-02-2013";
 	/**
 	 * The current version of the project.
 	 */
