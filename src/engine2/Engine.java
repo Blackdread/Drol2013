@@ -37,7 +37,6 @@ public abstract class Engine{
 	public void process_first_message(){
 		
 		if(!message_queue.isEmpty()){
-			
 			Message m = message_queue.remove();
 			
 			//Traite le message
