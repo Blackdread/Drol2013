@@ -133,10 +133,13 @@ public class Level implements ILevel{
 	}
 	
 	/**
+	 * ********* Sera surement supprimer du a l'interface ISave avec le Load(String s) **********  
+	 *
 	 * Gere ce que lis LoadLevelThread. Ainsi si Level devient une classe abstraite
 	 * Cette methode deviendra abstraite aussi et pourra être gérer différement par les classes filles
 	 * @param ligne
 	 */
+	@Deprecated
 	public void gererStringLuDansFichier(String ligne){
 		
 	}
