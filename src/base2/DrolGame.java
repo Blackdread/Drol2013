@@ -16,7 +16,10 @@ public class DrolGame extends StateBasedGame{
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		/*
+		 * Pourquoi tu recr cette classe ? Elle est djˆ faite. Faut juste enlever certaines lignes et en ajouter etc
+		 * 
+		 */
 	}
 
 }

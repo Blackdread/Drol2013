@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import base.engine.Engine;
-import base.engine.layers.entities.Data;
+import base.engine.entities.Data;
 
 public class BlockRectangle extends Block {
 	

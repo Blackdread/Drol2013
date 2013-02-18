@@ -14,6 +14,8 @@ public abstract class Engine{
 	private Game game_parent;
 	
 	//Interface à modifier
+	// Faudra choisir entre : AbstractQueue, ArrayBlockingQueue, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingQueue, LinkedList, PriorityBlockingQueue, PriorityQueue, SynchronousQueue
+	// je sais pas trop comment tu veux gerer tes messages.
 	private Queue<Message> message_queue = new Queue<Message>(0); 
 	
 	
