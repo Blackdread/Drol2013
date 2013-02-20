@@ -3,6 +3,7 @@
  */
 package engine2;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -13,8 +14,7 @@ public abstract class Engine{
 
 	private Game game_parent;
 	
-	//Interface à modifier
-	// Faudra choisir entre : AbstractQueue, ArrayBlockingQueue, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingQueue, LinkedList, PriorityBlockingQueue, PriorityQueue, SynchronousQueue
+	private Queue<Message> message_queue = new LinkedList<Message>(, ConcurrentLinkedQueue, DelayQueue, LinkedBlockingQueue, LinkedList, PriorityBlockingQueue, PriorityQueue, SynchronousQueue
 	// je sais pas trop comment tu veux gerer tes messages.
 	private Queue<Message> message_queue = new Queue<Message>(0); 
 	
@@ -34,18 +34,4 @@ public abstract class Engine{
 	}
 	
 	/*
-	 * Methode à redéfinir dans chacun des Engines, traite les messages
-	 */
-	public void process_first_message(){
-		
-		if(!message_queue.isEmpty()){
-			Message m = message_queue.remove();
-			
-			//Traite le message
-		}
-		
-	}
-	
-	abstract public void frame(); //Executé à chaque frame
-	
-}
+	 * Methode à redéfinir dans chacun des Engines, traite 
