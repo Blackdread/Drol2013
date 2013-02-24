@@ -10,8 +10,13 @@ public class ProgressOval extends ProgressBar {
 	
 	private int width, height;
 	
-	//private boolean milieuVide;
-	//private int milieuWidth, milieuHeight
+	/**
+	 * Default color : black
+	 */
+	private Color colorMilieu = Color.black;
+	private boolean milieuVide = false;
+	private boolean milieuTransparent = false;
+	private int milieuWidth, milieuHeight;
 	
 	public ProgressOval(int widht, int height) {
 		this.width = widht;
@@ -30,7 +35,7 @@ public class ProgressOval extends ProgressBar {
 	}
 	
 	@Override
-	public int getWidht() {
+	public int getWidth() {
 		return width;
 	}
 
@@ -39,12 +44,62 @@ public class ProgressOval extends ProgressBar {
 		return height;
 	}
 	
+	public boolean isMilieuVide() {
+		return milieuVide;
+	}
+
+	public boolean isMilieuTransparent() {
+		return milieuTransparent;
+	}
+
+	public int getMilieuWidth() {
+		return milieuWidth;
+	}
+
+	public int getMilieuHeight() {
+		return milieuHeight;
+	}
+
+	public void setMilieuVide(boolean milieuVide) {
+		this.milieuVide = milieuVide;
+	}
+
+	public void setMilieuTransparent(boolean milieuTransparent) {
+		this.milieuTransparent = milieuTransparent;
+	}
+
+	public void setMilieuWidth(int milieuWidth) {
+		this.milieuWidth = milieuWidth;
+	}
+
+	public void setMilieuHeight(int milieuHeight) {
+		this.milieuHeight = milieuHeight;
+	}
+
+	public Color getColorMilieu() {
+		return colorMilieu;
+	}
+
+	public void setColorMilieu(Color colorMilieu) {
+		this.colorMilieu = colorMilieu;
+	}
+
 	/**
 	 * La couleur doit etre mise avant l'appel de ce render
 	 */
 	@Override
 	public void render(GUIContext container, Graphics g) {
 		g.fillArc(x, y, width, height, 0, value*3.6f);
+		
+		if(milieuVide){
+			if(milieuTransparent){
+				// Pas fini
+				//milieuTransparent();
+			}else{
+				g.setColor(colorMilieu);
+				g.fillArc(x, y, milieuWidth, milieuHeight, 0, value*3.6f);
+			}
+		}
 	}
 	
 	/**
@@ -52,7 +107,7 @@ public class ProgressOval extends ProgressBar {
 	 * @param _g
 	 */
 	@Deprecated
-	private void colorMulty(Graphics _g){
+	private void milieuTransparent(Graphics _g){
 		Graphics gFog = new Graphics(width+20,height+20);
 		Rectangle rect = new Rectangle(0, 0, width+20, height+20);
 		

@@ -24,7 +24,7 @@ public class ProgressBarFillRect extends ProgressBar{
 	}
 	
 	@Override
-	public int getWidht() {
+	public int getWidth() {
 		return (int)(value*widthRect);
 	}
 

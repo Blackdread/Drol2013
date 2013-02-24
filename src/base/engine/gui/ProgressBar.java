@@ -36,7 +36,7 @@ public abstract class ProgressBar {
 		this.x=x;
 		this.y=y;
 	}
-	public abstract int getWidht();
+	public abstract int getWidth();
 	public abstract int getHeight();
 	
 	/**

@@ -46,7 +46,7 @@ public class ProgressBarImage extends ProgressBar {
 	 * width of background image
 	 */
 	@Override
-	public int getWidht() {
+	public int getWidth() {
 		return background.getWidth();
 	}
 
