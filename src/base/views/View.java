@@ -26,6 +26,7 @@ public abstract class View extends BasicGameState {
 
 	protected GameContainer container;
 	protected Game game;
+	
 
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
@@ -41,6 +42,12 @@ public abstract class View extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		
+	}
+
+	@Override
+	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+		if(Configuration.isDebug())
+			g.drawString(""+Configuration.getScaleFenetre(), 5, 30);
 	}
 
 	@Override
@@ -63,12 +70,6 @@ public abstract class View extends BasicGameState {
 		} catch (Exception e) {
 			System.err.println("Could not save screenshot: " + e.getMessage());
 		}
-	}
-
-	@Override
-	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		if(Configuration.isDebug())
-			g.drawString(""+Configuration.getScaleFenetre(), 5, 30);
 	}
 
 	/**

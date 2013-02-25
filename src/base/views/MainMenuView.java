@@ -12,7 +12,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
-import base.engine.gui.transition.WarpTransition;
 import base.utils.ResourceManager;
 
 
@@ -97,11 +96,11 @@ public class MainMenuView extends View {
 	}
 	private void gotoEditeur() {
 		container.setMouseGrabbed(false);
-		game.enterState(Game.EDITEUR_VIEW_ID, null, new WarpTransition());
+		game.enterState(Game.EDITEUR_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	private void gotoOption() {
 		container.setMouseGrabbed(false);
-		game.enterState(Game.OPTIONS_VIEW_ID, new WarpTransition(), null);
+		game.enterState(Game.OPTIONS_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	private void gotoCredits() {
 		container.setMouseGrabbed(false);

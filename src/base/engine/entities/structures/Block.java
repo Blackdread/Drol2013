@@ -42,7 +42,8 @@ public abstract class Block extends StaticEntity implements ICollidableObject, I
 			throws SlickException {
 		//if(this.type != Data.BLOCK_STYLO){
 		if(this.life != Data.BLOCK_INCASSABLE){
-			if(this.engine.getPlayer().isCollidingWith(shape)){
+			if(true){
+			//if(this.engine.getPlayer().isCollidingWith(shape)){
 				this.life -= this.enleverVie;
 				if(this.life < 0)
 					this.life = 0;

@@ -10,7 +10,9 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
-import base.engine.GameMusic;
+import base.engine.Message;
+import base.engine.MessageKey;
+import base.engine.SoundEngine;
 import base.engine.gui.ProgressBarFillRect;
 import base.utils.ResourceManager;
 import base.utils.Timer;
@@ -43,15 +45,13 @@ public class ResourcesView extends View {
 
 	public void initResources() {
 		ready=false;
-		
+		/*
 		try {
-			GameMusic.initMainTheme();
-			GameMusic.loopMainTheme();
 			background = new Image("resources/images/logo.png");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
+		//*/
 		bar = new ProgressBarFillRect(2,8);
 		bar.setLocation(container.getWidth() / 2 - 100, 3*container.getHeight() / 4);
 		bar.setValue(40);
@@ -60,7 +60,7 @@ public class ResourcesView extends View {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbGame, Graphics g) throws SlickException {
 		super.render(container, sbGame, g);
-		g.drawImage(background, 0, 0);
+		//g.drawImage(background, 0, 0);
 		g.setColor(Color.red);
 		bar.render(container, g);
 		g.drawString("Loading ... " + ResourceManager.getAdvancement() + "%", bar.getX() + 20, bar.getY() - 25);
@@ -82,8 +82,19 @@ public class ResourcesView extends View {
 					view.initResources();
 				}
 
-				GameMusic.initMusics();
 				ready = true;
+				SoundEngine b = new SoundEngine();
+				
+				Message a = new Message();
+				a.instruction = MessageKey.I_PLAY_MUSIC;
+				a.s_data.put(MessageKey.P_NAME, "tron");
+				a.f_data.put(MessageKey.P_VOLUME, 0.1f);
+				a.b_data.put(MessageKey.P_LOOP, false);
+				b.receiveMessage(a);
+				b.processMessage();
+				
+				Message c = new Message();
+				c.f_data.put(MessageKey.P_POSITION, 30.0f);
 			}
 			timer.resetTime();
 		}
@@ -107,8 +118,7 @@ public class ResourcesView extends View {
 	private void goToMenu() {
 		if (ready) {
 			container.setMouseGrabbed(false);
-			//game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
-			game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+			game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 

@@ -61,16 +61,18 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new ResourcesView(container));
+		/*
 		addState(new MainMenuView());
-		addState(new EditeurView());
-		addState(new OptionsView());
+		//addState(new EditeurView());
+		//addState(new OptionsView());
 		addState(new CreditsView());
-		addState(new LevelsView());
-		addState(new Engine());
-		addState(new CreateLevelView());
-		addState(new TransitionView());
+		//addState(new LevelsView());
+		//addState(new Engine());
+		//addState(new CreateLevelView());
+		//addState(new TransitionView());
 		addState(new LastView());
 		//addState(new CreateView());
+		 //*/
 	}
 	
 	private void applyCurrentConfiguration(AppGameContainer container) throws IOException, SlickException {
@@ -111,12 +113,14 @@ public class Game extends StateBasedGame {
 		container = new AppGameContainer(this);
 		
 		// Icon		ici car ca a besoin d'etre mis avant que le container ne commence
+		/*
 		String icon[] = {"resources/others/ico16.png", "resources/others/ico24.png","resources/others/ico32.png"};
 		try {
 			container.setIcons(icon);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+		//*/
 		
 		// Mandatory
 		container.setMinimumLogicUpdateInterval(10);
