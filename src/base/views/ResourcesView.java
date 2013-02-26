@@ -91,10 +91,14 @@ public class ResourcesView extends View {
 				a.f_data.put(MessageKey.P_VOLUME, 0.1f);
 				a.b_data.put(MessageKey.P_LOOP, false);
 				b.receiveMessage(a);
-				b.processMessage();
+				//b.processMessage();
 				
 				Message c = new Message();
-				c.f_data.put(MessageKey.P_POSITION, 30.0f);
+				c.instruction = MessageKey.I_PLAY_AT_MUSIC;
+				c.f_data.put(MessageKey.P_POSITION, 20.0f);
+				b.receiveMessage(c);
+				b.processMessage();
+				
 			}
 			timer.resetTime();
 		}

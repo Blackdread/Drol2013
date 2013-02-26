@@ -12,6 +12,7 @@ import org.newdawn.slick.imageout.ImageOut;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import base.engine.EngineManager;
 import base.engine.Game;
 import base.utils.Configuration;
 
@@ -26,7 +27,7 @@ public abstract class View extends BasicGameState {
 
 	protected GameContainer container;
 	protected Game game;
-	
+	protected EngineManager engineManager;
 
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
