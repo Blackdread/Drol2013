@@ -28,7 +28,7 @@ public class SoundEngine extends Engine {
 	 * @see base.engine.Engine#processMessage()
 	 */
 	@Override
-	public void processMessage() {
+	public void processMessage(){
 		Message mes;
 		while(!this.message_queue.isEmpty()){
 			mes = this.message_queue.poll();
@@ -38,19 +38,20 @@ public class SoundEngine extends Engine {
 				if(music != null)
 					if(mes.b_data.containsKey(MessageKey.P_LOOP)){
 						boolean a = mes.b_data.get(MessageKey.P_LOOP);
-						if(a){
+						if(!a){
 							float temp = music.getPosition();
 							music.stop();
 							music.play(1, music.getVolume());
+							music.setPosition(temp);
+						}else{
+							float temp = music.getPosition();
+							music.stop();
+							music.loop(1, music.getVolume());
 							music.setPosition(temp);
 						}
 					}
 				break;
 			
-			/*
-			 * Normalement slick2d a besoin de relancer la musique pour changer le volume donc il faut
-			 * recuperer la position actuelle et l'y remettre apres
-			 */
 			case MessageKey.I_CHANGE_VOLUME_MUSIC:
 				if(music != null)
 					if(mes.f_data.containsKey(MessageKey.P_VOLUME)){
@@ -185,11 +186,11 @@ public class SoundEngine extends Engine {
 		
 		music = ResourceManager.getMusic(name);
 		if(music != null){
-			music.setVolume(volume);
 			if(loop)
 				music.loop();
 			else
 				music.play();
+			music.setVolume(volume);
 		}
 	}
 

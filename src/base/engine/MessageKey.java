@@ -1,5 +1,10 @@
 package base.engine;
 
+/**
+ * 
+ * 
+ *
+ */
 public abstract class MessageKey {
 	
 	/*
@@ -31,9 +36,22 @@ public abstract class MessageKey {
 	
 	/*
 	 * 
+	 * Logic Engine
+	 * 
+	 */
+	// Instructions
+	
+	
+	// Parameters
+	
+	/*
+	 * 
 	 * Network Engine
 	 * 
 	 */
+	// Instructions
 	
+	
+	// Parameters
 	
 }

@@ -95,8 +95,14 @@ public class ResourcesView extends View {
 				
 				Message c = new Message();
 				c.instruction = MessageKey.I_PLAY_AT_MUSIC;
-				c.f_data.put(MessageKey.P_POSITION, 20.0f);
+				c.f_data.put(MessageKey.P_POSITION, 50.0f);
 				b.receiveMessage(c);
+				b.processMessage();
+				
+				Message d = new Message();
+				d.instruction = MessageKey.I_CHANGE_VOLUME_MUSIC;
+				d.f_data.put(MessageKey.P_VOLUME, 0.20f);
+				b.receiveMessage(d);
 				b.processMessage();
 				
 			}

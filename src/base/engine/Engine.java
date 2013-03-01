@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * The entry point to all game mechanics.
  * 
- * This class regroup collision, rendering, network, etc and link every
+ * This class regroup collision, network, etc and link every
  * module to make the game working.
  
  * 
