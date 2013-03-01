@@ -10,7 +10,7 @@ package base.engine;
 public class NetworkEngine extends Engine {
 
 	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see base.engine.Engine#processMessage()
 	 */
 	@Override

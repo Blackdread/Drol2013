@@ -1,11 +1,11 @@
-package base.engine.entities.structures;
+package base.engine.entities.triggers;
 
 import java.util.ArrayList;
 
 import base.engine.Engine;
 import base.engine.entities.BasicEntity;
 
-public interface ITriggerBlock {
+public interface ITrigger {
 	
 	public boolean isTriggerDeclenched();
 	
@@ -13,8 +13,6 @@ public interface ITriggerBlock {
 	public void setTriggerON(boolean set);
 	public boolean isTriggerOnce();
 	public void setTriggerOnce(boolean triggerOnce);
-	public Engine getEngine();
-	public void setEngine(Engine engine);
 	
 	/**
 	 * Si triggerON alors on verifie si le trigger doit se declencher
