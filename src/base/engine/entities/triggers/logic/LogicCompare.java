@@ -59,5 +59,11 @@ public class LogicCompare extends Logic {
 	public void setCompareValue(int compareValue) {
 		this.compareValue = compareValue;
 	}
+	public int getInitialValue() {
+		return this.initialValue;
+	}
+	public int getCompareValue() {
+		return this.compareValue;
+	}
 
 }
