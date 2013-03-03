@@ -16,14 +16,14 @@ public abstract class Filter {
 	
 	/**
 	 * 
-	 * @param String name to compare to 
+	 * @param String targetname that other entities refer to this entity by
 	 */
 	public Filter(String name){
 		this.name = name;
 	}
 	/**
 	 * 
-	 * @param String name to compare to
+	 * @param String targetname that other entities refer to this entity by
 	 * @param Boolean negate invert result
 	 */
 	public Filter(String name, boolean negate){

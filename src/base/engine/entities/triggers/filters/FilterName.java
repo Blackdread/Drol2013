@@ -32,7 +32,7 @@ public class FilterName extends Filter{
 	}
 	/**
 	 * @see Filter
-	 * @param negate nvert the filter
+	 * @param negate invert the filter
 	 * @param String classname Name this filter will compare to
 	 */
 	public FilterName(String name, boolean negate, String Classname){

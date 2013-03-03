@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import base.engine.Engine;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.triggers.filters.Filter;
 import base.utils.Timer;
 
 /**
@@ -44,15 +45,10 @@ public abstract class Trigger implements ITrigger {
 	// Il sera possible de cree une classe Filter puis de faire l'heritage et avoir : 
 	// Filter damage type, Filter enemy, Filter health, Filter activator name, Filter activator class, etc
 	/**
-	 * true -> seul les entites qui font partie des arrayFilter activent le trigger
-	 * false -> seul les entites qui ne font pas partie des arrayFilter activent le trigger
-	 */
-	protected boolean entityFilterActivate;
-	/**
 	 * Filter entities can be used to restrict what activates the trigger.
 	 * Based on pointers !
 	 */
-	protected ArrayList<BasicEntity> arrayFilterEntityThatActivate = new ArrayList<BasicEntity>();
+	protected ArrayList<Filter> arrayFilterEntityThatActivate = new ArrayList<Filter>();
 	
 	/**
 	 * Filter entities id can be used to restrict what activates the trigger.
@@ -65,6 +61,7 @@ public abstract class Trigger implements ITrigger {
 	
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger agit
+	 * Pour TriggerObjectInZone cet array contient les objets dans la zone
 	 */
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
