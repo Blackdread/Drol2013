@@ -28,9 +28,10 @@ public class SoundEngine extends Engine {
 	 * @see base.engine.Engine#processMessage()
 	 */
 	@Override
-	public void processMessage(){
+	synchronized public boolean processMessage(){
 		Message mes;
-		while(!this.message_queue.isEmpty()){
+		//while(!this.message_queue.isEmpty()){
+		if(!this.message_queue.isEmpty()){
 			mes = this.message_queue.poll();
 			switch(mes.instruction){
 			
@@ -161,7 +162,9 @@ public class SoundEngine extends Engine {
 				}
 				break;
 			}
-		}
+		}else
+			return false;
+		return true;
 	}
 	
 	/**

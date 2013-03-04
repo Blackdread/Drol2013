@@ -14,9 +14,10 @@ public class NetworkEngine extends Engine {
 	 * @see base.engine.Engine#processMessage()
 	 */
 	@Override
-	public void processMessage() {
+	public boolean processMessage() {
 		// TODO Auto-generated method stub
 
+		return true;
 	}
 
 }

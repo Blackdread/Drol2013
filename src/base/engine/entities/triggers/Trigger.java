@@ -16,6 +16,7 @@ public abstract class Trigger implements ITrigger {
 
 	/**
 	 * The targetname that other entities refer to this entity by
+	 * Should be unique
 	 */
 	protected String name;
 	
@@ -53,23 +54,17 @@ public abstract class Trigger implements ITrigger {
 	/**
 	 * Filter entities id can be used to restrict what activates the trigger.
 	 * Example : player = 0 ; playerEnemy = 1 ; balle = 2 ; arrow = 3 etc
+	 * @deprecated May be deleted and a filter will be used
 	 */
 	protected ArrayList<Integer> arrayFilterEntityIdThatActivate = new ArrayList<Integer>();
 	
-	
-	
-	
-	/**
-	 * ArrayList qui contient les entites sur lesquelles le trigger agit
-	 * Pour TriggerObjectInZone cet array contient les objets dans la zone
-	 */
-	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
 	// *******
 	// Flags
 	// *******	
 	/**
 	 * Trigger qui se declenche une fois puis plus jamais sinon plusieurs fois
+	 * Need to DESTROY the trigger (remove it from TriggerManager then garbageColector)
 	 */
 	protected boolean triggerOnce;
 	
@@ -96,10 +91,5 @@ public abstract class Trigger implements ITrigger {
 	public void setTriggerOnce(boolean triggerOnce) {
 		this.triggerOnce = triggerOnce;
 	}
-	public ArrayList<BasicEntity> getArrayEntityToActON(){
-		return arrayEntityToActON;
-	}
-	public void setArrayEntityToActON(ArrayList<BasicEntity> arrayEntity) {
-		this.arrayEntityToActON = arrayEntity;
-	}
+
 }

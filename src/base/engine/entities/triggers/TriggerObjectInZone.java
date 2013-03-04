@@ -1,5 +1,7 @@
 package base.engine.entities.triggers;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -16,6 +18,13 @@ public class TriggerObjectInZone extends Trigger {
 	protected int nbObjectInZoneToActivate = 1;
 	protected int x, y;
 	protected int width, height;
+	
+	/**
+	 * ArrayList qui contient les entites sur lesquelles le trigger agit
+	 * cet array contient les objets dans la zone
+	 */
+	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
+	
 	
 	public TriggerObjectInZone(int xx, int yy, int w, int h) {
 		x=xx;
@@ -41,23 +50,14 @@ public class TriggerObjectInZone extends Trigger {
 	 */
 	@Override
 	public void checkTrigger(){
-		int i = 0;
-		Shape zone = new Rectangle(x,y,width,height);
-		Shape enti;
-		if(arrayEntity!=null)
-			for(BasicEntity v : arrayEntity){
-				if(v!=null){
-					enti = new Rectangle(v.getX(),v.getY(),v.getWidth(),v.getHeight());
-					if(enti.intersects(zone) || zone.contains(enti))
-						i++;
-					// Faire de l'heritage pour differentier == , > et <  ????? ou juste des boolean
-					if(i==nbObjectInZoneToActivate){
-						 this.isTriggerDeclenched = true;
-						 return;
-					}
-				}
-				this.isTriggerDeclenched = false;
-			}
+		
+	}
+	
+	public ArrayList<BasicEntity> getArrayEntityToActON(){
+		return arrayEntityToActON;
+	}
+	public void setArrayEntityToActON(ArrayList<BasicEntity> arrayEntity) {
+		this.arrayEntityToActON = arrayEntity;
 	}
 
 }

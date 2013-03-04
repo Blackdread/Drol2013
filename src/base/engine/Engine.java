@@ -10,7 +10,6 @@ import java.util.Queue;
  * 
  * This class regroup collision, network, etc and link every
  * module to make the game working.
- 
  * 
  * @author Yoann CAPLAIN
  * @author Nicolas DUPIN
@@ -20,10 +19,14 @@ public abstract class Engine {
 	
 	protected Queue<Message> message_queue = new LinkedList<Message>(); 
 	
-	public void receiveMessage(Message mes){
+	synchronized public void receiveMessage(Message mes){
 		this.message_queue.add(mes);
 	}
 	
-	public abstract void processMessage();
+	/**
+	 * Need to be synchronized
+	 * @return Boolean true if message_queue is not empty
+	 */
+	public abstract boolean processMessage();
 	
 }

@@ -141,7 +141,7 @@ public class Configuration {
 	 * Get the game target FPS.
 	 */
 	public static int getTargetFPS() {
-		return Integer.parseInt(configurationFile.getProperty("targetFps", "100"));
+		return Integer.parseInt(configurationFile.getProperty("targetFps", "60"));
 	}
 
 	/**

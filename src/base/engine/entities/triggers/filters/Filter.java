@@ -4,6 +4,7 @@ public abstract class Filter {
 	
 	/**
 	 * The targetname that other entities refer to this entity by
+	 * Should be unique
 	 */
 	protected String name;
 	
