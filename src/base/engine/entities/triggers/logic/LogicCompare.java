@@ -59,28 +59,15 @@ public class LogicCompare extends Logic {
 	
 	@Override
 	public void fireOutputs(final String nameOfOutput) {
-		if(this.list_outputs != null){
-			int i=0;
-			for(String v : this.list_outputs){
-				if(v!=null)
-					if(v.equalsIgnoreCase(nameOfOutput))
-						break;
-				i++;
-			}
-			switch(i){
-			case 0:
+		if(nameOfOutput != null){
+			if(nameOfOutput.equalsIgnoreCase("OnEqualTo"))
 				OnEqualTo();
-				break;
-			case 1:
+			else if(nameOfOutput.equalsIgnoreCase("OnGreaterThan"))
 				OnGreaterThan();
-				break;
-			case 2:
+			else if(nameOfOutput.equalsIgnoreCase("OnLessThan"))
 				OnLessThan();
-				break;
-			case 3:
+			else if(nameOfOutput.equalsIgnoreCase("OnNotEqual"))
 				OnNotEqual();
-				break;
-			}
 		}
 	}
 	
@@ -181,26 +168,15 @@ public class LogicCompare extends Logic {
 	 * equation is (value - compare value)
 	 */
 	public void compare(){
-		/*
 		float result = this.initialValue - this.compareValue;
 		if(result == 0)
-			fireOutputs(this.list_outputs.get(0));
+			OnEqualTo();
 		if(result > 0)
-			fireOutputs(this.list_outputs.get(1));
+			OnGreaterThan();
 		else
-			fireOutputs(this.list_outputs.get(2));
+			OnLessThan();
 		if(result != 0)
-			fireOutputs(this.list_outputs.get(3));
-			//*/
-		float result = this.initialValue - this.compareValue;
-		if(result == 0)
-			this.OnEqualTo();
-		if(result > 0)
-			this.OnGreaterThan();
-		else
-			this.OnLessThan();
-		if(result != 0)
-			this.OnNotEqual();
+			OnNotEqual();
 	}
 	
 		

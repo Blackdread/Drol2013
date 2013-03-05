@@ -21,21 +21,39 @@ public class EngineManager {
 		tabEngine[1] = new LogicEngine();
 		tabEngine[2] = new NetworkEngine();
 	}
-	 
-	public void update(int delta){
+	
+	/**
+	 * 
+	 */
+	public void update(){
+		for(int i=0;i<NB_ENGINE;i++)
+			while(tabEngine[i].processMessage());
+	}
+	
+	/**
+	 * 
+	 * @param delta
+	 */
+	public void update2(int delta){
 		long time;
 		for(int i=0;i<NB_ENGINE;i++){
 			time = getTime();
 			while(tabEngine[i].processMessage() && getTime() - time < delta);	// un processMessage est fait au minimum
 		}
 	}
-	public void update2(int delta){
+	/**
+	 * 
+	 * @param delta
+	 */
+	public void update3(int delta){
 		long time = getTime();
 			do{
 				for(int i=0;i<NB_ENGINE;i++)
 					tabEngine[i].processMessage();
 			}while(getTime() - time < delta);
 	}
+	
+	
 	
 	public long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
