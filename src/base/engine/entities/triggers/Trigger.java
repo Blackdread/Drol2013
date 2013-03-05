@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import base.engine.Engine;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.triggers.filters.Filter;
+import base.engine.entities.triggers.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
@@ -12,13 +13,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public abstract class Trigger implements ITrigger {
-
-	/**
-	 * The targetname that other entities refer to this entity by
-	 * Should be unique
-	 */
-	protected String name;
+public abstract class Trigger extends InputsAndOutputs implements ITrigger {
 	
 	/**
 	 * 
@@ -68,6 +63,9 @@ public abstract class Trigger implements ITrigger {
 	 */
 	protected boolean triggerOnce;
 	
+	public Trigger(String name) {
+		super(name);
+	}
 	
 	/**
 	 * @return boolean Si le trigger est "operationelle" = peut etre declencher

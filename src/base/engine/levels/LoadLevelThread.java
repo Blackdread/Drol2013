@@ -33,7 +33,7 @@ public class LoadLevelThread implements Runnable {
 				 */
 				System.out.println("load: "+ligne);
 				level.setNbLigneFichierLuPourLeLoading(level.getNbLigneFichierLuPourLeLoading()+1);
-				//level.gererStringLuDansFichier(ligne);
+				
 			}
 		} catch (FileNotFoundException e){
 			e.printStackTrace();

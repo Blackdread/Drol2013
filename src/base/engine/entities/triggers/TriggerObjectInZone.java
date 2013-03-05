@@ -26,14 +26,16 @@ public class TriggerObjectInZone extends Trigger {
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
 	
-	public TriggerObjectInZone(int xx, int yy, int w, int h) {
+	public TriggerObjectInZone(String name, int xx, int yy, int w, int h) {
+		super(name);
 		x=xx;
 		y=yy;
 		width = w;
 		height = h;
 	}
 	
-	public TriggerObjectInZone(int a,int xx, int yy, int w, int h) {
+	public TriggerObjectInZone(String name, int a,int xx, int yy, int w, int h) {
+		super(name);
 		nbObjectInZoneToActivate = a;
 		x=xx;
 		y=yy;

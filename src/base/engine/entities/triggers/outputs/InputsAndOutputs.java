@@ -6,8 +6,8 @@ package base.engine.entities.triggers.outputs;
 import java.util.ArrayList;
 
 /**
- * @author Blackdread
- *
+ * 
+ * @author Yoann CAPLAIN
  */
 public abstract class InputsAndOutputs implements IInputsAndOutputs {
 
@@ -67,5 +67,21 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs {
 	 */
 	@Override
 	public abstract void fireInputs(String nameOfInput, Object parameter);
+
+	/**
+	 * The targetname that other entities refer to this entity by
+	 * Should be unique
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * The targetname that other entities refer to this entity by
+	 * Should be unique
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

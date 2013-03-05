@@ -7,14 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-
-import base.engine.entities.ActiveEntity;
 
 public abstract class Level implements ILevel{
 	
@@ -109,18 +101,6 @@ public abstract class Level implements ILevel{
 				e.printStackTrace();
 			} 
 		}
-	}
-	
-	/**
-	 * ********* Sera surement supprimer du a l'interface ISave avec le Load(String s) **********  
-	 *
-	 * Gere ce que lis LoadLevelThread. Ainsi si Level devient une classe abstraite
-	 * Cette methode deviendra abstraite aussi et pourra être gérer différement par les classes filles
-	 * @param ligne
-	 */
-	@Deprecated
-	public void gererStringLuDansFichier(String ligne){
-		
 	}
 	
 	public void loadLevel(){

@@ -1,12 +1,13 @@
 package base.engine.entities.triggers.filters;
 
-public abstract class Filter {
-	
-	/**
-	 * The targetname that other entities refer to this entity by
-	 * Should be unique
-	 */
-	protected String name;
+import base.engine.entities.triggers.outputs.InputsAndOutputs;
+
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
+public abstract class Filter extends InputsAndOutputs{
 	
 	/**
 	 * Inverts the filter, making the specified concept fail and all others pass
@@ -20,7 +21,7 @@ public abstract class Filter {
 	 * @param String targetname that other entities refer to this entity by
 	 */
 	public Filter(String name){
-		this.name = name;
+		super(name);
 	}
 	/**
 	 * 
@@ -28,7 +29,7 @@ public abstract class Filter {
 	 * @param Boolean negate invert result
 	 */
 	public Filter(String name, boolean negate){
-		this.name = name;
+		super(name);
 		this.negateFilter = negate;
 	}
 	
