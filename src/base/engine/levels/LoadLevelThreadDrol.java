@@ -1,18 +1,18 @@
-package base.engine.levels;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+	package base.engine.levels;
 
-public class LoadLevelThread implements Runnable {
+	import java.io.BufferedReader;
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.io.FileNotFoundException;
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.InputStreamReader;
 	
+public class LoadLevelThreadDrol implements Runnable {
 	private Level level;
 	
-	public LoadLevelThread(Level level){
+	public LoadLevelThreadDrol(Level level){
 		this.level = level;
 	}
 	
@@ -27,13 +27,24 @@ public class LoadLevelThread implements Runnable {
 			ipsr=new InputStreamReader(ips);
 			br=new BufferedReader(ipsr);
 			String ligne;
+			
+			int nombreASauter = level.NB_LIGNE_MINIMUM_POUR_PARAMETRE + level.NB_OBJET_MIN_SUPPOSER_PAR_LEVEL;
+			for(int i=0;i<nombreASauter;i++){
+				ligne=br.readLine();
+			}
+			int i=0;
 			while ((ligne=br.readLine())!=null){
-				/*
-				 * Parti non fini, c'est juste pour tester
-				 */
 				System.out.println("load: "+ligne);
+				
+				if(( i < ((LevelDrol)level).hauteurNiveau) ){
+					String t[] = ligne.split(" ");
+					for(int j=0 ; j< ((LevelDrol)level).largeurNiveau ; j++){
+						((LevelDrol)level).tabNiveau[i][j] = Integer.valueOf(t[j]);
+					}
+					i++;
+				}
+				
 				level.setNbLigneFichierLuPourLeLoading(level.getNbLigneFichierLuPourLeLoading()+1);
-				//level.gererStringLuDansFichier(ligne);
 			}
 		} catch (FileNotFoundException e){
 			e.printStackTrace();

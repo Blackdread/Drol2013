@@ -6,8 +6,8 @@ import base.utils.Timer;
 public abstract class ActiveEntity extends BasicEntity /*implements */ {
 
 	private static final int TIME_BEFORE_MOUSEOVER = 1000;
-
-	protected int type;
+	
+	
 	protected int maxLife;
 	protected int life;
 	protected boolean mouseOver;
@@ -68,9 +68,6 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 
 	public boolean isAlive() {
 		return life > 0;
-	}
-	public int getType() {
-		return type;
 	}
 
 	public int getLife() {

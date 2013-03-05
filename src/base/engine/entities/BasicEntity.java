@@ -6,12 +6,17 @@ import base.engine.Engine;
 public abstract class BasicEntity implements IEntity, ISave {
 
 	protected Engine engine;
+	
+	protected int id;
+	protected int type;
+	
 	protected int layer;
 	protected int width;
 	protected int height;
 	protected float x;
 	protected float y;
-
+	
+	
 	public BasicEntity(Engine engine, int layer) {
 		this.engine = engine;
 		this.layer = layer;
@@ -58,6 +63,19 @@ public abstract class BasicEntity implements IEntity, ISave {
 	public Object load(String s){
 		
 		return null;
+	}
+	
+
+	public int getType() {
+		return type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

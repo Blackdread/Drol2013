@@ -16,10 +16,10 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import base.engine.entities.ActiveEntity;
 
-public class Level implements ILevel{
+public abstract class Level implements ILevel{
 	
-	private final int NB_LIGNE_POUR_PARAMETRE = 3;
-	private final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
+	protected final int NB_LIGNE_MINIMUM_POUR_PARAMETRE = 3;
+	protected final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
 	
 	// Nom d'un level
 	// lvl_numero.lvl
@@ -27,38 +27,36 @@ public class Level implements ILevel{
 	/**
 	 * ligne 0 du fichier
 	 */
-	private String nom;
+	protected String nom;
 	/**
 	 * Le numero dans le nom du fichier
 	 */
-	private int numero;
+	protected int numero;
 	/**
 	 * Permet de savoir combien de ligne il y a dans le fichier
 	 * Puis d'avoir une bar d'avancement
 	 * ligne 2 du fichier
 	 */
-	private int nbLigneFichier;
+	protected int nbLigneFichier;
 	/**
 	 * Numero de la ligne où le LoadLevelThread est en cours
 	 */
-	private int nbLigneFichierLuPourLeLoading;
+	protected int nbLigneFichierLuPourLeLoading;
 	/**
 	 * ligne 1 du fichier
 	 */
-	private boolean reussi;
+	protected boolean reussi;
 	
-	private String nomFichier;
-	private String cheminFichier;
-	private boolean isLoadOver;
+	protected String nomFichier;
+	protected String cheminFichier;
+	protected boolean isLoadOver;
+	
 	/**
 	 * Afficher sur la vue que la sauvegarde a ete faite.
 	 * Par defaut il doit tout le temps etre a false
 	 * Il est mis a true, gerer puis remis a false
 	 */
-	private boolean isSaveOver;
-	
-	ArrayList<ActiveEntity> arrayEntitiesNoUpdateRequired = new ArrayList<ActiveEntity>(NB_OBJET_MIN_SUPPOSER_PAR_LEVEL);
-	ArrayList<ActiveEntity> arrayEntitiesOther= new ArrayList<ActiveEntity>(NB_OBJET_MIN_SUPPOSER_PAR_LEVEL);
+	protected boolean isSaveOver;
 	
 	public Level(File file){
 		isLoadOver = false;
@@ -76,22 +74,11 @@ public class Level implements ILevel{
 		InputStreamReader ipsr;
 		BufferedReader br=null;
 		try {
-			/*
-			FileInputStream in = new FileInputStream(file);
-			int n = 0;
-			byte[] buf = new byte[8];
-	         while ((n = in.read(buf)) >= 0) {
-	            for (byte bit : buf) {
-	               System.out.print("\t" + bit + "(" + (char) bit + ")");
-	               System.out.println("");
-	            }
-	         }//*/
-			//*
 			ips=new FileInputStream(file);
 			ipsr=new InputStreamReader(ips);
 			br=new BufferedReader(ipsr);
 			String ligne;
-			for(int i=0;i<NB_LIGNE_POUR_PARAMETRE;i++){
+			for(int i=0;i<NB_LIGNE_MINIMUM_POUR_PARAMETRE;i++){
 				ligne=br.readLine();
 				if(ligne!=null)
 					switch(i){
@@ -119,17 +106,9 @@ public class Level implements ILevel{
 				if(br!=null)
 					br.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 		}
-	}
-	
-	public void render(GameContainer container, StateBasedGame sbgame, Graphics g){
-		
-	}
-	public void render(Graphics g, int x, int y, int maxX, int maxY){
-		
 	}
 	
 	/**
@@ -145,6 +124,9 @@ public class Level implements ILevel{
 	}
 	
 	public void loadLevel(){
+		/*
+		 * juste comme exemple
+		 */
 		LoadLevelThread load = new LoadLevelThread(this);
 		Thread monThread;
 		monThread = new Thread(load);
@@ -152,6 +134,9 @@ public class Level implements ILevel{
 	}
 	
 	public void saveLevel(){
+		/*
+		 * juste comme exemple
+		 */
 		SaveLevelThread load = new SaveLevelThread(this);
 		Thread monThread;
 		monThread = new Thread(load);
@@ -165,8 +150,6 @@ public class Level implements ILevel{
 	public void releaseMemoryOfLevel(){
 		this.isLoadOver = false;
 		this.isSaveOver = false;
-		this.arrayEntitiesNoUpdateRequired.clear();
-		this.arrayEntitiesOther.clear();
 		this.nbLigneFichierLuPourLeLoading = 0;
 	}
 
@@ -247,36 +230,5 @@ public class Level implements ILevel{
 	
 	public String toString(){
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
-	}
-	
-	@Deprecated
-	public ArrayList<ActiveEntity> getArrayEntitiesNoUpdateRequired() {
-		return arrayEntitiesNoUpdateRequired;
-	}
-	@Deprecated
-	public ArrayList<ActiveEntity> getArrayEntitiesOther() {
-		return arrayEntitiesOther;
-	}
-	synchronized public ActiveEntity getArrayEntitiesNoUpdateRequiredAt(int i){
-		if(arrayEntitiesNoUpdateRequired.size() > i)
-			return arrayEntitiesNoUpdateRequired.get(i);
-		return null;
-	}
-	synchronized public ActiveEntity getArrayEntitiesOtherAt(int i){
-		if(arrayEntitiesOther.size() > i)
-			return arrayEntitiesOther.get(i);
-		return null;
-	}
-	synchronized public void addArrayEntitiesNoUpdateRequired(ActiveEntity a){
-		arrayEntitiesNoUpdateRequired.add(a);
-	}
-	synchronized public void addArrayEntitiesOther(ActiveEntity a){
-		arrayEntitiesOther.add(a);
-	}
-	synchronized public int sizeArrayEntitiesNoUpdateRequired(){
-		return arrayEntitiesNoUpdateRequired.size();
-	}
-	synchronized public int sizeArrayEntitiesOther(){
-		return arrayEntitiesOther.size();
 	}
 }

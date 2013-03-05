@@ -25,16 +25,7 @@ public class SaveLevelThread implements Runnable {
 		InputStreamReader ipsr;
 		BufferedReader br=null;
 		try {
-			int i=0;
-			while(i < level.sizeArrayEntitiesNoUpdateRequired()){
-				System.out.println("save:"+level.getArrayEntitiesNoUpdateRequiredAt(i).save());
-				i++;
-			}
-			i=0;
-			while(i < level.sizeArrayEntitiesOther()){
-				System.out.println("save:"+level.getArrayEntitiesOtherAt(i).save());
-				i++;
-			}
+			
 			
 			/*
 			ips=new FileInputStream(file);
