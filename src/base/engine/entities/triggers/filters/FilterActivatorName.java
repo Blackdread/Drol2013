@@ -9,7 +9,7 @@ package base.engine.entities.triggers.filters;
  * @author Yoann CAPLAIN
  *
  */
-public class FilterName extends Filter{
+public class FilterActivatorName extends Filter{
 
 	/**
 	 * The class name to filter by. If the filter mode is Allow, only entities whose class name matches 
@@ -19,7 +19,8 @@ public class FilterName extends Filter{
 	protected String classNameFilter;
 	
 	/**
-	 * IMPORTANT ! NameToCompareTo needs to be given before calling checkFilterConditions()
+	 * @IMPORTANT NameToCompareTo needs to be given before calling checkFilterConditions()
+	 * Name of the activator
 	 */
 	protected String NameToCompareTo;
 	
@@ -27,7 +28,7 @@ public class FilterName extends Filter{
 	 * @see Filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterName(String name, String Classname){
+	public FilterActivatorName(String name, String Classname){
 		super(name);
 	}
 	/**
@@ -35,7 +36,7 @@ public class FilterName extends Filter{
 	 * @param negate invert the filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterName(String name, boolean negate, String Classname){
+	public FilterActivatorName(String name, boolean negate, String Classname){
 		super(name, negate);
 	}
 	
