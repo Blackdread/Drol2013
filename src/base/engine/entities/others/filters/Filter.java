@@ -1,6 +1,6 @@
-package base.engine.entities.triggers.filters;
+package base.engine.entities.others.filters;
 
-import base.engine.entities.triggers.outputs.InputsAndOutputs;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 

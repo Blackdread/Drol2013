@@ -1,8 +1,8 @@
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.triggers.outputs.Outputs;
+import base.engine.entities.others.outputs.Outputs;
 
 /**
  * It examines the relationship between two numbers ("value" and "compare value"), and fires appropriate output(s).

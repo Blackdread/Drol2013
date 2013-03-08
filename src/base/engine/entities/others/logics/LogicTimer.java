@@ -1,12 +1,12 @@
 /**
  * 
  */
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.triggers.outputs.IDisable;
-import base.engine.entities.triggers.outputs.IFireOnce;
+import base.engine.entities.others.outputs.IDisable;
+import base.engine.entities.others.outputs.IFireOnce;
 import base.utils.Timer;
 
 /**
@@ -54,7 +54,10 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	
 	private boolean enabled;
 	
-	
+	/**
+	 * false -> last is low
+	 * true -> last is high
+	 */
 	private boolean remindLastOutputForOscillator;
 	
 	// *******
@@ -67,7 +70,14 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	
 	public LogicTimer(String name){
 		super(name);
-		timer = new Timer(0);
+		refireInterval = 1000;
+		timer = new Timer(1000);
+		startDisabled = false;
+		enabled = true;
+		remindLastOutputForOscillator = false;
+		minimumRandomInterval = 1000;
+		maximumRandomInterval = 3000;
+		useRandomTime = false;
 	}
 
 	

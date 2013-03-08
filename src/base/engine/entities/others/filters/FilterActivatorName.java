@@ -1,4 +1,4 @@
-package base.engine.entities.triggers.filters;
+package base.engine.entities.others.filters;
 
 /**
  *  It is a filter that filters by the name of the activator.

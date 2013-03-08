@@ -12,7 +12,7 @@ import base.engine.entities.Data;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.ISave;
 import base.engine.entities.StaticEntity;
-import base.engine.entities.triggers.Trigger;
+import base.engine.entities.others.triggers.Trigger;
 
 public abstract class Block extends StaticEntity implements ICollidableObject, IGravityBlock, IEntityAcideBlock {
 

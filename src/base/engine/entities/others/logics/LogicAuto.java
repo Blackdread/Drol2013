@@ -1,4 +1,4 @@
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
@@ -70,47 +70,47 @@ public class LogicAuto extends Logic {
 	 *  Fired when the map is loaded for any reason
 	 */
 	private void OnMapSpawn(){
-		
+		fireOutput("OnMapSpawn");
 	}
 	
 	/**
 	 * Fired when the map is loaded to start a new game
 	 */
 	private void OnNewGame(){
-			
+		fireOutput("OnNewGame");	
 	}
 	
 	/**
 	 * Fired when the map is loaded from a saved game
 	 */
 	private void OnLoadGame(){
-			
+		fireOutput("OnLoadGame");	
 	}
 	
 	/**
 	 *  Fired when the map is loaded due to a level transition
 	 */
 	private void OnMapTransition(){
-			
+		fireOutput("OnMapTransition");
 	}
 	/**
 	 *  Fired when the map is loaded as a background to the main menu
 	 */
 	private void OnBackgroundMap(){
-			
+		fireOutput("OnBackgroundMap");
 	}
 	/**
 	 * Fired only in multiplayer, when a new map is loaded 
 	 */
 	private void OnMultiNewMap(){
-			
+		fireOutput("OnMultiNewMap");
 	}
 	/**
 	 * Fired only in multiplayer, when a new round is started. 
 	 * Only fired in multiplayer games that use round-based gameplay 
 	 */
 	private void OnMultiNewRound(){
-			
+		fireOutput("OnMultiNewRound");
 	}
 
 	public boolean isRemoveOnFire() {

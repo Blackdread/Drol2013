@@ -1,10 +1,11 @@
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.triggers.outputs.IDisable;
-import base.engine.entities.triggers.outputs.IFireOnce;
-import base.engine.entities.triggers.outputs.Outputs;
+import base.engine.entities.others.outputs.IDisable;
+import base.engine.entities.others.outputs.IFireOnce;
+import base.engine.entities.others.outputs.Outputs;
+import base.utils.Timer;
 
 /**
  * It is a message forwarder. It can be used to fire many outputs at once from just one input, or, 
@@ -19,8 +20,11 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	
 	/**
 	 * true -> once it has been fired if it's a fireOnce this will be deleted from the world
+	 * Will always be false if it is not a fireOnce
 	 */
-	private boolean hasbeenFired;
+	private boolean hasbeenFired = false;
+	
+	private Timer timerFastRetrigger;
 	
 	/*
 	 * Flags
@@ -113,7 +117,7 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	 *  Trigger the relay, causing its OnTrigger output to fire if it is enabled
 	 */
 	public void trigger(){
-	
+		OnTrigger();
 	}
 	
 	/**
@@ -161,16 +165,26 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	/**
 	 * Fired when the relay is spawned. If the relay is set to only trigger once, 
 	 * it will delete itself after firing this output
+	 * Supposed to be called only once !
 	 */
 	private void OnSpawn(){
+		if(fireOnce && !hasbeenFired){
+			hasbeenFired = true;
+			//fireOutput("OnSpawn");
+		}
+		fireOutput("OnSpawn");
 		
 	}
 	 /**
 	  * Fired when the relay is triggered. If the relay is set to only trigger once, 
 	  * it will delete itself after firing this output
 	  */
-	private void OnTrigger (){
-		
+	private void OnTrigger(){
+		if(enabled && !hasbeenFired){
+			if(fireOnce)
+				hasbeenFired = true;
+			fireOutput("OnTrigger");
+		}
 	}
 
 	@Override

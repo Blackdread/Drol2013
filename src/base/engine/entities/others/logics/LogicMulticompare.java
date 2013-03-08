@@ -1,7 +1,4 @@
-/**
- * 
- */
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 

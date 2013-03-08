@@ -1,4 +1,4 @@
-package base.engine.entities.triggers;
+package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 import java.util.HashMap;

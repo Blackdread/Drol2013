@@ -1,6 +1,6 @@
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
-import base.engine.entities.triggers.outputs.InputsAndOutputs;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 

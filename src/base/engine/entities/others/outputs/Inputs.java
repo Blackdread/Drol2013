@@ -1,4 +1,4 @@
-package base.engine.entities.triggers.outputs;
+package base.engine.entities.others.outputs;
 
 /**
  * Pas sur que ce soit garder (Permet a celui qui recoit des outputs de savoir qui lui en envoie et qu'elle input il 

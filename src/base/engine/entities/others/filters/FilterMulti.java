@@ -1,4 +1,4 @@
-package base.engine.entities.triggers.filters;
+package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 

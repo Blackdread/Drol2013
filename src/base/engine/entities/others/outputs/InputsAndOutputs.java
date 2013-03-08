@@ -1,7 +1,7 @@
 /**
  * 
  */
-package base.engine.entities.triggers.outputs;
+package base.engine.entities.others.outputs;
 
 import java.util.ArrayList;
 

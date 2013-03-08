@@ -1,11 +1,11 @@
-package base.engine.entities.triggers;
+package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
 import base.engine.Engine;
 import base.engine.entities.BasicEntity;
-import base.engine.entities.triggers.filters.Filter;
-import base.engine.entities.triggers.outputs.InputsAndOutputs;
+import base.engine.entities.others.filters.Filter;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**

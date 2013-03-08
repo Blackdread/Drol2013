@@ -1,8 +1,8 @@
-package base.engine.entities.triggers.logic;
+package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.triggers.outputs.Outputs;
+import base.engine.entities.others.outputs.Outputs;
 
 /**
  * It tests a boolean value and fires an output based on whether the value is true (one) or false (zero). 

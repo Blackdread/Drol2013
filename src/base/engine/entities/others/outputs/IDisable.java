@@ -1,4 +1,4 @@
-package base.engine.entities.triggers.outputs;
+package base.engine.entities.others.outputs;
 
 /**
  * Enable/disable this entity from performing its task.
