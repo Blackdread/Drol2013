@@ -62,4 +62,5 @@ public class TriggerObjectInZone extends Trigger {
 		this.arrayEntityToActON = arrayEntity;
 	}
 
+
 }

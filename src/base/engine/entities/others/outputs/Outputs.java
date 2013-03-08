@@ -7,7 +7,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public class Outputs implements IFireOnce{
+public class Outputs implements IFireOnce, IUpdatable{
 
 	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
@@ -62,6 +62,7 @@ public class Outputs implements IFireOnce{
 	 * Update timer if the output has been triggered and fire output if timer is timeComplete (delay has passed)
 	 * @param delta in milliseconds
 	 */
+	@Override
 	public void update(int delta){
 		if(timeBeforeDeclencheTrigger != null && outputHasBeenDeclenched){
 			timeBeforeDeclencheTrigger.update(delta);

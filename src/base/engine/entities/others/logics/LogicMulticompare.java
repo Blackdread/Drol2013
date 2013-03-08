@@ -17,6 +17,7 @@ import base.engine.entities.triggers.outputs.Outputs;
  */
 public class LogicMulticompare extends Logic {
 
+	private int value;
 	
 	public LogicMulticompare(String name) {
 		super(name);

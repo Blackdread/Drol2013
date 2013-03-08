@@ -6,7 +6,7 @@ package base.engine.entities.others.logics;
 import java.util.ArrayList;
 
 import base.engine.entities.others.outputs.IDisable;
-import base.engine.entities.others.outputs.IFireOnce;
+import base.engine.entities.others.outputs.IUpdatable;
 import base.utils.Timer;
 
 /**
@@ -15,7 +15,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public class LogicTimer extends Logic implements IDisable, IFireOnce{
+public class LogicTimer extends Logic implements IDisable, IUpdatable{
 
 	/**
 	 * Makes the entity fire at random intervals
@@ -79,6 +79,33 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 		maximumRandomInterval = 3000;
 		useRandomTime = false;
 	}
+	
+	@Override
+	public void update(int delta) {
+		if(timer != null){
+			timer.update(delta);
+			
+			if(timer.isTimeComplete()){
+				timer.resetTime();
+				OnTimer();
+				
+				if(useRandomTime){
+					refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
+					timer.setEventTime(refireInterval);
+				}
+				
+				if(isOscillator){
+					if(remindLastOutputForOscillator){
+						remindLastOutputForOscillator = false;
+						OnTimerHigh();
+					}else{
+						remindLastOutputForOscillator = true;
+						OnTimerLow();
+					}
+				}
+			}
+		}
+	}
 
 	
 	public ArrayList<String> get_list_outputs(){
@@ -136,7 +163,7 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 			else if(nameOfInput.equalsIgnoreCase("FireTimer"))
 				fireTimer();
 			else if(nameOfInput.equalsIgnoreCase("Enable"))
-				enabled = true;
+				enable();
 			else if(nameOfInput.equalsIgnoreCase("Disable"))
 				enabled = false;
 			else if(nameOfInput.equalsIgnoreCase("Toggle"))
@@ -206,13 +233,17 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	 */
 	public void refireTime(int interval){
 		refireInterval = interval;
-		timer.setEventTime(interval);
+		if(timer != null)
+			timer.setEventTime(interval);
+		else
+			timer = new Timer(interval);
 	}
 	/**
 	 * Reset the timer. It will fire after the Refire Interval expires
 	 */
 	public void resetTimer(){
-		timer.resetTime();
+		if(timer != null)
+			timer.resetTime();
 	}
 	/**
 	 * Force the timer to fire immediately
@@ -220,14 +251,18 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	public void fireTimer(){
 		OnTimer();
 	}
-	/*
+	/**
+	 *  Enabling the entity resets its timer
+	 */
 	public void enable(){
 		enabled = true;
+		resetTimer();
 	}
+	/*
 	public void disable(){
 		enabled = false;
 	}
-	*/
+	//*/
 	/**
 	 * Toggle the timer on/off
 	 */
@@ -255,13 +290,15 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	 * Add time to the timer if it is currently enabled. Does not change the Refire Interval
 	 */
 	public void addToTimer(int add){
-		timer.update(add);
+		if(timer != null)
+			timer.update(add);
 	}
 	/**
 	 * Subtract time from the timer if it is currently enabled. Does not change the Refire Interval
 	 */
 	public void subtractFromTimer(int sub){
-		timer.subtractTime(sub);
+		if(timer != null)
+			timer.subtractTime(sub);
 	}
 
 
@@ -346,20 +383,6 @@ public class LogicTimer extends Logic implements IDisable, IFireOnce{
 	@Override
 	public boolean isDisabled() {
 		return !enabled;
-	}
-
-
-	@Override
-	public boolean isFireOnce() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public void setFireOnce(boolean fireOnce) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

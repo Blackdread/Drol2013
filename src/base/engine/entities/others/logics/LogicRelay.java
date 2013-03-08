@@ -42,6 +42,12 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	
 	public LogicRelay(String name) {
 		super(name);
+		allowFastRetrigger = false;
+		fireOnce = false;
+		startDisabled = false;
+		enabled = false;
+		timerFastRetrigger = new Timer(1);
+		hasbeenFired = false;
 	}
 
 	public ArrayList<String> get_list_outputs(){
@@ -221,6 +227,22 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	@Override
 	public void setFireOnce(boolean fireOnce) {
 		this.fireOnce = fireOnce;
+	}
+
+	public boolean isHasbeenFired() {
+		return hasbeenFired;
+	}
+
+	public boolean isAllowFastRetrigger() {
+		return allowFastRetrigger;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setAllowFastRetrigger(boolean allowFastRetrigger) {
+		this.allowFastRetrigger = allowFastRetrigger;
 	}
 	 
 }
