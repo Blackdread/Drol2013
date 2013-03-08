@@ -7,7 +7,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public class Outputs {
+public class Outputs implements IFireOnce{
 
 	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
@@ -17,22 +17,23 @@ public class Outputs {
 	private boolean outputHasBeenDeclenched;
 	
 	/**
-	 * Output qui sera declenche qu'une seul fois
+	 * Only trigger once
 	 */
-	private boolean doOnlyOnce;
+	private boolean fireOnce;
+	
 	/**
 	 * Count how many times this output has been fired
 	 * Ou faire en sorte que cet Output soit detruit apres avoir ete fired -> preferable
 	 */
-	private int counter;
+	//private int counter;
 	
 	/**
 	 * Temps avant que l'output envoie l'output (declenche l'input de l'objet)
 	 */
-	protected Timer TimeBeforeDeclencheTrigger;
+	protected Timer timeBeforeDeclencheTrigger;
 	
 	/**
-	 * Represents the name of the output -> Key of the HashMap/HashTable
+	 * Represents the name of the output
 	 * Exemples: OnMapSpawn, OnTrigger, OnStartTouch, OnGreaterThan, OnEqual, ...
 	 */
 	protected String nameOfTheOutput;
@@ -47,19 +48,30 @@ public class Outputs {
 	private Object objectToDeclencheInput;
 	/*
 	 * Peut-etre mettre une liste de parametre et ordonne
-	 * sinon il faut mettre plusieurs output et ordonne
+	 * sinon il faut mettre plusieurs output et ordonne -> preferable
 	 */
 	private Object parameter;
 	
 	public Outputs(int number,Object objectToDeclencheInput,int delay){
-		TimeBeforeDeclencheTrigger = new Timer(delay);
+		timeBeforeDeclencheTrigger = new Timer(delay);
 		outputNumber = number;
 		this.objectToDeclencheInput = objectToDeclencheInput;
 	}
 	
+	/**
+	 * Update timer if the output has been triggered and fire output if timer is timeComplete (delay has passed)
+	 * @param delta in milliseconds
+	 */
 	public void update(int delta){
-		if(TimeBeforeDeclencheTrigger != null)
-			TimeBeforeDeclencheTrigger.update(delta);
+		if(timeBeforeDeclencheTrigger != null && outputHasBeenDeclenched){
+			timeBeforeDeclencheTrigger.update(delta);
+			
+			if(timeBeforeDeclencheTrigger.isTimeComplete()){
+				fireOutput();
+				
+				timeBeforeDeclencheTrigger.resetTime();
+			}
+		}
 	}
 	
 	/**
@@ -71,11 +83,16 @@ public class Outputs {
 	public void fireOutput(){
 		
 	}
-
-	public boolean isDoOnlyOnce() {
-		return doOnlyOnce;
+	
+	/**
+	 * If the output has been triggered but not fired yet, this will cancel the output and restart timer
+	 */
+	public void cancelOutput(){
+		if(outputHasBeenDeclenched){
+			outputHasBeenDeclenched = false;
+			timeBeforeDeclencheTrigger.resetTime();
+		}
 	}
-
 	
 	/**
 	 * Represents the name of the output -> Key of the HashMap/HashTable
@@ -98,10 +115,6 @@ public class Outputs {
 		return parameter;
 	}
 
-	public void setDoOnlyOnce(boolean doOnlyOnce) {
-		this.doOnlyOnce = doOnlyOnce;
-	}
-
 	public void setNameOfTheOutput(String nameOfTheOutput) {
 		this.nameOfTheOutput = nameOfTheOutput;
 	}
@@ -116,5 +129,15 @@ public class Outputs {
 
 	public void setParameter(Object parameter) {
 		this.parameter = parameter;
+	}
+
+	@Override
+	public boolean isFireOnce() {
+		return fireOnce;
+	}
+
+	@Override
+	public void setFireOnce(boolean fireOnce) {
+		this.fireOnce = fireOnce;
 	}
 }

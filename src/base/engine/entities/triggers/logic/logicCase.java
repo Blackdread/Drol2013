@@ -3,16 +3,18 @@
  */
 package base.engine.entities.triggers.logic;
 
+import java.util.ArrayList;
+
 import base.engine.entities.triggers.outputs.Outputs;
 
 /**
  * It compares an input to up to 16 configured values, firing a corresponding output if there is a match (on InValue), 
  * or fires a random output (on PickRandom)
- * Does not recognize floats with trailing zeroes (like 0.5000 or 1.00). Always remove any, leave at least one.
+ * Does not recognize floats with trailing zeroes (like 0.5000 or 1.00). Always remove any.
  * @author Yoann CAPLAIN
  *
  */
-public class logicCase extends Logic {
+public class LogicCase extends Logic {
 
 	private final static int NB_CASE = 16;
 	
@@ -24,7 +26,7 @@ public class logicCase extends Logic {
 	
 	private boolean shuffleCaseReminder[];
 	
-	public logicCase(String name) {
+	public LogicCase(String name) {
 		super(name);
 		shuffleCaseReminder = new boolean[NB_CASE+1 +1];
 		for(int i=0;i < NB_CASE + 1;i++)
@@ -32,40 +34,39 @@ public class logicCase extends Logic {
 		valueOfCase = new String[NB_CASE];
 	}
 
-	/* (non-Javadoc)
-	 * @see base.engine.entities.triggers.outputs.InputsAndOutputs#addInListInputsInputsOfTheClass()
-	 */
-	@Override
-	public void addInListInputsInputsOfTheClass(){
-		this.list_inputs.add("InValue");
-		this.list_inputs.add("PickRandom");
-		this.list_inputs.add("PickRandomShuffle");
+	public ArrayList<String> get_list_outputs(){
+		ArrayList<String> list_outputs = new ArrayList<String>();
+		list_outputs.addAll(super.get_list_outputs());
+		list_outputs.add("OnCase01");
+		list_outputs.add("OnCase02");
+		list_outputs.add("OnCase03");
+		list_outputs.add("OnCase04");
+		list_outputs.add("OnCase05");
+		list_outputs.add("OnCase06");
+		list_outputs.add("OnCase07");
+		list_outputs.add("OnCase08");
+		list_outputs.add("OnCase09");
+		list_outputs.add("OnCase10");
+		list_outputs.add("OnCase11");
+		list_outputs.add("OnCase12");
+		list_outputs.add("OnCase13");
+		list_outputs.add("OnCase14");
+		list_outputs.add("OnCase15");
+		list_outputs.add("OnCase16");
+		list_outputs.add("OnDefault");
+		
+		return list_outputs;
 	}
-
-	/* (non-Javadoc)
-	 * @see base.engine.entities.triggers.outputs.InputsAndOutputs#addInListOutputsOutputsOfTheClass()
-	 */
-	@Override
-	public void addInListOutputsOutputsOfTheClass() {
-		this.list_outputs.add("OnCase01");
-		this.list_outputs.add("OnCase02");
-		this.list_outputs.add("OnCase03");
-		this.list_outputs.add("OnCase04");
-		this.list_outputs.add("OnCase05");
-		this.list_outputs.add("OnCase06");
-		this.list_outputs.add("OnCase07");
-		this.list_outputs.add("OnCase08");
-		this.list_outputs.add("OnCase09");
-		this.list_outputs.add("OnCase10");
-		this.list_outputs.add("OnCase11");
-		this.list_outputs.add("OnCase12");
-		this.list_outputs.add("OnCase13");
-		this.list_outputs.add("OnCase14");
-		this.list_outputs.add("OnCase15");
-		this.list_outputs.add("OnCase16");
-		this.list_outputs.add("OnDefault");
+	
+	public ArrayList<String> get_list_inputs() {
+		ArrayList<String> list_inputs = new ArrayList<String>();
+		list_inputs.addAll(super.get_list_inputs());
+		list_inputs.add("InValue");
+		list_inputs.add("PickRandom");
+		list_inputs.add("PickRandomShuffle");
+		
+		return list_inputs;
 	}
-
 	/* (non-Javadoc)
 	 * @see base.engine.entities.triggers.outputs.InputsAndOutputs#fireOutputs(java.lang.String)
 	 */
@@ -104,8 +105,10 @@ public class logicCase extends Logic {
 				OnCase15();
 			else if(nameOfOutput.equalsIgnoreCase("OnCase16"))
 				OnCase16();
-			else
+			else if(nameOfOutput.equalsIgnoreCase("OnDefault"))
 				OnDefault();
+			else
+				super.fireOutputs(nameOfOutput);
 		}
 	}
 
@@ -223,109 +226,58 @@ public class logicCase extends Logic {
 	 * Fired when the input value equals the corresponding Case value
 	 */
 	private void OnCase01(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase01"))
-					v.fireOutput();
+		fireOutput("OnCase01");
 	}
 	private void OnCase02(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase02"))
-					v.fireOutput();
+		fireOutput("OnCase02");
 	}
 	private void OnCase03(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase03"))
-					v.fireOutput();
+		fireOutput("OnCase03");
 	}
 	private void OnCase04(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase04"))
-					v.fireOutput();
+		fireOutput("OnCase04");
 	}
 	private void OnCase05(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase05"))
-					v.fireOutput();
+		fireOutput("OnCase05");
 	}
 	private void OnCase06(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase06"))
-					v.fireOutput();
+		fireOutput("OnCase06");
 	}
 	private void OnCase07(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase07"))
-					v.fireOutput();
+		fireOutput("OnCase07");
 	}
 	private void OnCase08(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase08"))
-					v.fireOutput();
+		fireOutput("OnCase08");
 	}
 	private void OnCase09(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase09"))
-					v.fireOutput();
+		fireOutput("OnCase09");
 	}
 	private void OnCase10(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase10"))
-					v.fireOutput();
+		fireOutput("OnCase10");
 	}
 	private void OnCase11(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase11"))
-					v.fireOutput();
+		fireOutput("OnCase11");
 	}
 	private void OnCase12(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase12"))
-					v.fireOutput();
+		fireOutput("OnCase12");
 	}
 	private void OnCase13(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase13"))
-					v.fireOutput();
+		fireOutput("OnCase13");
 	}
 	private void OnCase14(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase14"))
-					v.fireOutput();
+		fireOutput("OnCase14");
 	}
 	private void OnCase15(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase15"))
-					v.fireOutput();
+		fireOutput("OnCase15");
 	}
 	private void OnCase16(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnCase16"))
-					v.fireOutput();
+		fireOutput("OnCase16");
 	}
 	/**
 	 * Fired when the input value does not equal any of the Case values
 	 */
 	private void OnDefault(){
-		for(Outputs v : this.array_outputs)
-			if(v != null)
-				if(v.getNameOfTheOutput().equalsIgnoreCase("OnDefault"))
-					v.fireOutput();
+		fireOutput("OnDefault");
 	}
 
 }

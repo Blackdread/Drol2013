@@ -21,27 +21,16 @@ public interface IInputsAndOutputs {
 	 */
 	
 	/**
-	 * Un arrayList est surement mieux (qu'un hashTable) puisque que l'on se refere juste au String
-	 * Moins maintenable si changement mais il n'est cense y avoir de gros changement (peut-etre juste un ajout d'input ou d'output)
-	 * @return
+	 * Meant to be used with hierarchy (super.get_list_inputs())
+	 * @return ArrayList<String> that contains all inputs available for that entity
 	 */
 	public ArrayList<String> get_list_inputs();
 	
 	/**
-	 * Not supposed to be called from outside of the class.
-	 * It's meant to be called at the instantiation of the class
-	 * @important This needs to be ordered !
+	 * Meant to be used with hierarchy (super.get_list_outputs())
+	 * @return ArrayList<String> that contains all outputs available for that entity
 	 */
-	public void addInListInputsInputsOfTheClass();
-	
 	public ArrayList<String> get_list_outputs();
-	
-	/**
-	 * Not supposed to be called from outside of the class.
-	 * It's meant to be called at the instantiation of the class
-	 * @important This needs to be ordered !
-	 */
-	public void addInListOutputsOutputsOfTheClass();
 	
 	/**
 	 * 
@@ -52,16 +41,24 @@ public interface IInputsAndOutputs {
 	
 	/**
 	 * Contains a switch to fire different outputs
-	 * Outputs are private
+	 * Outputs are private (or are directly in fireOutputs if those outputs don't modify the object when fired)
 	 * Parameter is in Outputs Class
+	 * Meant to be used with hierarchy (super.fireOutputs(String))
 	 * @important switch depends on ArrayList that has been ordered
 	 * @param nameOfOutput represents the function to activate
 	 */
 	public void fireOutputs(final String nameOfOutput);
 	
 	/**
+	 * Search in the arrayList of outputs and fire if(element_of_array_outputs.equalsIgnoreCase(nameOfOutput))
+	 * @param nameOfOutput represents the name of the output to activate
+	 */
+	public void fireOutput(final String nameOfOutput);
+	
+	/**
 	 * Contains a switch to fire different intputs
 	 * Inputs are 
+	 * Meant to be used with hierarchy (super.fireInputs(String))
 	 * @param nameOfInput represents the function to activate
 	 */
 	public void fireInputs(final String nameOfInput);
@@ -69,8 +66,15 @@ public interface IInputsAndOutputs {
 	/**
 	 * Contains a switch to fire different intputs
 	 * Inputs are 
+	 * Meant to be used with hierarchy (super.fireInputs(String, Object))
 	 * @param nameOfInput represents the function to activate
 	 * @param parameter represents the parameter of the function
 	 */
 	public void fireInputs(final String nameOfInput, Object parameter);
+	
+	/**
+	 * The targetname that other entities refer to this entity by
+	 * Should be unique
+	 */
+	public String getName();
 }

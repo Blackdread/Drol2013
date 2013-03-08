@@ -132,5 +132,21 @@ public class Timer {
 	public float getPercentage() {
 		return deltaStock / eventTime;
 	}
+	
+	/**
+	 * Subtract time
+	 * @param time
+	 */
+	public void subtractTime(int time){
+		deltaStock -=time;
+	}
+	
+	/**
+	 * 
+	 * @param event
+	 */
+	public void setEventTime(int event){
+		eventTime = event;
+	}
 
 }

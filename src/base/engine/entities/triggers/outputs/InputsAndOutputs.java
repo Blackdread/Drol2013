@@ -17,9 +17,6 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs {
 	 */
 	protected String name;
 	
-	protected ArrayList<String> list_inputs = new ArrayList<String>();
-	protected ArrayList<String> list_outputs = new ArrayList<String>();
-	
 	protected ArrayList<Outputs> array_outputs = new ArrayList<Outputs>();
 	
 	public InputsAndOutputs(String name){
@@ -27,46 +24,52 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs {
 	}
 	
 	public ArrayList<String> get_list_outputs(){
+		ArrayList<String> list_outputs = new ArrayList<String>();
+		// empty for the moment
 		return list_outputs;
 	}
 	
 	public ArrayList<String> get_list_inputs() {
+		ArrayList<String> list_inputs = new ArrayList<String>();
+		// empty for the moment
 		return list_inputs;
 	}
 	
 	public ArrayList<Outputs> get_array_outputs() {
 		return array_outputs;
 	}
-	
-	/* (non-Javadoc)
-	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#addInListInputsInputsOfTheClass()
-	 */
-	@Override
-	public abstract void addInListInputsInputsOfTheClass();
-	
-	/* (non-Javadoc)
-	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#addInListOutputsOutputsOfTheClass()
-	 */
-	@Override
-	public abstract void addInListOutputsOutputsOfTheClass();
 
 	/* (non-Javadoc)
 	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#fireOutputs(java.lang.String)
 	 */
 	@Override
-	public abstract void fireOutputs(String nameOfOutput);
+	public void fireOutputs(String nameOfOutput){
+		
+	}
+	
+	@Override
+	public void fireOutput(final String nameOfOutput){
+		for(Outputs v : this.array_outputs)
+			if(v != null)
+				if(v.getNameOfTheOutput().equalsIgnoreCase(""+nameOfOutput))
+					v.fireOutput();
+	}
 
 	/* (non-Javadoc)
 	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#fireInputs(java.lang.String)
 	 */
 	@Override
-	public abstract void fireInputs(String nameOfInput);
+	public void fireInputs(String nameOfInput){
+		
+	}
 
 	/* (non-Javadoc)
 	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#fireInputs(java.lang.String, java.lang.Object)
 	 */
 	@Override
-	public abstract void fireInputs(String nameOfInput, Object parameter);
+	public void fireInputs(String nameOfInput, Object parameter){
+		
+	}
 
 	/**
 	 * The targetname that other entities refer to this entity by

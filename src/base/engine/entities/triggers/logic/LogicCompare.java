@@ -1,5 +1,7 @@
 package base.engine.entities.triggers.logic;
 
+import java.util.ArrayList;
+
 import base.engine.entities.triggers.outputs.Outputs;
 
 /**
@@ -27,8 +29,6 @@ public class LogicCompare extends Logic {
 	 */
 	public LogicCompare(String name, float initialValue){
 		super(name);
-		addInListOutputsOutputsOfTheClass();
-		addInListInputsInputsOfTheClass();
 	}
 	/**
 	 * @see Logic
@@ -37,24 +37,28 @@ public class LogicCompare extends Logic {
 	 */
 	public LogicCompare(String name, float initialValue, float compareValue){
 		super(name);
-		addInListOutputsOutputsOfTheClass();
-		addInListInputsInputsOfTheClass();
 	}
 	
-	@Override
-	public void addInListOutputsOutputsOfTheClass(){
-		this.list_outputs.add("OnEqualTo");
-		this.list_outputs.add("OnGreaterThan");
-		this.list_outputs.add("OnLessThan");
-		this.list_outputs.add("OnNotEqual");
+	public ArrayList<String> get_list_outputs(){
+		ArrayList<String> list_outputs = new ArrayList<String>();
+		list_outputs.addAll(super.get_list_outputs());
+		list_outputs.add("OnEqualTo");
+		list_outputs.add("OnGreaterThan");
+		list_outputs.add("OnLessThan");
+		list_outputs.add("OnNotEqual");
+		
+		return list_outputs;
 	}
 	
-	@Override
-	public void addInListInputsInputsOfTheClass() {
-		this.list_inputs.add("SetInitialValue");
-		this.list_inputs.add("SetInitialValueAndCompare");
-		this.list_inputs.add("SetCompareValue");
-		this.list_inputs.add("Compare");
+	public ArrayList<String> get_list_inputs() {
+		ArrayList<String> list_inputs = new ArrayList<String>();
+		list_inputs.addAll(super.get_list_inputs());
+		list_inputs.add("SetInitialValue");
+		list_inputs.add("SetInitialValueAndCompare");
+		list_inputs.add("SetCompareValue");
+		list_inputs.add("Compare");
+		
+		return list_inputs;
 	}
 	
 	@Override
@@ -68,36 +72,38 @@ public class LogicCompare extends Logic {
 				OnLessThan();
 			else if(nameOfOutput.equalsIgnoreCase("OnNotEqual"))
 				OnNotEqual();
+			else
+				super.fireOutputs(nameOfOutput);
 		}
 	}
 	
 	@Override
 	public void fireInputs(final String nameOfInput) {
-		if(nameOfInput != null)
+		if(nameOfInput != null){
 			if(nameOfInput.equalsIgnoreCase("Compare"))
 				compare();
+			else
+				super.fireInputs(nameOfInput);
+		}
 	}
 	
 	@Override
 	public void fireInputs(final String nameOfInput, Object parameter){
-		int i=0;
-		for(String v : this.list_inputs){
-			if(v!=null)
-				if(v.equalsIgnoreCase(nameOfInput))
-					break;
-			i++;
-		}
-		switch(i){
-		case 0:
-			setInitialValue((Float) parameter);
-			break;
-		case 1:
-			setInitialValueAndCompare((Float) parameter);
-			compare();
-			break;
-		case 2:
-			setCompareValue((Float) parameter);
-			break;
+		if(nameOfInput != null && parameter != null){
+			float temp = 1.0f;
+			try{
+				temp = (Float)parameter;	// Normalemnt on ne devrait pas avoir d'erreur !
+			}catch(Exception e){e.printStackTrace();}
+			
+			if(nameOfInput.equalsIgnoreCase("SetInitialValue"))
+					setInitialValue(temp);
+			else if(nameOfInput.equalsIgnoreCase("SetInitialValueAndCompare")){
+					setInitialValueAndCompare(temp);
+					compare();
+			}else if(nameOfInput.equalsIgnoreCase("SetCompareValue"))
+					setCompareValue(temp);
+			else
+				super.fireInputs(nameOfInput, parameter);
 		}
 	}
 	
