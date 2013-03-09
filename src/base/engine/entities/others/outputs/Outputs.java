@@ -11,7 +11,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 
 	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
-	 * sinon l'uptade verifie ce boolean et update le timer de facon a que l'output soit declenche une fois le timer
+	 * sinon l'update verifie ce boolean et update le timer de facon a que l'output soit declenche une fois le timer
 	 * arrive a l'event puis redevient false
 	 */
 	private boolean outputHasBeenDeclenched;
@@ -22,10 +22,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 	private boolean fireOnce;
 	
 	/**
-	 * Count how many times this output has been fired
-	 * Ou faire en sorte que cet Output soit detruit apres avoir ete fired -> preferable
+	 * 
 	 */
-	//private int counter;
+	private boolean hasBeenFiredAtleastOnce;
 	
 	/**
 	 * Temps avant que l'output envoie l'output (declenche l'input de l'objet)
@@ -56,6 +55,10 @@ public class Outputs implements IFireOnce, IUpdatable{
 		timeBeforeDeclencheTrigger = new Timer(delay);
 		outputNumber = number;
 		this.objectToDeclencheInput = objectToDeclencheInput;
+		hasBeenFiredAtleastOnce = false;
+		outputHasBeenDeclenched = false;
+		fireOnce = false;
+		nameOfTheOutput = "";
 	}
 	
 	/**
@@ -68,9 +71,22 @@ public class Outputs implements IFireOnce, IUpdatable{
 			timeBeforeDeclencheTrigger.update(delta);
 			
 			if(timeBeforeDeclencheTrigger.isTimeComplete()){
-				fireOutput();
 				
-				timeBeforeDeclencheTrigger.resetTime();
+				if(!fireOnce){
+					fireOutput();
+					timeBeforeDeclencheTrigger.resetTime();
+					outputHasBeenDeclenched = false;
+					hasBeenFiredAtleastOnce= true;
+				}else{
+					objectToDeclencheInput = null;
+					parameter = null;
+					outputHasBeenDeclenched = true;
+					
+					if(!hasBeenFiredAtleastOnce){
+						fireOutput();
+						hasBeenFiredAtleastOnce= true;
+					}
+				}
 			}
 		}
 	}
@@ -87,6 +103,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 	
 	/**
 	 * If the output has been triggered but not fired yet, this will cancel the output and restart timer
+	 * Means -> a trigger once may have been triggered but not fired yet, this will "save" that output
 	 */
 	public void cancelOutput(){
 		if(outputHasBeenDeclenched){
@@ -141,4 +158,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 	public void setFireOnce(boolean fireOnce) {
 		this.fireOnce = fireOnce;
 	}
+
+	public boolean isHasBeenFiredAtleastOnce() {
+		return hasBeenFiredAtleastOnce;
+	}
+
 }

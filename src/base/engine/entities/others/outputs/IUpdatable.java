@@ -1,5 +1,10 @@
 package base.engine.entities.others.outputs;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ * 
+ */
 public interface IUpdatable {
 
 	/**

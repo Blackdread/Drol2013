@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Toute classe qui peut recevoir des input et envoyer des output doit implementer cette classe.
+ * Et devrait implementer ITargetName
  * 
  * @author Yoann CAPLAIN
  *
@@ -72,9 +73,10 @@ public interface IInputsAndOutputs {
 	 */
 	public void fireInputs(final String nameOfInput, Object parameter);
 	
-	/**
+	/*
 	 * The targetname that other entities refer to this entity by
 	 * Should be unique
+	 * Everywhere the name will be supposed not unique
 	 */
-	public String getName();
+	//public String getName();
 }

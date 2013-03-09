@@ -81,7 +81,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	}
 	
 	@Override
-	public void update(int delta) {
+	public void update(final int delta) {
 		if(timer != null){
 			timer.update(delta);
 			

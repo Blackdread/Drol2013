@@ -9,11 +9,12 @@ import java.util.ArrayList;
  * 
  * @author Yoann CAPLAIN
  */
-public abstract class InputsAndOutputs implements IInputsAndOutputs {
+public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName {
 
 	/**
 	 * The targetname that other entities refer to this entity by
 	 * Should be unique
+	 * Everywhere the name will be supposed not unique
 	 */
 	protected String name;
 	
@@ -70,20 +71,13 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs {
 	public void fireInputs(String nameOfInput, Object parameter){
 		
 	}
-
-	/**
-	 * The targetname that other entities refer to this entity by
-	 * Should be unique
-	 */
-	public String getName() {
+	
+	@Override
+	public String getTargetName() {
 		return name;
 	}
-
-	/**
-	 * The targetname that other entities refer to this entity by
-	 * Should be unique
-	 */
-	public void setName(String name) {
+	@Override
+	public void setTargetName(String name) {
 		this.name = name;
 	}
 

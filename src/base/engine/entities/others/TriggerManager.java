@@ -1,9 +1,11 @@
-package base.engine.entities.others.triggers;
+package base.engine.entities.others;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.newdawn.slick.AngelCodeFont;
+
+import base.engine.entities.others.triggers.Trigger;
 
 /**
  * 

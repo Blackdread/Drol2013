@@ -1,6 +1,8 @@
-package base.engine.entities.others.filters;
+package base.engine.entities.others;
 
 import java.util.ArrayList;
+
+import base.engine.entities.others.filters.Filter;
 
 
 public class FilterManager {
