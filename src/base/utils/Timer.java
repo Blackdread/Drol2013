@@ -142,6 +142,14 @@ public class Timer {
 	}
 	
 	/**
+	 * add time
+	 * @param time
+	 */
+	public void addTime(int time){
+		deltaStock +=time;
+	}
+	
+	/**
 	 * 
 	 * @param event
 	 */

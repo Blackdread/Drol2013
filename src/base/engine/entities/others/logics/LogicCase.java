@@ -5,8 +5,6 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.others.outputs.Outputs;
-
 /**
  * It compares an input to up to 16 configured values, firing a corresponding output if there is a match (on InValue), 
  * or fires a random output (on PickRandom)

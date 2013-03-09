@@ -25,7 +25,8 @@ public class LogicManager implements IUpdatable{
 	private ArrayList<Logic> arrayLogicInstancie = new ArrayList<Logic>();
 	
 	/*
-	 * Je sais pas trop si c'est interessant de faire ca comme ca. Ca permet de chercher par rapport au targetname
+	 * Je sais pas trop si c'est interessant de faire ca comme ca. Ca permet de chercher par rapport au targetname sauf
+	 * que je ne le considere pas comme pouvant etre unique donc...
 	 */
 	//private static HashMap<String, Logic> hashTrigger = new HashMap<String, Logic>();
 	

@@ -90,8 +90,8 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 				OnTimer();
 				
 				if(useRandomTime){
-					refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
-					timer.setEventTime(refireInterval);
+					//refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
+					timer.setEventTime(minimumRandomInterval + (int)(Math.random()*maximumRandomInterval));
 				}
 				
 				if(isOscillator){
@@ -127,6 +127,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 		list_inputs.add("Enable");
 		list_inputs.add("Disable");
 		list_inputs.add("Toggle");
+		list_inputs.add("ToggleRandomTime");
 		list_inputs.add("LowerRandomBound");
 		list_inputs.add("UpperRandomBound");
 		list_inputs.add("AddToTimer");
@@ -168,6 +169,8 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 				enabled = false;
 			else if(nameOfInput.equalsIgnoreCase("Toggle"))
 				toggle();
+			else if(nameOfInput.equalsIgnoreCase("ToggleRandomTime"))
+				toggleRandomTime();
 			else
 				super.fireInputs(nameOfInput);
 		}
@@ -273,6 +276,21 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 			enabled = true;
 	}
 	/**
+	 * Toggle random interval on/off
+	 * Reset timer and set event time between min and max
+	 */
+	public void toggleRandomTime(){
+		if(useRandomTime)
+			useRandomTime = false;
+		else{
+			useRandomTime = true;
+			//refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
+			timer.setEventTime(minimumRandomInterval + (int)(Math.random()*maximumRandomInterval));
+			timer.resetTime();
+		}
+	}
+	
+	/**
 	 * Set a new Minimum Random Interval
 	 * @param minRand
 	 */
@@ -341,7 +359,10 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 		return isOscillator;
 	}
 
-
+	/**
+	 * 
+	 * @param useRandomTime
+	 */
 	public void setUseRandomTime(boolean useRandomTime) {
 		this.useRandomTime = useRandomTime;
 	}

@@ -74,6 +74,25 @@ private static OutputManager instance;
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param nameWeSearch targetName of the entity (should be unique) (Not case sensitive)
+	 * @return An arraylist that contains Outputs that triggers those entities with targetname == nameWeSearch
+	 */
+	public ArrayList<Outputs> getAllOutputsThatTriggerOn(final String nameWeSearch){
+		/*
+		 * v doit implementer ITargetName sinon ça plantera !! A voir si je fais les verifications pour eviter les erreurs
+		 */
+		ArrayList<Outputs> array = new ArrayList<Outputs>();
+		if(arrayOutputInstancie != null)
+			for(Outputs v : arrayOutputInstancie)
+				if(v != null)
+					if(((ITargetName)(v.getObjectToDeclencheInput())).getTargetName().equalsIgnoreCase(nameWeSearch)){
+						array.add(v);
+					}
+		
+		return array;
+	}
 	
 	synchronized public void addOutput(Outputs a){
 		if(arrayOutputInstancie != null)

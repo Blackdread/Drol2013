@@ -3,7 +3,9 @@ package base.engine.entities.others.outputs;
 import base.utils.Timer;
 
 /**
- * 
+ * An output fires an input on an Object that can receive inputs
+ * Outputs may be delayed or triggered immediatly
+ * Outputs may be triggered once then destroyed
  * @author Yoann CAPLAIN
  *
  */
@@ -22,7 +24,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 	private boolean fireOnce;
 	
 	/**
-	 * 
+	 * If it's a triggerOnce, if true then this entity will be deleted
 	 */
 	private boolean hasBeenFiredAtleastOnce;
 	
@@ -32,7 +34,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 	protected Timer timeBeforeDeclencheTrigger;
 	
 	/**
-	 * Represents the name of the output
+	 * Represents the name of the input
 	 * Exemples: OnMapSpawn, OnTrigger, OnStartTouch, OnGreaterThan, OnEqual, ...
 	 */
 	protected String nameOfTheOutput;
@@ -161,6 +163,17 @@ public class Outputs implements IFireOnce, IUpdatable{
 
 	public boolean isHasBeenFiredAtleastOnce() {
 		return hasBeenFiredAtleastOnce;
+	}
+	/**
+	 * 
+	 * @param event in milliseconds
+	 */
+	public void changeEventTime(int event){
+		timeBeforeDeclencheTrigger.setEventTime(event);
+	}
+	
+	public Timer getTimeBeforeDeclencheTrigger() {
+		return timeBeforeDeclencheTrigger;
 	}
 
 }

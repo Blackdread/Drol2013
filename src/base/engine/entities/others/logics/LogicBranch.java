@@ -2,8 +2,6 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.others.outputs.Outputs;
-
 /**
  * It tests a boolean value and fires an output based on whether the value is true (one) or false (zero). 
  * Use this entity to branch between two potential sets of events.  
