@@ -7,7 +7,7 @@ package base.engine.entities.others.outputs;
  */
 public interface IDisable {
 
-	public void setEnable(boolean enabled);
+	public void setEnabled(boolean enabled);
 	public boolean isDisabled();
 	public boolean isEnabled();
 	

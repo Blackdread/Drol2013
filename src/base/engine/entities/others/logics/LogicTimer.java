@@ -394,7 +394,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 
 
 	@Override
-	public void setEnable(boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 	

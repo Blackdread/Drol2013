@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
+import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.Outputs;
 import base.utils.Timer;
 
@@ -14,17 +15,27 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public class LogicRelay extends Logic implements IDisable, IFireOnce{
+public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable{
 
+	private static final int MINIMUM_DELAY = 2;
+	private static final int DELAY_BEFORE_FIRE_ON_SPAWN = 1000;
+	
 	private boolean enabled;
 	
 	/**
 	 * true -> once it has been fired if it's a fireOnce this will be deleted from the world
 	 * Will always be false if it is not a fireOnce
 	 */
-	private boolean hasbeenFired = false;
+	private boolean hasbeenFired;
 	
 	private Timer timerFastRetrigger;
+	
+	/**
+	 * Will be true once it has fired
+	 * We don't want to trigger it immediately on spawn because some entities may not be created yet
+	 * Delay is DELAY_BEFORE_FIRE_ON_SPAWN milliseconds
+	 */
+	private boolean hasBeenFiredOnSpawn;
 	
 	/*
 	 * Flags
@@ -45,11 +56,33 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 		allowFastRetrigger = false;
 		fireOnce = false;
 		startDisabled = false;
-		enabled = false;
-		timerFastRetrigger = new Timer(1);
+		enabled = true;
+		timerFastRetrigger = new Timer(MINIMUM_DELAY);
 		hasbeenFired = false;
+		hasBeenFiredOnSpawn = false;
 	}
 
+
+	@Override
+	public void update(int delta) {
+		if(enabled)
+			if(!hasBeenFiredOnSpawn){
+				timerFastRetrigger.addTime(delta);
+				if(timerFastRetrigger.getDeltaStock() >= DELAY_BEFORE_FIRE_ON_SPAWN){
+					for(Outputs v : get_array_outputs())
+						if(v.getNameOfTheOutput().equalsIgnoreCase("OnSpawn")){	// eviter qu'il fire pour rien et perde son FireOnce, il pourrait y avoir des OnTrigger
+							OnSpawn();
+							break;
+						}
+					hasBeenFiredOnSpawn = true;
+					timerFastRetrigger.setEventTime(MINIMUM_DELAY);
+					timerFastRetrigger.resetTime();
+				}
+			}else{
+				timerFastRetrigger.update(delta);
+			}
+	}
+	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();
 		list_outputs.addAll(super.get_list_outputs());
@@ -67,6 +100,7 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 		list_inputs.add("Disable");
 		list_inputs.add("Toggle");
 		list_inputs.add("CancelPending");
+		list_inputs.add("cancelAllPending");
 		list_inputs.add("EnableRefire");
 		
 		return list_inputs;
@@ -162,7 +196,7 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	 *  Allows a slow trigger to fire again. (Used as an internal callback)
 	 */
 	public void enableRefire(){
-		
+		allowFastRetrigger = true;
 	}
 	
 	/*
@@ -174,11 +208,12 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 	 * Supposed to be called only once !
 	 */
 	private void OnSpawn(){
-		if(fireOnce && !hasbeenFired){
+		if(fireOnce && !hasbeenFired && enabled){
 			hasbeenFired = true;
 			//fireOutput("OnSpawn");
 		}
-		fireOutput("OnSpawn");
+		if(enabled)
+			fireOutput("OnSpawn");
 		
 	}
 	 /**
@@ -189,12 +224,19 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 		if(enabled && !hasbeenFired){
 			if(fireOnce)
 				hasbeenFired = true;
-			fireOutput("OnTrigger");
+			if(allowFastRetrigger)
+				fireOutput("OnTrigger");
+			else{
+				if(timerFastRetrigger.isTimeComplete()){
+					fireOutput("OnTrigger");
+					timerFastRetrigger.resetTime();
+				}
+			}
 		}
 	}
 
 	@Override
-	public void setEnable(boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 	
@@ -237,12 +279,9 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce{
 		return allowFastRetrigger;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	public void setAllowFastRetrigger(boolean allowFastRetrigger) {
 		this.allowFastRetrigger = allowFastRetrigger;
 	}
+
 	 
 }

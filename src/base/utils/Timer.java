@@ -157,4 +157,8 @@ public class Timer {
 		eventTime = event;
 	}
 
+	public float getDeltaStock() {
+		return deltaStock;
+	}
+
 }
