@@ -2,16 +2,21 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
+import base.engine.entities.others.outputs.IUpdatable;
+
 /**
  * It fires outputs immediately after a map loads, unlike most other entities that wait for input first. 
  * It can be set to check a global state before firing, which allows you to fire events based on what 
  * took place in a previous map. 
  * If the "Remove on fire" flag is set, the logic_auto is deleted after firing. 
  * To do: This may cause problems with delayed outputs.
+ * 
+ * This is a singleton (Only one by map/level)
+ * 
  * @author Yoann CAPLAIN
  *
  */
-public class LogicAuto extends Logic {
+public class LogicAuto extends Logic implements IUpdatable{
 	
 	/*
 	 * Flags
@@ -38,6 +43,11 @@ public class LogicAuto extends Logic {
 
 	private LogicAuto(String name) {
 		super(name);
+	}
+	
+	@Override
+	public void update(int delta) {
+		
 	}
 	
 	public ArrayList<String> get_list_outputs(){

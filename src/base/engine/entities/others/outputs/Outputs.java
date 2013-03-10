@@ -40,10 +40,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 	protected String nameOfTheOutput;
 	
 	/**
-	 * Ce nombre represente l'input a declenche sur le Target Entity
-	 */
-	private int outputNumber;
-	/**
 	 * Target Entity
 	 */
 	private Object objectToDeclencheInput;
@@ -53,14 +49,34 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 */
 	private Object parameter;
 	
-	public Outputs(int number,Object objectToDeclencheInput,int delay){
-		timeBeforeDeclencheTrigger = new Timer(delay);
-		outputNumber = number;
+	public Outputs(){
+		timeBeforeDeclencheTrigger = new Timer(0);
+		objectToDeclencheInput = null;
+		hasBeenFiredAtleastOnce = false;
+		outputHasBeenDeclenched = false;
+		fireOnce = false;
+		nameOfTheOutput = "";
+		parameter = null;
+	}
+	
+	public Outputs(Object objectToDeclencheInput){
+		timeBeforeDeclencheTrigger = new Timer(0);
 		this.objectToDeclencheInput = objectToDeclencheInput;
 		hasBeenFiredAtleastOnce = false;
 		outputHasBeenDeclenched = false;
 		fireOnce = false;
 		nameOfTheOutput = "";
+		parameter = null;
+	}
+	
+	public Outputs(Object objectToDeclencheInput,int delay){
+		timeBeforeDeclencheTrigger = new Timer(delay);
+		this.objectToDeclencheInput = objectToDeclencheInput;
+		hasBeenFiredAtleastOnce = false;
+		outputHasBeenDeclenched = false;
+		fireOnce = false;
+		nameOfTheOutput = "";
+		parameter = null;
 	}
 	
 	/**
@@ -80,14 +96,13 @@ public class Outputs implements IFireOnce, IUpdatable{
 					outputHasBeenDeclenched = false;
 					hasBeenFiredAtleastOnce= true;
 				}else{
-					objectToDeclencheInput = null;
-					parameter = null;
-					outputHasBeenDeclenched = true;
-					
 					if(!hasBeenFiredAtleastOnce){
 						fireOutput();
 						hasBeenFiredAtleastOnce= true;
 					}
+					objectToDeclencheInput = null;
+					parameter = null;
+					outputHasBeenDeclenched = true;	// A voir si c'est bien true qu'il faut mettre
 				}
 			}
 		}
@@ -100,7 +115,14 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 * if the output is deleted
 	 */
 	public void fireOutput(){
-		
+		/*
+		 * Pas de verification que ca implement bien IInputsAndOutputs, de toute facons c'est necessaire
+		 * A voir
+		 */
+		if(parameter == null)
+			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheOutput);
+		else
+			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheOutput, parameter);
 	}
 	
 	/**
@@ -123,10 +145,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 		return nameOfTheOutput;
 	}
 
-	public int getOutputNumber() {
-		return outputNumber;
-	}
-
 	public Object getObjectToDeclencheInput() {
 		return objectToDeclencheInput;
 	}
@@ -137,10 +155,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 
 	public void setNameOfTheOutput(String nameOfTheOutput) {
 		this.nameOfTheOutput = nameOfTheOutput;
-	}
-
-	public void setOutputNumber(int outputNumber) {
-		this.outputNumber = outputNumber;
 	}
 
 	public void setObjectToDeclencheInput(Object objectToDeclencheInput) {

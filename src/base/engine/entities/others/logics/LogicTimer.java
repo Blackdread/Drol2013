@@ -82,29 +82,30 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	
 	@Override
 	public void update(final int delta) {
-		if(timer != null){
-			timer.update(delta);
-			
-			if(timer.isTimeComplete()){
-				timer.resetTime();
-				OnTimer();
+		if(enabled)
+			if(timer != null){
+				timer.update(delta);
 				
-				if(useRandomTime){
-					//refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
-					timer.setEventTime(minimumRandomInterval + (int)(Math.random()*maximumRandomInterval));
-				}
-				
-				if(isOscillator){
-					if(remindLastOutputForOscillator){
-						remindLastOutputForOscillator = false;
-						OnTimerHigh();
-					}else{
-						remindLastOutputForOscillator = true;
-						OnTimerLow();
+				if(timer.isTimeComplete()){
+					timer.resetTime();
+					OnTimer();
+					
+					if(useRandomTime){
+						//refireInterval = minimumRandomInterval + (int)(Math.random()*maximumRandomInterval);
+						timer.setEventTime(minimumRandomInterval + (int)(Math.random()*maximumRandomInterval));
+					}
+					
+					if(isOscillator){
+						if(remindLastOutputForOscillator){
+							remindLastOutputForOscillator = false;
+							OnTimerHigh();
+						}else{
+							remindLastOutputForOscillator = true;
+							OnTimerLow();
+						}
 					}
 				}
 			}
-		}
 	}
 
 	
@@ -250,6 +251,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	}
 	/**
 	 * Force the timer to fire immediately
+	 * Do not check if it's enabled
 	 */
 	public void fireTimer(){
 		OnTimer();
