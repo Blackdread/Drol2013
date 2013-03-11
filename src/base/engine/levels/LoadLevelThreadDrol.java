@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import base.tile.Tile;
 	
 public class LoadLevelThreadDrol implements Runnable {
 	private Level level;
@@ -27,18 +29,21 @@ public class LoadLevelThreadDrol implements Runnable {
 			br=new BufferedReader(ipsr);
 			String ligne;
 			
-			int nombreASauter = level.NB_LIGNE_MINIMUM_POUR_PARAMETRE + level.NB_OBJET_MIN_SUPPOSER_PAR_LEVEL;
+			int nombreASauter = level.NB_LIGNE_MINIMUM_POUR_PARAMETRE + ((LevelDrol)level).NB_LIGNE_MINIMUM_POUR_PARAMETRE_POUR_DROL;
 			for(int i=0;i<nombreASauter;i++){
 				br.readLine();
 			}
+			
 			int i=0;
+			String t[];
 			while ((ligne=br.readLine())!=null){
 				System.out.println("load: "+ligne);
 				
 				if(( i < ((LevelDrol)level).hauteurNiveau) ){
-					String t[] = ligne.split(" ");
+					t = ligne.split(" ");
 					for(int j=0 ; j< ((LevelDrol)level).largeurNiveau ; j++){
-						((LevelDrol)level).tabNiveau[i][j] = Integer.valueOf(t[j]);
+						((LevelDrol)level).tabNiveau[i][j] = new Tile();
+						((LevelDrol)level).tabNiveau[i][j].setIndex(Integer.valueOf(t[j]));
 					}
 					i++;
 				}

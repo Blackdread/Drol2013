@@ -1,5 +1,8 @@
 package base.views;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +17,9 @@ import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.SoundEngine;
 import base.engine.gui.ProgressBarFillRect;
+import base.engine.levels.LevelDrol;
+import base.tile.TilePropriety;
+import base.tile.TileSet;
 import base.utils.ResourceManager;
 import base.utils.Timer;
 
@@ -36,6 +42,16 @@ public class ResourcesView extends View {
 	private Image background;
 	private ProgressBarFillRect bar;
 	private Timer timer;
+	
+	/*
+	 * POUR LES TEST A SUPRIMER
+	 */
+	
+	private TileSet t;
+	private LevelDrol lvl;
+	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
+	
+	
 
 	public ResourcesView(GameContainer container) {
 		timer = new Timer(WAIT_TIME_BEFORE_NEXTR);
@@ -67,7 +83,11 @@ public class ResourcesView extends View {
 
 		if (ready) {
 			g.drawString("Press a key or click", container.getWidth() / 2 - 90, container.getHeight() / 2 + 10);
+			if(lvl.isLoadOver())
+				lvl.generateLevelGraphic(500, 500).flush();
 		}
+		
+		
 	}
 
 	@Override
@@ -83,6 +103,19 @@ public class ResourcesView extends View {
 				}
 
 				ready = true;
+				
+
+				tp.add(new TilePropriety(0, true, "mur"));
+				tp.add(new TilePropriety(0, false, "fond"));
+				
+				
+				t = new TileSet(ResourceManager.getSpriteSheet("turret"), tp);
+				
+				lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
+				lvl.loadLevel();
+				/*
+				
+				
 				SoundEngine b = new SoundEngine();
 				
 				Message a = new Message();
@@ -104,6 +137,8 @@ public class ResourcesView extends View {
 				d.f_data.put(MessageKey.P_VOLUME, 0.20f);
 				b.receiveMessage(d);
 				b.processMessage();
+				*/
+				
 				
 			}
 			timer.resetTime();

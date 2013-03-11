@@ -76,4 +76,10 @@ public class BlockRectangle extends Block {
 		return null;
 	}
 
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

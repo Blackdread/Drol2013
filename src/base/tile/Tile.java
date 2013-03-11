@@ -7,17 +7,17 @@ import org.newdawn.slick.SpriteSheet;
 import base.engine.entities.BasicEntity;
 
 public class Tile {
-
-	protected SpriteSheet tileSet;
-	protected int id;
-	protected boolean isWall;
+	protected int index;
 	
 	protected ArrayList<BasicEntity> entiteProche = new ArrayList<BasicEntity>();
 	
-	public Tile(SpriteSheet sp, int i, boolean wall){
-		tileSet = sp;
-		id =i;
-		isWall = wall;
+	public Tile()
+	{
+		index = -1;
+	}
+	
+	public Tile(int i){
+		index = i;
 	}
 	
 	public void enleverEntite(int idEntite){
@@ -31,23 +31,25 @@ public class Tile {
 		}
 		
 	}
+	
+	
 	public void ajouterEntite(BasicEntity a){
 		entiteProche.add(a);
 	}
 
-	public int getId() {
-		return id;
+	public int getIndex() {
+		return index;
 	}
 
-	public boolean isWall() {
-		return isWall;
+	public void setIndex(int id) {
+		this.index = id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public ArrayList<BasicEntity> getEntiteProche() {
+		return entiteProche;
 	}
 
-	public void setWall(boolean isWall) {
-		this.isWall = isWall;
+	public void setEntiteProche(ArrayList<BasicEntity> entiteProche) {
+		this.entiteProche = entiteProche;
 	}
 }
