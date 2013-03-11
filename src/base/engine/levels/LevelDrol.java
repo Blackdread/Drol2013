@@ -65,14 +65,8 @@ public class LevelDrol extends Level {
 					}
 			}
 			/*
-			String tmp[];
-			for(int i=0; i < hauteurNiveau ; i++){
-				ligne=br.readLine();
-				tmp = ligne.split(" ");
-				for(int j=0;j<largeurNiveau;j++)
-					tabNiveau[i][j].setIndex(Integer.valueOf(tmp[j]));
-			}
-			//*/
+			 * Le chargement du reste se fait avec le Thread loadLevel()
+			 */
 			//while ((ligne=br.readLine())!=null)
 				//System.out.println(ligne);
 				
