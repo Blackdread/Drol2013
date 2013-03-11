@@ -12,7 +12,14 @@ public class TestView extends View{
 	
 	public void initResources()
 	{
+		tp.add(new TilePropriety(0, true, "mur"));
+		tp.add(new TilePropriety(0, false, "fond"));
 		
+		
+		t = new TileSet(ResourceManager.getSpriteSheet("turret"), tp);
+		
+		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
+		lvl.loadLevel();
 	}
 	
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
@@ -23,14 +30,7 @@ public class TestView extends View{
 	
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{
-		tp.add(new TilePropriety(0, true, "mur"));
-		tp.add(new TilePropriety(0, false, "fond"));
 		
-		
-		t = new TileSet(ResourceManager.getSpriteSheet("turret"), tp);
-		
-		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
-		lvl.loadLevel();
 	}
 	
 	public void keyPressed(int key, char c) {
