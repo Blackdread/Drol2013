@@ -38,15 +38,6 @@ public class Game extends StateBasedGame {
 	
 	// State IDS
 	public static final int RESOURCES_STATE_ID = 0;
-	public static final int MAIN_MENU_VIEW_ID = 1;
-	public static final int EDITEUR_VIEW_ID = 2;
-	public static final int OPTIONS_VIEW_ID = 3;
-	public static final int CREDITS_VIEW_ID = 4;
-	public static final int LEVELS_VIEW_ID = 5;
-	public static final int ENGINE_VIEW_ID = 6;
-	public static final int CREATE_LEVEL_ID = 7;
-	public static final int TRANSITION_VIEW_ID = 8;
-	public static final int LAST_VIEW_ID = 9;
 	
 	public Game(String configFileLocation, String resourceJarLocation) throws IOException, SlickException {
 		super(NAME);
@@ -61,18 +52,6 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new ResourcesView(container));
-		/*
-		addState(new MainMenuView());
-		//addState(new EditeurView());
-		//addState(new OptionsView());
-		addState(new CreditsView());
-		//addState(new LevelsView());
-		//addState(new Engine());
-		//addState(new CreateLevelView());
-		//addState(new TransitionView());
-		addState(new LastView());
-		//addState(new CreateView());
-		 //*/
 	}
 	
 	private void applyCurrentConfiguration(AppGameContainer container) throws IOException, SlickException {
@@ -109,7 +88,6 @@ public class Game extends StateBasedGame {
 	 * @throws LWJGLException 
 	 */
 	public void launch() throws SlickException, IOException {
-		//AppGameContainer container = new AppGameContainer(this);
 		container = new AppGameContainer(this);
 		
 		// Icon		ici car ca a besoin d'etre mis avant que le container ne commence
@@ -122,7 +100,6 @@ public class Game extends StateBasedGame {
 		}
 		//*/
 		
-		// Mandatory
 		container.setMinimumLogicUpdateInterval(10);
 		container.setMaximumLogicUpdateInterval(10);
 		container.setUpdateOnlyWhenVisible(false);
@@ -144,10 +121,6 @@ public class Game extends StateBasedGame {
 	public static View getStateByIndex(int index) {
 		return (View) states.get(index);
 	}
-	 /*
-	public NetworkManager getNetworkManager() {
-		return networkManager;
-	}*/
 	
 	public static void changeResolution(int width, int height) throws SlickException{
 		((AppGameContainer) Game.container).setDisplayMode(width, height, Configuration.isFullScreen());

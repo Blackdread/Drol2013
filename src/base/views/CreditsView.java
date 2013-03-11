@@ -19,6 +19,7 @@ import base.utils.ResourceManager;
  * @author Yoann CAPLAIN
  * 
  */
+
 public class CreditsView extends View {
 
 	private Image background;

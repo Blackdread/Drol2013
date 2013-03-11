@@ -43,14 +43,6 @@ public class ResourcesView extends View {
 	private ProgressBarFillRect bar;
 	private Timer timer;
 	
-	/*
-	 * POUR LES TEST A SUPRIMER
-	 */
-	
-	private TileSet t;
-	private LevelDrol lvl;
-	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
-	
 	
 
 	public ResourcesView(GameContainer container) {
@@ -83,8 +75,6 @@ public class ResourcesView extends View {
 
 		if (ready) {
 			g.drawString("Press a key or click", container.getWidth() / 2 - 90, container.getHeight() / 2 + 10);
-			if(lvl.isLoadOver())
-				lvl.generateLevelGraphic(500, 500).flush();
 		}
 		
 		
@@ -105,14 +95,7 @@ public class ResourcesView extends View {
 				ready = true;
 				
 
-				tp.add(new TilePropriety(0, true, "mur"));
-				tp.add(new TilePropriety(0, false, "fond"));
 				
-				
-				t = new TileSet(ResourceManager.getSpriteSheet("turret"), tp);
-				
-				lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
-				lvl.loadLevel();
 				/*
 				
 				
