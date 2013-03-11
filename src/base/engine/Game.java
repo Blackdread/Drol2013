@@ -38,6 +38,7 @@ public class Game extends StateBasedGame {
 	
 	// State IDS
 	public static final int RESOURCES_STATE_ID = 0;
+	public static final int TEST_STATE_ID = 1;
 	
 	public Game(String configFileLocation, String resourceJarLocation) throws IOException, SlickException {
 		super(NAME);
@@ -52,6 +53,7 @@ public class Game extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		addState(new ResourcesView(container));
+		addState(new TestView());
 	}
 	
 	private void applyCurrentConfiguration(AppGameContainer container) throws IOException, SlickException {
