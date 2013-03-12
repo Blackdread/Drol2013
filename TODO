@@ -1,8 +1,5 @@
 TODO:
 
-Class Level : revoir les parametres necessaires au minimum, tilemapping
-Necessite d'avoir des classes qui heritent de Level
-
-TileMap : 
-
+Changer les Hashtable en HashMap
 LogicEngine :
+
