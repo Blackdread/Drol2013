@@ -26,13 +26,21 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();
-		// empty for the moment
+		list_outputs.add("OnUser1");
+		list_outputs.add("OnUser2");
+		list_outputs.add("OnUser3");
+		list_outputs.add("OnUser4");
+		
 		return list_outputs;
 	}
 	
 	public ArrayList<String> get_list_inputs() {
 		ArrayList<String> list_inputs = new ArrayList<String>();
-		// empty for the moment
+		list_inputs.add("FireUser1");
+		list_inputs.add("FireUser2");
+		list_inputs.add("FireUser3");
+		list_inputs.add("FireUser4");
+		
 		return list_inputs;
 	}
 	
@@ -45,7 +53,14 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 */
 	@Override
 	public void fireOutputs(String nameOfOutput){
-		
+		if(nameOfOutput.equalsIgnoreCase("OnUser1"))
+			fireOutput("OnUser1");
+		else if(nameOfOutput.equalsIgnoreCase("OnUser2"))
+			fireOutput("OnUser2");
+		else if(nameOfOutput.equalsIgnoreCase("OnUser3"))
+			fireOutput("OnUser3");
+		else if(nameOfOutput.equalsIgnoreCase("OnUser4"))
+			fireOutput("OnUser4");
 	}
 	
 	@Override
@@ -60,7 +75,15 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#fireInputs(java.lang.String)
 	 */
 	@Override
-	public void fireInputs(String nameOfInput){
+	public void fireInputs(final String nameOfInput){
+		if(nameOfInput.equalsIgnoreCase("FireUser1"))
+			fireOutput("OnUser1");
+		else if(nameOfInput.equalsIgnoreCase("FireUser2"))
+			fireOutput("OnUser2");
+		else if(nameOfInput.equalsIgnoreCase("FireUser3"))
+			fireOutput("OnUser3");
+		else if(nameOfInput.equalsIgnoreCase("FireUser4"))
+			fireOutput("OnUser4");
 		
 	}
 
@@ -68,7 +91,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * @see base.engine.entities.triggers.outputs.IInputsAndOutputs#fireInputs(java.lang.String, java.lang.Object)
 	 */
 	@Override
-	public void fireInputs(String nameOfInput, Object parameter){
+	public void fireInputs(final String nameOfInput, Object parameter){
 		
 	}
 	

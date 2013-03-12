@@ -11,6 +11,15 @@ import base.utils.Timer;
  */
 public class Outputs implements IFireOnce, IUpdatable{
 
+	//TODO: Un outputs a besoin de savoir a quelle entite elle appartient car elle peut avoir besoin d'execute un input sur 
+	// elle-meme (pas sur l'output mais sur l'entite)
+	// Soit faire une recherche la liste des entites et chercher celle qui contient cette output, soit avoir 
+	// une reference dans l'output pour savoir a qui elle appartient
+	/*
+	 * Ou vu que l'appel du FireOutput se fait dans le InputsAndOutputs, je peux passer en parametre l'activateur
+	 */
+	
+	
 	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
 	 * sinon l'update verifie ce boolean et update le timer de facon a que l'output soit declenche une fois le timer
@@ -34,15 +43,27 @@ public class Outputs implements IFireOnce, IUpdatable{
 	protected Timer timeBeforeDeclencheTrigger;
 	
 	/**
-	 * Represents the name of the input
-	 * Exemples: OnMapSpawn, OnTrigger, OnStartTouch, OnGreaterThan, OnEqual, ...
+	 * Represents the name of the output
+	 * Examples: OnMapSpawn, OnTrigger, OnStartTouch, OnGreaterThan, OnEqual, ...
 	 */
 	protected String nameOfTheOutput;
 	
 	/**
+	 * Represents the name of the input
+	 * Examples: Trigger, Close, Enable, Toggle, FlyAway, Test ...
+	 */
+	protected String nameOfTheInput;
+	
+	/**
 	 * Target Entity
+	 * TODO: May becomes a String
 	 */
 	private Object objectToDeclencheInput;
+	
+	/**
+	 * Target Entity name
+	 */
+	private String nameOfTheEntityToFireInput;
 	/*
 	 * Peut-etre mettre une liste de parametre et ordonne
 	 * sinon il faut mettre plusieurs output et ordonne -> preferable
@@ -188,6 +209,14 @@ public class Outputs implements IFireOnce, IUpdatable{
 	
 	public Timer getTimeBeforeDeclencheTrigger() {
 		return timeBeforeDeclencheTrigger;
+	}
+
+	public String getNameOfTheInput() {
+		return nameOfTheInput;
+	}
+
+	public void setNameOfTheInput(String nameOfTheInput) {
+		this.nameOfTheInput = nameOfTheInput;
 	}
 
 }

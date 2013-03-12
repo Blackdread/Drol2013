@@ -11,6 +11,8 @@ public interface IDisable {
 	public boolean isDisabled();
 	public boolean isEnabled();
 	
+	public void toggle();
+	
 	public void setStartDisabled(boolean startDisabled);
 	public boolean isStartDisabled();
 }

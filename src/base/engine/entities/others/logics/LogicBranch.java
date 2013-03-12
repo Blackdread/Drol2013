@@ -57,7 +57,7 @@ public class LogicBranch extends Logic {
 	 * @see base.engine.entities.triggers.outputs.InputsAndOutputs#fireInputs(java.lang.String)
 	 */
 	@Override
-	public void fireInputs(String nameOfInput) {
+	public void fireInputs(final String nameOfInput) {
 		if(nameOfInput != null){
 			if(nameOfInput.equalsIgnoreCase("Toggle"))
 				toggle();
@@ -75,7 +75,7 @@ public class LogicBranch extends Logic {
 	 * @see base.engine.entities.triggers.outputs.InputsAndOutputs#fireInputs(java.lang.String, java.lang.Object)
 	 */
 	@Override
-	public void fireInputs(String nameOfInput, Object parameter) {
+	public void fireInputs(final String nameOfInput, Object parameter) {
 		if(nameOfInput != null && parameter != null){
 			int temp = 0;
 			try{
