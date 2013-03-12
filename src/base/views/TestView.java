@@ -1,7 +1,17 @@
+import java.awt.Graphics;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+import base.engine.levels.LevelDrol;
+import base.tile.TilePropriety;
+import base.tile.TileSet;
+import base.utils.ResourceManager;
 
 
 public class TestView extends View{
@@ -37,5 +47,11 @@ public class TestView extends View{
 	}
 	
 	public void mousePressed(int button, int x, int y) {
+	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
