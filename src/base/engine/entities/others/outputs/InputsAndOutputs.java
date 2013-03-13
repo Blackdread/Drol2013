@@ -95,6 +95,11 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		
 	}
 	
+	public void addOutput(Outputs output){
+		output.setEntityWhoHasThisOutput(this);
+		array_outputs.add(output);
+	}
+	
 	@Override
 	public String getTargetName() {
 		return name;

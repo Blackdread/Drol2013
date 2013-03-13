@@ -88,7 +88,7 @@ public class LevelDrol extends Level {
 	//TODO
 	public Graphics generateLevelGraphic(int width, int height)
 	{
-		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>();
+		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>(15);
 		
 		
 		Graphics graph = new Graphics(width, height);

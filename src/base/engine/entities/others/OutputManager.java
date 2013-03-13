@@ -62,7 +62,6 @@ private static OutputManager instance;
 			for(i=0; i <  k ;i++){
 				if(arrayOutputInstancie.get(i) != null){	// Verifier que c'est bien une instance de ITargetName ?
 					if(((ITargetName)arrayOutputInstancie.get(i)).getTargetName().equalsIgnoreCase(nameOfEntityThatOutputOn)){
-						arrayOutputInstancie.get(i).setObjectToDeclencheInput(null);
 						arrayOutputInstancie.get(i).setParameter(null);
 						arrayOutputInstancie.remove(i);
 						k--;
@@ -87,11 +86,22 @@ private static OutputManager instance;
 		if(arrayOutputInstancie != null)
 			for(Outputs v : arrayOutputInstancie)
 				if(v != null)
-					if(((ITargetName)(v.getObjectToDeclencheInput())).getTargetName().equalsIgnoreCase(nameWeSearch)){
+					if(v.getNameOfTheEntityToFireInput().equalsIgnoreCase(nameWeSearch)){
 						array.add(v);
 					}
 		
 		return array;
+	}
+	/**
+	 * A besoin de chercher dans toutes les entites qui peuvent recevoir des inputs si leur nom
+	 * correspond a nameWeSearch pour ensuite declencher l'input
+	 * @param nameWeSearch targetName of the entity (should be unique) (Not case sensitive)
+	 * @param input name
+	 * @param parameter may be null
+	 */
+	public void triggerInputsOnEntity(final String nameWeSearch, final String nameOfInput, Object parameter){
+		//if(parameter == null)
+		// TODO
 	}
 	
 	synchronized public void addOutput(Outputs a){

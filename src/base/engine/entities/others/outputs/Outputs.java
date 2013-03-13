@@ -1,5 +1,6 @@
 package base.engine.entities.others.outputs;
 
+import base.engine.entities.others.OutputManager;
 import base.utils.Timer;
 
 /**
@@ -19,6 +20,10 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 * Ou vu que l'appel du FireOutput se fait dans le InputsAndOutputs, je peux passer en parametre l'activateur
 	 */
 	
+	/**
+	 * If this output has to fire input on his entity owner, it mays do it using this
+	 */
+	private InputsAndOutputs entityWhoHasThisOutput;
 	
 	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
@@ -54,14 +59,19 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 */
 	protected String nameOfTheInput;
 	
-	/**
+	/*
 	 * Target Entity
 	 * TODO: May becomes a String
 	 */
-	private Object objectToDeclencheInput;
+	//private Object objectToDeclencheInput;
 	
 	/**
 	 * Target Entity name
+	 */
+	/*
+	 * J'utilise le nom de l'entite car il est possible que plusieurs entite est le meme nom, ainsi on peut declencher le meme
+	 * output sur plusieurs entite. Le probleme est que l'on est oblige de parcourir la liste des entites pour voir si on doit
+	 * lui declencher l'input
 	 */
 	private String nameOfTheEntityToFireInput;
 	/*
@@ -72,31 +82,34 @@ public class Outputs implements IFireOnce, IUpdatable{
 	
 	public Outputs(){
 		timeBeforeDeclencheTrigger = new Timer(0);
-		objectToDeclencheInput = null;
+		nameOfTheEntityToFireInput = "";
 		hasBeenFiredAtleastOnce = false;
 		outputHasBeenDeclenched = false;
 		fireOnce = false;
 		nameOfTheOutput = "";
+		nameOfTheInput = "";
 		parameter = null;
 	}
 	
-	public Outputs(Object objectToDeclencheInput){
+	public Outputs(String nameEntity){
 		timeBeforeDeclencheTrigger = new Timer(0);
-		this.objectToDeclencheInput = objectToDeclencheInput;
+		nameOfTheEntityToFireInput = nameEntity;
 		hasBeenFiredAtleastOnce = false;
 		outputHasBeenDeclenched = false;
 		fireOnce = false;
 		nameOfTheOutput = "";
+		nameOfTheInput = "";
 		parameter = null;
 	}
 	
-	public Outputs(Object objectToDeclencheInput,int delay){
+	public Outputs(String nameEntity,int delay){
 		timeBeforeDeclencheTrigger = new Timer(delay);
-		this.objectToDeclencheInput = objectToDeclencheInput;
+		nameOfTheEntityToFireInput = nameEntity;
 		hasBeenFiredAtleastOnce = false;
 		outputHasBeenDeclenched = false;
 		fireOnce = false;
 		nameOfTheOutput = "";
+		nameOfTheInput = "";
 		parameter = null;
 	}
 	
@@ -121,7 +134,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 						fireOutput();
 						hasBeenFiredAtleastOnce= true;
 					}
-					objectToDeclencheInput = null;
+					nameOfTheEntityToFireInput = "";
 					parameter = null;
 					outputHasBeenDeclenched = true;	// A voir si c'est bien true qu'il faut mettre
 				}
@@ -134,16 +147,27 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 * otherwise outputHasBeenDeclenched is set to true then OutputsManager will increment timer
 	 * Once an output is fired, this function does NOT reinitialize it -> means the output will be fired except
 	 * if the output is deleted
+	 * @param self Represent the object that 
 	 */
 	public void fireOutput(){
 		/*
 		 * Pas de verification que ca implement bien IInputsAndOutputs, de toute facons c'est necessaire
 		 * A voir
 		 */
+		/*
 		if(parameter == null)
-			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheOutput);
+			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheInput);
 		else
-			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheOutput, parameter);
+			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheInput, parameter);
+		//*/
+		if(nameOfTheEntityToFireInput != null)
+			if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, ...
+				if(parameter == null)
+					entityWhoHasThisOutput.fireInputs(nameOfTheInput);
+				else
+					entityWhoHasThisOutput.fireInputs(nameOfTheInput, parameter);
+			}else
+				OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
 	}
 	
 	/**
@@ -166,20 +190,12 @@ public class Outputs implements IFireOnce, IUpdatable{
 		return nameOfTheOutput;
 	}
 
-	public Object getObjectToDeclencheInput() {
-		return objectToDeclencheInput;
-	}
-
 	public Object getParameter() {
 		return parameter;
 	}
 
 	public void setNameOfTheOutput(String nameOfTheOutput) {
 		this.nameOfTheOutput = nameOfTheOutput;
-	}
-
-	public void setObjectToDeclencheInput(Object objectToDeclencheInput) {
-		this.objectToDeclencheInput = objectToDeclencheInput;
 	}
 
 	public void setParameter(Object parameter) {
@@ -217,6 +233,18 @@ public class Outputs implements IFireOnce, IUpdatable{
 
 	public void setNameOfTheInput(String nameOfTheInput) {
 		this.nameOfTheInput = nameOfTheInput;
+	}
+
+	public String getNameOfTheEntityToFireInput() {
+		return nameOfTheEntityToFireInput;
+	}
+
+	public void setNameOfTheEntityToFireInput(String nameOfTheEntityToFireInput) {
+		this.nameOfTheEntityToFireInput = nameOfTheEntityToFireInput;
+	}
+
+	public void setEntityWhoHasThisOutput(InputsAndOutputs entityWhoHasThisOutput) {
+		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
 	}
 
 }

@@ -35,4 +35,16 @@ public abstract class Filter extends InputsAndOutputs{
 	
 
 	public abstract boolean checkFilterConditions();
+	/**
+	 * 
+	 * @param activatorName Name of the entity that triggered the trigger then the trigger send the name to the filter
+	 * @return 
+	 */
+	public abstract boolean checkFilterConditions(final String activatorName);
+	/**
+	 * 
+	 * @param activator The entity that triggered the trigger
+	 * @return 
+	 */
+	public abstract boolean checkFilterConditions(Object activator);
 }
