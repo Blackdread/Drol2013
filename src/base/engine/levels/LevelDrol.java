@@ -88,11 +88,11 @@ public class LevelDrol extends Level {
 	//TODO
 	public Graphics generateLevelGraphic(int width, int height)
 	{
-		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>(15);
+		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>();
 		
 		
 		Graphics graph = new Graphics(width, height);
-		graph.setColor(Color.green);
+		graph.setColor(Color.blue);
 		graph.fillRect(0, 0, width, height);
 		
 		//Variable necessaire a l'affichage de la fenetre de scrolling
@@ -103,10 +103,10 @@ public class LevelDrol extends Level {
 		
 		
 		minX = xScroll / largeurTile;
-		maxX = (xScroll + largeurTile*largeurNiveau) / largeurTile;
+		maxX = (xScroll + width)/largeurTile + 1;
 		
 		minY = yScroll / hauteurTile;
-		maxY = (yScroll + hauteurTile*hauteurNiveau) / hauteurTile;
+		maxY = (yScroll + height)/hauteurTile + 1;
 		
 		for(int i = minY; i < maxY; i++)
 		{
