@@ -1,9 +1,6 @@
 package base.tile;
 
 import java.util.ArrayList;
-
-import org.newdawn.slick.SpriteSheet;
-
 import base.engine.entities.BasicEntity;
 
 public class Tile {

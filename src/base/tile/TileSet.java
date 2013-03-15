@@ -9,14 +9,20 @@ public class TileSet {
 	private ArrayList<TilePropriety> correspondanceTile;
 	private int nbTileLargeur;
 	private int nbTileHauteur;
+	private int largeurTile;
+	private int hauteurTile;
 	
 	public TileSet(SpriteSheet img, ArrayList<TilePropriety> t)
 	{
 		spriteSource = img;
 		correspondanceTile = t;
 		
-		nbTileLargeur = img.getWidth()/img.getSubImage(0, 0).getWidth();
-		nbTileHauteur = img.getHeight()/img.getSubImage(0, 0).getHeight();
+		largeurTile = img.getSubImage(0, 0).getWidth();
+		hauteurTile = img.getSubImage(0, 0).getHeight();
+		
+		nbTileLargeur = img.getWidth()/largeurTile;
+		nbTileHauteur = img.getHeight()/hauteurTile;
+		
 	}
 
 	public SpriteSheet getSpriteSource() {
@@ -49,6 +55,22 @@ public class TileSet {
 
 	public void setNbTileHauteur(int nbTileHauteur) {
 		this.nbTileHauteur = nbTileHauteur;
+	}
+
+	public int getLargeurTile() {
+		return largeurTile;
+	}
+
+	public void setLargeurTile(int largeurTile) {
+		this.largeurTile = largeurTile;
+	}
+
+	public int getHauteurTile() {
+		return hauteurTile;
+	}
+
+	public void setHauteurTile(int hauteurTile) {
+		this.hauteurTile = hauteurTile;
 	}
 	
 	

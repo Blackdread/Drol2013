@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -24,8 +25,11 @@ public class LevelDrol extends Level {
 	
 	protected int largeurNiveau;
 	protected int hauteurNiveau;
+	protected int largeurTile;
+	protected int hauteurTile;
 	
-	protected ArrayList<BasicEntity> arrayEntite = new ArrayList<BasicEntity>();
+	//HashMap : id/Entity
+	protected HashMap<Integer, BasicEntity> arrayEntite = new HashMap<Integer, BasicEntity>();
 	
 	protected Tile[][] tabNiveau;
 	
@@ -35,6 +39,10 @@ public class LevelDrol extends Level {
 		super(file);
 		
 		tileSet = tile;
+		
+		largeurTile = tile.getLargeurTile();
+		hauteurTile = tile.getHauteurTile();
+		
 		
 		InputStream ips;
 		InputStreamReader ipsr;
@@ -156,6 +164,64 @@ public class LevelDrol extends Level {
 	
 	
 	
+	public int getLargeurNiveau() {
+		return largeurNiveau;
+	}
+
+	public void setLargeurNiveau(int largeurNiveau) {
+		this.largeurNiveau = largeurNiveau;
+	}
+
+	public int getHauteurNiveau() {
+		return hauteurNiveau;
+	}
+
+	public void setHauteurNiveau(int hauteurNiveau) {
+		this.hauteurNiveau = hauteurNiveau;
+	}
+	
+	
+
+	public int getLargeurTile() {
+		return largeurTile;
+	}
+
+	public void setLargeurTile(int largeurTile) {
+		this.largeurTile = largeurTile;
+	}
+
+	public int getHauteurTile() {
+		return hauteurTile;
+	}
+
+	public void setHauteurTile(int hauteurTile) {
+		this.hauteurTile = hauteurTile;
+	}
+
+	public Tile[][] getTabNiveau() {
+		return tabNiveau;
+	}
+
+	public void setTabNiveau(Tile[][] tabNiveau) {
+		this.tabNiveau = tabNiveau;
+	}
+
+	public TileSet getTileSet() {
+		return tileSet;
+	}
+
+	public void setTileSet(TileSet tileSet) {
+		this.tileSet = tileSet;
+	}
+
+	public HashMap<Integer, BasicEntity> getArrayEntite() {
+		return arrayEntite;
+	}
+
+	public void setArrayEntite(HashMap<Integer, BasicEntity> arrayEntite) {
+		this.arrayEntite = arrayEntite;
+	}
+
 	/**
 	 * Vider les arraylist, etc
 	 * 
