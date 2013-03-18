@@ -2,6 +2,7 @@ package base.engine.logics;
 
 import base.engine.CollisionManager;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.HeroEntity;
 import base.engine.levels.LevelDrol;
 
 public class Deplacement {
@@ -42,6 +43,22 @@ public class Deplacement {
 			{
 				for(int j = y/lvl.getHauteurTile(); j < (y + hauteur)/lvl.getHauteurTile(); j++)
 					lvl.getTabNiveau()[i][j].ajouterEntite(e);
+			}
+			
+			//Si l'entité est le héro, il faut mettre à jour le scoll
+			if(e instanceof HeroEntity)
+			{
+				//Si le scroll ne sort pas de l'écran
+				if((x-(lvl.getScroll().getWidth()/2)) > 0)
+					lvl.getScroll().setxScroll((x-(lvl.getScroll().getWidth()/2)));
+				else
+					lvl.getScroll().setxScroll(0);
+				
+				if( (x + (lvl.getScroll().getWidth()/2) ) < (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
+					lvl.getScroll().setxScroll(x+(lvl.getScroll().getWidth()/2));
+				else
+					lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());
+				
 			}
 		}		
 	}

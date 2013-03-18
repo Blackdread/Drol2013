@@ -14,6 +14,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import base.engine.entities.BasicEntity;
+import base.tile.Scroll;
 import base.tile.Tile;
 import base.tile.TileSet;
 
@@ -27,6 +28,7 @@ public class LevelDrol extends Level {
 	protected int hauteurNiveau;
 	protected int largeurTile;
 	protected int hauteurTile;
+	protected Scroll scroll;
 	
 	//HashMap : id/Entity
 	protected HashMap<Integer, BasicEntity> arrayEntite = new HashMap<Integer, BasicEntity>();
@@ -37,6 +39,8 @@ public class LevelDrol extends Level {
 	
 	public LevelDrol(File file, TileSet tile) {
 		super(file);
+		
+		scroll = new Scroll();
 		
 		tileSet = tile;
 		
@@ -94,14 +98,14 @@ public class LevelDrol extends Level {
 	}
 	
 	//TODO
-	public Graphics generateLevelGraphic(int width, int height)
+	public Graphics generateLevelGraphic()
 	{
 		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>();
 		
 		
-		Graphics graph = new Graphics(width, height);
+		Graphics graph = new Graphics(scroll.getWidth(), scroll.getHeight());
 		graph.setColor(Color.blue);
-		graph.fillRect(0, 0, width, height);
+		graph.fillRect(0, 0, scroll.getWidth(), scroll.getHeight());
 		
 		//Variable necessaire a l'affichage de la fenetre de scrolling
 		int minX, minY, maxX, maxY, largeurTile, hauteurTile, indexTile;
@@ -110,11 +114,11 @@ public class LevelDrol extends Level {
 		hauteurTile = tileSet.getSpriteSource().getSprite(0, 0).getHeight();
 		
 		
-		minX = xScroll / largeurTile;
-		maxX = (xScroll + width)/largeurTile + 1;
+		minX = scroll.getxScroll() / largeurTile;
+		maxX = (scroll.getxScroll() + scroll.getWidth())/largeurTile + 1;
 		
-		minY = yScroll / hauteurTile;
-		maxY = (yScroll + height)/hauteurTile + 1;
+		minY = scroll.getyScroll() / hauteurTile;
+		maxY = (scroll.getyScroll() + scroll.getHeight())/hauteurTile + 1;
 		
 		for(int i = minY; i < maxY; i++)
 		{
@@ -122,7 +126,7 @@ public class LevelDrol extends Level {
 			{
 				//Affiche le decors
 				indexTile = tabNiveau[i][j].getIndex();
-				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), j*largeurTile-xScroll, i*hauteurTile-yScroll);
+				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), j*largeurTile-scroll.getxScroll(), i*hauteurTile-scroll.getyScroll());
 				
 				//Affiche les entitees au voisinage de la tile et qui n'ont pas encore ete affiche
 				if(!tabNiveau[i][j].getEntiteProche().isEmpty())
@@ -131,7 +135,7 @@ public class LevelDrol extends Level {
 						if(tabNiveau[i][j].getEntiteProche().get(k) != null)
 						{
 							if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProche().get(k).getId())){
-								tabNiveau[i][j].getEntiteProche().get(k).render(graph, (int)tabNiveau[i][j].getEntiteProche().get(k).getX()-xScroll, (int)tabNiveau[i][j].getEntiteProche().get(k).getY()-yScroll);
+								tabNiveau[i][j].getEntiteProche().get(k).render(graph, (int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll());
 								entiteAffiche.add(tabNiveau[i][j].getEntiteProche().get(k).getId());
 							}
 						}
@@ -220,6 +224,14 @@ public class LevelDrol extends Level {
 
 	public void setArrayEntite(HashMap<Integer, BasicEntity> arrayEntite) {
 		this.arrayEntite = arrayEntite;
+	}
+
+	public Scroll getScroll() {
+		return scroll;
+	}
+
+	public void setScroll(Scroll scroll) {
+		this.scroll = scroll;
 	}
 
 	/**
