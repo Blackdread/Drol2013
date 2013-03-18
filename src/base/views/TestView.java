@@ -1,15 +1,18 @@
 package base.views;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+<<<<<<< HEAD
+=======
+import org.newdawn.slick.Input;
+>>>>>>> 616691ad3795b30c8b897d55582dfc1b820b1bfb
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import base.engine.Game;
 import base.engine.levels.LevelDrol;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
@@ -28,7 +31,7 @@ public class TestView extends View{
 		tp.add(new TilePropriety(0, false, "fond"));
 		
 		
-		t = new TileSet(ResourceManager.getSpriteSheet("turret"), tp);
+		t = new TileSet(ResourceManager.getSpriteSheet("sprite"), tp);
 		
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
@@ -46,6 +49,12 @@ public class TestView extends View{
 	}
 	
 	public void keyPressed(int key, char c) {
+		super.keyPressed(key, c);
+		switch(key){
+		case Input.KEY_RIGHT:
+			lvl.setxScroll(lvl.getxScroll()+3);
+			break;
+		}
 	}
 	
 	public void mousePressed(int button, int x, int y) {
@@ -53,7 +62,12 @@ public class TestView extends View{
 
 	@Override
 	public int getID() {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		return 1;
+=======
+		
+		return Game.TEST_STATE_ID;
+>>>>>>> 616691ad3795b30c8b897d55582dfc1b820b1bfb
 	}
 }

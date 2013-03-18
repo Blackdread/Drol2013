@@ -34,7 +34,7 @@ public abstract class Level implements ILevel{
 	 */
 	protected int nbLigneFichier;
 	/**
-	 * Numero de la ligne où le LoadLevelThread est en cours
+	 * Numero de la ligne oÔøΩ le LoadLevelThread est en cours
 	 */
 	protected int nbLigneFichierLuPourLeLoading;
 	/**
@@ -217,4 +217,22 @@ public abstract class Level implements ILevel{
 	public String toString(){
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
 	}
+
+	public int getxScroll() {
+		return xScroll;
+	}
+
+	public void setxScroll(int xScroll) {
+		this.xScroll = xScroll;
+	}
+
+	public int getyScroll() {
+		return yScroll;
+	}
+
+	public void setyScroll(int yScroll) {
+		this.yScroll = yScroll;
+	}
+	
+	
 }
