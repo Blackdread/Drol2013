@@ -30,16 +30,15 @@ public class LogicEngine extends Engine {
 		if(!this.message_queue.isEmpty()){
 			mes = this.message_queue.poll();
 			switch(mes.instruction){
-			
 				case MessageKey.I_MOVE_ENTITY:
-					if(mes.i_data.contains(MessageKey.P_ID))
+					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
 						int id, x, y;
 						id = mes.i_data.get(MessageKey.P_ID);
-						if(mes.i_data.contains(MessageKey.P_X))
+						if(mes.i_data.containsKey(MessageKey.P_X))
 						{
 							x = mes.i_data.get(MessageKey.P_X);
-							if(mes.i_data.contains(MessageKey.P_Y))
+							if(mes.i_data.containsKey(MessageKey.P_Y))
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
 								deplacement.deplacerEntity(x, y, id);
@@ -51,6 +50,7 @@ public class LogicEngine extends Engine {
 		}
 		else
 			return false;
+		
 		return true;
 	}
 

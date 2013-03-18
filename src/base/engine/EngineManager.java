@@ -69,7 +69,7 @@ public class EngineManager {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 	
-	private static Object objetSynchrone;
+	private static Object objetSynchrone = new Object();
 	
 	public static EngineManager getInstance() {
 		if (null == instance) { // Premier appel
