@@ -26,6 +26,4 @@ public interface IEntity {
 
 	public int getHeight();
 
-	public int getLayer();
-
 }

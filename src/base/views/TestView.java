@@ -3,17 +3,23 @@ package base.views;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
+import base.engine.entities.HeroEntity;
 import base.engine.levels.LevelDrol;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
 import base.utils.ResourceManager;
+import base.engine.LogicEngine;
 
 
 public class TestView extends View{
@@ -21,9 +27,12 @@ public class TestView extends View{
 	private TileSet t;
 	private LevelDrol lvl;
 	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
+	HeroEntity hero;
+	EngineManager engineManager;
 	
 	public void initResources()
 	{
+		engineManager = EngineManager.getInstance();
 		tp.add(new TilePropriety(0, true, "mur"));
 		tp.add(new TilePropriety(0, false, "fond"));
 		
@@ -32,18 +41,33 @@ public class TestView extends View{
 		
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
+		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
+		hero = new HeroEntity(5, 500);
+		hero.setLocation(0, 0);
+		hero.setWidth(32);
+		hero.setHeight(32);
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
-			lvl.generateLevelGraphic(500, 500).flush();
+			lvl.generateLevelGraphic().flush();
 	}
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{
-		
+		if(Keyboard.isKeyDown(Input.KEY_RIGHT))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_X, (int)hero.getX());
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
+			
+		}
 	}
 	
 	@Override
@@ -51,7 +75,7 @@ public class TestView extends View{
 		super.keyPressed(key, c);
 		switch(key){
 		case Input.KEY_RIGHT:
-			lvl.setxScroll(lvl.getxScroll()+3);
+			lvl.getScroll().setxScroll((lvl.getScroll().getxScroll()+3));
 			break;
 		}
 	}

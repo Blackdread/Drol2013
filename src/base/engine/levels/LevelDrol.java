@@ -115,10 +115,10 @@ public class LevelDrol extends Level {
 		
 		
 		minX = scroll.getxScroll() / largeurTile;
-		maxX = (scroll.getxScroll() + scroll.getWidth())/largeurTile + 1;
+		maxX = (scroll.getxScroll() + scroll.getWidth())/largeurTile;
 		
 		minY = scroll.getyScroll() / hauteurTile;
-		maxY = (scroll.getyScroll() + scroll.getHeight())/hauteurTile + 1;
+		maxY = (scroll.getyScroll() + scroll.getHeight())/hauteurTile;
 		
 		for(int i = minY; i < maxY; i++)
 		{

@@ -1,25 +1,20 @@
 package base.engine.entities;
 
-import base.engine.Engine;
 
 
 public abstract class BasicEntity implements IEntity, ISave {
-
-	protected Engine engine;
 	
 	protected int id;
 	protected int type;
 	
-	protected int layer;
+	
 	protected int width;
 	protected int height;
 	protected float x;
 	protected float y;
 	
 	
-	public BasicEntity(Engine engine, int layer) {
-		this.engine = engine;
-		this.layer = layer;
+	public BasicEntity() {
 	}
 
 	public void setLocation(float x, float y) {
@@ -34,11 +29,6 @@ public abstract class BasicEntity implements IEntity, ISave {
 	@Override
 	public int getHeight() {
 		return height;
-	}
-
-	@Override
-	public int getLayer() {
-		return layer;
 	}
 
 	@Override
@@ -57,7 +47,7 @@ public abstract class BasicEntity implements IEntity, ISave {
 	}
 	
 	public String save() {
-		return ""+layer+"_"+x+"_"+y+"_"+width+"_"+height;
+		return ""+"_"+x+"_"+y+"_"+width+"_"+height;
 	}
 	
 	public Object load(String s){
@@ -77,5 +67,15 @@ public abstract class BasicEntity implements IEntity, ISave {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	
 
 }

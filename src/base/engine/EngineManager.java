@@ -14,7 +14,17 @@ public class EngineManager {
 	private static final int NB_ENGINE = 3;
 	private static EngineManager instance;
 	private Engine tabEngine[];
+
 	
+
+	public Engine[] getTabEngine() {
+		return tabEngine;
+	}
+
+	public void setTabEngine(Engine[] tabEngine) {
+		this.tabEngine = tabEngine;
+	}
+
 	private EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
 		tabEngine[0] = new SoundEngine();

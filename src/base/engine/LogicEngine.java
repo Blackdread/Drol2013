@@ -10,12 +10,14 @@ public class LogicEngine extends Engine {
 	private Deplacement deplacement;
 	private LevelDrol lvl;
 	
-	public LogicEngine(LevelDrol lvl)
+	
+	
+	public LogicEngine()
 	{
 		super();
-		this.lvl = lvl;
-		c_manager = new CollisionManager(lvl);
-		deplacement = new Deplacement(lvl);
+		this.lvl = null;
+		c_manager = new CollisionManager(null);
+		deplacement = new Deplacement(null);
 	}
 	
 	@Override
@@ -50,5 +52,13 @@ public class LogicEngine extends Engine {
 		else
 			return false;
 		return true;
+	}
+
+	public LevelDrol getLvl() {
+		return lvl;
+	}
+
+	public void setLvl(LevelDrol lvl) {
+		this.lvl = lvl;
 	}
 }
