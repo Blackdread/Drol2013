@@ -19,8 +19,8 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 	private Timer mouseOverTimer;
 	private boolean remove;
 
-	public ActiveEntity(Engine engine, int layer, int type, int maxLife) {
-		super(engine, layer);
+	public ActiveEntity(int type, int maxLife) {
+		super();
 		this.type = type;
 		this.maxLife = maxLife;
 		this.life = maxLife;

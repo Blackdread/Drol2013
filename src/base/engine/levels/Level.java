@@ -14,8 +14,6 @@ public abstract class Level implements ILevel{
 	protected final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
 	
 	
-	protected int xScroll, yScroll;
-	
 	// Nom d'un level
 	// lvl_numero.lvl
 	
@@ -54,8 +52,6 @@ public abstract class Level implements ILevel{
 	protected boolean isSaveOver;
 	
 	public Level(File file){
-		xScroll = 0;
-		yScroll = 0;
 		
 		isLoadOver = false;
 		isSaveOver = false;
@@ -216,22 +212,6 @@ public abstract class Level implements ILevel{
 	
 	public String toString(){
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
-	}
-
-	public int getxScroll() {
-		return xScroll;
-	}
-
-	public void setxScroll(int xScroll) {
-		this.xScroll = xScroll;
-	}
-
-	public int getyScroll() {
-		return yScroll;
-	}
-
-	public void setyScroll(int yScroll) {
-		this.yScroll = yScroll;
 	}
 	
 	
