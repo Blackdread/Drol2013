@@ -69,6 +69,19 @@ public class FilterMulti extends Filter {
 		}
 		return retour;
 	}
+	
+	@Override
+	public boolean checkFilterConditions(Object entityToFilter) {
+		setCompare(entityToFilter);
+		return checkFilterConditions();
+	}
+	
+	@Override
+	public void setCompare(Object entityToFilter) {
+		for(Filter v : arrayFilter)
+			if(v != null)
+				v.setCompare(entityToFilter);
+	}
 
 
 }

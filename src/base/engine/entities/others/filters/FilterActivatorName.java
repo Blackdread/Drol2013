@@ -30,16 +30,18 @@ public class FilterActivatorName extends Filter{
 	 * @see Filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name, String Classname){
+	public FilterActivatorName(String name, String classname){
 		super(name);
+		classNameFilter = classname;
 	}
 	/**
 	 * @see Filter
 	 * @param negate invert the filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name, boolean negate, String Classname){
+	public FilterActivatorName(String name, boolean negate, String classname){
 		super(name, negate);
+		classNameFilter = classname;
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public class FilterActivatorName extends Filter{
 		}
 		
 		// On gere ici la negation du resultat
-		if(this.negateFilter){
+		if(negateFilter){
 			if(retour)
 				return false;
 			else
@@ -65,19 +67,15 @@ public class FilterActivatorName extends Filter{
 	}
 	
 	@Override
-	public boolean checkFilterConditions(String activatorName) {
-		NameToCompareTo = activatorName;
+	public boolean checkFilterConditions(Object entityToFilter) {
+		if(entityToFilter instanceof ITargetName)
+			NameToCompareTo = ((ITargetName)entityToFilter).getTargetName();
 		return checkFilterConditions();
 	}
+	
 	@Override
-	public boolean checkFilterConditions(Object activator) {
-		if(activator instanceof ITargetName)
-			NameToCompareTo = ((ITargetName)activator).getTargetName();
-		return checkFilterConditions();
+	public void setCompare(Object entityToFilter) {
+		if(entityToFilter instanceof ITargetName)
+			NameToCompareTo = ((ITargetName)entityToFilter).getTargetName();
 	}
-	
-	public void setNameToCompareTo(String classNameToCompareTo) {
-		this.NameToCompareTo = classNameToCompareTo;
-	}
-	
 }

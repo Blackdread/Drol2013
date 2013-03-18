@@ -116,6 +116,7 @@ public class LevelDrol extends Level {
 		minY = yScroll / hauteurTile;
 		maxY = (yScroll + height)/hauteurTile + 1;
 		
+		
 		for(int i = minY; i < maxY; i++)
 		{
 			for(int j = minX; j < maxX; j++)
