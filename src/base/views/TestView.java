@@ -34,17 +34,19 @@ public class TestView extends View{
 		lvl.loadLevel();
 	}
 	
+	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
 			lvl.generateLevelGraphic(500, 500).flush();
 	}
 	
-	
+	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{
 		
 	}
 	
+	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		switch(key){
@@ -54,6 +56,7 @@ public class TestView extends View{
 		}
 	}
 	
+	@Override
 	public void mousePressed(int button, int x, int y) {
 	}
 
