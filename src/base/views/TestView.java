@@ -5,10 +5,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-<<<<<<< HEAD
-=======
 import org.newdawn.slick.Input;
->>>>>>> 616691ad3795b30c8b897d55582dfc1b820b1bfb
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -62,12 +59,6 @@ public class TestView extends View{
 
 	@Override
 	public int getID() {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-		return 1;
-=======
-		
 		return Game.TEST_STATE_ID;
->>>>>>> 616691ad3795b30c8b897d55582dfc1b820b1bfb
 	}
 }
