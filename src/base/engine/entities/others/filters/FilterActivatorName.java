@@ -1,5 +1,7 @@
 package base.engine.entities.others.filters;
 
+import base.engine.entities.others.outputs.ITargetName;
+
 /**
  *  It is a filter that filters by the name of the activator.
  *  The name to compare to needs to be given before checking filter
@@ -43,7 +45,7 @@ public class FilterActivatorName extends Filter{
 	/**
 	 * Compare names and ignore case
 	 * Peut-etre qu'il faudrait faire en sorte que le filter aille chercher lui meme NameToCompareTo
-	 * Mais pour ca il faut que le filter est un pointeur vers ce qui l'active
+	 * Mais pour ca il faut que le filter est un pointeur vers ce qui l'active 
 	 */
 	@Override
 	public boolean checkFilterConditions() {
@@ -62,7 +64,20 @@ public class FilterActivatorName extends Filter{
 		return retour;
 	}
 	
+	@Override
+	public boolean checkFilterConditions(String activatorName) {
+		NameToCompareTo = activatorName;
+		return checkFilterConditions();
+	}
+	@Override
+	public boolean checkFilterConditions(Object activator) {
+		if(activator instanceof ITargetName)
+			NameToCompareTo = ((ITargetName)activator).getTargetName();
+		return checkFilterConditions();
+	}
+	
 	public void setNameToCompareTo(String classNameToCompareTo) {
 		this.NameToCompareTo = classNameToCompareTo;
 	}
+	
 }

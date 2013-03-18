@@ -92,7 +92,7 @@ public class LogicCompare extends Logic {
 		if(nameOfInput != null && parameter != null){
 			float temp = 1.0f;
 			try{
-				temp = (Float)parameter;	// Normalemnt on ne devrait pas avoir d'erreur !
+				temp = (Float)parameter;	// Normalement on ne devrait pas avoir d'erreur !
 			}catch(Exception e){e.printStackTrace();}
 			
 			if(nameOfInput.equalsIgnoreCase("SetInitialValue"))

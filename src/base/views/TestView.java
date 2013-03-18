@@ -1,10 +1,12 @@
-import java.awt.Graphics;
+package base.views;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -52,6 +54,6 @@ public class TestView extends View{
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }

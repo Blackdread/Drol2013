@@ -186,7 +186,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 		if(nameOfInput != null && parameter != null){
 			int temp = 1000;
 			try{
-				temp = (Integer)parameter;	// Normalemnt on ne devrait pas avoir d'erreur !
+				temp = (Integer)parameter;	// Normalement on ne devrait pas avoir d'erreur !
 			}catch(Exception e){e.printStackTrace();}
 			
 			if(nameOfInput.equalsIgnoreCase("RefireTime"))
