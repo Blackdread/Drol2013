@@ -2,6 +2,11 @@ package base.engine.entities.others.filters;
 
 import base.engine.entities.others.outputs.ITeam;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
 public class FilterActivatorTeam extends Filter {
 
 	protected int team;

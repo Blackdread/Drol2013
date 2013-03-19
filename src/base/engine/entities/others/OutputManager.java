@@ -21,7 +21,7 @@ private static OutputManager instance;
 	
 	public static OutputManager getInstance() {
 		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone__) {
+            synchronized(objetSynchrone) {
                 if (null == instance) {
                     instance = new OutputManager();
                 }
@@ -124,5 +124,5 @@ private static OutputManager instance;
 		 
 	 }
 	 
-	 private static Object objetSynchrone__;
+	 private static Object objetSynchrone = new Object();
 }

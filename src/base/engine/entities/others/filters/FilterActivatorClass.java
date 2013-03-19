@@ -2,7 +2,11 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
-
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
 public class FilterActivatorClass extends Filter {
 
 	/**

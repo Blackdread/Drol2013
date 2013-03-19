@@ -5,17 +5,13 @@ import java.util.ArrayList;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
- * 
+ * If the filter mode is Allow, only entities whose matches the given conditions 
+ * will pass the filter. If the filter mode is Disallow, all entities EXCEPT those whose matches 
+ * conditions will pass the filter
  * @author Yoann CAPLAIN
  *
  */
 public abstract class Filter extends InputsAndOutputs{
-	/**
-	* If the filter mode is Allow, only entities whose matches the given conditions 
-	* will pass the filter. If the filter mode is Disallow, all entities EXCEPT those whose matches 
-	* conditions will pass the filter
-	*/
-	protected boolean allow = true;
 	
 	/**
 	 * Inverts the filter, making the specified concept fail and all others pass
@@ -136,5 +132,12 @@ public abstract class Filter extends InputsAndOutputs{
 	 */
 	protected void OnFail(){
 		fireOutput("OnFail");
+	}
+	
+	public boolean isNegateFilter() {
+		return negateFilter;
+	}
+	public void setNegateFilter(boolean negateFilter) {
+		this.negateFilter = negateFilter;
 	}
 }

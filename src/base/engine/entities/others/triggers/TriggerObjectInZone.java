@@ -21,7 +21,7 @@ public class TriggerObjectInZone extends Trigger {
 	
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger agit
-	 * cet array contient les objets dans la zone
+	 * Cet array contient les objets dans la zone
 	 */
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
@@ -61,6 +61,5 @@ public class TriggerObjectInZone extends Trigger {
 	public void setArrayEntityToActON(ArrayList<BasicEntity> arrayEntity) {
 		this.arrayEntityToActON = arrayEntity;
 	}
-
 
 }

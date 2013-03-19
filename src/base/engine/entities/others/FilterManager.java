@@ -17,7 +17,7 @@ public class FilterManager {
 	
 	public static FilterManager getInstance() {
 		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone__) {
+            synchronized(objetSynchrone) {
                 if (null == instance) {
                     instance = new FilterManager();
                 }
@@ -40,5 +40,5 @@ public class FilterManager {
 		 
 	 }
 	 
-	 private static Object objetSynchrone__;
+	 private static Object objetSynchrone = new Object();
 }

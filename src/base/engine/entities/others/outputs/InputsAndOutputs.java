@@ -27,6 +27,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		list_outputs.add("OnUser2");
 		list_outputs.add("OnUser3");
 		list_outputs.add("OnUser4");
+		list_outputs.add("OnKilled");
 		
 		return list_outputs;
 	}
@@ -37,6 +38,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		list_inputs.add("FireUser2");
 		list_inputs.add("FireUser3");
 		list_inputs.add("FireUser4");
+		list_inputs.add("Kill");
 		
 		return list_inputs;
 	}
@@ -58,11 +60,13 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 			fireOutput("OnUser3");
 		else if(nameOfOutput.equalsIgnoreCase("OnUser4"))
 			fireOutput("OnUser4");
+		else if(nameOfOutput.equalsIgnoreCase("OnKilled"))
+			fireOutput("OnKilled");
 	}
 	
 	@Override
 	public void fireOutput(final String nameOfOutput){
-		for(Outputs v : this.array_outputs)
+		for(Outputs v : array_outputs)
 			if(v != null)
 				if(v.getNameOfTheOutput().equalsIgnoreCase(""+nameOfOutput))
 					v.fireOutput();
@@ -81,6 +85,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 			fireOutput("OnUser3");
 		else if(nameOfInput.equalsIgnoreCase("FireUser4"))
 			fireOutput("OnUser4");
+		else if(nameOfInput.equalsIgnoreCase("Kill"))
+			OnKilled();
 		
 	}
 
@@ -106,4 +112,12 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		this.name = name;
 	}
 
+	// Outputs
+	/**
+	 * Fired when the entity is killed and removed from the game
+	 */
+	private void OnKilled(){
+		fireOutput("Kill");
+	}
+	
 }

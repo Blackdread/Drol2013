@@ -32,7 +32,7 @@ public class LogicManager implements IUpdatable{
 	
 	public static LogicManager getInstance(){
 		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone__) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
+            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
                 if (null == instance) {
                     instance = new LogicManager();
                 }
@@ -117,7 +117,7 @@ public class LogicManager implements IUpdatable{
 	 private LogicManager(){
 		 
 	 }
-	 private static Object objetSynchrone__;
+	 private static Object objetSynchrone = new Object();
 
 
 }
