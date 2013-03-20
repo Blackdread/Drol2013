@@ -15,10 +15,22 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 */
 	protected String name;
 	
+	/**
+	 * true -> entity will be deleted
+	 * OnKilled() has already been triggered
+	 */
+	protected boolean removeEntityFromWorld;
+	
+	/**
+	 * true -> Removes this entity and all its children from the world
+	 */
+	protected boolean removeHierarchy;
+	
 	protected ArrayList<Outputs> array_outputs = new ArrayList<Outputs>();
 	
 	public InputsAndOutputs(String name){
 		this.name = name;
+		removeEntityFromWorld = false;
 	}
 	
 	public ArrayList<String> get_list_outputs(){
@@ -39,6 +51,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		list_inputs.add("FireUser3");
 		list_inputs.add("FireUser4");
 		list_inputs.add("Kill");
+		list_inputs.add("KillHierarchy");
 		
 		return list_inputs;
 	}
@@ -61,7 +74,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		else if(nameOfOutput.equalsIgnoreCase("OnUser4"))
 			fireOutput("OnUser4");
 		else if(nameOfOutput.equalsIgnoreCase("OnKilled"))
-			fireOutput("OnKilled");
+			OnKilled();
 	}
 	
 	@Override
@@ -86,8 +99,9 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		else if(nameOfInput.equalsIgnoreCase("FireUser4"))
 			fireOutput("OnUser4");
 		else if(nameOfInput.equalsIgnoreCase("Kill"))
-			OnKilled();
-		
+			kill();
+		else if(nameOfInput.equalsIgnoreCase("KillHierarchy"))
+			killHierarchy();
 	}
 
 	/* (non-Javadoc)
@@ -100,7 +114,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	
 	public void addOutput(Outputs output){
 		output.setEntityWhoHasThisOutput(this);
-		array_outputs.add(output);
+		if(array_outputs != null)
+			array_outputs.add(output);
 	}
 	
 	@Override
@@ -112,12 +127,57 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		this.name = name;
 	}
 
+	/**
+	 * Clear the array that contains outputs and remove outputs from OutputsManager
+	 */
+	public void removeAllOutputsThatEntityHas(){
+		// TODO enlever les outputs du manager (ceux qui appartiennent a cette entite)
+		
+		if(array_outputs != null)
+			array_outputs.clear();
+	}
+	
+	public void removeChildrenThatEntityHas(){
+		// TODO
+		
+	}
+	
+	// Inputs
+	/**
+	 * Set a boolean to true to remove this entity later and fire outputs OnKilled
+	 * Remove all outputs that matches outputs of this entity
+	 * BE CAREFUL outputs with a delay won't be fired because it mays be deleted before it fires
+	 */
+	public void kill(){
+		OnKilled();
+		removeAllOutputsThatEntityHas();
+		removeEntityFromWorld = true;
+	}
+	
+	/**
+	 * Delete this entity and its children and fire output OnKilled (and children's outputs OnKilled)
+	 * @see InputsAndOutputs#kill()
+	 */
+	public void killHierarchy(){
+		kill();
+		removeChildrenThatEntityHas();
+		removeHierarchy = true;
+	}
+	
 	// Outputs
 	/**
 	 * Fired when the entity is killed and removed from the game
 	 */
 	private void OnKilled(){
-		fireOutput("Kill");
+		fireOutput("OnKilled");
+	}
+
+	public boolean isRemoveEntityFromWorld() {
+		return removeEntityFromWorld;
+	}
+
+	public boolean isRemoveHierarchy() {
+		return removeHierarchy;
 	}
 	
 }

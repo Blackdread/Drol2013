@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Yoann CAPLAIN
  *
  */
-public interface IInputsAndOutputs {
+public interface IInputsAndOutputs{
 	/*
 	 * J'implementerai ça plus tard
 	 * 	Kill 
@@ -73,10 +73,4 @@ public interface IInputsAndOutputs {
 	 */
 	public void fireInputs(final String nameOfInput, Object parameter);
 	
-	/*
-	 * The targetname that other entities refer to this entity by
-	 * Should be unique
-	 * Everywhere the name will be supposed not unique
-	 */
-	//public String getName();
 }

@@ -28,7 +28,7 @@ private static OutputManager instance;
             }
         }
         return instance;
-        }
+     }
 	
 	/**
 	 * Will delete outputs that are trigger Once and has fired there output (delay is passed)
@@ -51,7 +51,7 @@ private static OutputManager instance;
 	}
 	
 	/**
-	 * Remove outputs
+	 * Remove outputs which trigger on the entity name given in parameter
 	 * @param nameOfEntityThatOutputOn name of the entity that outputs may trigger on (not case sensitive)
 	 */
 	public void removeOutput(final String nameOfEntityThatOutputOn){
@@ -59,7 +59,7 @@ private static OutputManager instance;
 		int k;
 		if(arrayOutputInstancie != null){
 			k = arrayOutputInstancie.size();
-			for(i=0; i <  k ;i++){
+			for(i=0; i <  k ;i++){	// TODO Erreur dans le target name
 				if(arrayOutputInstancie.get(i) != null){	// Verifier que c'est bien une instance de ITargetName ?
 					if(((ITargetName)arrayOutputInstancie.get(i)).getTargetName().equalsIgnoreCase(nameOfEntityThatOutputOn)){
 						arrayOutputInstancie.get(i).setParameter(null);

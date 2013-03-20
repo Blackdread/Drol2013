@@ -17,10 +17,13 @@ import base.engine.entities.triggers.outputs.Outputs;
  */
 public class LogicMulticompare extends Logic {
 
-	private int value;
+	//private int value;
+	
+	private ArrayList<Integer> arrayValue;
 	
 	public LogicMulticompare(String name) {
 		super(name);
+		arrayValue = new ArrayList<Integer>();
 	}
 
 	
