@@ -19,7 +19,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 	/*
 	 * Ou vu que l'appel du FireOutput se fait dans le InputsAndOutputs, je peux passer en parametre l'activateur
 	 */
-	
 	/**
 	 * If this output has to fire input on his entity owner, it mays do it using this
 	 */

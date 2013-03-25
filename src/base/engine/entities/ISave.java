@@ -1,5 +1,10 @@
 package base.engine.entities;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
 public interface ISave {
 	
 	public String save();

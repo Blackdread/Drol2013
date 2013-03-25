@@ -131,7 +131,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * Clear the array that contains outputs and remove outputs from OutputsManager
 	 */
 	public void removeAllOutputsThatEntityHas(){
-		// TODO enlever les outputs du manager (ceux qui appartiennent a cette entite)
+		// TODO enlever les outputs du manager (ceux qui appartiennent a CETTE entite)
 		
 		if(array_outputs != null)
 			array_outputs.clear();
