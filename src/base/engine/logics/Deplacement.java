@@ -10,9 +10,10 @@ public class Deplacement {
 	private LevelDrol lvl;
 	private CollisionManager c_manager;
 	
-	public Deplacement(LevelDrol lvl)
+	public Deplacement(LevelDrol lvl, CollisionManager c)
 	{
 		this.lvl = lvl;
+		c_manager = c;
 	}
 	
 	public void deplacerEntity(int x, int y, int id)
@@ -61,5 +62,13 @@ public class Deplacement {
 				
 			}
 		}		
+	}
+
+	public LevelDrol getLvl() {
+		return lvl;
+	}
+
+	public void setLvl(LevelDrol lvl) {
+		this.lvl = lvl;
 	}
 }
