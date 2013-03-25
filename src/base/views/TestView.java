@@ -87,6 +87,15 @@ public class TestView extends View{
 			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
+		}else if(Keyboard.isKeyDown(Input.KEY_LEFT) || Keyboard.isKeyDown(Input.KEY_A))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_X, (int)hero.getX()-1);
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
 		}
 		engineManager.update();
 	}

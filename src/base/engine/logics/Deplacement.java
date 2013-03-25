@@ -52,18 +52,19 @@ public class Deplacement {
 			
 			//Si l'entité est le héro, il faut mettre à jour le scoll
 			if(e instanceof HeroEntity)
-			{				
+			{
 				//Si le scroll ne sort pas de l'écran
-				if((x-(lvl.getScroll().getWidth()/2)) > 0)
+				if((x-(lvl.getScroll().getWidth()/2)) >= 0){
 					lvl.getScroll().setxScroll((x-(lvl.getScroll().getWidth()/2)));
-				else
+					System.out.println("dup");
+				}else
 					lvl.getScroll().setxScroll(0);
-				
+				/*
 				if( (x + (lvl.getScroll().getWidth()/2) ) < (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
 					lvl.getScroll().setxScroll(x+(lvl.getScroll().getWidth()/2));
 				else
 					lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());	
-			
+			*/
 				
 			}
 		}		
