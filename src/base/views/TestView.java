@@ -83,8 +83,8 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX()+1);
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			m.i_data.put(MessageKey.P_X, 1);
+			m.i_data.put(MessageKey.P_Y, 0);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}else if(Keyboard.isKeyDown(Input.KEY_LEFT) || Keyboard.isKeyDown(Input.KEY_A))
@@ -102,8 +102,8 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX()-1);
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			m.i_data.put(MessageKey.P_X, -1);
+			m.i_data.put(MessageKey.P_Y, 0);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}
@@ -112,8 +112,8 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX());
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY()-1);
+			m.i_data.put(MessageKey.P_X, 0);
+			m.i_data.put(MessageKey.P_Y, -1);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}
@@ -122,8 +122,8 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX());
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY()+1);
+			m.i_data.put(MessageKey.P_X, 0);
+			m.i_data.put(MessageKey.P_Y, 1);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}
