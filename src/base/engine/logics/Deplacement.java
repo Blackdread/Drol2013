@@ -55,8 +55,9 @@ public class Deplacement {
 			{
 				//Si le scroll ne sort pas de l'écran
 				if((x-(lvl.getScroll().getWidth()/2)) >= 0){
+				System.out.println((x-(lvl.getScroll().getWidth()/2)));
+				if((x-(lvl.getScroll().getWidth()/2)) > 0)
 					lvl.getScroll().setxScroll((x-(lvl.getScroll().getWidth()/2)));
-					System.out.println("dup");
 				}else
 					lvl.getScroll().setxScroll(0);
 				/*
