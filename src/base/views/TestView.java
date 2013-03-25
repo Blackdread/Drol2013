@@ -61,7 +61,7 @@ public class TestView extends View{
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{
-		if(Keyboard.isKeyDown(Input.KEY_RIGHT))
+		if(Keyboard.isKeyDown(Input.KEY_RIGHT) || Keyboard.isKeyDown(Input.KEY_D))
 		{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
@@ -70,18 +70,21 @@ public class TestView extends View{
 			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
-			
 		}
+		engineManager.update();
 	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
+		
 		switch(key){
+		/*
 		case Input.KEY_RIGHT:
 			lvl.getScroll().setxScroll((lvl.getScroll().getxScroll()+3));
-			break;
+			break;*/
 		}
+		
 	}
 	
 	@Override
