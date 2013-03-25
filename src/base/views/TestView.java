@@ -45,17 +45,34 @@ public class TestView extends View{
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
 		hero = new HeroEntity(5, 500);
-		hero.setLocation(250, 128);
+		hero.setLocation(128, 32);
 		hero.setWidth(32);
 		hero.setHeight(32);
+		
+		while(!lvl.isLoadOver())
+		{
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		lvl.getArrayEntite().put(hero.getId(), hero);
+		lvl.getTabNiveau()[4][0].ajouterEntite(hero);
+	}
+	
+	@Override
+	public void enter(GameContainer container, StateBasedGame sbgame)
+	{
+		
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
 			lvl.generateLevelGraphic().flush();
-		
 	}
 	
 	@Override
@@ -66,7 +83,7 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX()+2);
+			m.i_data.put(MessageKey.P_X, (int)hero.getX()+1);
 			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);

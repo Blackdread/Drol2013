@@ -29,7 +29,7 @@ public class Deplacement {
 		if(!c_manager.testerCollision(x, y, e))
 		{
 			//Enlever l'entité des tiles avant le déplacement
-			for(int i = ex/lvl.getLargeurTile(); i < (ex + largeur)/lvl.getLargeurTile(); i++)
+			for(int i = ex/lvl.getLargeurTile(); i <= (ex + largeur)/lvl.getLargeurTile(); i++)
 			{
 				for(int j = ey/lvl.getHauteurTile(); j < (ey + hauteur)/lvl.getHauteurTile(); j++)
 					lvl.getTabNiveau()[i][j].enleverEntite(id);
@@ -40,15 +40,19 @@ public class Deplacement {
 			lvl.getArrayEntite().put(id, e);
 			
 			//On replace l'entité dans les tiles
-			for(int i = x/lvl.getLargeurTile(); i < (x + largeur)/lvl.getLargeurTile(); i++)
+			for(int i = x/lvl.getLargeurTile(); i <= (x + largeur)/lvl.getLargeurTile(); i++)
 			{
 				for(int j = y/lvl.getHauteurTile(); j < (y + hauteur)/lvl.getHauteurTile(); j++)
+				{
 					lvl.getTabNiveau()[i][j].ajouterEntite(e);
+					for(int k = 0; k < lvl.getTabNiveau()[i][j].getEntiteProche().size(); k++)
+						System.out.println(lvl.getTabNiveau()[i][j].getEntiteProche().get(k).getX() +" "+i+" "+j);
+				}
 			}
 			
 			//Si l'entité est le héro, il faut mettre à jour le scoll
 			if(e instanceof HeroEntity)
-			{
+			{				
 				//Si le scroll ne sort pas de l'écran
 				if((x-(lvl.getScroll().getWidth()/2)) > 0)
 					lvl.getScroll().setxScroll((x-(lvl.getScroll().getWidth()/2)));
@@ -58,7 +62,8 @@ public class Deplacement {
 				if( (x + (lvl.getScroll().getWidth()/2) ) < (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
 					lvl.getScroll().setxScroll(x+(lvl.getScroll().getWidth()/2));
 				else
-					lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());
+					lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());	
+			
 				
 			}
 		}		

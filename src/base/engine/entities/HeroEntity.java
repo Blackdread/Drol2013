@@ -18,7 +18,7 @@ public class HeroEntity extends MoveableEntity {
 	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.red);
-		g.fillRect(x, y, 10, 10);
+		g.fillRect(x, y, this.getWidth(), this.getHeight());
 	}
 
 	@Override
