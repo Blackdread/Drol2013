@@ -17,7 +17,7 @@ public class NetworkEngine extends Engine {
 	public boolean processMessage() {
 		// TODO Auto-generated method stub
 
-		return true;
+		return false;
 	}
 
 }
