@@ -21,7 +21,7 @@ public class CollisionManager {
 		//Si on sort de la map, on a une collision
 		if((e.getX() + x) < 0 || (e.getX() + x + e.getWidth()) > lvl.getLargeurNiveau()*lvl.getLargeurTile()
 				|| (e.getY() + y) < 0 || (e.getY() + y + e.getHeight()) > lvl.getHauteurNiveau()*lvl.getHauteurTile())
-				return true;
+				{return true;}
 				
 		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
 	    tileYMin = (int) (e.getY() / lvl.getHauteurTile());
@@ -33,7 +33,7 @@ public class CollisionManager {
 	        for(int j= tileYMin; j <= tileYMax; j++)
 	        {
 	        	//C'est un mur, il y a donc collision
-	            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[i][j].getIndex()).isMur())
+	            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][i].getIndex()).isMur())
 	                return true;
 	        }
 	    }
