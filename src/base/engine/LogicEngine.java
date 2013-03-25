@@ -17,8 +17,10 @@ public class LogicEngine extends Engine {
 		super();
 		this.lvl = null;
 		c_manager = new CollisionManager(null);
-		deplacement = new Deplacement(null);
+		deplacement = new Deplacement(null, c_manager);
 	}
+	
+	
 	
 	@Override
 	public boolean processMessage() {
@@ -60,5 +62,7 @@ public class LogicEngine extends Engine {
 
 	public void setLvl(LevelDrol lvl) {
 		this.lvl = lvl;
+		c_manager.setLvl(lvl);
+		deplacement.setLvl(lvl);
 	}
 }

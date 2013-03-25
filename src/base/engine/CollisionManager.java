@@ -41,4 +41,12 @@ public class CollisionManager {
 		return false;
 	}
 
+	public LevelDrol getLvl() {
+		return lvl;
+	}
+
+	public void setLvl(LevelDrol lvl) {
+		this.lvl = lvl;
+	}
+
 }
