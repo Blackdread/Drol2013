@@ -45,7 +45,7 @@ public class TestView extends View{
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
 		hero = new HeroEntity(5, 500);
-		hero.setLocation(128, 32);
+		hero.setLocation(64, 32);
 		hero.setWidth(32);
 		hero.setHeight(32);
 		
@@ -60,7 +60,7 @@ public class TestView extends View{
 		}
 		
 		lvl.getArrayEntite().put(hero.getId(), hero);
-		lvl.getTabNiveau()[4][0].ajouterEntite(hero);
+		lvl.getTabNiveau()[2][0].ajouterEntite(hero);
 	}
 	
 	@Override
@@ -88,6 +88,37 @@ public class TestView extends View{
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}
+		else if(Keyboard.isKeyDown(Input.KEY_LEFT))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_X, (int)hero.getX()-1);
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
+		}
+		else if(Keyboard.isKeyDown(Input.KEY_UP))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_X, (int)hero.getX());
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY()-1);
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
+		}
+		else if(Keyboard.isKeyDown(Input.KEY_DOWN))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_X, (int)hero.getX());
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY()+1);
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
+		}
+		
 		engineManager.update();
 	}
 	

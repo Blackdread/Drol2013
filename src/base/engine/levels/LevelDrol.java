@@ -100,6 +100,8 @@ public class LevelDrol extends Level {
 	//TODO
 	public Graphics generateLevelGraphic()
 	{
+		
+		//TODO :
 		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>();
 		
 		
@@ -145,6 +147,8 @@ public class LevelDrol extends Level {
 				
 			}
 		}
+		
+		
 		
 		return graph;
 	}
