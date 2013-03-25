@@ -33,8 +33,10 @@ public class TestView extends View{
 	public void initResources()
 	{
 		engineManager = EngineManager.getInstance();
-		tp.add(new TilePropriety(0, true, "mur"));
-		tp.add(new TilePropriety(0, false, "fond"));
+		tp.add(new TilePropriety(0, false, "fodfnd"));
+		tp.add(new TilePropriety(1, false, "fond"));
+		tp.add(new TilePropriety(2, false, "fodnd"));
+		tp.add(new TilePropriety(3, false, "fonssd"));
 		
 		
 		t = new TileSet(ResourceManager.getSpriteSheet("sprite"), tp);
@@ -43,7 +45,7 @@ public class TestView extends View{
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
 		hero = new HeroEntity(5, 500);
-		hero.setLocation(0, 0);
+		hero.setLocation(250, 128);
 		hero.setWidth(32);
 		hero.setHeight(32);
 		lvl.getArrayEntite().put(hero.getId(), hero);
@@ -53,35 +55,33 @@ public class TestView extends View{
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
 			lvl.generateLevelGraphic().flush();
+		
 	}
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{
-		if(Keyboard.isKeyDown(Input.KEY_RIGHT) || Keyboard.isKeyDown(Input.KEY_D))
+		if(Keyboard.isKeyDown(Input.KEY_RIGHT))
 		{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
 			m.i_data.put(MessageKey.P_X, (int)hero.getX()+2);
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY()+2);
+			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
+			
 		}
-		
-		engineManager.update2(delta);
 	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		/*
 		switch(key){
 		case Input.KEY_RIGHT:
 			lvl.getScroll().setxScroll((lvl.getScroll().getxScroll()+3));
 			break;
 		}
-		*/
 	}
 	
 	@Override
