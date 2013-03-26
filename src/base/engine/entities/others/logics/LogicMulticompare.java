@@ -2,8 +2,6 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
-import base.engine.entities.triggers.outputs.Outputs;
-
 /**
  * 
  * Compares a set of inputs to each other. If they are all the same, fires an OnEqual output. 
@@ -41,6 +39,7 @@ public class LogicMulticompare extends Logic {
 		list_inputs.addAll(super.get_list_inputs());
 		list_inputs.add("InputValue");
 		list_inputs.add("CompareValues");
+		list_inputs.add("RemoveValues");
 		
 		return list_inputs;
 	}
@@ -67,8 +66,10 @@ public class LogicMulticompare extends Logic {
 	public void fireInputs(String nameOfInput) {
 		if(nameOfInput != null){
 			 if(nameOfInput.equalsIgnoreCase("CompareValues"))
-				
-			else
+				 compareValues();
+			 if(nameOfInput.equalsIgnoreCase("RemoveValues"))
+				 removeValues();
+			 else
 				super.fireInputs(nameOfInput);
 		}
 		
@@ -80,17 +81,49 @@ public class LogicMulticompare extends Logic {
 	@Override
 	public void fireInputs(String nameOfInput, Object parameter) {
 		if(nameOfInput != null && parameter != null){
-			int temp = 1000;
+			int temp = 0;
 			try{
-				temp = (Integer)parameter;	// Normalemnt on ne devrait pas avoir d'erreur !
+				if(parameter instanceof Integer)
+					temp = (Integer)parameter;	// Normalemnt on ne devrait pas avoir d'erreur !
+				else if(parameter instanceof Boolean){
+					if((Boolean)parameter == true)
+						temp = 1;
+					else 
+						temp = 0;
+				}
 			}catch(Exception e){e.printStackTrace();}
 			
 			if(nameOfInput.equalsIgnoreCase("InputValue"))
-				
+				inputValue(temp);
 			else
 				super.fireInputs(nameOfInput, parameter);
 				
 		}
+	}
+	
+	/*
+	 * Inputs
+	 */
+	public void inputValue(int a){
+		arrayValue.add(a);
+	}
+	
+	public void removeValues(){
+		arrayValue.clear();
+	}
+	
+	public void compareValues(){
+		boolean tmp = true;
+		for(int i = 1; i < arrayValue.size(); i++){
+			if(arrayValue.get(i) != arrayValue.get(i-1)){
+				tmp = false;
+				break;
+			}
+		}
+		if(tmp)
+			OnEqual();
+		else
+			OnNotEqual();
 	}
 	
 	/*

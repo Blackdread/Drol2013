@@ -1,8 +1,11 @@
 package base.engine.entities;
 
+import base.engine.entities.others.outputs.IActivator;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 
-public abstract class BasicEntity implements IEntity, ISave {
+
+public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave, IActivator {
 	
 	protected int id;
 	protected int type;
@@ -14,7 +17,8 @@ public abstract class BasicEntity implements IEntity, ISave {
 	protected float y;
 	
 	
-	public BasicEntity() {
+	public BasicEntity(String name) {
+		super(name);
 	}
 
 	public void setLocation(float x, float y) {
@@ -76,6 +80,10 @@ public abstract class BasicEntity implements IEntity, ISave {
 		this.height = height;
 	}
 	
+	@Override
+	public BasicEntity getActivator() {
+		return this;
+	}
 	
 
 }

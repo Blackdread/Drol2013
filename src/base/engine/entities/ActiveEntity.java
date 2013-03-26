@@ -15,12 +15,11 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 	protected boolean dying;
 	protected boolean visible;
 	
-	private String name;
 	private Timer mouseOverTimer;
 	private boolean remove;
 
-	public ActiveEntity(int type, int maxLife) {
-		super();
+	public ActiveEntity(String name, int type, int maxLife) {
+		super(name);
 		this.type = type;
 		this.maxLife = maxLife;
 		this.life = maxLife;

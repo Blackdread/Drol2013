@@ -25,13 +25,13 @@ public class FilterDamageType extends Filter {
 	@Override
 	public boolean checkFilterConditions() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean checkFilterConditions(Object entityToFilter) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

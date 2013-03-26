@@ -25,6 +25,12 @@ public class Outputs implements IFireOnce, IUpdatable{
 	private InputsAndOutputs entityWhoHasThisOutput;
 	
 	/**
+	 * The entity (InputsAndOutputs, not the class InputsAndOutputs) must implements IActivator
+	 * So the activator is the entity who has triggered this output (or may)
+	 */
+	private InputsAndOutputs activator;
+	
+	/**
 	 * Boolean qui passe a true lorsque cette output doit etre declenche (si timer vaut 0 alors fired immediatly)
 	 * sinon l'update verifie ce boolean et update le timer de facon a que l'output soit declenche une fois le timer
 	 * arrive a l'event puis redevient false
@@ -79,7 +85,8 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 */
 	private Object parameter;
 	
-	public Outputs(){
+	public Outputs(InputsAndOutputs entityWhoHasThisOutput){
+		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
 		timeBeforeDeclencheTrigger = new Timer(0);
 		nameOfTheEntityToFireInput = "";
 		hasBeenFiredAtleastOnce = false;
@@ -90,7 +97,8 @@ public class Outputs implements IFireOnce, IUpdatable{
 		parameter = null;
 	}
 	
-	public Outputs(String nameEntity){
+	public Outputs(InputsAndOutputs entityWhoHasThisOutput, String nameEntity){
+		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
 		timeBeforeDeclencheTrigger = new Timer(0);
 		nameOfTheEntityToFireInput = nameEntity;
 		hasBeenFiredAtleastOnce = false;
@@ -101,7 +109,8 @@ public class Outputs implements IFireOnce, IUpdatable{
 		parameter = null;
 	}
 	
-	public Outputs(String nameEntity,int delay){
+	public Outputs(InputsAndOutputs entityWhoHasThisOutput, String nameEntity,int delay){
+		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
 		timeBeforeDeclencheTrigger = new Timer(delay);
 		nameOfTheEntityToFireInput = nameEntity;
 		hasBeenFiredAtleastOnce = false;
@@ -161,10 +170,22 @@ public class Outputs implements IFireOnce, IUpdatable{
 		//*/
 		if(nameOfTheEntityToFireInput != null)
 			if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, ...
-				if(parameter == null)
-					entityWhoHasThisOutput.fireInputs(nameOfTheInput);
-				else
-					entityWhoHasThisOutput.fireInputs(nameOfTheInput, parameter);
+				if(entityWhoHasThisOutput != null){
+					if(parameter == null)
+						entityWhoHasThisOutput.fireInputs(nameOfTheInput);
+					else
+						entityWhoHasThisOutput.fireInputs(nameOfTheInput, parameter);
+				}else
+					System.err.println("In Outputs.java entityWhoHasThisOutput = null");
+			}else if(nameOfTheEntityToFireInput.equalsIgnoreCase("!activator")){
+				if(activator != null){
+					if(parameter == null){	// TODO A voir s'il faut passer l'activator ou le changeais par celui qui possede cet output si implement IActivator
+						activator.fireInputs(nameOfTheInput);
+					}else{
+						activator.fireInputs(nameOfTheInput, parameter);
+					}
+				}else
+					System.err.println("In Outputs.java activator = null");
 			}else
 				OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
 	}
@@ -244,6 +265,10 @@ public class Outputs implements IFireOnce, IUpdatable{
 
 	public void setEntityWhoHasThisOutput(InputsAndOutputs entityWhoHasThisOutput) {
 		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
+	}
+
+	public void setActivator(InputsAndOutputs activator) {
+		this.activator = activator;
 	}
 
 }

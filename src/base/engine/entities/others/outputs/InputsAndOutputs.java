@@ -31,6 +31,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	public InputsAndOutputs(String name){
 		this.name = name;
 		removeEntityFromWorld = false;
+		removeHierarchy = false;
 	}
 	
 	public ArrayList<String> get_list_outputs(){
@@ -178,6 +179,20 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 
 	public boolean isRemoveHierarchy() {
 		return removeHierarchy;
+	}
+	
+	/**
+	 * Don't forget to call it !!!
+	 * Ex: If an entity enter a trigger and that entity implements IActivator then the trigger must call this function
+	 * and the entity in the parameter
+	 * Triggers must call this function if needed
+	 * Ex: func_tracktrain and path_track -> see Valve User And Outputs
+	 * @param activator
+	 */
+	public void setActivatorToAllOutputs(InputsAndOutputs activator){
+		for(Outputs v : array_outputs)
+			if(v != null)
+				v.setActivator(activator);
 	}
 	
 }

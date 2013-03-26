@@ -9,8 +9,8 @@ import base.engine.Engine;
 
 public class HeroEntity extends MoveableEntity {
 
-	public HeroEntity(int type, int maxLife) {
-		super(type, maxLife);
+	public HeroEntity(String name, int type, int maxLife) {
+		super(name, type, maxLife);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,5 +35,7 @@ public class HeroEntity extends MoveableEntity {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
