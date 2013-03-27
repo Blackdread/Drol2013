@@ -44,7 +44,7 @@ public class TestView extends View{
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
-		hero = new HeroEntity(5, 500);
+		hero = new HeroEntity("bla",5, 500);
 		hero.setLocation(64, 32);
 		hero.setWidth(32);
 		hero.setHeight(32);
@@ -92,8 +92,8 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, (int)hero.getX()-1);
-			m.i_data.put(MessageKey.P_Y, (int)hero.getY());
+			m.i_data.put(MessageKey.P_X, -1);
+			m.i_data.put(MessageKey.P_Y, 0);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 		}

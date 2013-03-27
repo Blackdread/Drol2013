@@ -179,7 +179,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 					System.err.println("In Outputs.java entityWhoHasThisOutput = null");
 			}else if(nameOfTheEntityToFireInput.equalsIgnoreCase("!activator")){
 				if(activator != null){
-					if(parameter == null){	// TODO A voir s'il faut passer l'activator ou le changeais par celui qui possede cet output si implement IActivator
+					// TODO A voir s'il faut passer l'activator afin que l'activator soit donnee dans tout les outputs
+					// suivant mais ca peut faire des choses pas forcement souhaitait (imprevue)
+					if(parameter == null){	
 						activator.fireInputs(nameOfTheInput);
 					}else{
 						activator.fireInputs(nameOfTheInput, parameter);

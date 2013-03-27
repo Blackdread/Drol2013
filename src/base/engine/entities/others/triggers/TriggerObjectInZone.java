@@ -15,13 +15,13 @@ import base.engine.entities.BasicEntity;
  */
 public class TriggerObjectInZone extends Trigger {
 	
-	protected int nbObjectInZoneToActivate = 1;
 	protected int x, y;
 	protected int width, height;
 	
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger agit
 	 * Cet array contient les objets dans la zone
+	 * Donc l'engine doit ajouter
 	 */
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
@@ -34,13 +34,11 @@ public class TriggerObjectInZone extends Trigger {
 		height = h;
 	}
 	
-	public TriggerObjectInZone(String name, int a,int xx, int yy, int w, int h) {
-		super(name);
-		nbObjectInZoneToActivate = a;
-		x=xx;
-		y=yy;
-		width = w;
-		height = h;
+	@Override
+	public void update(int delta) {
+		// TODO Auto-generated method stub
+		delayBeforeReset.update(delta);
+		
 	}
 	
 	/**
@@ -54,6 +52,18 @@ public class TriggerObjectInZone extends Trigger {
 	public void checkTrigger(){
 		
 	}
+	
+	/*
+	 * Inputs
+	 */
+	
+	
+	/*
+	 * Outputs
+	 */
+	
+	
+	
 	
 	public ArrayList<BasicEntity> getArrayEntityToActON(){
 		return arrayEntityToActON;

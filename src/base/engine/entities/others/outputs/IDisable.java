@@ -13,6 +13,8 @@ public interface IDisable {
 	
 	public void toggle();
 	
-	public void setStartDisabled(boolean startDisabled);
-	public boolean isStartDisabled();
+	// Plus necessaire car si il faut qu'il soit disabled au lancement de la map, il suffit de serializer la map avec enabled
+	// a false pour l'entite
+	//public void setStartDisabled(boolean startDisabled);
+	//public boolean isStartDisabled();
 }

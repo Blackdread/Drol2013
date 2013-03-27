@@ -19,4 +19,6 @@ public interface ICollidableObject {
  
 	public boolean isCollidingWith(ICollidableObject collidable);
 	
+	public boolean onCollision();
+	
 }

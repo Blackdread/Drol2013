@@ -2,49 +2,41 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
-import base.engine.Engine;
-import base.engine.entities.BasicEntity;
 import base.engine.entities.others.filters.Filter;
+import base.engine.entities.others.outputs.IDisable;
+import base.engine.entities.others.outputs.IFireOnce;
+import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
- * 
+ * Trigger is a brush entity
+ * It is a volume that fires outputs when a specified type of entity enters or leaves it.
  * @author Yoann CAPLAIN
  *
  */
-public abstract class Trigger extends InputsAndOutputs implements ITrigger {
+public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDisable, IFireOnce, IUpdatable {
 	
 	/**
-	 * 
+	 * true -> once it has been fired if it's a fireOnce this will be deleted from the world
+	 * Will always be false if it is not a fireOnce
 	 */
-	protected int triggerID;
-	protected int triggerType;
+	protected boolean hasbeenFired;
+	
+	protected boolean enabled;
 	
 	/**
-	 * Vraie tant que le trigger est dans un etat triggerON et ses conditions validees.
+	 * Amount of time, in seconds, after the trigger_multiple has triggered before it can be triggered again.
 	 */
-	protected boolean isTriggerDeclenched;
-	/**
-	 * Si le trigger est "operationelle", -> agit ou pas
-	 */
-	protected boolean triggerON;
-	
-	/**
-	 * Temps avant que le trigger soit declencher si condition validee
-	 */
-	protected Timer TimeBeforeDeclencheTrigger;
+	protected Timer delayBeforeReset;
 	
 	// *******
 	// Filters
 	// *******
-	// Il sera possible de cree une classe Filter puis de faire l'heritage et avoir : 
-	// Filter damage type, Filter enemy, Filter health, Filter activator name, Filter activator class, etc
 	/**
-	 * Filter entities can be used to restrict what activates the trigger.
-	 * Based on pointers !
+	 * Filter entities can be used to restrict what activates the trigger
 	 */
-	protected ArrayList<Filter> arrayFilterEntityThatActivate = new ArrayList<Filter>();
+	protected Filter filterEntityThatActivate;
 	
 	/**
 	 * Filter entities id can be used to restrict what activates the trigger.
@@ -59,35 +51,50 @@ public abstract class Trigger extends InputsAndOutputs implements ITrigger {
 	// *******	
 	/**
 	 * Trigger qui se declenche une fois puis plus jamais sinon plusieurs fois
-	 * Need to DESTROY the trigger (remove it from TriggerManager then garbageColector)
+	 * Need to DESTROY the trigger (remove it from TriggerManager etc)
 	 */
-	protected boolean triggerOnce;
+	protected boolean fireOnce;
 	
 	public Trigger(String name) {
 		super(name);
+		delayBeforeReset = new Timer(1000);
 	}
 	
+	@Override
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	/**
-	 * @return boolean Si le trigger est "operationelle" = peut etre declencher
+	 * @return true it's disabled
 	 */
-	public boolean isTriggerON() {
-		// TODO Auto-generated method stub
-		return triggerON;
+	@Override
+	public boolean isDisabled() {
+		return !enabled;
 	}
-	public void setTriggerON(boolean set) {
-		triggerON = set;
+	@Override
+	public boolean isEnabled() {
+		return enabled;
 	}
-	public boolean isTriggerDeclenched() {
-		return isTriggerDeclenched;
+	@Override
+	public boolean isFireOnce() {
+		return fireOnce;
 	}
-	public void setTriggerDeclenched(boolean a) {
-		isTriggerDeclenched = a;
+	@Override
+	public void setFireOnce(boolean fireOnce) {
+		this.fireOnce = fireOnce;
 	}
-	public boolean isTriggerOnce() {
-		return triggerOnce;
+	@Override
+	public boolean isHasbeenFired() {
+		return hasbeenFired;
 	}
-	public void setTriggerOnce(boolean triggerOnce) {
-		this.triggerOnce = triggerOnce;
+	@Override
+	public void setHasbeenFired(boolean hasBeenFired) {
+		this.hasbeenFired = hasBeenFired;
 	}
+	@Override
+	public void toggle() {
+		enabled = !enabled;
+	}
+
 
 }

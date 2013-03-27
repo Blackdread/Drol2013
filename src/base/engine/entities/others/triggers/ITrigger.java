@@ -12,15 +12,14 @@ import base.engine.entities.BasicEntity;
  */
 public interface ITrigger {
 	
-	public boolean isTriggerDeclenched();
-	
-	public boolean isTriggerON();
-	public void setTriggerON(boolean set);
-	public boolean isTriggerOnce();
-	public void setTriggerOnce(boolean triggerOnce);
+	//public boolean isTriggerDeclenched();
+	//public boolean isTriggerON();	Plus necessaire depuis l'ajout des interfaces correspondantes
+	//public void setTriggerON(boolean set);
+	//public boolean isTriggerOnce();
+	//public void setTriggerOnce(boolean triggerOnce);
 	
 	/**
-	 * Si triggerON alors on verifie si le trigger doit se declencher
+	 * Si enabled alors on verifie si le trigger doit se declencher
 	 */
 	public abstract void checkTrigger();
 	

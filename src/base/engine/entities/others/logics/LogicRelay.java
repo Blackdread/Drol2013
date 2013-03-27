@@ -49,13 +49,10 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	 */
 	private boolean allowFastRetrigger;
 	
-	private boolean startDisabled;
-	
 	public LogicRelay(String name) {
 		super(name);
 		allowFastRetrigger = false;
 		fireOnce = false;
-		startDisabled = false;
 		enabled = true;
 		timerFastRetrigger = new Timer(MINIMUM_DELAY);
 		hasbeenFired = false;
@@ -163,11 +160,9 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	/**
 	 *  Toggle the relay between enabled and disabled
 	 */
+	@Override
 	public void toggle(){
-		if(enabled)
-			enabled = false;
-		else
-			enabled = true;
+		enabled = !enabled;
 	}
 	
 	/**
@@ -247,34 +242,27 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	public boolean isDisabled() {
 		return !enabled;
 	}
-	public boolean isStartDisabled() {
-		return startDisabled;
-	}
-
-
+	@Override
 	public boolean isEnabled() {
 		return enabled;
-	}
-
-	@Override
-	public void setStartDisabled(boolean startDisabled) {
-		this.startDisabled = startDisabled;
 	}
 
 	@Override
 	public boolean isFireOnce() {
 		return fireOnce;
 	}
-
 	@Override
 	public void setFireOnce(boolean fireOnce) {
 		this.fireOnce = fireOnce;
 	}
-
+	@Override
 	public boolean isHasbeenFired() {
 		return hasbeenFired;
 	}
-
+	@Override
+	public void setHasbeenFired(boolean hasBeenFired) {
+		this.hasbeenFired = hasBeenFired;
+	}
 	public boolean isAllowFastRetrigger() {
 		return allowFastRetrigger;
 	}
@@ -282,6 +270,7 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	public void setAllowFastRetrigger(boolean allowFastRetrigger) {
 		this.allowFastRetrigger = allowFastRetrigger;
 	}
+	
 
 	 
 }

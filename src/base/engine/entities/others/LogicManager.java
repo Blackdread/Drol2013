@@ -29,6 +29,9 @@ public class LogicManager implements IUpdatable{
 	 * que je ne le considere pas comme pouvant etre unique donc...
 	 */
 	//private static HashMap<String, Logic> hashTrigger = new HashMap<String, Logic>();
+	// sinon :
+	//private static HashMap<String, ArrayList<Logic>> hashTrigger = new HashMap<String, ArrayList<Logic>>();
+	
 	
 	public static LogicManager getInstance(){
 		if (null == instance) { // Premier appel
