@@ -17,6 +17,7 @@ public class Message {
 	 * Definit quelle instruction on desire executee
 	 */
 	public int instruction;
+	public char engine;
 	
 	public Hashtable<Integer, Boolean> b_data = new Hashtable<Integer, Boolean>();
 	public Hashtable<Integer, Float> f_data = new Hashtable<Integer, Float>();

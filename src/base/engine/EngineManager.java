@@ -13,6 +13,9 @@ public class EngineManager {
 	
 	private static final int NB_ENGINE = 3;
 	private static EngineManager instance;
+	/**
+	 * TODO A changer par un hashMap normalement
+	 */
 	private Engine tabEngine[];
 
 	
