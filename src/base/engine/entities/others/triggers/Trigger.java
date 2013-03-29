@@ -35,8 +35,9 @@ public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDis
 	// *******
 	/**
 	 * Filter entities can be used to restrict what activates the trigger
+	 * TODO A voir si c'est la reference ou le nom du filter (il faudrait mieux que ce soit le nom)
 	 */
-	protected Filter filterEntityThatActivate;
+	private Filter filterEntityThatActivate;
 	
 	/**
 	 * Filter entities id can be used to restrict what activates the trigger.
@@ -57,7 +58,45 @@ public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDis
 	
 	public Trigger(String name) {
 		super(name);
+		hasbeenFired = false;
 		delayBeforeReset = new Timer(1000);
+	}
+	
+	public ArrayList<String> get_list_inputs() {
+		ArrayList<String> list_inputs = new ArrayList<String>();
+		list_inputs.addAll(super.get_list_inputs());
+		list_inputs.add("Enable");
+		list_inputs.add("Disable");
+		list_inputs.add("Toggle");
+		
+		return list_inputs;
+	}
+	
+	@Override
+	public void fireOutputs(String nameOfOutput) {
+		if(nameOfOutput != null){
+			if(nameOfOutput.equalsIgnoreCase("Enable"))
+				setEnabled(true);
+			else if(nameOfOutput.equalsIgnoreCase("Disable"))
+				setEnabled(false);
+			else if(nameOfOutput.equalsIgnoreCase("Toggle"))
+				toggle();
+			else
+				super.fireOutputs(nameOfOutput);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param entityToFilter
+	 * @return true if the entity has passed the filter
+	 */
+	protected boolean testFilter(Object entityToFilter){
+		// TODO le filtre peut changer en un String (donc faire une recherche dans le filterManager) ou rester comme il est
+		if(filterEntityThatActivate != null)
+			return filterEntityThatActivate.checkFilterConditions(entityToFilter);
+		else
+			return true;
 	}
 	
 	@Override

@@ -18,12 +18,9 @@ public interface ITrigger {
 	//public boolean isTriggerOnce();
 	//public void setTriggerOnce(boolean triggerOnce);
 	
-	/**
-	 * Si enabled alors on verifie si le trigger doit se declencher
-	 */
-	public abstract void checkTrigger();
+	//public abstract void checkTrigger();
 	
-	public ArrayList<BasicEntity> getArrayEntity();
-	public void setArrayEntity(ArrayList<BasicEntity> arrayEntity);
+	//public ArrayList<BasicEntity> getArrayEntity();
+	//public void setArrayEntity(ArrayList<BasicEntity> arrayEntity);
 	
 }

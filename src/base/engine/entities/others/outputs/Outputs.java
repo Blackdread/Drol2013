@@ -269,6 +269,13 @@ public class Outputs implements IFireOnce, IUpdatable{
 		this.entityWhoHasThisOutput = entityWhoHasThisOutput;
 	}
 
+	/**
+	 * TODO activator peut devenir une "Queue" => si par exemple cette output a un delay mais que d'autres entite veulent
+	 * declencher cette output, ils peuvent ecraser l'activator et on n'a plus le bon activator pour l'ancienne activation
+	 * Donc il faudrait mettre une sorte de Queue pour declencher cet output avec les bon parametre (bon activator, bon 
+	 * parameter et bon targetName et etc)
+	 * @param activator
+	 */
 	public void setActivator(InputsAndOutputs activator) {
 		this.activator = activator;
 	}

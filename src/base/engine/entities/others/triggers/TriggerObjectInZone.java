@@ -2,9 +2,6 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-
 import base.engine.entities.BasicEntity;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
@@ -19,10 +16,11 @@ public class TriggerObjectInZone extends Trigger {
 	protected int width, height;
 	
 	/**
-	 * ArrayList qui contient les entites sur lesquelles le trigger agit
+	 * ArrayList qui contient les entites sur lesquelles le trigger peut agir (pourrait)
 	 * Cet array contient les objets dans la zone
-	 * Donc l'engine doit ajouter
+	 * Donc l'engine doit ajouter les entites et les enlever quand elles bougent, ce n'est pas au trigger de verifier ca
 	 */
+	// Peut devenir un HashMap
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
 	
@@ -34,22 +32,67 @@ public class TriggerObjectInZone extends Trigger {
 		height = h;
 	}
 	
-	@Override
-	public void update(int delta) {
-		// TODO Auto-generated method stub
-		delayBeforeReset.update(delta);
-		
-	}
-	
-	/**
-	 * Pour le moment, des qu'il y a un nb suffisant d'entite dans la zone, le trigger est declenche
-	 * 
-	 * Voir pour differencier == et non superieur,  > , < etc
-	 * Voir s'il faut verifier par rapport a un shape rectangle ou cercle, un point, etc
-	 * 
+	/*
+	 * OnStartTouch() et OnEndTouchAll() et OnEndTouch() sont declenche lors de l'ajout ou du retrait d'une entite
+	 * L'update ne verifie pas ca, c'est l'engine qui le gere
+	 * @see base.engine.entities.others.outputs.IUpdatable#update(int)
 	 */
 	@Override
-	public void checkTrigger(){
+	public void update(int delta) {
+		if(delayBeforeReset	!= null)
+			delayBeforeReset.update(delta);
+		else
+			System.err.println("TriggerObjectInZone Timer is null");
+	}
+	public ArrayList<String> get_list_outputs(){
+		ArrayList<String> list_outputs = new ArrayList<String>();
+		list_outputs.addAll(super.get_list_outputs());
+		list_outputs.add("OnEndTouch");
+		list_outputs.add("OnEndTouchAll");
+		list_outputs.add("OnTouching");
+		list_outputs.add("OnNotTouching");
+		list_outputs.add("OnStartTouch");
+		list_outputs.add("OnTrigger");
+		
+		return list_outputs;
+	}
+	
+	public ArrayList<String> get_list_inputs() {
+		ArrayList<String> list_inputs = new ArrayList<String>();
+		list_inputs.addAll(super.get_list_inputs());
+		list_inputs.add("TouchTest");
+		
+		return list_inputs;
+	}
+	
+	@Override
+	public void fireOutputs(String nameOfOutput) {
+		if(nameOfOutput != null){
+			if(nameOfOutput.equalsIgnoreCase("OnEndTouch"))
+				OnEndTouch();
+			else if(nameOfOutput.equalsIgnoreCase("OnEndTouchAll"))
+				OnEndTouchAll();
+			else if(nameOfOutput.equalsIgnoreCase("OnTouching"))
+				OnTouching();
+			else if(nameOfOutput.equalsIgnoreCase("OnNotTouching"))
+				OnNotTouching();
+			else if(nameOfOutput.equalsIgnoreCase("OnStartTouch"))
+				OnStartTouch();
+			else if(nameOfOutput.equalsIgnoreCase("OnTrigger"))
+				OnTrigger();
+			else
+				super.fireOutputs(nameOfOutput);
+		}
+	}
+
+	@Override
+	public void fireInputs(String nameOfInput) {
+		if(nameOfInput != null){
+			 if(nameOfInput.equalsIgnoreCase("TouchTest"))
+				 TouchTest();
+			else
+				super.fireInputs(nameOfInput);
+		}
 		
 	}
 	
@@ -61,7 +104,10 @@ public class TriggerObjectInZone extends Trigger {
 	 * Triggers either the OnTouching or OnNotTouching outputs for whether anything is touching this entity
 	 */
 	public void TouchTest(){
-			
+			if(arrayEntityToActON.size() == 0)
+				OnNotTouching();
+			else
+				OnTouching();
 	}
 
 	
@@ -73,39 +119,56 @@ public class TriggerObjectInZone extends Trigger {
 	 * Only entities that passed this trigger's filters will cause this output to fire. (activator is the exiting entity)
 	 */
 	protected void OnEndTouch(){
-		
+		if(isTriggerable()){
+			fireOutput("OnEndTouch");
+			OnTrigger();
+		}
 	}
 	/**
 	 * Fires when the last entity in the entity's area exits this trigger or when this entity is disabled
 	 * Only entities that passed this trigger's filters are considered. (activator is the last exiting entity)
 	 */
 	protected void OnEndTouchAll(){
-		
+		if(isTriggerable()){
+			fireOutput("OnEndTouchAll");
+			OnTrigger();
+		}
 	}
 	/**
 	 * Fired when the TouchTest input is called
 	 */
 	protected void OnTouching(){
-		
+		if(isTriggerable()){
+			fireOutput("OnTouching");
+			OnTrigger();
+		}
 	}
 	/**
 	 * Fired when the TouchTest input is called
 	 */
 	protected void OnNotTouching(){
-		
+		if(isTriggerable()){
+			fireOutput("OnNotTouching");
+			OnTrigger();
+		}
 	}
 	/**
 	 * Fired when an entity starts touching this trigger
 	 * The touching entity must pass this trigger's filters to cause this output to fire. (activator is the toucher)
 	 */
 	protected void OnStartTouch(){
-		
+		if(isTriggerable()){
+			fireOutput("OnStartTouch");
+			OnTrigger();
+		}
 	}
 	/**
 	 * Fired whenever the trigger is activated. (activator is the activator)
+	 * So if OnStartTouch() or OnTouching() or OnEndTouchAll() or ... is fired, this is fired
 	 */
 	protected void OnTrigger(){
-		
+		if(isTriggerable())
+			fireOutput("OnTrigger");
 	}
 	
 	
@@ -115,16 +178,78 @@ public class TriggerObjectInZone extends Trigger {
 	 * @param entity
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
-		// TODO
 		arrayEntityToActON.add(entity);
+		
+		if(testFilter(entity)){	// entity must pass the filter
+			setActivatorToAllOutputs(entity);
+			OnStartTouch();
+		}
 	}
 	/**
 	 * Devra enlever l'entite et declencler les outputs OnEndTouch
 	 * @param entity
 	 */
 	public void removeAnEntityToActON(BasicEntity entity) {
-		// TODO
-		arrayEntityToActON.add(entity);
+		if(testFilter(entity)){	// entity must pass the filter
+			setActivatorToAllOutputs(entity);
+			OnEndTouch();
+			if(howManyEntityPassFilter() == 1)
+				OnEndTouchAll();
+		}
+		
+		arrayEntityToActON.remove(entity);
+	}
+	
+	protected int howManyEntityPassFilter(){
+		int tmp = 0;
+		for(BasicEntity v : arrayEntityToActON){
+			if(v != null)
+				if(testFilter(v))
+					tmp++;
+		}
+		return tmp;
+	}
+	protected boolean isThereEntityThatPassFilter(){
+		for(BasicEntity v : arrayEntityToActON){
+			if(v != null)
+				if(testFilter(v))
+					return true;
+		}
+		return false;
+	}
+	
+	private boolean isTriggerable(){
+		if(!enabled)
+			return false;
+		else{
+			if(delayBeforeReset.isTimeComplete()){
+				delayBeforeReset.resetTime();
+				if(fireOnce){
+					if(!hasbeenFired){
+						hasbeenFired = true;
+						return true;
+					}
+				}else
+					return true;
+			}
+			return false;
+		}	// fin enabled
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		if(!enabled){
+			setActivatorToAllOutputs(null);	// TODO A voir
+			OnEndTouchAll();
+		}
+		this.enabled = enabled;
+	}
+	@Override
+	public void toggle() {
+		if(enabled){
+			setActivatorToAllOutputs(null);	// TODO A voir
+			OnEndTouchAll();
+		}
+		enabled = !enabled;
+	}
 }
