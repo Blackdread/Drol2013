@@ -16,7 +16,6 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	protected float x;
 	protected float y;
 	
-	
 	public BasicEntity(String name) {
 		super(name);
 	}

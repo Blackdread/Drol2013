@@ -1,12 +1,6 @@
 package base.engine.entities;
 
-import base.engine.Engine;
-import base.utils.Timer;
-
 public abstract class ActiveEntity extends BasicEntity /*implements */ {
-
-	private static final int TIME_BEFORE_MOUSEOVER = 1000;
-	
 	
 	protected int maxLife;
 	protected int life;
@@ -15,7 +9,6 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 	protected boolean dying;
 	protected boolean visible;
 	
-	private Timer mouseOverTimer;
 	private boolean remove;
 
 	public ActiveEntity(String name, int type, int maxLife) {
@@ -24,8 +17,6 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 		this.maxLife = maxLife;
 		this.life = maxLife;
 		this.visible = true;
-		this.mouseOverTimer = new Timer(TIME_BEFORE_MOUSEOVER);
-	//	this.name = EData.NAMES[type];
 	}
 
 /*

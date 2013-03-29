@@ -8,7 +8,7 @@ package base.engine.entities.others.outputs;
  */
 public interface IOrigin {
 	
-	public int getX();
-	public int getY();
+	public float getX();
+	public float getY();
 
 }

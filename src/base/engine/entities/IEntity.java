@@ -21,6 +21,8 @@ public interface IEntity {
 	public float getX();
 
 	public float getY();
+	
+	public void setLocation(float x, float y);
 
 	public int getWidth();
 

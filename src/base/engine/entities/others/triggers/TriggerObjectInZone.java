@@ -13,6 +13,8 @@ import base.engine.entities.BasicEntity;
 public class TriggerObjectInZone extends Trigger {
 	
 	protected int x, y;
+	
+	// TODO Pourra devenir un shape de facons a avoir des trigger de forme quelconque
 	protected int width, height;
 	
 	/**
@@ -23,7 +25,14 @@ public class TriggerObjectInZone extends Trigger {
 	// Peut devenir un HashMap
 	protected ArrayList<BasicEntity> arrayEntityToActON = new ArrayList<BasicEntity>();
 	
-	
+	/**
+	 * 
+	 * @param name TargetName
+	 * @param xx x position
+	 * @param yy y position
+	 * @param w width
+	 * @param h height
+	 */
 	public TriggerObjectInZone(String name, int xx, int yy, int w, int h) {
 		super(name);
 		x=xx;
@@ -39,10 +48,7 @@ public class TriggerObjectInZone extends Trigger {
 	 */
 	@Override
 	public void update(int delta) {
-		if(delayBeforeReset	!= null)
-			delayBeforeReset.update(delta);
-		else
-			System.err.println("TriggerObjectInZone Timer is null");
+		delayBeforeReset.update(delta);
 	}
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();
@@ -175,7 +181,7 @@ public class TriggerObjectInZone extends Trigger {
 	
 	/**
 	 * Devra ajouter l'entite et declencler les outputs OnStartTouch
-	 * @param entity
+	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
 		arrayEntityToActON.add(entity);
@@ -186,8 +192,8 @@ public class TriggerObjectInZone extends Trigger {
 		}
 	}
 	/**
-	 * Devra enlever l'entite et declencler les outputs OnEndTouch
-	 * @param entity
+	 * Devra enlever l'entite et declencler les outputs OnEndTouch et/ou OnEndTouchAll
+	 * @param entity to remove
 	 */
 	public void removeAnEntityToActON(BasicEntity entity) {
 		if(testFilter(entity)){	// entity must pass the filter
@@ -218,7 +224,11 @@ public class TriggerObjectInZone extends Trigger {
 		return false;
 	}
 	
-	private boolean isTriggerable(){
+	/**
+	 * 
+	 * @return true if enabled and delay is complete and is not fireOnce
+	 */
+	protected boolean isTriggerable(){
 		if(!enabled)
 			return false;
 		else{

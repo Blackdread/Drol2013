@@ -93,9 +93,9 @@ public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDis
 	 */
 	protected boolean testFilter(Object entityToFilter){
 		// TODO le filtre peut changer en un String (donc faire une recherche dans le filterManager) ou rester comme il est
-		if(filterEntityThatActivate != null)
+		if(filterEntityThatActivate != null){
 			return filterEntityThatActivate.checkFilterConditions(entityToFilter);
-		else
+		}else
 			return true;
 	}
 	
