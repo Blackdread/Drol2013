@@ -121,10 +121,7 @@ public class LogicBranch extends Logic {
 	 * Toggle the boolean value between true and false.
 	 */
 	public void toggle(){
-		 if(value == true)
-			 value = false;
-		 else
-			 value = true;
+		value = !value;
 	}
 	 
 	/**

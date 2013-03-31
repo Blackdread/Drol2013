@@ -184,7 +184,7 @@ public class TriggerObjectInZone extends Trigger {
 	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
-		arrayEntityToActON.add(entity);
+		arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
 		
 		if(testFilter(entity)){	// entity must pass the filter
 			setActivatorToAllOutputs(entity);

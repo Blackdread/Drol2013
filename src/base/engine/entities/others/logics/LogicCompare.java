@@ -57,6 +57,7 @@ public class LogicCompare extends Logic {
 		list_inputs.add("SetInitialValueAndCompare");
 		list_inputs.add("SetCompareValue");
 		list_inputs.add("Compare");
+		// Pourrai ajouter un input qui va chercher une valeur puis compare (chercher dans un math_counter par exemple)
 		
 		return list_inputs;
 	}
@@ -99,7 +100,7 @@ public class LogicCompare extends Logic {
 					setInitialValue(temp);
 			else if(nameOfInput.equalsIgnoreCase("SetInitialValueAndCompare")){
 					setInitialValueAndCompare(temp);
-					compare();
+					//compare();	erreur ?
 			}else if(nameOfInput.equalsIgnoreCase("SetCompareValue"))
 					setCompareValue(temp);
 			else

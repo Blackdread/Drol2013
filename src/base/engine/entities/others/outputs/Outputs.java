@@ -79,10 +79,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 * lui declencher l'input
 	 */
 	private String nameOfTheEntityToFireInput;
-	/*
-	 * Peut-etre mettre une liste de parametre et ordonne
-	 * sinon il faut mettre plusieurs output et ordonne -> preferable
-	 */
+
 	private Object parameter;
 	
 	public Outputs(InputsAndOutputs entityWhoHasThisOutput){

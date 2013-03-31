@@ -47,11 +47,6 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	 */
 	//private int maxRefire;	// A voir si je le mets
 	
-	/**
-	 * Stay dormant until activated (probably with the Enable input)
-	 */
-	private boolean startDisabled;
-	
 	private boolean enabled;
 	
 	/**
@@ -72,7 +67,6 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 		super(name);
 		refireInterval = 1000;
 		timer = new Timer(1000);
-		startDisabled = false;
 		enabled = true;
 		remindLastOutputForOscillator = false;
 		minimumRandomInterval = 1000;
@@ -167,7 +161,7 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 			else if(nameOfInput.equalsIgnoreCase("Enable"))
 				enable();
 			else if(nameOfInput.equalsIgnoreCase("Disable"))
-				enabled = false;
+				disable();
 			else if(nameOfInput.equalsIgnoreCase("Toggle"))
 				toggle();
 			else if(nameOfInput.equalsIgnoreCase("ToggleRandomTime"))
@@ -259,23 +253,22 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	/**
 	 *  Enabling the entity resets its timer
 	 */
+	@Override
 	public void enable(){
 		enabled = true;
 		resetTimer();
 	}
-	/*
+	@Override
 	public void disable(){
 		enabled = false;
 	}
-	//*/
+	
 	/**
 	 * Toggle the timer on/off
 	 */
+	@Override
 	public void toggle(){
-		if(enabled)
-			enabled = false;
-		else
-			enabled = true;
+		enabled = !enabled;
 	}
 	/**
 	 * Toggle random interval on/off
@@ -342,11 +335,6 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	}
 
 
-	public boolean isStartDisabled() {
-		return startDisabled;
-	}
-
-
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -377,11 +365,6 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 
 	public void setMaximumRandomInterval(int maximumRandomInterval) {
 		this.maximumRandomInterval = maximumRandomInterval;
-	}
-
-
-	public void setStartDisabled(boolean startDisabled) {
-		this.startDisabled = startDisabled;
 	}
 
 	public void setRemindLastOutputForOscillator(

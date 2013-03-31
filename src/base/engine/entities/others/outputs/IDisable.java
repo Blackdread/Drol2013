@@ -12,6 +12,8 @@ public interface IDisable {
 	public boolean isEnabled();
 	
 	public void toggle();
+	public void enable();
+	public void disable();
 	
 	// Plus necessaire car si il faut qu'il soit disabled au lancement de la map, il suffit de serializer la map avec enabled
 	// a false pour l'entite
