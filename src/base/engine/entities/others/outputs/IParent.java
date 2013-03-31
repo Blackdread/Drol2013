@@ -10,11 +10,22 @@ import java.util.ArrayList;
 public interface IParent {
 
 	public ArrayList<String> getChildren();
-	public void addChild(InputsAndOutputs child);
-	public void removeChild(InputsAndOutputs child);
+	public void addChild(InputsAndOutputs child);	// TODO Le nom ? (oui normalement)
+	public void removeChild(InputsAndOutputs child);	// TODO Le nom ?? (oui normalement)
+	
+	/**
+	 * @return true if array of children size >= 1
+	 */
+	public boolean hasChildren();
+	
+	/**
+	 * @return true if parentName != null
+	 */
+	public boolean hasParent();
 	
 	/**
 	 * Move with this entity. See Entity Hierarchy (parenting)
+	 * If null then this entity has no parent
 	 */
 	public void SetParent(String parent);
 	/**

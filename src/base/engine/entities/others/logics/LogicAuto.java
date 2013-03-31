@@ -11,7 +11,7 @@ import base.engine.entities.others.outputs.IUpdatable;
  * If the "Remove on fire" flag is set, the logic_auto is deleted after firing. 
  * To do: This may cause problems with delayed outputs.
  * 
- * This is a singleton (Only one by map/level)
+ * This is a singleton (Only one by map/level)	TODO Not sure
  * 
  * @author Yoann CAPLAIN
  *

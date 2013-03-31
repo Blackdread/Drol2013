@@ -33,7 +33,7 @@ public class TriggerHurt extends TriggerObjectInZone {
 	 * Set a new amount of damage for this trigger
 	 * @param dmg damage
 	 */
-	public void SetDamage(float dmg){
+	public void SetDamage(int dmg){
 		damage = dmg;
 	}
 	

@@ -127,7 +127,7 @@ public class TriggerObjectInZone extends Trigger {
 	protected void OnEndTouch(){
 		if(isTriggerable()){
 			fireOutput("OnEndTouch");
-			OnTrigger();
+			//OnTrigger();	called in removeAnEntityToActON
 		}
 	}
 	/**
@@ -137,7 +137,7 @@ public class TriggerObjectInZone extends Trigger {
 	protected void OnEndTouchAll(){
 		if(isTriggerable()){
 			fireOutput("OnEndTouchAll");
-			OnTrigger();
+			//OnTrigger();	called in removeAnEntityToActON
 		}
 	}
 	/**
@@ -201,6 +201,7 @@ public class TriggerObjectInZone extends Trigger {
 			OnEndTouch();
 			if(howManyEntityPassFilter() == 1)
 				OnEndTouchAll();
+			OnTrigger();
 		}
 		
 		arrayEntityToActON.remove(entity);

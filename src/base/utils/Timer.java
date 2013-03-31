@@ -5,8 +5,6 @@ package base.utils;
  * 
  * It can be used to wait between two actions.
  * 
- * Use:
- * 
  * Timer t = new Timer(5000);
  * 
  * In update method:

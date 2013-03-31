@@ -1,11 +1,14 @@
 package base.utils;
 
 /**
- * Sera supprime car existe sur Slick2d
- * Classe représentant des coordonnées
+ * Classe representant des coordonnees
+ * @author Yoann CAPLAIN
+ * @deprecated existe dans Slick2d
  */
-@Deprecated
 public class Vector2df {
+	
 	public float x;
 	public float y;
+	
+	
 }

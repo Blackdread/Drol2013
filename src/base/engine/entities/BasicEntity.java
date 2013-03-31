@@ -10,7 +10,7 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	protected int id;
 	protected int type;
 	
-	
+	// TODO Sera transformee en shape
 	protected int width;
 	protected int height;
 	protected float x;

@@ -35,7 +35,7 @@ public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDis
 	// *******
 	/**
 	 * Filter entities can be used to restrict what activates the trigger
-	 * TODO A voir si c'est la reference ou le nom du filter (il faudrait mieux que ce soit le nom)
+	 * TODO Mettre le nom du filter (String)
 	 */
 	private Filter filterEntityThatActivate;
 	
