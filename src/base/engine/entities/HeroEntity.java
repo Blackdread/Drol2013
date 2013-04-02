@@ -5,8 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import base.engine.Engine;
-
 public class HeroEntity extends MoveableEntity {
 
 	public HeroEntity(String name, int type, int maxLife) {
@@ -19,7 +17,6 @@ public class HeroEntity extends MoveableEntity {
 		// TODO Auto-generated method stub
 		g.setColor(Color.red);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
-		System.out.println("duuuu");
 	}
 
 	@Override
