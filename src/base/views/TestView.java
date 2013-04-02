@@ -35,7 +35,7 @@ public class TestView extends View{
 		engineManager = EngineManager.getInstance();
 		tp.add(new TilePropriety(0, false, "fodfnd"));
 		tp.add(new TilePropriety(1, false, "fond"));
-		tp.add(new TilePropriety(2, false, "fodnd"));
+		tp.add(new TilePropriety(2, true, "fodnd"));
 		tp.add(new TilePropriety(3, false, "fonssd"));
 		
 		
@@ -116,6 +116,13 @@ public class TestView extends View{
 			m.i_data.put(MessageKey.P_Y, 1);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
+		}
+		
+		if(Keyboard.isKeyDown(Input.KEY_LSHIFT))
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_SHOOT;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
 		}
 		
 		engineManager.update();

@@ -48,6 +48,15 @@ public class LogicEngine extends Engine {
 						}
 					}
 					break;
+					
+				case MessageKey.I_SHOOT:
+					if(mes.i_data.containsKey(MessageKey.P_ID))
+					{
+						int id;
+						id = mes.i_data.get(MessageKey.P_ID);
+						//Créer un tir
+					}
+					break;
 			}
 		}
 		else
