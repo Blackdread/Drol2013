@@ -6,13 +6,24 @@ package base.engine.entities.others.info;
  * that needs to point, shoot, look at, or walk to a specific target.
  * @author Yoann CAPLAIN
  *
+ * TODO Ajouter un vecteur pour orienter cet entite, par exemple: une entite est teleporter a cette entite et si besoin l'entite teleporter
+ * peut s'orienter selon cette entite (InfoTarget)
+ * TODO creer une classe pour orienter correctement les entite via x y (puis z si l'engine passe en 3D)
  */
 public class InfoTarget extends Info {
-	// TODO La classe InputsAndOutputs devrait avoir une position car toutes les entites ont une position
-	// info target a besoin d'une position
 	
 	public InfoTarget(String name) {
 		super(name);
+	}
+	
+	public InfoTarget(String name, float xx, float yy) {
+		super(name);
+		x=xx;
+		y=yy;
+		/* N'a pas besoin d'origin
+		xOrigin=xx;
+		yOrigin=yy;
+		*/
 	}
 
 }

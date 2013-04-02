@@ -13,16 +13,9 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	// TODO Sera transformee en shape
 	protected int width;
 	protected int height;
-	protected float x;
-	protected float y;
 	
 	public BasicEntity(String name) {
 		super(name);
-	}
-
-	public void setLocation(float x, float y) {
-		this.x = x;
-		this.y = y;
 	}
 
 	public boolean onEntity(int mx, int my) {
@@ -37,16 +30,6 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	@Override
 	public int getWidth() {
 		return width;
-	}
-
-	@Override
-	public float getX() {
-		return x;
-	}
-
-	@Override
-	public float getY() {
-		return y;
 	}
 	
 	public String save() {

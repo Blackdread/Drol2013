@@ -121,9 +121,9 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 			 if(nameOfInput.equalsIgnoreCase("Trigger"))
 				 trigger();
 			 else if(nameOfInput.equalsIgnoreCase("Enable"))
-				enabled = true;
+				enable();
 			else if(nameOfInput.equalsIgnoreCase("Disable"))
-				enabled = false;
+				disable();
 			else if(nameOfInput.equalsIgnoreCase("Toggle"))
 				toggle();
 			else if(nameOfInput.equalsIgnoreCase("CancelPending"))
@@ -269,6 +269,16 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 
 	public void setAllowFastRetrigger(boolean allowFastRetrigger) {
 		this.allowFastRetrigger = allowFastRetrigger;
+	}
+
+	@Override
+	public void enable() {
+		enabled = true;
+	}
+
+	@Override
+	public void disable() {
+		enabled = false;
 	}
 	
 

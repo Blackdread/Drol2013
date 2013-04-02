@@ -12,9 +12,9 @@ public interface IPosition {
 	public float getY();
 	//public float getZ();
 	
-	public float setX(float x);
-	public float setY(float y);
-	//public float setZ(float z);
+	public void setX(float x);
+	public void setY(float y);
+	//public void setZ(float z);
 	
 	public void setLocation(float x, float y/*, float z*/);
 }

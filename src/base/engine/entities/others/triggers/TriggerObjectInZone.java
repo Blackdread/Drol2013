@@ -12,7 +12,7 @@ import base.engine.entities.BasicEntity;
  */
 public class TriggerObjectInZone extends Trigger {
 	
-	protected int x, y;
+	//protected int x, y;
 	
 	// TODO Pourra devenir un shape de facons a avoir des trigger de forme quelconque
 	protected int width, height;
@@ -173,7 +173,7 @@ public class TriggerObjectInZone extends Trigger {
 	 * So if OnStartTouch() or OnTouching() or OnEndTouchAll() or ... is fired, this is fired
 	 */
 	protected void OnTrigger(){
-		if(isTriggerable())
+		if(isTriggerable())	// TODO ERREUR ERREUR !!! car dans isTriggerable() le timer est remis a zero hors cette output est appele sur la 2eme fois donc jamais fired
 			fireOutput("OnTrigger");
 	}
 	
@@ -187,7 +187,7 @@ public class TriggerObjectInZone extends Trigger {
 		arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
 		
 		if(testFilter(entity)){	// entity must pass the filter
-			setActivatorToAllOutputs(entity);
+			setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
 			OnStartTouch();
 		}
 	}
@@ -262,5 +262,15 @@ public class TriggerObjectInZone extends Trigger {
 			OnEndTouchAll();
 		}
 		enabled = !enabled;
+	}
+
+	@Override
+	public void enable() {
+		enabled = true;
+	}
+
+	@Override
+	public void disable() {
+		enabled = false;
 	}
 }

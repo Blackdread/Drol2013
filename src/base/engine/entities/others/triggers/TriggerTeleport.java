@@ -1,6 +1,14 @@
 package base.engine.entities.others.triggers;
 
+import java.util.ArrayList;
+
+import base.engine.EngineManager;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.others.InfoManager;
+import base.engine.entities.others.info.Info;
+import base.utils.Configuration;
 
 /**
  * It is a trigger that teleports entities that touch its volume
@@ -42,8 +50,27 @@ public class TriggerTeleport extends TriggerObjectInZone {
 		if(enabled)
 			if(testFilter(entity))
 				if(remoteDestination != null){
-					// TODO recuperer la destination puis envoyer un msg a l'engine pour deplacer l'entite
-					
+					ArrayList<Info> tmp = InfoManager.getInstance().getInfo(remoteDestination);
+					if(tmp != null){
+						int taille = tmp.size();
+						if(taille > 1){
+							// aleatoirement
+							
+						}
+						if(tmp.get(taille-1) != null){
+							Message m = new Message();
+							m.instruction = MessageKey.I_MOVE_ENTITY;
+							m.i_data.put(MessageKey.P_ID, entity.getId());
+							m.i_data.put(MessageKey.P_X, (int)tmp.get(taille-1).getX());
+							m.i_data.put(MessageKey.P_Y, (int)tmp.get(taille-1).getY());
+							//m.engine = m.LOGIC_ENGINE;// TODO a faire
+							
+							EngineManager.getInstance().getTabEngine()[1].receiveMessage(m);	// TODO on ne doit plus recuperer le tableau mais 
+							// ca ce trouve dans le message a quel engine envoyer
+						}
+					}else
+						if(Configuration.isDebug())
+							System.err.println("Trigger Teleport array is null");
 				}
 		
 	}

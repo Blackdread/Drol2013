@@ -16,9 +16,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 	// elle-meme (pas sur l'output mais sur l'entite)
 	// Soit faire une recherche la liste des entites et chercher celle qui contient cette output, soit avoir 
 	// une reference dans l'output pour savoir a qui elle appartient
-	/*
-	 * Ou vu que l'appel du FireOutput se fait dans le InputsAndOutputs, je peux passer en parametre l'activateur
-	 */
 	/**
 	 * If this output has to fire input on his entity owner, it mays do it using this
 	 */
@@ -272,6 +269,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 * Donc il faudrait mettre une sorte de Queue pour declencher cet output avec les bon parametre (bon activator, bon 
 	 * parameter et bon targetName et etc)
 	 * @param activator
+	 * 
+	 * TODO voir si faut aussi passer l'activator a la prochaine entite car la I/O chain peut etre plus longue que ca et les
+	 * entites suivante n'auront pas le bon Activator
 	 */
 	public void setActivator(InputsAndOutputs activator) {
 		this.activator = activator;

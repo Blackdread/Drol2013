@@ -3,17 +3,26 @@ package base.engine.entities.others.outputs;
 import java.util.ArrayList;
 
 /**
+ * TODO Pour le moment toutes les entites herite de cette classe, plus tard certaines entites auront besoin d'une zone (comme les TriggerObjectInZone)
+ * mais d'autres n'auront pas besoin de ca (brush) on pourra donc faire heriter les entiter de 2 classes filles differentes
+ * l'une Brush (Tout ce qui est Trigger, etc) et l'autre PointEntity (Logic, Light, Filter, etc)
  * 
  * @author Yoann CAPLAIN
  */
-public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName {
+public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition {
 
 	/**
 	 * The targetname that other entities refer to this entity by
-	 * Should be unique
+	 * Should be unique	-> depends, it cas be useful sometimes to not be unique
 	 * Everywhere the name will be supposed not unique
 	 */
 	protected String name;
+	
+	protected float x;
+	protected float y;
+	
+	protected float xOrigin;
+	protected float yOrigin;
 	
 	/**
 	 * true -> entity will be deleted
@@ -139,7 +148,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	}
 	
 	public void removeChildrenThatEntityHas(){
-		// TODO
+		// TODO ceux qui sont parent mais c'est pas fait encore et ce ne sera pas cette fonction ou il faut la definir dans
+		// IParent
 		
 	}
 	
@@ -195,4 +205,53 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 				v.setActivator(activator);
 	}
 	
+	@Override
+	public float getX() {
+		return x;
+	}
+	@Override
+	public float getY() {
+		return y;
+	}
+	@Override
+	public float getXorigin() {
+		return xOrigin;
+	}
+
+	@Override
+	public float getYorigin() {
+		return yOrigin;
+	}
+
+	@Override
+	public void setXorigin(float x) {
+		this.xOrigin = x;
+	}
+
+	@Override
+	public void setYorigin(float y) {
+		this.yOrigin = y;
+	}
+
+	@Override
+	public void setLocationOrigin(float x, float y) {
+		this.xOrigin = x;
+		this.yOrigin = y;
+	}
+
+	@Override
+	public void setLocation(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	@Override
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	@Override
+	public void setY(float y) {
+		this.y = y;
+	}
 }
