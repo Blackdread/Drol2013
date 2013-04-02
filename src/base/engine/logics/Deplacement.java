@@ -31,12 +31,12 @@ public class Deplacement {
 			//On vérifie qu'il n'y a pas de collision
 			if(!c_manager.testerCollision(x, y, e))
 			{
-				System.out.println(ex + " " + ey);
+				//System.out.println(ex + " " + ey);
 				
 				//Enlever l'entité des tiles avant le déplacement
-				for(int i = ex/lvl.getLargeurTile(); i <= (ex + largeur)/lvl.getLargeurTile(); i++)
+				for(int i = ex/lvl.getLargeurTile(); i < (ex + largeur)/lvl.getLargeurTile(); i++)
 				{
-					for(int j = ey/lvl.getHauteurTile(); j <= (ey + hauteur)/lvl.getHauteurTile(); j++)
+					for(int j = ey/lvl.getHauteurTile(); j < (ey + hauteur)/lvl.getHauteurTile(); j++)
 					{
 						lvl.getTabNiveau()[j][i].enleverEntite(id);
 					}
@@ -47,9 +47,9 @@ public class Deplacement {
 				lvl.getArrayEntite().put(id, e);
 				
 				//On replace l'entité dans les tiles
-				for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i <= ((x + e.getX()) + largeur)/lvl.getLargeurTile(); i++)
+				for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i < ((x + e.getX()) + largeur)/lvl.getLargeurTile(); i++)
 				{
-					for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j <= ((y + e.getY()) + hauteur)/lvl.getHauteurTile(); j++)
+					for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j < ((y + e.getY()) + hauteur)/lvl.getHauteurTile(); j++)
 					{
 						System.out.println(i + " " + j);
 						lvl.getTabNiveau()[j][i].ajouterEntite(e);
