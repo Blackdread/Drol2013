@@ -1,6 +1,8 @@
 package base.engine.entities;
 
-public abstract class ActiveEntity extends BasicEntity /*implements */ {
+import base.engine.entities.others.outputs.IActivator;
+
+public abstract class ActiveEntity extends BasicEntity implements IActivator {
 	
 	protected int maxLife;
 	protected int life;
@@ -83,5 +85,10 @@ public abstract class ActiveEntity extends BasicEntity /*implements */ {
 	public Object load(String s){
 		
 		return super.load(s);
+	}
+	
+	@Override
+	public BasicEntity getActivator() {
+		return this;
 	}
 }

@@ -29,20 +29,6 @@ public class HeroEntity extends MoveableEntity {
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
 	}
 
-	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public int getDirection() {
 		return direction;
 	}

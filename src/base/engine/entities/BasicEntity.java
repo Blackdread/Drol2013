@@ -1,11 +1,10 @@
 package base.engine.entities;
 
-import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 
 
 
-public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave, IActivator {
+public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave {
 	
 	protected int type;
 	
@@ -51,11 +50,6 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 
 	public void setHeight(int height) {
 		this.height = height;
-	}
-	
-	@Override
-	public BasicEntity getActivator() {
-		return this;
 	}
 	
 

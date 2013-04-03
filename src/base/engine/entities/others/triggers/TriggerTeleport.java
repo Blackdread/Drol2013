@@ -40,12 +40,6 @@ public class TriggerTeleport extends TriggerObjectInZone {
 	}
 	
 	@Override
-	public void update(int delta) {
-		super.update(delta);
-		// TODO verifier si il faut teleport les entite qui se trouve a l'interieur
-	}
-	
-	@Override
 	public void addAnEntityToActON(BasicEntity entity) {
 		super.addAnEntityToActON(entity);
 		if(enabled)
@@ -61,7 +55,8 @@ public class TriggerTeleport extends TriggerObjectInZone {
 								taille--;
 								tmp.remove(i);
 								i = (int) (Math.random()*taille);
-								
+								// Dans le principe, un InfoTarget ou InfoTeleportDestination n'ont pas 
+								// le meme nom que les autres type Info => Pas de verification
 							}
 							taille = i + 1;
 						}
@@ -74,10 +69,9 @@ public class TriggerTeleport extends TriggerObjectInZone {
 									m.i_data.put(MessageKey.P_ID, entity.getId());
 									m.i_data.put(MessageKey.P_X, (int)tmpInfo.getX());
 									m.i_data.put(MessageKey.P_Y, (int)tmpInfo.getY());
-									//m.engine = m.LOGIC_ENGINE;// TODO a faire
+									m.engine = EngineManager.LOGIC_ENGINE;
 									
-									EngineManager.getInstance().getTabEngine()[1].receiveMessage(m);	// TODO on ne doit plus recuperer le tableau mais 
-									// ca ce trouve dans le message a quel engine envoyer
+									EngineManager.getInstance().receiveMessage(m);
 							}
 						}
 					}else

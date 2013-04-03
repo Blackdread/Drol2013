@@ -14,9 +14,9 @@ public interface IEntity {
 
 	public void render(Graphics g, int x, int y);
 	
-	public void render(GameContainer container, Graphics g) throws SlickException;
+	//public void render(GameContainer container, Graphics g) throws SlickException;
 
-	public void update(GameContainer container, int delta) throws SlickException;
+	//public void update(int delta) throws SlickException;
 
 	public float getX();
 

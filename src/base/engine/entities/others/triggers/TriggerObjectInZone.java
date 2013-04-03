@@ -2,6 +2,10 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+
 import base.engine.entities.BasicEntity;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
@@ -50,6 +54,14 @@ public class TriggerObjectInZone extends Trigger {
 	public void update(int delta) {
 		delayBeforeReset.update(delta);
 	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();
 		list_outputs.addAll(super.get_list_outputs());
@@ -63,6 +75,7 @@ public class TriggerObjectInZone extends Trigger {
 		return list_outputs;
 	}
 	
+	@Override
 	public ArrayList<String> get_list_inputs() {
 		ArrayList<String> list_inputs = new ArrayList<String>();
 		list_inputs.addAll(super.get_list_inputs());
@@ -273,4 +286,9 @@ public class TriggerObjectInZone extends Trigger {
 	public void disable() {
 		enabled = false;
 	}
+
+
+
+
+	
 }

@@ -2,11 +2,11 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
+import base.engine.entities.BasicEntity;
 import base.engine.entities.others.filters.Filter;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
 import base.engine.entities.others.outputs.IUpdatable;
-import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
@@ -15,7 +15,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public abstract class Trigger extends InputsAndOutputs implements ITrigger, IDisable, IFireOnce, IUpdatable {
+public abstract class Trigger extends BasicEntity implements ITrigger, IDisable, IFireOnce, IUpdatable {
 	
 	/**
 	 * true -> once it has been fired if it's a fireOnce this will be deleted from the world

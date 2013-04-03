@@ -11,6 +11,10 @@ import org.lwjgl.Sys;
  */
 public class EngineManager {
 	
+	public static final char SOUND_ENGINE = '0';
+	public static final char LOGIC_ENGINE = '1';
+	public static final char NETWORK_ENGINE = '2';
+	
 	private static final int NB_ENGINE = 3;
 	private static EngineManager instance;
 	/**
@@ -18,15 +22,25 @@ public class EngineManager {
 	 */
 	private Engine tabEngine[];
 
-	
+	/*
 	public Engine[] getTabEngine() {
 		return tabEngine;
-	}
+	}//*/
 
-	public void setTabEngine(Engine[] tabEngine) {
-		this.tabEngine = tabEngine;
+	public void receiveMessage(Message mes){
+		switch(mes.engine){
+		case SOUND_ENGINE:
+			tabEngine[0].receiveMessage(mes);
+			break;
+		case LOGIC_ENGINE:
+			tabEngine[1].receiveMessage(mes);
+			break;
+		case NETWORK_ENGINE:
+			tabEngine[2].receiveMessage(mes);
+			break;
+		}
 	}
-
+	
 	private EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
 		tabEngine[0] = new SoundEngine();
