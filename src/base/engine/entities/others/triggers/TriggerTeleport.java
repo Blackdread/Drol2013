@@ -8,6 +8,7 @@ import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.info.Info;
+import base.engine.entities.others.info.InfoTarget;
 import base.utils.Configuration;
 
 /**
@@ -54,19 +55,30 @@ public class TriggerTeleport extends TriggerObjectInZone {
 					if(tmp != null){
 						int taille = tmp.size();
 						if(taille > 1){
-							// aleatoirement
-							// TODO
+							// TODO aleatoirement ou deplacer toutes les entites qui ont le meme nom
+							int i = (int) (Math.random()*taille);
+							while(tmp.get(i) == null){
+								taille--;
+								tmp.remove(i);
+								i = (int) (Math.random()*taille);
+								
+							}
+							taille = i + 1;
 						}
-						if(tmp.get(taille-1) != null){
-							Message m = new Message();
-							m.instruction = MessageKey.I_MOVE_ENTITY;
-							m.i_data.put(MessageKey.P_ID, entity.getId());
-							m.i_data.put(MessageKey.P_X, (int)tmp.get(taille-1).getX());
-							m.i_data.put(MessageKey.P_Y, (int)tmp.get(taille-1).getY());
-							//m.engine = m.LOGIC_ENGINE;// TODO a faire
-							
-							EngineManager.getInstance().getTabEngine()[1].receiveMessage(m);	// TODO on ne doit plus recuperer le tableau mais 
-							// ca ce trouve dans le message a quel engine envoyer
+						if(taille > 1){
+							Info tmpInfo = tmp.get(taille-1);
+							if(tmpInfo != null)
+								if(tmpInfo instanceof InfoTarget /*|| tmpInfo instanceof InfoTeleportDestination*/){
+									Message m = new Message();
+									m.instruction = MessageKey.I_MOVE_ENTITY;
+									m.i_data.put(MessageKey.P_ID, entity.getId());
+									m.i_data.put(MessageKey.P_X, (int)tmpInfo.getX());
+									m.i_data.put(MessageKey.P_Y, (int)tmpInfo.getY());
+									//m.engine = m.LOGIC_ENGINE;// TODO a faire
+									
+									EngineManager.getInstance().getTabEngine()[1].receiveMessage(m);	// TODO on ne doit plus recuperer le tableau mais 
+									// ca ce trouve dans le message a quel engine envoyer
+							}
 						}
 					}else
 						if(Configuration.isDebug())

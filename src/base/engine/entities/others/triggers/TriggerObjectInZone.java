@@ -175,8 +175,8 @@ public class TriggerObjectInZone extends Trigger {
 	protected void OnTrigger(){
 		if(isTriggerable())	// TODO ERREUR ERREUR !!! car dans isTriggerable() le timer est remis a zero hors cette output est appele sur la 2eme fois donc jamais fired
 			fireOutput("OnTrigger");
+		delayBeforeReset.resetTime();
 	}
-	
 	
 	
 	/**
@@ -234,7 +234,7 @@ public class TriggerObjectInZone extends Trigger {
 			return false;
 		else{
 			if(delayBeforeReset.isTimeComplete()){
-				delayBeforeReset.resetTime();
+				//delayBeforeReset.resetTime(); FAIT dans OnTrigger() sinon erreur
 				if(fireOnce){
 					if(!hasbeenFired){
 						hasbeenFired = true;

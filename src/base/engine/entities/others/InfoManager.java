@@ -26,7 +26,7 @@ public class InfoManager {
             }
         }
         return instance;
-	    }
+	 }
 	
 	synchronized public void addInfo(Info a){
 		ArrayList<Info> tmp = arrayFilterInstancie.get(a.getTargetName());

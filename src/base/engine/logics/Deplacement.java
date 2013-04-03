@@ -3,6 +3,7 @@ package base.engine.logics;
 import base.engine.CollisionManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
+import base.engine.entities.others.triggers.Trigger;
 import base.engine.levels.LevelDrol;
 
 public class Deplacement {
@@ -53,6 +54,12 @@ public class Deplacement {
 					{
 						System.out.println(i + " " + j);
 						lvl.getTabNiveau()[j][i].ajouterEntite(e);
+						//for(int k = 0; k < lvl.getTabNiveau()[j][i].getEntiteProche().size(); k++)
+						//if(lvl.getTabNiveau()[j][i].getEntiteProche().get(i) instanceof Trigger)
+						//{
+							
+						//}
+							
 					}
 				}
 				

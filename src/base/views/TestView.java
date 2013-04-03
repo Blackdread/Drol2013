@@ -44,7 +44,7 @@ public class TestView extends View{
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
-		hero = new HeroEntity("bla",5, 500);
+		hero = new HeroEntity("bla", 5, 500);
 		hero.setLocation(64, 32);
 		hero.setWidth(32);
 		hero.setHeight(32);
@@ -123,6 +123,36 @@ public class TestView extends View{
 			Message m = new Message();
 			m.instruction = MessageKey.I_SHOOT;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
+			
+			if(hero.getDirection() == 0)
+			{
+				//BAS
+				m.i_data.put(MessageKey.P_X, (int) hero.getX()+1);
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
+			}
+			else if(hero.getDirection() == 1)
+			{
+				//HAUT
+				m.i_data.put(MessageKey.P_X, (int) hero.getX() + 1);
+				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+			}
+			else if(hero.getDirection() == 2)
+			{
+				//GAUCHE
+				m.i_data.put(MessageKey.P_X, (int) hero.getX() - 1);
+				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+				
+			}
+			else if(hero.getDirection() == 3)
+			{
+				//DROITE
+				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getWidth() + 1));
+				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+			}
+			
+			engineManager.getTabEngine()[1].receiveMessage(m);
+			
+			
 		}
 		
 		engineManager.update();

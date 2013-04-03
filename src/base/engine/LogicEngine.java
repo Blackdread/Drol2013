@@ -1,6 +1,7 @@
 package base.engine;
 
 
+import base.engine.entities.Tir;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
 
@@ -52,9 +53,28 @@ public class LogicEngine extends Engine {
 				case MessageKey.I_SHOOT:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
-						int id;
+						int id,x ,y;
 						id = mes.i_data.get(MessageKey.P_ID);
-						//Créer un tir
+						if(mes.i_data.containsKey(MessageKey.P_X))
+						{
+							x = mes.i_data.get(MessageKey.P_X);
+							if(mes.i_data.containsKey(MessageKey.P_Y))
+							{
+								y = mes.i_data.get(MessageKey.P_Y);
+								Tir t = new Tir("tirHero", 10, 1);
+								t.setLocation(x, y);
+								lvl.getArrayEntite().put(t.getId(), t);
+								
+								for(int i = (int) (x/lvl.getLargeurTile()); i < (x + t.getWidth())/lvl.getLargeurTile(); i++)
+								{
+									for(int j = (int) ((y)/lvl.getHauteurTile()); j < ((y + t.getHeight())/lvl.getHauteurTile()); j++)
+									{
+										lvl.getTabNiveau()[j][i].ajouterEntite(t);
+									}
+								}
+							}
+						}
+						
 					}
 					break;
 			}
