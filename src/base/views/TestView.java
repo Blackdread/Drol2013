@@ -127,7 +127,7 @@ public class TestView extends View{
 			if(hero.getDirection() == BasicEntity.HAUT)
 			{
 				//haut
-				m.i_data.put(MessageKey.P_X, (int) hero.getX()+1);
+				m.i_data.put(MessageKey.P_X, (int) (hero.getX()+1));
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
 				
 			}

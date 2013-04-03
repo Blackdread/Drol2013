@@ -59,28 +59,20 @@ public class LogicEngine extends Engine {
 						if(mes.i_data.containsKey(MessageKey.P_Y))
 						{
 							y = mes.i_data.get(MessageKey.P_Y);
-							Tir t = new Tir("tirHero", 1);
+							Tir t = new Tir("tirHero", 10, 1);
 							
-							
+							t.setHeight(10);
+							t.setWidth(10);
 							t.setLocation(x, y);
 							lvl.getArrayEntite().put(t.getId(), t);
-							
-							for(int i = (int) (x/lvl.getLargeurTile()); i < (x + t.getWidth())/lvl.getLargeurTile(); i++)
-							{
-								for(int j = (int) ((y)/lvl.getHauteurTile()); j < ((y + t.getHeight())/lvl.getHauteurTile()); j++)
-								{
-									lvl.getTabNiveau()[j][i].ajouterEntite(t);
-								}
-							}
+							deplacement.deplacerEntity(x, y, t.getId());
 						}
 					}
-						
 					break;
 			}
 		}
 		else
 			return false;
-		
 		return true;
 	}
 

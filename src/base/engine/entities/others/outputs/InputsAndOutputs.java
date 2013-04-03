@@ -18,6 +18,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 */
 	protected String name;
 	
+	public static int currentId = 0;
+	
 	protected int id;
 	
 	protected float x;
@@ -43,6 +45,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		this.name = name;
 		removeEntityFromWorld = false;
 		removeHierarchy = false;
+		id = InputsAndOutputs.currentId;
+		InputsAndOutputs.currentId++;
 	}
 	
 	public ArrayList<String> get_list_outputs(){
