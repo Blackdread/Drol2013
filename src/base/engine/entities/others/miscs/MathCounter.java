@@ -125,28 +125,30 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 				temp = (Integer)parameter;	// Normalement on ne devrait pas avoir d'erreur !
 			}catch(Exception e){e.printStackTrace();}
 			
-			if(nameOfInput.equalsIgnoreCase("Add"))
-				add(temp);
-			else if(nameOfInput.equalsIgnoreCase("Divide"))
-				divide(temp);
-			else if(nameOfInput.equalsIgnoreCase("Multiply"))
-				multiply(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetValue"))
-				setValue(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetValueNoFire"))
-				setValueNoFire(temp);
-			else if(nameOfInput.equalsIgnoreCase("Subtract"))
-				subtract(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetHitMax"))
-				setHitMax(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetHitMin"))
-				setHitMin(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetMaxValueNoFire"))
-				setMaxValueNoFire(temp);
-			else if(nameOfInput.equalsIgnoreCase("SetMinValueNoFire"))
-				setMinValueNoFire(temp);
-			else
-				super.fireInputs(nameOfInput, parameter);
+			if(isEnabled()){
+				if(nameOfInput.equalsIgnoreCase("Add"))
+					add(temp);
+				else if(nameOfInput.equalsIgnoreCase("Divide"))
+					divide(temp);
+				else if(nameOfInput.equalsIgnoreCase("Multiply"))
+					multiply(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetValue"))
+					setValue(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetValueNoFire"))
+					setValueNoFire(temp);
+				else if(nameOfInput.equalsIgnoreCase("Subtract"))
+					subtract(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetHitMax"))
+					setHitMax(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetHitMin"))
+					setHitMin(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetMaxValueNoFire"))
+					setMaxValueNoFire(temp);
+				else if(nameOfInput.equalsIgnoreCase("SetMinValueNoFire"))
+					setMinValueNoFire(temp);
+				else
+					super.fireInputs(nameOfInput, parameter);
+			}
 		}
 	}
 	
@@ -156,7 +158,10 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void add(int a){
-		
+		checkOnChangeMinAndMax(initialValue + a);
+		initialValue += a;
+		checkMinAndMax();
+		OutValue();
 	}
 	
 	/**
@@ -164,7 +169,10 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void divide(int a){
-
+		checkOnChangeMinAndMax(initialValue / a);
+		initialValue /= a;
+		checkMinAndMax();
+		OutValue();
 	}
 
 	/**
@@ -172,7 +180,10 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void multiply(int a){
-
+		checkOnChangeMinAndMax(initialValue * a);
+		initialValue *= a;
+		checkMinAndMax();
+		OutValue();
 	}
 
 	/**
@@ -180,7 +191,10 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setValue(int a){
-
+		checkOnChangeMinAndMax(a);
+		initialValue = a;
+		checkMinAndMax();
+		OutValue();
 	} 
 
 	/**
@@ -188,7 +202,7 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setValueNoFire(int a){
-
+		initialValue = a;
 	}
 
 	/**
@@ -196,7 +210,10 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void subtract(int a){
-
+		checkOnChangeMinAndMax(initialValue - a);
+		initialValue -= a;
+		checkMinAndMax();
+		OutValue();
 	}
 
 	/**
@@ -204,7 +221,9 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setHitMax(int a){
-
+		maximumLegalValue = a;
+		checkMinAndMax();	// TODO sur ?
+		OutValue();
 	}
 
 	/**
@@ -212,7 +231,9 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setHitMin(int a){
-
+		minimumLegalValue = a;
+		checkMinAndMax();	// TODO sur ?
+		OutValue();
 	}
 
 	/**
@@ -221,7 +242,7 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 *  Exemple: send the value to a LogicCompare or LogicBranch etc
 	 */
 	public void getValue(){
-
+		OnGetValue();
 	}
 
 	/**
@@ -229,7 +250,8 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setMaxValueNoFire(int a){
-
+		maximumLegalValue = a;
+		//checkMinAndMax();	// TODO sur ?
 	}
 
 	/**
@@ -237,7 +259,8 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void setMinValueNoFire(int a){
-
+		minimumLegalValue = a;
+		//checkMinAndMax();	// TODO sur ?
 	}
 
 
@@ -253,37 +276,63 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * The counter must go back above the min value before the output will fire again
 	 */
 	private void OnHitMin(){
-
+		fireOutput("OnHitMin");
 	}
 	/**
 	 * Fired when the counter value meets or exceeds the max value. 
 	 * The counter must go below the max value before the output will fire again
 	 */
 	private void OnHitMax(){
-
+		fireOutput("OnHitMax");
 	}
 	/**
 	 *  Fired in response to the GetValue input. 
 	 *  Used for polling the counter when you don't want constant updates from the OutValue output
 	 */
 	private void OnGetValue(){
-
+		fireOutput("OnGetValue");
 	}
 	/**
 	 * Fired when the counter value changes from the minimum value
 	 */
 	private void OnChangedFromMin(){
-
+		fireOutput("OnChangedFromMin");
 	}
 	/**
 	 * Fired when the counter value changes from the max value
 	 */
 	private void OnChangedFromMax(){
-
+		fireOutput("OnChangedFromMax");
 	}
 
+	/**
+	 * minimumLegalValue and maximumLegalValue must be different of 0
+	 * if initialValue > maximumLegalValue then initialValue = maximumLegalValue
+	 * and fire output OnHitMax()
+	 * if initialValue < minimumLegalValue then initialValue = minimumLegalValue
+	 * and fire output OnHitMin()
+	 */
+	private void checkMinAndMax(){
+		if(!(minimumLegalValue == 0 && maximumLegalValue == 0)){
+			if(initialValue > maximumLegalValue){
+				initialValue = maximumLegalValue;
+				OnHitMax();
+			}
+			if(initialValue < minimumLegalValue){
+				initialValue = minimumLegalValue;
+				OnHitMin();
+			}
+		}
+	}
 	
-	
+	private void checkOnChangeMinAndMax(final int nextValue){
+		if(initialValue == minimumLegalValue)
+			if(initialValue != nextValue)
+				OnChangedFromMin();
+		if(initialValue == maximumLegalValue)
+			if(initialValue != nextValue)
+				OnChangedFromMax();
+	}
 	
 	@Override
 	public void toggle(){

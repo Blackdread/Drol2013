@@ -1,6 +1,5 @@
 package base.engine;
 
-
 import base.engine.entities.Tir;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
@@ -14,8 +13,6 @@ public class LogicEngine extends Engine {
 
 	private CollisionManager c_manager;
 	private LevelDrol lvl;	// TODO A enlever ? et recuperer seulement quand necessaire
-	
-	
 	
 	public LogicEngine()
 	{
