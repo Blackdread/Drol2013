@@ -14,6 +14,7 @@ import base.engine.EngineManager;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.levels.LevelDrol;
 import base.tile.TilePropriety;
@@ -122,28 +123,28 @@ public class TestView extends View{
 		{
 			Message m = new Message();
 			m.instruction = MessageKey.I_SHOOT;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
 			
-			if(hero.getDirection() == 0)
+			if(hero.getDirection() == BasicEntity.HAUT)
 			{
-				//BAS
+				//haut
 				m.i_data.put(MessageKey.P_X, (int) hero.getX()+1);
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
+				
 			}
-			else if(hero.getDirection() == 1)
+			else if(hero.getDirection() == BasicEntity.BAS)
 			{
-				//HAUT
+				//BAS
 				m.i_data.put(MessageKey.P_X, (int) hero.getX() + 1);
 				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
 			}
-			else if(hero.getDirection() == 2)
+			else if(hero.getDirection() == BasicEntity.GAUCHE)
 			{
 				//GAUCHE
 				m.i_data.put(MessageKey.P_X, (int) hero.getX() - 1);
 				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
 				
 			}
-			else if(hero.getDirection() == 3)
+			else if(hero.getDirection() == BasicEntity.DROITE)
 			{
 				//DROITE
 				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getWidth() + 1));
