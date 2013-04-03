@@ -4,8 +4,17 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Tir extends MoveableEntity {
+	
+	public Tir(int maxLife, Vector2f vitesse)
+	{
+		super("tir", maxLife);
+		this.vitesse = vitesse;
+		width = 10;
+		height = 10;
+	}
 
 	public Tir(String name, int maxLife) {
 		super(name, maxLife);
@@ -25,6 +34,6 @@ public class Tir extends MoveableEntity {
 	@Override
 	public void update(int delta) {
 		// TODO Auto-generated method stub
-		
+		//TODO: Deplacer le tir
 	}
 }
