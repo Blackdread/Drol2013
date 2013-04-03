@@ -190,7 +190,6 @@ public class TriggerObjectInZone extends Trigger {
 		delayBeforeReset.resetTime();
 	}
 	
-	
 	/**
 	 * Devra ajouter l'entite et declencler les outputs OnStartTouch
 	 * @param entity to add

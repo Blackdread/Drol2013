@@ -14,7 +14,6 @@ import base.engine.levels.LevelDrol;
 public class Deplacement {
 
 	//private static CollisionManager c_manager;
-	//private static LevelDrol lvl;
 	
 	public static void deplacerEntity(int x, int y, int id)
 	{

@@ -24,8 +24,6 @@ public class LogicEngine extends Engine {
 		c_manager = CollisionManager.getInstance();
 	}
 	
-	
-	
 	@Override
 	public boolean processMessage() {
 		Message mes;

@@ -95,6 +95,7 @@ private static OutputManager instance;
 	/**
 	 * A besoin de chercher dans toutes les entites qui peuvent recevoir des inputs si leur nom
 	 * correspond a nameWeSearch pour ensuite declencher l'input
+	 * Si nameWeSearch termine par un '*' cela signifie que tout les noms qui ont le meme debut jusqu'a '*' seront triggered 
 	 * @param nameWeSearch targetName of the entity (should be unique) (Not case sensitive)
 	 * @param input name
 	 * @param parameter may be null

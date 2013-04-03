@@ -61,12 +61,6 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 */
 	protected String nameOfTheInput;
 	
-	/*
-	 * Target Entity
-	 * TODO: May becomes a String
-	 */
-	//private Object objectToDeclencheInput;
-	
 	/**
 	 * Target Entity name
 	 */
@@ -130,7 +124,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 					fireOutput();
 					timeBeforeDeclencheTrigger.resetTime();
 					outputHasBeenDeclenched = false;
-					hasBeenFiredAtleastOnce= true;
+					//hasBeenFiredAtleastOnce = false;	// C bien false ? ou il sert a rien vu que c'est pour le IFireOnce
 				}else{
 					if(!hasBeenFiredAtleastOnce){
 						fireOutput();
@@ -138,14 +132,14 @@ public class Outputs implements IFireOnce, IUpdatable{
 					}
 					nameOfTheEntityToFireInput = "";
 					parameter = null;
-					outputHasBeenDeclenched = true;	// A voir si c'est bien true qu'il faut mettre
+					outputHasBeenDeclenched = false;	// A voir si c'est bien true ou false qu'il faut mettre
 				}
 			}
 		}
 	}
 	
 	/**
-	 * if timer == 0 or is null -> output is fired
+	 * if timer == 0 -> output is fired
 	 * otherwise outputHasBeenDeclenched is set to true then OutputsManager will increment timer
 	 * Once an output is fired, this function does NOT reinitialize it -> means the output will be fired except
 	 * if the output is deleted
@@ -156,34 +150,36 @@ public class Outputs implements IFireOnce, IUpdatable{
 		 * Pas de verification que ca implement bien IInputsAndOutputs, de toute facons c'est necessaire
 		 * A voir
 		 */
-		/*
-		if(parameter == null)
-			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheInput);
-		else
-			((IInputsAndOutputs)objectToDeclencheInput).fireInputs(nameOfTheInput, parameter);
-		//*/
-		if(nameOfTheEntityToFireInput != null)
-			if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, ...
-				if(entityWhoHasThisOutput != null){
-					if(parameter == null)
-						entityWhoHasThisOutput.fireInputs(nameOfTheInput);
-					else
-						entityWhoHasThisOutput.fireInputs(nameOfTheInput, parameter);
+		if(timeBeforeDeclencheTrigger.isTimeComplete()){	// si l'eventTime est 0 alors true de toute facons
+			if(fireOnce && hasBeenFiredAtleastOnce)
+				return;
+			if(fireOnce)
+				hasBeenFiredAtleastOnce= true;
+			
+			if(nameOfTheEntityToFireInput != null)
+				if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, ...
+					if(entityWhoHasThisOutput != null){
+						if(parameter == null)
+							entityWhoHasThisOutput.fireInputs(nameOfTheInput);
+						else
+							entityWhoHasThisOutput.fireInputs(nameOfTheInput, parameter);
+					}else
+						System.err.println("In Outputs.java entityWhoHasThisOutput = null");
+				}else if(nameOfTheEntityToFireInput.equalsIgnoreCase("!activator")){
+					if(activator != null){
+						// TODO A voir s'il faut passer l'activator afin que l'activator soit donnee dans tout les outputs
+						// suivant mais ca peut faire des choses pas forcement souhaitait (imprevue)
+						if(parameter == null){	
+							activator.fireInputs(nameOfTheInput);
+						}else{
+							activator.fireInputs(nameOfTheInput, parameter);
+						}
+					}else
+						System.err.println("In Outputs.java activator = null");
 				}else
-					System.err.println("In Outputs.java entityWhoHasThisOutput = null");
-			}else if(nameOfTheEntityToFireInput.equalsIgnoreCase("!activator")){
-				if(activator != null){
-					// TODO A voir s'il faut passer l'activator afin que l'activator soit donnee dans tout les outputs
-					// suivant mais ca peut faire des choses pas forcement souhaitait (imprevue)
-					if(parameter == null){	
-						activator.fireInputs(nameOfTheInput);
-					}else{
-						activator.fireInputs(nameOfTheInput, parameter);
-					}
-				}else
-					System.err.println("In Outputs.java activator = null");
-			}else
-				OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
+					OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
+		}else
+			outputHasBeenDeclenched = true;
 	}
 	
 	/**
@@ -275,6 +271,16 @@ public class Outputs implements IFireOnce, IUpdatable{
 	 */
 	public void setActivator(InputsAndOutputs activator) {
 		this.activator = activator;
+	}
+
+	@Override
+	public boolean isHasbeenFired() {
+		return hasBeenFiredAtleastOnce;
+	}
+
+	@Override
+	public void setHasbeenFired(boolean hasBeenFired) {
+		hasBeenFiredAtleastOnce = hasBeenFired;
 	}
 
 }
