@@ -27,5 +27,4 @@ public class Tir extends MoveableEntity {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

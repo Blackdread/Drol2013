@@ -127,7 +127,7 @@ public class TestView extends View{
 			if(hero.getDirection() == BasicEntity.HAUT)
 			{
 				//haut
-				
+				//TODO: Gérer direction, vecteur du tir, update du tir
 				m.i_data.put(MessageKey.P_X, (int) (hero.getX()+1));
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 1));
 				System.out.println("heroX "+ hero.getX());

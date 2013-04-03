@@ -56,7 +56,6 @@ public class LogicEngine extends Engine {
 						{
 							y = mes.i_data.get(MessageKey.P_Y);
 							Tir t = new Tir("tirHero", 1);
-							
 							t.setLocation(x, y);
 							lvl.getArrayEntite().put(t.getId(), t);
 							Deplacement.deplacerEntity(x, y, t.getId());
