@@ -15,7 +15,7 @@ public class Tir extends MoveableEntity {
 	@Override
 	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.blue);
+		g.setColor(Color.green);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
 		
 	}

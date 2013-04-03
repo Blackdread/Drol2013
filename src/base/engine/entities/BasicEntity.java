@@ -12,7 +12,7 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	// TODO Sera transformee en shape
 	protected int width;
 	protected int height;
-	int direction;
+	protected int direction;
 	
 	public static final int HAUT = 0;
 	public static final int BAS = 1;
