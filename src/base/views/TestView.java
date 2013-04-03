@@ -127,15 +127,17 @@ public class TestView extends View{
 			if(hero.getDirection() == BasicEntity.HAUT)
 			{
 				//haut
+				
 				m.i_data.put(MessageKey.P_X, (int) (hero.getX()+1));
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 1));
+				System.out.println(hero.getX());
 				
 			}
 			else if(hero.getDirection() == BasicEntity.BAS)
 			{
 				//BAS
 				m.i_data.put(MessageKey.P_X, (int) hero.getX() + 1);
-				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
 			}
 			else if(hero.getDirection() == BasicEntity.GAUCHE)
 			{
