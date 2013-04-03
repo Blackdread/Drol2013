@@ -52,7 +52,7 @@ public class Deplacement {
 				{
 					for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j < ((y + e.getY()) + hauteur)/lvl.getHauteurTile(); j++)
 					{
-						System.out.println(i + " " + j);
+						//System.out.println(i + " " + j);
 						lvl.getTabNiveau()[j][i].ajouterEntite(e);
 						//for(int k = 0; k < lvl.getTabNiveau()[j][i].getEntiteProche().size(); k++)
 						//if(lvl.getTabNiveau()[j][i].getEntiteProche().get(i) instanceof Trigger)

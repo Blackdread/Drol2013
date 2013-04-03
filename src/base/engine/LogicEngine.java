@@ -59,10 +59,8 @@ public class LogicEngine extends Engine {
 						if(mes.i_data.containsKey(MessageKey.P_Y))
 						{
 							y = mes.i_data.get(MessageKey.P_Y);
-							Tir t = new Tir("tirHero", 10, 1);
+							Tir t = new Tir("tirHero", 1);
 							
-							t.setHeight(10);
-							t.setWidth(10);
 							t.setLocation(x, y);
 							lvl.getArrayEntite().put(t.getId(), t);
 							deplacement.deplacerEntity(x, y, t.getId());
