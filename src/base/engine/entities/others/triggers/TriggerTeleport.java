@@ -55,7 +55,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 						int taille = tmp.size();
 						if(taille > 1){
 							// aleatoirement
-							
+							// TODO
 						}
 						if(tmp.get(taille-1) != null){
 							Message m = new Message();

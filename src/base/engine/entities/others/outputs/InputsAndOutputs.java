@@ -18,6 +18,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 */
 	protected String name;
 	
+	protected int id;
+	
 	protected float x;
 	protected float y;
 	
@@ -253,5 +255,13 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	@Override
 	public void setY(float y) {
 		this.y = y;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

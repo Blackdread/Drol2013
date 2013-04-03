@@ -7,7 +7,6 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
 
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave, IActivator {
 	
-	protected int id;
 	protected int type;
 	
 	// TODO Sera transformee en shape
@@ -44,14 +43,6 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 
 	public int getType() {
 		return type;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public void setWidth(int width) {
