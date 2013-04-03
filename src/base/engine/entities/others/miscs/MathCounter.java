@@ -156,7 +156,7 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	 * @param a
 	 */
 	public void add(int a){
-
+		
 	}
 	
 	/**

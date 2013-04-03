@@ -46,4 +46,7 @@ public interface IParent {
 	 */
 	public void ClearParent();
 	
+	
+	//public boolean isParentable();
+	
 }

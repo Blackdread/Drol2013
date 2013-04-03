@@ -41,13 +41,16 @@ public abstract class MessageKey {
 	 */
 	// Instructions
 	public static final int I_MOVE_ENTITY = 10;
-	public static final int I_SHOOT = 11;
+	public static final int I_MOVE_ENTITY_TO = 11;
+	public static final int I_SHOOT = 12;
 	
 	
 	// Parameters
 	public static final int P_ID = 5;
 	public static final int P_X = 6;
 	public static final int P_Y = 7;
+	public static final int P_LIFE = 8;
+	public static final int P_MAX_LIFE = 9;
 	
 	
 	/*

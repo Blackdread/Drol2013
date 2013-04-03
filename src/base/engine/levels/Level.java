@@ -14,6 +14,8 @@ public abstract class Level implements ILevel{
 	protected final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
 	
 	
+	public static Level currentLevelUsed = null;
+	
 	// Nom d'un level
 	// lvl_numero.lvl
 	
@@ -52,6 +54,8 @@ public abstract class Level implements ILevel{
 	protected boolean isSaveOver;
 	
 	public Level(File file){
+		
+		Level.currentLevelUsed = this;	// A voir si ca reste
 		
 		isLoadOver = false;
 		isSaveOver = false;
@@ -212,6 +216,14 @@ public abstract class Level implements ILevel{
 	
 	public String toString(){
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
+	}
+
+	public static Level getCurrentLevelUsed() {
+		return currentLevelUsed;
+	}
+
+	public static void setCurrentLevelUsed(Level currentLevelUsed) {
+		Level.currentLevelUsed = currentLevelUsed;
 	}
 	
 	

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package base.engine.entities.others.triggers;
 
 /**

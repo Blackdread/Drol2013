@@ -5,11 +5,15 @@ import base.engine.entities.Tir;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ * @author Nicolas DUPIN
+ */
 public class LogicEngine extends Engine {
 
 	private CollisionManager c_manager;
-	private Deplacement deplacement;
-	private LevelDrol lvl;
+	private LevelDrol lvl;	// TODO A enlever ? et recuperer seulement quand necessaire
 	
 	
 	
@@ -17,16 +21,13 @@ public class LogicEngine extends Engine {
 	{
 		super();
 		this.lvl = null;
-		c_manager = new CollisionManager(null);
-		deplacement = new Deplacement(null, c_manager);
+		c_manager = CollisionManager.getInstance();
 	}
 	
 	
 	
 	@Override
 	public boolean processMessage() {
-		
-	
 		Message mes;
 		//while(!this.message_queue.isEmpty()){
 		
@@ -44,7 +45,7 @@ public class LogicEngine extends Engine {
 							if(mes.i_data.containsKey(MessageKey.P_Y))
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
-								deplacement.deplacerEntity(x, y, id);
+								Deplacement.deplacerEntity(x, y, id);
 							}
 						}
 					}
@@ -63,7 +64,7 @@ public class LogicEngine extends Engine {
 							
 							t.setLocation(x, y);
 							lvl.getArrayEntite().put(t.getId(), t);
-							deplacement.deplacerEntity(x, y, t.getId());
+							Deplacement.deplacerEntity(x, y, t.getId());
 						}
 					}
 					break;
@@ -80,7 +81,5 @@ public class LogicEngine extends Engine {
 
 	public void setLvl(LevelDrol lvl) {
 		this.lvl = lvl;
-		c_manager.setLvl(lvl);
-		deplacement.setLvl(lvl);
 	}
 }

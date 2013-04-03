@@ -3,22 +3,23 @@ package base.engine.logics;
 import base.engine.CollisionManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
-import base.engine.entities.others.triggers.Trigger;
+import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ * @author Nicolas DUPIN
+ */
 public class Deplacement {
+
+	//private static CollisionManager c_manager;
+	//private static LevelDrol lvl;
 	
-	private LevelDrol lvl;
-	private CollisionManager c_manager;
-	
-	public Deplacement(LevelDrol lvl, CollisionManager c)
+	public static void deplacerEntity(int x, int y, int id)
 	{
-		this.lvl = lvl;
-		c_manager = c;
-	}
-	
-	public void deplacerEntity(int x, int y, int id)
-	{
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		
 		BasicEntity e = lvl.getArrayEntite().get(id);
 		
 		if(e != null)
@@ -30,7 +31,8 @@ public class Deplacement {
 			
 			
 			//On vérifie qu'il n'y a pas de collision
-			if(!c_manager.testerCollision(x, y, e))
+			//if(!c_manager.testerCollision(x, y, e))
+			if(!CollisionManager.getInstance().testerCollision(x, y, e))
 			{
 				//System.out.println(ex + " " + ey);
 				
@@ -77,18 +79,12 @@ public class Deplacement {
 			}
 			else
 				System.out.println("Collision");
-		}
-		else
-		{
+		}else{
 			System.out.println("Fonction deplacer Entity : Entité non trouve, e = null");
 		}
 	}
-
-	public LevelDrol getLvl() {
-		return lvl;
-	}
-
-	public void setLvl(LevelDrol lvl) {
-		this.lvl = lvl;
+	
+	private Deplacement(){
+		
 	}
 }

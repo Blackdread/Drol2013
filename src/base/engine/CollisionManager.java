@@ -1,21 +1,38 @@
 package base.engine;
 
 import base.engine.entities.BasicEntity;
+import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
-public class CollisionManager {
-	private LevelDrol lvl;
+/**
+ * Les methodes peuvent devenir static -> A voir
+ * @author Yoann CAPLAIN
+ * @author Nicolas DUPIN
+ */
+public class CollisionManager{
+
+	private static CollisionManager instance;
+	//private LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+	// TODO necessite de change la reference si le niveau change ou la 2eme methode
 	
-	public CollisionManager(LevelDrol niv)
-	{
-		lvl = niv;
-	}
+	public static CollisionManager getInstance() {
+		if (null == instance) { // Premier appel
+            synchronized(objetSynchrone) {
+                if (null == instance) {
+                    instance = new CollisionManager();
+                }
+            }
+        }
+        return instance;
+	 }
 	
 	/*
 	 * Teste si il y a une collision aux coordonnées x,y de l'entitée e
 	 */
 	public boolean testerCollision(int x, int y, BasicEntity e)
 	{
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();	// TODO ‚a ou la 2eme methode mais necessite de change la reference si le niveau change
+		
 		int tileXMin, tileXMax, tileYMin, tileYMax;
 		
 		//Si on sort de la map, on a une collision
@@ -41,12 +58,10 @@ public class CollisionManager {
 		return false;
 	}
 
-	public LevelDrol getLvl() {
-		return lvl;
-	}
-
-	public void setLvl(LevelDrol lvl) {
-		this.lvl = lvl;
-	}
-
+	
+	 private CollisionManager(){
+		 
+	 }
+	 
+	 private static Object objetSynchrone = new Object();
 }

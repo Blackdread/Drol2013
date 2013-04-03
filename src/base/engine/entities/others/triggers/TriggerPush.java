@@ -8,7 +8,7 @@ import base.engine.entities.BasicEntity;
 /**
  * It is a trigger volume that pushes entities that touch it, except those with a parent
  * @author Yoann CAPLAIN
- *
+ * @unfinished
  */
 public class TriggerPush extends TriggerObjectInZone {
 

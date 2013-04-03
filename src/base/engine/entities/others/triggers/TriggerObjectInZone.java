@@ -2,11 +2,10 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.others.outputs.IActivator;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
  * Ne pas oublier d'initialiser l'array et de le "remplir"
@@ -19,7 +18,7 @@ public class TriggerObjectInZone extends Trigger {
 	//protected int x, y;
 	
 	// TODO Pourra devenir un shape de facons a avoir des trigger de forme quelconque
-	protected int width, height;
+	//protected int width, height;	-> herite de BasicEntity
 	
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger peut agir (pourrait)
@@ -197,11 +196,14 @@ public class TriggerObjectInZone extends Trigger {
 	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
-		arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
-		
-		if(testFilter(entity)){	// entity must pass the filter
-			setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
-			OnStartTouch();
+		if(entity instanceof IActivator){	// TODO un activator n'est pas un Info ni un filter mais peut etre un tir, un monstre etc
+			arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
+			
+			if(testFilter(entity)){	// entity must pass the filter
+				//
+					setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
+				OnStartTouch();
+			}
 		}
 	}
 	/**
@@ -209,15 +211,33 @@ public class TriggerObjectInZone extends Trigger {
 	 * @param entity to remove
 	 */
 	public void removeAnEntityToActON(BasicEntity entity) {
-		if(testFilter(entity)){	// entity must pass the filter
-			setActivatorToAllOutputs(entity);
-			OnEndTouch();
-			if(howManyEntityPassFilter() == 1)
-				OnEndTouchAll();
-			OnTrigger();
-		}
+		if(entity instanceof IActivator)	// TODO un activator n'est pas un Info ni un filter mais peut etre un tir, un monstre etc
+			if(testFilter(entity)){	// entity must pass the filter
+				setActivatorToAllOutputs(entity);
+				OnEndTouch();
+				if(howManyEntityPassFilter() == 1)
+					OnEndTouchAll();
+				OnTrigger();
+			}
 		
 		arrayEntityToActON.remove(entity);
+	}
+	
+	@Deprecated
+	public boolean isEntityAlreadyInArray(String entity){
+		for(BasicEntity v : arrayEntityToActON)
+			if(v != null)
+				if(v.getTargetName().equalsIgnoreCase(entity))
+					return true;
+		return false;
+	}
+	@Deprecated
+	public boolean isEntityAlreadyInArray(BasicEntity entity){
+		for(BasicEntity v : arrayEntityToActON)
+			if(v != null)
+				if(v.equals(entity))
+					return true;
+		return false;
 	}
 	
 	protected int howManyEntityPassFilter(){

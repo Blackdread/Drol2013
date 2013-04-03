@@ -63,7 +63,7 @@ public class FilterActivatorClass extends Filter {
 		NameToCompareTo.clear();
 		//Class c = Class.forName("maClasse");
 		int securite = 0;
-		Class tmp = null;
+		Class<?> tmp = null;	// Pas de bug ??
 		try {
 			tmp = Class.forName(entityToFilter.getClass().getName());
 		}catch (ClassNotFoundException e){
