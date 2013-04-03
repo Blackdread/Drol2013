@@ -9,8 +9,8 @@ public class HeroEntity extends MoveableEntity {
 	
 	
 
-	public HeroEntity(String name, int type, int maxLife) {
-		super(name, type, maxLife);
+	public HeroEntity(String name, int maxLife) {
+		super(name, maxLife);
 		// TODO Auto-generated constructor stub
 	}
 

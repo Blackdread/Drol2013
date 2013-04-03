@@ -13,9 +13,8 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator {
 	
 	private boolean remove;
 
-	public ActiveEntity(String name, int type, int maxLife) {
+	public ActiveEntity(String name, int maxLife) {
 		super(name);
-		this.type = type;
 		this.maxLife = maxLife;
 		this.life = maxLife;
 		this.visible = true;
@@ -79,7 +78,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator {
 	
 	@Override
 	public String save() {
-		return super.save()+"_"+type+"_"+maxLife+"_"+life+"_"+name;
+		return super.save()+"_"+maxLife+"_"+life+"_"+name;
 	}
 	@Override
 	public Object load(String s){

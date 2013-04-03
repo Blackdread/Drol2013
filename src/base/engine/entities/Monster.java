@@ -6,8 +6,8 @@ import org.newdawn.slick.SlickException;
 
 public class Monster extends MoveableEntity {
 
-	public Monster(String name, int type, int maxLife) {
-		super(name, type, maxLife);
+	public Monster(String name, int maxLife) {
+		super(name, maxLife);
 		// TODO Auto-generated constructor stub
 	}
 

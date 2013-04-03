@@ -6,8 +6,6 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
 
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave {
 	
-	protected int type;
-	
 	// TODO Sera transformee en shape
 	protected int width;
 	protected int height;
@@ -44,11 +42,6 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	public Object load(String s){
 		
 		return null;
-	}
-	
-
-	public int getType() {
-		return type;
 	}
 
 	public void setWidth(int width) {

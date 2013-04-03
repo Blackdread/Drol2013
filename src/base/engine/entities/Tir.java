@@ -7,15 +7,17 @@ import org.newdawn.slick.SlickException;
 
 public class Tir extends MoveableEntity {
 
-	public Tir(String name, int type, int maxLife) {
-		super(name, type, maxLife);
+	public Tir(String name, int maxLife) {
+		super(name, maxLife);
 		// TODO Auto-generated constructor stub
+		width = 10;
+		height = 10;
 	}
 
 	@Override
 	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.green);
+		g.setColor(Color.cyan);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
 		
 	}
