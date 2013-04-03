@@ -15,10 +15,16 @@ public class Tir extends MoveableEntity {
 	}
 
 	@Override
-	public void render(Graphics g, int x, int y) {
+	public void render(Graphics g, int xx, int yy) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.cyan);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
+		System.out.println("tir "+x+" "+y);
+	}
+
+	@Override
+	public void update(int delta) {
+		// TODO Auto-generated method stub
 		
 	}
 

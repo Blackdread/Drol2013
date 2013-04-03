@@ -16,6 +16,12 @@ public class Monster extends MoveableEntity {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void update(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	
 	public void onCollision(BasicEntity a){

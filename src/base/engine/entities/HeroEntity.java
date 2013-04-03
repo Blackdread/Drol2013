@@ -20,6 +20,12 @@ public class HeroEntity extends MoveableEntity {
 		g.setColor(Color.red);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
 	}
+	
+	@Override
+	public void update(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public int getDirection() {
 		return direction;

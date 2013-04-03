@@ -139,6 +139,7 @@ public class LevelDrol extends Level {
 						{
 							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProche().get(k).getId())){
 								tabNiveau[i][j].getEntiteProche().get(k).render(graph, (int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll());
+								//System.out.println("x "+((int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll())+" y"+ ((int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll()));
 								//entiteAffiche.add(tabNiveau[i][j].getEntiteProche().get(k).getId());
 							//}
 						}

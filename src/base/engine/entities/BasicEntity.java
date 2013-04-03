@@ -18,7 +18,7 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	
 	public BasicEntity(String name) {
 		super(name);
-		direction = 0;
+		direction = HAUT;
 	}
 
 	public boolean onEntity(int mx, int my) {
