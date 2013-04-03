@@ -22,7 +22,6 @@ public class EngineManager {
 	 */
 	private Engine tabEngine[];
 
-	/*
 	public Engine[] getTabEngine() {
 		return tabEngine;
 	}//*/
@@ -40,7 +39,7 @@ public class EngineManager {
 			break;
 		}
 	}
-	
+
 	private EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
 		tabEngine[0] = new SoundEngine();
