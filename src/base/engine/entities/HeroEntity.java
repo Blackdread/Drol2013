@@ -7,7 +7,6 @@ import org.newdawn.slick.SlickException;
 
 public class HeroEntity extends MoveableEntity {
 	
-	
 
 	public HeroEntity(String name, int maxLife) {
 		super(name, maxLife);
@@ -23,16 +22,8 @@ public class HeroEntity extends MoveableEntity {
 	
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
+		super.update(delta);
 		
-	}
-
-	public int getDirection() {
-		return direction;
-	}
-
-	public void setDirection(int direction) {
-		this.direction = direction;
 	}
 
 }

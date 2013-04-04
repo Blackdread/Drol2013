@@ -1,8 +1,6 @@
 package base.engine.entities;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 public class Monster extends MoveableEntity {
 
@@ -19,7 +17,7 @@ public class Monster extends MoveableEntity {
 	
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
+		super.update(delta);
 		
 	}
 

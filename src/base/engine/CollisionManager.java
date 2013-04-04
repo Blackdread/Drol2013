@@ -26,7 +26,7 @@ public class CollisionManager{
         return instance;
 	 }
 	
-	/*
+	/**
 	 * Teste si il y a une collision aux coordonnées x,y de l'entitée e
 	 */
 	public boolean testerCollision(int x, int y, BasicEntity e)

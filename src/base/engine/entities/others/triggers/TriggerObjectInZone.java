@@ -200,7 +200,7 @@ public class TriggerObjectInZone extends Trigger {
 			
 			if(testFilter(entity)){	// entity must pass the filter
 				//
-					setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
+				setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
 				OnStartTouch();
 			}
 		}

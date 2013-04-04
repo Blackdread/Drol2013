@@ -7,7 +7,7 @@ package base.engine.entities.structures;
  */
 public interface IGravityBlock {
 	
-	public void updateGravity();
+	//public void updateGravity();
 	
 	public int getRotation();
 	public void setRotation(int rotation);

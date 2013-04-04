@@ -3,7 +3,7 @@ package base.engine.entities;
 import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.IUpdatable;
 
-public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable {
+public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable/*, ICollidableObject*/ {
 	
 	protected int maxLife;
 	protected int life;
