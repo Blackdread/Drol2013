@@ -51,6 +51,8 @@ public abstract class MessageKey {
 	public static final int P_Y = 7;
 	public static final int P_LIFE = 8;
 	public static final int P_MAX_LIFE = 9;
+	public static final int P_VITESSE_X = 10;
+	public static final int P_VITESSE_Y = 11;
 	
 	
 	/*

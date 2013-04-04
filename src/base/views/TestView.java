@@ -128,29 +128,37 @@ public class TestView extends View{
 			{
 				//haut
 				//TODO: Gérer direction, vecteur du tir, update du tir
-				m.i_data.put(MessageKey.P_X, (int) (hero.getX()+1));
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 1));
+				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getHeight()/2));
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 5));
+				m.i_data.put(MessageKey.P_VITESSE_X, 0);
+				m.i_data.put(MessageKey.P_VITESSE_Y, -5);
 				System.out.println("heroX "+ hero.getX());
 				
 			}
 			else if(hero.getDirection() == BasicEntity.BAS)
 			{
 				//BAS
-				m.i_data.put(MessageKey.P_X, (int) hero.getX() + 1);
+				m.i_data.put(MessageKey.P_X, (int) hero.getX() + hero.getHeight()/2);
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
+				m.i_data.put(MessageKey.P_VITESSE_X, 0);
+				m.i_data.put(MessageKey.P_VITESSE_Y, 5);
 			}
 			else if(hero.getDirection() == BasicEntity.GAUCHE)
 			{
 				//GAUCHE
-				m.i_data.put(MessageKey.P_X, (int) hero.getX() - 1);
-				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+				m.i_data.put(MessageKey.P_X, (int) (hero.getX() - 5));
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getWidth()/2));
+				m.i_data.put(MessageKey.P_VITESSE_X, -5);
+				m.i_data.put(MessageKey.P_VITESSE_Y, 0);
 				
 			}
 			else if(hero.getDirection() == BasicEntity.DROITE)
 			{
 				//DROITE
-				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getWidth() + 1));
-				m.i_data.put(MessageKey.P_Y, (int) hero.getY() + 1);
+				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getWidth() + 5));
+				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getWidth()/2));
+				m.i_data.put(MessageKey.P_VITESSE_X, 5);
+				m.i_data.put(MessageKey.P_VITESSE_Y, 0);
 			}
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
