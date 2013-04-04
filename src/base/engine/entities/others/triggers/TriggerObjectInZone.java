@@ -2,6 +2,7 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import base.engine.entities.BasicEntity;
@@ -56,8 +57,10 @@ public class TriggerObjectInZone extends Trigger {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
+		Color col = Color.orange;
+		col.a = 170;
+		g.setColor(col);
+		g.fillRect(x, y, width, height);
 	}
 	
 	@Override

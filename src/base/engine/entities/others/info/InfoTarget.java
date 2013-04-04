@@ -1,5 +1,7 @@
 package base.engine.entities.others.info;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * info_target is a point entity available in all Source games. 
  * It can be used by many different entities, and is a great generic target for any entity 
@@ -24,6 +26,12 @@ public class InfoTarget extends Info {
 		xOrigin=xx;
 		yOrigin=yy;
 		*/
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

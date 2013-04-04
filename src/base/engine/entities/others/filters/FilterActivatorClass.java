@@ -2,6 +2,8 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * 
  * @author Yoann CAPLAIN
@@ -28,6 +30,12 @@ public class FilterActivatorClass extends Filter {
 	public FilterActivatorClass(String name, boolean negate, String classname){
 		super(name, negate);
 		classNameFilter = classname;
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		
+		
 	}
 
 	@Override

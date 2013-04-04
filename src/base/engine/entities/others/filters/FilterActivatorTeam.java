@@ -1,5 +1,7 @@
 package base.engine.entities.others.filters;
 
+import org.newdawn.slick.Graphics;
+
 import base.engine.entities.others.outputs.ITeam;
 
 /**
@@ -25,6 +27,12 @@ public class FilterActivatorTeam extends Filter {
 	public FilterActivatorTeam(String name, boolean negate, int team2){
 		super(name, negate);
 		team = team2;
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

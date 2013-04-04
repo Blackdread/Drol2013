@@ -2,6 +2,9 @@ package base.engine.entities.others.miscs;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+
+import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 
@@ -14,7 +17,7 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
  * @author Yoann CAPLAIN
  *
  */
-public class MathCounter extends InputsAndOutputs implements IDisable{
+public class MathCounter extends BasicEntity implements IDisable{
 	
 	private boolean enabled;
 	
@@ -39,6 +42,11 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 		super(name);
 	}
 
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();
@@ -361,4 +369,5 @@ public class MathCounter extends InputsAndOutputs implements IDisable{
 	public void disable(){
 		enabled = false;
 	}
+
 }

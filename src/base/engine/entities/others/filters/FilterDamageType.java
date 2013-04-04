@@ -2,6 +2,8 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * @IMPORTANT unfinished
  * @author Yoann CAPLAIN
@@ -22,6 +24,12 @@ public class FilterDamageType extends Filter {
 		arrayDamageTypeToFilter = array;
 	}
 
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public boolean checkFilterConditions() {
 		// TODO Auto-generated method stub

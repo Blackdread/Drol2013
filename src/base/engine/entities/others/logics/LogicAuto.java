@@ -2,7 +2,11 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
 import base.engine.entities.others.outputs.IUpdatable;
+import base.utils.ResourceManager;
 
 /**
  * It fires outputs immediately after a map loads, unlike most other entities that wait for input first. 
@@ -48,6 +52,13 @@ public class LogicAuto extends Logic implements IUpdatable{
 	@Override
 	public void update(int delta) {
 		
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		Image tmp = ResourceManager.getImage("logicAuto");
+		if(tmp != null)
+			g.drawImage(tmp, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){
