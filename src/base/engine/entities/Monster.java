@@ -21,8 +21,8 @@ public class Monster extends MoveableEntity {
 		
 	}
 
-	
-	public void onCollision(BasicEntity a){
+	@Override
+	public void onCollision(ICollidableObject collideWith){
 		
 	}
 

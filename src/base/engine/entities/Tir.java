@@ -33,4 +33,10 @@ public class Tir extends MoveableEntity {
 		// TODO Auto-generated method stub
 		//TODO: Deplacer le tir
 	}
+
+	@Override
+	public void onCollision(ICollidableObject collideWith) {
+		// TODO Auto-generated method stub
+		
+	}
 }

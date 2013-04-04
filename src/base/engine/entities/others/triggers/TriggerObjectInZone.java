@@ -344,7 +344,7 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	}
 
 	@Override
-	public void onCollision() {
+	public void onCollision(ICollidableObject collideWith) {
 		// TODO Auto-generated method stub
 		
 	}

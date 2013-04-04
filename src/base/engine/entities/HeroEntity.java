@@ -26,4 +26,10 @@ public class HeroEntity extends MoveableEntity {
 		
 	}
 
+	@Override
+	public void onCollision(ICollidableObject collideWith) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

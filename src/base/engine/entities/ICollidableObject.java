@@ -38,8 +38,6 @@ public interface ICollidableObject {
 	public boolean isCollisionON();
 	public void setCollisionON(boolean collision);
 	
-	// TODO voir si la 1ere est suffissante ou il faut la 2eme onCollision
-	public void onCollision();
-	//public void onCollision(ICollidableObject collideWith);
+	public void onCollision(ICollidableObject collideWith);
 	
 }
