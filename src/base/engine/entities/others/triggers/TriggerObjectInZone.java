@@ -4,8 +4,12 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.outputs.IActivator;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
@@ -14,12 +18,7 @@ import base.engine.entities.others.outputs.IActivator;
  * @author Yoann CAPLAIN
  *
  */
-public class TriggerObjectInZone extends Trigger {
-	
-	//protected int x, y;
-	
-	// TODO Pourra devenir un shape de facons a avoir des trigger de forme quelconque
-	//protected int width, height;	-> herite de BasicEntity
+public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger peut agir (pourrait)
@@ -41,8 +40,7 @@ public class TriggerObjectInZone extends Trigger {
 		super(name);
 		x=xx;
 		y=yy;
-		width = w;
-		height = h;
+		shape = new Rectangle(0,0,w,h);
 	}
 	
 	/*
@@ -57,10 +55,9 @@ public class TriggerObjectInZone extends Trigger {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		Color col = Color.orange;
-		col.a = 170;
+		Color col = new Color(255,180,0,90);
 		g.setColor(col);
-		g.fillRect(x, y, width, height);
+		g.fill(shape.transform(Transform.createTranslateTransform(x, y)));
 	}
 	
 	@Override
@@ -198,15 +195,16 @@ public class TriggerObjectInZone extends Trigger {
 	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
-		if(entity instanceof IActivator){	// TODO un activator n'est pas un Info ni un filter mais peut etre un tir, un monstre etc
-			arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
-			
-			if(testFilter(entity)){	// entity must pass the filter
-				//
-				setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
-				OnStartTouch();
+		if(!isEntityAlreadyInArray(entity))
+			if(entity instanceof IActivator){	// TODO un activator n'est pas un Info ni un filter mais peut etre un tir, un monstre etc
+				arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
+				
+				if(testFilter(entity)){	// entity must pass the filter
+					//
+					setActivatorToAllOutputs(entity);	// TODO faire isTriggerable() ainsi il n'y aurait peut-etre plus besoin de faire la verification des les OnTrigger etc
+					OnStartTouch();
+				}
 			}
-		}
 	}
 	/**
 	 * Devra enlever l'entite et declencler les outputs OnEndTouch et/ou OnEndTouchAll
@@ -225,7 +223,6 @@ public class TriggerObjectInZone extends Trigger {
 		arrayEntityToActON.remove(entity);
 	}
 	
-	@Deprecated
 	public boolean isEntityAlreadyInArray(String entity){
 		for(BasicEntity v : arrayEntityToActON)
 			if(v != null)
@@ -233,7 +230,7 @@ public class TriggerObjectInZone extends Trigger {
 					return true;
 		return false;
 	}
-	@Deprecated
+	
 	public boolean isEntityAlreadyInArray(BasicEntity entity){
 		for(BasicEntity v : arrayEntityToActON)
 			if(v != null)
@@ -309,8 +306,47 @@ public class TriggerObjectInZone extends Trigger {
 		enabled = false;
 	}
 
+	@Override
+	public Shape getNormalCollisionShape() {
+		if(shape.getX() == 0 && shape.getY() == 0)
+			return shape;
+		return shape.transform(Transform.createTranslateTransform((x > 0) ? -x : x, (y > 0) ? -y : y));
+		//return new Rectangle(0,0,shape.getWidth(),shape.getHeight());
+	}
 
+	@Override
+	public Shape getCollisionShape() {
+		if(shape.getX() != 0 || shape.getY() != 0)
+			return shape;
+		//return new Rectangle(x,y,shape.getWidth(),shape.getHeight());
+		return shape.transform(Transform.createTranslateTransform(x, y));
+	}
 
+	@Override
+	public void updateShape() {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public boolean isCollidingWith(ICollidableObject collidable) {
+		return getCollisionShape().contains(collidable.getCollisionShape()) || collidable.getCollisionShape().contains(getCollisionShape()) || getCollisionShape().contains(collidable.getCollisionShape());
+	}
+
+	@Override
+	public boolean isCollisionON() {
+		return true;
+	}
+
+	@Override
+	public void setCollisionON(boolean collision) {
+		
+	}
+
+	@Override
+	public void onCollision() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

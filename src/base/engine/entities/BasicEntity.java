@@ -1,16 +1,19 @@
 package base.engine.entities;
 
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.entities.others.outputs.InputsAndOutputs;
 
-
-
-public abstract class BasicEntity extends InputsAndOutputs implements IEntity, ISave {
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
+public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
-	// TODO Sera transformee en shape
-	protected int width;
-	protected int height;
+	protected Shape shape;
+	
 	//protected int direction;
 	protected Vector2f direction;
 	
@@ -24,35 +27,22 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 		direction = HAUT;
 	}
 
-	public boolean onEntity(int mx, int my) {
-		return mx >= x && mx <= x + width && my >= y && my <= y + height;
-	}
-
 	@Override
 	public int getHeight() {
-		return height;
+		if(shape != null)
+			//return (int) (shape.getMaxY()-shape.getMinY()); -> voir code source de shape -> c'est ce qui est fait
+			return (int) shape.getHeight();
+		else 
+			return 32;
 	}
 
 	@Override
 	public int getWidth() {
-		return width;
-	}
-	
-	public String save() {
-		return ""+"_"+x+"_"+y+"_"+width+"_"+height;
-	}
-	
-	public Object load(String s){
-		
-		return null;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
+		if(shape != null)
+			//return (int) (shape.getMaxX()-shape.getMinX()); -> voir code source de shape -> c'est ce qui est fait
+			return (int) shape.getWidth();
+		else 
+			return 32;
 	}
 
 	public Vector2f getDirection() {

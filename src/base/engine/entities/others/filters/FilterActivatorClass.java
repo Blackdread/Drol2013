@@ -25,11 +25,13 @@ public class FilterActivatorClass extends Filter {
 	public FilterActivatorClass(String name, String classname) {
 		super(name);
 		classNameFilter = classname;
+		NameToCompareTo = new ArrayList<String>();
 	}
 	
 	public FilterActivatorClass(String name, boolean negate, String classname){
 		super(name, negate);
 		classNameFilter = classname;
+		NameToCompareTo = new ArrayList<String>();
 	}
 	
 	@Override

@@ -3,7 +3,6 @@ package base.engine.entities.others.filters;
 import java.util.ArrayList;
 
 import base.engine.entities.BasicEntity;
-import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * If the filter mode is Allow, only entities whose matches the given conditions 
