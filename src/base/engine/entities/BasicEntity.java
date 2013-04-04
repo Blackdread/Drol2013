@@ -1,5 +1,7 @@
 package base.engine.entities;
 
+import org.newdawn.slick.geom.Vector2f;
+
 import base.engine.entities.others.outputs.InputsAndOutputs;
 
 
@@ -9,12 +11,13 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 	// TODO Sera transformee en shape
 	protected int width;
 	protected int height;
-	protected int direction;
+	//protected int direction;
+	protected Vector2f direction;
 	
-	public static final int HAUT = 0;
-	public static final int BAS = 1;
-	public static final int GAUCHE = 2;
-	public static final int DROITE = 3;
+	public static final Vector2f HAUT = new Vector2f(0,1);
+	public static final Vector2f BAS = new Vector2f(0,-1);
+	public static final Vector2f GAUCHE = new Vector2f(-1,0);
+	public static final Vector2f DROITE = new Vector2f(1,0);
 	
 	public BasicEntity(String name) {
 		super(name);
@@ -52,11 +55,11 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity, I
 		this.height = height;
 	}
 
-	public int getDirection() {
+	public Vector2f getDirection() {
 		return direction;
 	}
 
-	public void setDirection(int direction) {
+	public void setDirection(Vector2f direction) {
 		this.direction = direction;
 	}
 	

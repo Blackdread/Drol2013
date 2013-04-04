@@ -1,5 +1,7 @@
 package base.engine.entities;
 
+import org.newdawn.slick.geom.Vector2f;
+
 /**
  * Mettre un boolean pour savoir si l'objet depend de la gravite
  * @author Yoann CAPLAIN
@@ -8,7 +10,7 @@ package base.engine.entities;
 public interface IGravity {
 	
 	//public void updateGravity(final int delta);
-	//public void update(final int delta);
+	public void update(final int delta);
 	
 	//public int getRotation();
 	//public void setRotation(int rotation);
@@ -19,11 +21,11 @@ public interface IGravity {
 	public int getMass();
 	public void setMass(int mass);
 	
-	public float getvitesse();
-	public void setVitesse(float vitesse);
+	public Vector2f getvitesse();
+	public void setVitesse(Vector2f vitesse);
 	
-	public float getAcceleration();
-	public void setAcceleration(float acceleration);
+	public Vector2f getAcceleration();
+	public void setAcceleration(Vector2f acceleration);
 	
 	//public int getDamagedDoneOnImpact();
 	//public void setDamagedDoneOnImpact(int damage);
