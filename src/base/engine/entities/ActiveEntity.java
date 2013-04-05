@@ -20,9 +20,9 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected boolean dying;
 	protected boolean visible;
 	
-	private boolean remove;
-	
 	protected boolean collisionON;
+	
+	//protected boolean remove; se trouve deja dans InputAndOutputs
 
 	public ActiveEntity(String name, int maxLife) {
 		super(name);
@@ -46,16 +46,16 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 				dying = false;
 			}
 		}
-		remove = false;
+		//remove = false;
 	}
 
 	public void removeLife(int damage) {
 		life -= damage;
 		if (life <= 0) {
-			if (!remove) {
+			//if (!remove) {
 				//remove();
-				remove = true;
-			}
+				//remove = true;
+			//}
 			life = 0;
 		} else {
 			if ((float) life / (float) maxLife <= 0.2f) {
@@ -110,7 +110,9 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 
 	@Override
 	public boolean isCollidingWith(ICollidableObject collidable) {
-		return getCollisionShape().contains(collidable.getCollisionShape()) || collidable.getCollisionShape().contains(getCollisionShape()) || getCollisionShape().contains(collidable.getCollisionShape());
+		if(collidable != null)
+			return getCollisionShape().contains(collidable.getCollisionShape()) || collidable.getCollisionShape().contains(getCollisionShape()) || getCollisionShape().contains(collidable.getCollisionShape());
+		return false;
 	}
 
 	@Override

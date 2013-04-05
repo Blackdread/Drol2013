@@ -2,6 +2,10 @@ package base.engine.entities;
 
 import org.newdawn.slick.geom.Vector2f;
 
+import base.engine.EngineManager;
+import base.engine.Message;
+import base.engine.MessageKey;
+
 /**
  * 
  * @author Yoann CAPLAIN
@@ -22,11 +26,13 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	public MoveableEntity(String name, int maxLife) {
 		super(name, maxLife);
 		vitesse = new Vector2f(0, 0);
+		acceleration = new Vector2f(0, 0);
 	}
 
 	public MoveableEntity(String name, int maxLife, int vx, int vy) {
 		super(name, maxLife);
 		vitesse = new Vector2f(vx, vy);
+		acceleration = new Vector2f(0, 0);
 	}
 
 	/**
@@ -34,8 +40,16 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 */
 	@Override
 	public void update(int delta) {
+		vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
 		
+		Message m = new Message();
+		m.instruction = MessageKey.I_MOVE_ENTITY;
+		m.i_data.put(MessageKey.P_ID, id);
+		m.i_data.put(MessageKey.P_X, (int)vitesse.x);
+		m.i_data.put(MessageKey.P_Y, (int)vitesse.y);
+		m.engine = EngineManager.LOGIC_ENGINE;
 		
+		EngineManager.getInstance().receiveMessage(m);
 	}
 	
 	@Override

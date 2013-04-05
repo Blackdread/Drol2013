@@ -5,6 +5,7 @@ import org.newdawn.slick.geom.Vector2f;
 import base.engine.entities.Tir;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
+import base.engine.logics.IA;
 
 /**
  * 
@@ -68,6 +69,7 @@ public class LogicEngine extends Engine {
 									
 									Tir t = new Tir(1, vitesse);
 									t.setLocation(x, y);
+									IA.getInstance().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);
 									Deplacement.deplacerEntity(0, 0, t.getId());
 								}
@@ -75,6 +77,14 @@ public class LogicEngine extends Engine {
 							
 							
 						}
+					}
+					break;
+				case MessageKey.I_REMOVE_ENTITY:
+					if(mes.i_data.containsKey(MessageKey.P_ID))
+					{
+						lvl.removeEntity(mes.i_data.get(MessageKey.P_ID));
+						IA.getInstance().removeEntity(mes.i_data.get(MessageKey.P_ID));
+						
 					}
 					break;
 			}
