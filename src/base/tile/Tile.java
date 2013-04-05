@@ -18,15 +18,11 @@ public class Tile {
 	}
 	
 	public void enleverEntite(int idEntite){
-		int i=0;
-		for(BasicEntity v : entiteProche){
-			if(v.getId() == idEntite){
+		for(int i=0;i<entiteProche.size();i++)
+			if(entiteProche.get(i).getId() == idEntite){
 				entiteProche.remove(i);
 				break;
 			}
-			i++;
-		}
-		
 	}
 	
 	

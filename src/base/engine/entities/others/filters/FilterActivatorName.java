@@ -1,5 +1,7 @@
 package base.engine.entities.others.filters;
 
+import org.newdawn.slick.Graphics;
+
 import base.engine.entities.others.outputs.ITargetName;
 
 /**
@@ -42,6 +44,12 @@ public class FilterActivatorName extends Filter{
 	public FilterActivatorName(String name, boolean negate, String classname){
 		super(name, negate);
 		classNameFilter = classname;
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**

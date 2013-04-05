@@ -2,7 +2,7 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
-import base.engine.entities.others.outputs.InputsAndOutputs;
+import base.engine.entities.BasicEntity;
 
 /**
  * If the filter mode is Allow, only entities whose matches the given conditions 
@@ -11,7 +11,7 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
  * @author Yoann CAPLAIN
  *
  */
-public abstract class Filter extends InputsAndOutputs{
+public abstract class Filter extends BasicEntity{
 	
 	/**
 	 * Inverts the filter, making the specified concept fail and all others pass

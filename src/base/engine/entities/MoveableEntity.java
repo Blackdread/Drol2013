@@ -2,6 +2,11 @@ package base.engine.entities;
 
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
 public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	
 	protected boolean gravityON;

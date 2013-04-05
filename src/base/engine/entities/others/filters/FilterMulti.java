@@ -2,6 +2,8 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * Whether to negate the result of the subfilters, after combining them using the Logic Type chosen.
  * Negating the outcome using the AND logic type means that any subfilter must fail for this filter to pass.
@@ -30,6 +32,12 @@ public class FilterMulti extends Filter {
 	 */
 	public FilterMulti(String name, boolean negate){
 		super(name, negate);
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**

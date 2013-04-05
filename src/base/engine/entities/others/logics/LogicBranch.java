@@ -2,6 +2,11 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
+import base.utils.ResourceManager;
+
 /**
  * It tests a boolean value and fires an output based on whether the value is true (one) or false (zero). 
  * Use this entity to branch between two potential sets of events.  
@@ -16,6 +21,13 @@ public class LogicBranch extends Logic {
 	
 	public LogicBranch(String name) {
 		super(name);
+	}
+	
+	@Override
+	public void render(Graphics g, int x, int y) {
+		Image tmp = ResourceManager.getImage("logicBranch");
+		if(tmp != null)
+			g.drawImage(tmp, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){
