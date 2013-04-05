@@ -5,6 +5,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
+import base.engine.EngineManager;
+import base.engine.Message;
+import base.engine.MessageKey;
+
 public class Tir extends MoveableEntity {
 	
 	public Tir(int maxLife, Vector2f vitesse)
@@ -16,7 +20,6 @@ public class Tir extends MoveableEntity {
 
 	public Tir(String name, int maxLife) {
 		super(name, maxLife);
-		// TODO Auto-generated constructor stub
 		shape = new Rectangle(0,0,10,10);
 	}
 
@@ -25,18 +28,26 @@ public class Tir extends MoveableEntity {
 		// TODO Auto-generated method stub
 		g.setColor(Color.cyan);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
-		System.out.println("tir "+x+" "+y);
 	}
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
+		super.update(delta);
 		//TODO: Deplacer le tir
+		
 	}
 
 	@Override
 	public void onCollision(ICollidableObject collideWith) {
-		// TODO Auto-generated method stub
+		// TODO envoyer un message pour declencher les outputs OnKilled()
+		
+		Message m = new Message();
+		m.instruction = MessageKey.I_REMOVE_ENTITY;
+		m.i_data.put(MessageKey.P_ID, id);
+		m.engine = EngineManager.LOGIC_ENGINE;
+		
+		EngineManager.getInstance().receiveMessage(m);
+		
 		
 	}
 }

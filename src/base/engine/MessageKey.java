@@ -43,6 +43,7 @@ public abstract class MessageKey {
 	public static final int I_MOVE_ENTITY = 10;
 	public static final int I_MOVE_ENTITY_TO = 11;
 	public static final int I_SHOOT = 12;
+	public static final int I_REMOVE_ENTITY = 13;
 	
 	
 	// Parameters

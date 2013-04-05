@@ -47,8 +47,8 @@ public class TestView extends View{
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
 		hero = new HeroEntity("bla", 500);
 		hero.setLocation(64, 32);
-		hero.setWidth(32);
-		hero.setHeight(32);
+		//hero.setWidth(32);
+		//hero.setHeight(32);
 		
 		while(!lvl.isLoadOver())
 		{
@@ -166,7 +166,7 @@ public class TestView extends View{
 			
 		}
 		
-		engineManager.update();
+		engineManager.update(delta);
 	}
 	
 	@Override

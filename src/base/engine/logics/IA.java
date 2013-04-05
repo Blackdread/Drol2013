@@ -1,16 +1,58 @@
 package base.engine.logics;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
+import base.engine.entities.ActiveEntity;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.others.InfoManager;
+import base.engine.entities.others.info.Info;
+import base.engine.entities.others.outputs.IUpdatable;
 
-public class IA {
+public class IA implements IUpdatable{
 	
-	private HashMap<Integer, BasicEntity> updatable;
+	private static IA instance;
 	
-	public void update()
-	{
-		
+	public static IA getInstance() {
+		if (null == instance) { // Premier appel
+            synchronized(objetSynchrone) {
+                if (null == instance) {
+                    instance = new IA();
+                }
+            }
+        }
+        return instance;
+	 }
+	
+	private HashMap<Integer, ActiveEntity> updatable = new HashMap<Integer, ActiveEntity>();
+	
+	
+	@Override
+	public void update(int delta) {
+		for(Entry<Integer, ActiveEntity> v : updatable.entrySet())
+			if(v != null)
+				if(v.getValue() != null){
+					v.getValue().update(delta);
+				}
 	}
 
+	
+	public void addEntity(ActiveEntity entity){
+		updatable.put(entity.getId(), entity);
+	}
+	
+	public void removeEntity(ActiveEntity entity){
+		updatable.remove(entity.getId());
+	}
+	public void removeEntity(int id){
+		updatable.remove(id);
+	}
+	
+
+	 private IA(){
+		 
+	 }
+	 
+	 private static Object objetSynchrone = new Object();
 }
