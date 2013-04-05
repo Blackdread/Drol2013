@@ -2,6 +2,11 @@ package base.engine.entities.others.logics;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
+import base.utils.ResourceManager;
+
 /**
  * 
  * Compares a set of inputs to each other. If they are all the same, fires an OnEqual output. 
@@ -24,6 +29,12 @@ public class LogicMulticompare extends Logic {
 		arrayValue = new ArrayList<Integer>();
 	}
 
+	@Override
+	public void render(Graphics g, int x, int y) {
+		Image tmp = ResourceManager.getImage("logicMulticompare");
+		if(tmp != null)
+			g.drawImage(tmp, x, y);
+	}
 	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();

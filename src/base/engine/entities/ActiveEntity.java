@@ -1,9 +1,17 @@
 package base.engine.entities;
 
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
+
 import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.IUpdatable;
 
-public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable/*, ICollidableObject*/ {
+/**
+ * 
+ * @author Yoann CAPLAIN
+ *
+ */
+public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable, ICollidableObject {
 	
 	protected int maxLife;
 	protected int life;
@@ -13,6 +21,8 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected boolean visible;
 	
 	private boolean remove;
+	
+	protected boolean collisionON;
 
 	public ActiveEntity(String name, int maxLife) {
 		super(name);
@@ -78,17 +88,39 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	}
 	
 	@Override
-	public String save() {
-		return super.save()+"_"+maxLife+"_"+life+"_"+name;
-	}
-	@Override
-	public Object load(String s){
-		
-		return super.load(s);
-	}
-	
-	@Override
 	public BasicEntity getActivator() {
 		return this;
 	}
+	
+	//*
+	@Override
+	public Shape getNormalCollisionShape() {
+		if(shape.getX() == 0 && shape.getY() == 0)
+			return shape;
+		return shape.transform(Transform.createTranslateTransform((x > 0) ? -x : x, (y > 0) ? -y : y));
+	}
+	//*/
+
+	@Override
+	public Shape getCollisionShape() {
+		if(shape.getX() != 0 || shape.getY() != 0)
+			return shape;
+		return shape.transform(Transform.createTranslateTransform(x, y));
+	}
+
+	@Override
+	public boolean isCollidingWith(ICollidableObject collidable) {
+		return getCollisionShape().contains(collidable.getCollisionShape()) || collidable.getCollisionShape().contains(getCollisionShape()) || getCollisionShape().contains(collidable.getCollisionShape());
+	}
+
+	@Override
+	public boolean isCollisionON() {
+		return collisionON;
+	}
+
+	@Override
+	public void setCollisionON(boolean collision) {
+		collisionON = collision;
+	}
+
 }

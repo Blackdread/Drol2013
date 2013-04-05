@@ -1,25 +1,19 @@
 package base.views;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
-import base.engine.Message;
-import base.engine.MessageKey;
-import base.engine.SoundEngine;
 import base.engine.gui.ProgressBarFillRect;
-import base.engine.levels.LevelDrol;
-import base.tile.TilePropriety;
-import base.tile.TileSet;
 import base.utils.ResourceManager;
 import base.utils.Timer;
 
@@ -76,7 +70,6 @@ public class ResourcesView extends View {
 		if (ready) {
 			g.drawString("Press a key or click", container.getWidth() / 2 - 90, container.getHeight() / 2 + 10);
 		}
-		
 		
 	}
 

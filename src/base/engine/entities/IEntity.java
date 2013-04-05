@@ -15,7 +15,7 @@ public interface IEntity {
 	//public void render(GameContainer container, Graphics g) throws SlickException;
 
 	//public void update(int delta) throws SlickException;
-
+	
 	public float getX();
 
 	public float getY();
