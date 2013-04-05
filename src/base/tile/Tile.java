@@ -51,6 +51,17 @@ public class Tile {
 		this.index = id;
 	}
 
+	public boolean isEntiteProcheEmpty(){
+		return entiteProche.isEmpty();
+	}
+	public BasicEntity getEntiteProcheAt(final int i){
+		return entiteProche.get(i);
+	}
+	
+	public int getEntiteProcheSize(){
+		return entiteProche.size();
+	}
+	
 	/*
 	public HashMap<Integer, BasicEntity> getEntiteProche() {
 		return entiteProche;

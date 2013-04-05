@@ -133,21 +133,24 @@ public class LevelDrol extends Level {
 				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), j*largeurTile-scroll.getxScroll(), i*hauteurTile-scroll.getyScroll());
 				
 				//Affiche les entitees au voisinage de la tile et qui n'ont pas encore ete affiche
-				if(!tabNiveau[i][j].getEntiteProche().isEmpty())
+				if(!tabNiveau[i][j].isEntiteProcheEmpty())
 				{
-					for(int k = 0; k < tabNiveau[i][j].getEntiteProche().size();k++){
-						if(tabNiveau[i][j].getEntiteProche().get(k) != null)
+					for(int k = 0; k < tabNiveau[i][j].getEntiteProcheSize();k++){
+						if(tabNiveau[i][j].getEntiteProcheAt(k) != null)
 						{
 							//System.out.println("ren "+j+" "+i);
 							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProche().get(k).getId())){
-								tabNiveau[i][j].getEntiteProche().get(k).render(graph, (int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll());
+								tabNiveau[i][j].getEntiteProcheAt(k).render(graph, (int)tabNiveau[i][j].getEntiteProcheAt(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProcheAt(k).getY()-scroll.getyScroll());
 								//System.out.println("x "+((int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll())+" y"+ ((int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll()));
 								//entiteAffiche.add(tabNiveau[i][j].getEntiteProche().get(k).getId());
+								//if(tabNiveau[i][j].getEntiteProcheAt(k).getId() != 0)
+								//	System.out.println("affiche "+i+" "+j+" "+tabNiveau[i][j].getEntiteProcheAt(k).getId());
 								//for(int kk=0; kk < tabNiveau[i][j].getEntiteProche().size() ; kk++)
 									//System.out.println(""+i+" "+j+" entite "+tabNiveau[i][j].getEntiteProche().get(kk).getId());
 							//}
 						}
 					}
+					System.out.println("fin");
 				}
 				
 			}
@@ -192,7 +195,12 @@ public class LevelDrol extends Level {
 			int ey = (int) e.getY();
 			
 			System.out.println("enl");
-			
+			/*
+			for(int j=0 ; j < this.hauteurNiveau;j++)
+				for(int i=0; i<this.largeurNiveau;i++)
+					tabNiveau[j][i].enleverEntite(id);
+			//*/
+			//*
 			for(int i = ex/getLargeurTile(); i <= (ex + largeur)/getLargeurTile(); i++)
 			{
 				for(int j = ey/getHauteurTile(); j <= (ey + hauteur)/getHauteurTile(); j++)
@@ -200,7 +208,7 @@ public class LevelDrol extends Level {
 					tabNiveau[j][i].enleverEntite(id);
 					System.out.println("enl "+j+" "+i);
 				}
-			}
+			}//*/
 		}
 		arrayEntite.remove(id);
 	}

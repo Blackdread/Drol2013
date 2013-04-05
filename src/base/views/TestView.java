@@ -132,7 +132,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 5));
 				m.i_data.put(MessageKey.P_VITESSE_X, 0);
 				m.i_data.put(MessageKey.P_VITESSE_Y, -5);
-				System.out.println("heroX "+ hero.getX());
+				//System.out.println("heroX "+ hero.getX());
 				
 			}
 			else if(hero.getDirection() == BasicEntity.BAS)
