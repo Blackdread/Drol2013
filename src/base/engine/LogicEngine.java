@@ -16,12 +16,14 @@ public class LogicEngine extends Engine {
 
 	private CollisionManager c_manager;
 	private LevelDrol lvl;	// TODO A enlever ? et recuperer seulement quand necessaire
+	public static long tmp = System.currentTimeMillis();
 	
 	public LogicEngine()
 	{
 		super();
 		this.lvl = null;
 		c_manager = CollisionManager.getInstance();
+		tmp = System.currentTimeMillis();
 	}
 	
 	@Override
@@ -66,12 +68,14 @@ public class LogicEngine extends Engine {
 									Vector2f vitesse = new Vector2f();
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
-									
+									if(System.currentTimeMillis() - tmp > 500){	// juste pour debug, ce sera pas la plus tard
 									Tir t = new Tir(1, vitesse);
 									t.setLocation(x, y);
 									IA.getInstance().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);
 									Deplacement.deplacerEntity(0, 0, t.getId());
+									tmp =  System.currentTimeMillis();
+									}
 								}
 							}
 							

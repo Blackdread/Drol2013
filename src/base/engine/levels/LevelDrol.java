@@ -202,10 +202,7 @@ public class LevelDrol extends Level {
 				}
 			}
 		}
-		if((e = arrayEntite.remove(id)) == null)
-			System.out.println("etait null ");
-		else
-			System.out.println("pas null "+e.getId());
+		arrayEntite.remove(id);
 	}
 	
 	

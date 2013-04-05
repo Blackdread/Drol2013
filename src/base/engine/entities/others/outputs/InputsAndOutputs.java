@@ -47,6 +47,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		removeHierarchy = false;
 		id = InputsAndOutputs.currentId;
 		InputsAndOutputs.currentId++;
+		System.out.println("instance "+InputsAndOutputs.currentId);
 	}
 	
 	public ArrayList<String> get_list_outputs(){
