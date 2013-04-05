@@ -3,6 +3,7 @@ package base.engine.logics;
 import base.engine.CollisionManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
+import base.engine.entities.ICollidableObject;
 import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
@@ -76,8 +77,11 @@ public class Deplacement {
 						lvl.getScroll().setxScroll((int) ((x + e.getX()-(lvl.getScroll().getWidth()/2))));	
 				}
 			}
-			else
+			else{
 				System.out.println("Collision");
+				if(e instanceof ICollidableObject)
+					((ICollidableObject)e).onCollision(null);	// TODO
+			}
 		}else{
 			System.out.println("Fonction deplacer Entity : Entité non trouve, e = null");
 		}

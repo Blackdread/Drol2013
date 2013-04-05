@@ -20,7 +20,9 @@ public class Tile {
 	public void enleverEntite(int idEntite){
 		for(int i=0;i<entiteProche.size();i++)
 			if(entiteProche.get(i).getId() == idEntite){
+				System.out.println("enlever entite "+entiteProche.get(i).getId()+" pos "+i+" taille"+entiteProche.size());
 				entiteProche.remove(i);
+				System.out.println("enlever entite pos "+i+" taille"+entiteProche.size());
 				break;
 			}
 	}

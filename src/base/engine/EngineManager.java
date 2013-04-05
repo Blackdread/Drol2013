@@ -2,6 +2,8 @@ package base.engine;
 
 import org.lwjgl.Sys;
 
+import base.engine.logics.IA;
+
 
 /**
  * 
@@ -50,7 +52,9 @@ public class EngineManager {
 	/**
 	 * 
 	 */
-	public void update(){
+	public void update(int delta){
+		IA.getInstance().update(delta);
+		
 		for(int i=0;i<NB_ENGINE;i++)
 			while(tabEngine[i].processMessage());
 	}

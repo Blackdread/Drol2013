@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class HeroEntity extends MoveableEntity {
 	
@@ -11,6 +12,7 @@ public class HeroEntity extends MoveableEntity {
 	public HeroEntity(String name, int maxLife) {
 		super(name, maxLife);
 		// TODO Auto-generated constructor stub
+		shape = new Rectangle(0,0,32,32);
 	}
 
 	@Override

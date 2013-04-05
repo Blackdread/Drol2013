@@ -13,6 +13,7 @@ import java.util.HashMap;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import base.engine.entities.ActiveEntity;
 import base.engine.entities.BasicEntity;
 import base.tile.Scroll;
 import base.tile.Tile;
@@ -137,10 +138,13 @@ public class LevelDrol extends Level {
 					for(int k = 0; k < tabNiveau[i][j].getEntiteProche().size();k++){
 						if(tabNiveau[i][j].getEntiteProche().get(k) != null)
 						{
+							//System.out.println("ren "+j+" "+i);
 							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProche().get(k).getId())){
 								tabNiveau[i][j].getEntiteProche().get(k).render(graph, (int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll());
 								//System.out.println("x "+((int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll())+" y"+ ((int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll()));
 								//entiteAffiche.add(tabNiveau[i][j].getEntiteProche().get(k).getId());
+								//for(int kk=0; kk < tabNiveau[i][j].getEntiteProche().size() ; kk++)
+									//System.out.println(""+i+" "+j+" entite "+tabNiveau[i][j].getEntiteProche().get(kk).getId());
 							//}
 						}
 					}
@@ -172,6 +176,37 @@ public class LevelDrol extends Level {
 		*/
 	}
 	
+	public void addEntity(BasicEntity entity){
+		arrayEntite.put(entity.getId(), entity);
+	}
+	
+	public void removeEntity(BasicEntity entity){
+		removeEntity(entity.getId());
+	}
+	public void removeEntity(int id){
+		BasicEntity e = arrayEntite.get(id);
+		if(e != null){
+			int largeur = e.getWidth();
+			int hauteur = e.getHeight();
+			int ex = (int) e.getX();
+			int ey = (int) e.getY();
+			
+			System.out.println("enl");
+			
+			for(int i = ex/getLargeurTile(); i <= (ex + largeur)/getLargeurTile(); i++)
+			{
+				for(int j = ey/getHauteurTile(); j <= (ey + hauteur)/getHauteurTile(); j++)
+				{
+					tabNiveau[j][i].enleverEntite(id);
+					System.out.println("enl "+j+" "+i);
+				}
+			}
+		}
+		if((e = arrayEntite.remove(id)) == null)
+			System.out.println("etait null ");
+		else
+			System.out.println("pas null "+e.getId());
+	}
 	
 	
 	public int getLargeurNiveau() {
