@@ -1,13 +1,9 @@
 package base.engine.logics;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import base.engine.entities.ActiveEntity;
-import base.engine.entities.BasicEntity;
-import base.engine.entities.others.InfoManager;
-import base.engine.entities.others.info.Info;
 import base.engine.entities.others.outputs.IUpdatable;
 
 public class IA implements IUpdatable{

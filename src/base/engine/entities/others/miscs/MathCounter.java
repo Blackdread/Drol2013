@@ -6,7 +6,6 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.IDisable;
-import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * math_counter is a point entity available in all Source games. 
@@ -75,6 +74,9 @@ public class MathCounter extends BasicEntity implements IDisable{
 		list_inputs.add("GetValue");
 		list_inputs.add("SetMaxValueNoFire");
 		list_inputs.add("SetMinValueNoFire");
+		list_inputs.add("Enable");
+		list_inputs.add("Disable");
+		list_inputs.add("Toggle");
 		
 		return list_inputs;
 	}

@@ -30,6 +30,7 @@ public interface IGravity {
 	//public int getDamagedDoneOnImpact();
 	//public void setDamagedDoneOnImpact(int damage);
 	
+	
 	public boolean isGravityON();
 	public void setGravityON(boolean gravity);
 	

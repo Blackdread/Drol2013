@@ -39,6 +39,7 @@ public class Tile {
 	
 	
 	public void ajouterEntite(BasicEntity a){
+		//if(!entiteProche.contains(a))
 		entiteProche.add(a);
 		//entiteProche.put(a.getId(), a);
 	}
@@ -57,6 +58,13 @@ public class Tile {
 	public BasicEntity getEntiteProcheAt(final int i){
 		return entiteProche.get(i);
 	}
+	public BasicEntity getEntiteProcheID(final int id){
+		for(int i=0;i<entiteProche.size();i++)
+			if(entiteProche.get(i) != null)
+				if(entiteProche.get(i).getId() == id)
+					return entiteProche.get(i);
+		return null;
+	}
 	
 	public int getEntiteProcheSize(){
 		return entiteProche.size();
@@ -70,7 +78,7 @@ public class Tile {
 	public void setEntiteProche(HashMap<Integer, BasicEntity> entiteProche) {
 		this.entiteProche = entiteProche;
 	}//*/
-	//*
+	/*
 	public ArrayList<BasicEntity> getEntiteProche() {
 		return entiteProche;
 	}
