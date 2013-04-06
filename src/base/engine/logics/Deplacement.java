@@ -93,7 +93,7 @@ public class Deplacement {
 	 * Enleve l'entite des tiles où elle se trouve
 	 * @param e entite a enlever des tiles qui la contiennent
 	 */
-	public void enleverEntiteDesTiles(final BasicEntity e){
+	public static void enleverEntiteDesTiles(final BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		int ex = (int) e.getX();
 		int ey = (int) e.getY();
@@ -113,7 +113,7 @@ public class Deplacement {
 	 * @param x 
 	 * @param y 
 	 */
-	public void ajouterEntiteDansTiles(final BasicEntity e, final int x, final int y){
+	public static void ajouterEntiteDansTiles(final BasicEntity e, final int x, final int y){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		
 		for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i < ((x + e.getX()) + e.getWidth())/lvl.getLargeurTile(); i++)
@@ -130,7 +130,7 @@ public class Deplacement {
 	 * @param e entite sur laquelle centre le scroll
 	 * @param x c quoi ?
 	 */
-	public void mettreAJourScroll(final BasicEntity e, final int x){
+	public static void mettreAJourScroll(final BasicEntity e, final int x){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		
 		if((x + e.getX()-(lvl.getScroll().getWidth()/2)) < 0)
