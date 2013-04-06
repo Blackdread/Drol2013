@@ -13,8 +13,6 @@ import base.engine.levels.LevelDrol;
  * @author Nicolas DUPIN
  */
 public class Deplacement {
-
-	//private static CollisionManager c_manager;
 	
 	public static void deplacerEntity(int x, int y, int id)
 	{
@@ -89,5 +87,57 @@ public class Deplacement {
 	
 	private Deplacement(){
 		
+	}
+	
+	/**
+	 * Enleve l'entite des tiles où elle se trouve
+	 * @param e entite a enlever des tiles qui la contiennent
+	 */
+	public void enleverEntiteDesTiles(final BasicEntity e){
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		int ex = (int) e.getX();
+		int ey = (int) e.getY();
+		
+		for(int i = ex/lvl.getLargeurTile(); i < (ex + e.getWidth())/lvl.getLargeurTile(); i++)
+		{
+			for(int j = ey/lvl.getHauteurTile(); j < (ey + e.getHeight())/lvl.getHauteurTile(); j++)
+			{
+				lvl.getTabNiveau()[j][i].enleverEntite(e.getId());
+			}
+		}
+	}
+	
+	/**
+	 * Ajoute l'entite dans les tiles qu'il faut (partout où l'entite touche la tile)
+	 * @param e entite a ajouter
+	 * @param x 
+	 * @param y 
+	 */
+	public void ajouterEntiteDansTiles(final BasicEntity e, final int x, final int y){
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		
+		for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i < ((x + e.getX()) + e.getWidth())/lvl.getLargeurTile(); i++)
+		{
+			for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j < ((y + e.getY()) + e.getHeight())/lvl.getHauteurTile(); j++)
+			{
+				lvl.getTabNiveau()[j][i].ajouterEntite(e);
+			}
+		}
+	}
+	
+	/**
+	 * Si le scroll sort de l'Ècran on met ‡ 0 ou max sinon on centre sur le hÈro
+	 * @param e entite sur laquelle centre le scroll
+	 * @param x c quoi ?
+	 */
+	public void mettreAJourScroll(final BasicEntity e, final int x){
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		
+		if((x + e.getX()-(lvl.getScroll().getWidth()/2)) < 0)
+			lvl.getScroll().setxScroll(0);
+		else if((x + e.getX() + (lvl.getScroll().getWidth()/2)) > (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
+			lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());
+		else
+			lvl.getScroll().setxScroll((int) ((x + e.getX()-(lvl.getScroll().getWidth()/2))));	
 	}
 }

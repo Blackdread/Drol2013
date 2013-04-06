@@ -27,6 +27,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		super(name, maxLife);
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
+		
 	}
 
 	public MoveableEntity(String name, int maxLife, int vx, int vy) {

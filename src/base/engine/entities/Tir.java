@@ -33,7 +33,6 @@ public class Tir extends MoveableEntity {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		//TODO: Deplacer le tir
 		
 	}
 

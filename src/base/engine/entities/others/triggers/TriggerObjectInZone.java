@@ -195,7 +195,7 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
-		if(!isEntityAlreadyInArray(entity))
+		if(!isEntityAlreadyInArray(entity.getId()))	// par rapport a l'id c'est mieux car des entites peuvent avoir le meme nom mais de classe differente etc
 			if(entity instanceof IActivator){	// TODO un activator n'est pas un Info ni un filter mais peut etre un tir, un monstre etc
 				arrayEntityToActON.add(entity);	// TODO On ajoute seulement si l'entite passe le filter ??
 				
@@ -221,6 +221,14 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 			}
 		
 		arrayEntityToActON.remove(entity);
+	}
+	
+	public boolean isEntityAlreadyInArray(final int id){
+		for(BasicEntity v : arrayEntityToActON)
+			if(v != null)
+				if(v.getId() == id)
+					return true;
+		return false;
 	}
 	
 	public boolean isEntityAlreadyInArray(String entity){

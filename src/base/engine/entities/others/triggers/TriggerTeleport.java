@@ -9,6 +9,7 @@ import base.engine.entities.BasicEntity;
 import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.info.Info;
 import base.engine.entities.others.info.InfoTarget;
+import base.engine.entities.others.outputs.IActivator;
 import base.utils.Configuration;
 
 /**
@@ -35,14 +36,17 @@ public class TriggerTeleport extends TriggerObjectInZone {
 	
 	public TriggerTeleport(String name, int xx, int yy, int w, int h) {
 		super(name, xx, yy, w, h);
-		
+		enabled = true;
 		
 	}
-	
+	/**
+	 * TODO ne pas teleporter une entite qui a un parent
+	 */
 	@Override
 	public void addAnEntityToActON(BasicEntity entity) {
 		super.addAnEntityToActON(entity);
 		if(enabled)
+			if(entity instanceof IActivator)	// TODO sur ?
 			if(testFilter(entity))
 				if(remoteDestination != null){
 					ArrayList<Info> tmp = InfoManager.getInstance().getInfo(remoteDestination);
@@ -60,12 +64,12 @@ public class TriggerTeleport extends TriggerObjectInZone {
 							}
 							taille = i + 1;
 						}
-						if(taille > 1){
+						if(taille >= 1){
 							Info tmpInfo = tmp.get(taille-1);
 							if(tmpInfo != null)
 								if(tmpInfo instanceof InfoTarget /*|| tmpInfo instanceof InfoTeleportDestination*/){
 									Message m = new Message();
-									m.instruction = MessageKey.I_MOVE_ENTITY;
+									m.instruction = MessageKey.I_MOVE_ENTITY_TO;
 									m.i_data.put(MessageKey.P_ID, entity.getId());
 									m.i_data.put(MessageKey.P_X, (int)tmpInfo.getX());
 									m.i_data.put(MessageKey.P_Y, (int)tmpInfo.getY());
@@ -80,5 +84,15 @@ public class TriggerTeleport extends TriggerObjectInZone {
 				}
 		
 	}
+
+	public String getRemoteDestination() {
+		return remoteDestination;
+	}
+
+
+	public void setRemoteDestination(String remoteDestination) {
+		this.remoteDestination = remoteDestination;
+	}
+
 
 }

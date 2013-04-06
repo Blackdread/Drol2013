@@ -2,6 +2,7 @@ package base.engine;
 
 import org.newdawn.slick.geom.Vector2f;
 
+import base.engine.entities.BasicEntity;
 import base.engine.entities.Tir;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
@@ -46,6 +47,23 @@ public class LogicEngine extends Engine {
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
 								Deplacement.deplacerEntity(x, y, id);
+							}
+						}
+					}
+					break;
+					
+				case MessageKey.I_MOVE_ENTITY_TO:
+					if(mes.i_data.containsKey(MessageKey.P_ID))
+					{
+						int id, x, y;
+						id = mes.i_data.get(MessageKey.P_ID);
+						if(mes.i_data.containsKey(MessageKey.P_X))
+						{
+							x = mes.i_data.get(MessageKey.P_X);
+							if(mes.i_data.containsKey(MessageKey.P_Y))
+							{
+								y = mes.i_data.get(MessageKey.P_Y);
+								// TODO
 							}
 						}
 					}

@@ -41,6 +41,9 @@ public abstract class MessageKey {
 	 */
 	// Instructions
 	public static final int I_MOVE_ENTITY = 10;
+	/**
+	 * Teleport entity and don't check collisions
+	 */
 	public static final int I_MOVE_ENTITY_TO = 11;
 	public static final int I_SHOOT = 12;
 	public static final int I_REMOVE_ENTITY = 13;

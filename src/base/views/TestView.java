@@ -16,7 +16,11 @@ import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
+import base.engine.entities.others.InfoManager;
+import base.engine.entities.others.info.InfoTarget;
+import base.engine.entities.others.triggers.TriggerTeleport;
 import base.engine.levels.LevelDrol;
+import base.engine.logics.Deplacement;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
 import base.utils.ResourceManager;
@@ -59,7 +63,14 @@ public class TestView extends View{
 				e.printStackTrace();
 			}
 		}
-		
+		TriggerTeleport tr = new TriggerTeleport("teleport",200,20,40,40);
+		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
+		tr.setRemoteDestination("infotarget");
+		InfoManager.getInstance().addInfo(inf);
+		lvl.addEntity(tr);
+		lvl.addEntity(inf);
+		Deplacement.deplacerEntity(0, 0, tr.getId());
+		Deplacement.deplacerEntity(0, 0, inf.getId());
 		lvl.getArrayEntite().put(hero.getId(), hero);
 		lvl.getTabNiveau()[2][0].ajouterEntite(hero);
 	}

@@ -1,6 +1,10 @@
 package base.engine;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.ICollidableObject;
+import base.engine.entities.others.triggers.Trigger;
+import base.engine.entities.others.triggers.TriggerObjectInZone;
+import base.engine.entities.others.triggers.TriggerTeleport;
 import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
@@ -54,6 +58,18 @@ public class CollisionManager{
 	                return true;
 	        }
 	    }
+	    for(int i = tileXMin; i <= tileXMax; i++)
+	    {
+	        for(int j= tileYMin; j <= tileYMax; j++)
+	        {
+	        	 for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
+	        		 if(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k) instanceof Trigger){
+	        			 ((TriggerTeleport)lvl.getTabNiveau()[j][i].getEntiteProcheAt(k)).addAnEntityToActON(e);
+	        			 System.out.println("ajouter");
+	        		 }
+	        }
+	    }
+	   
 		
 		return false;
 	}
