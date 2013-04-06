@@ -30,10 +30,23 @@ public class FilterManager {
 		if(arrayFilterInstancie != null)
 			arrayFilterInstancie.add(a);
 	}
-	synchronized public void getFilterAt(int a){
+	
+	synchronized public Filter getFilter(String name){
+		if(arrayFilterInstancie != null)
+			for(Filter v : arrayFilterInstancie){
+				if(v != null)
+					if(v.getTargetName().equalsIgnoreCase(name))
+						return v;
+			}
+		return null;
+	}
+	
+	@Deprecated
+	synchronized public Filter getFilterAt(int a){
 		if(arrayFilterInstancie != null)
 			if(arrayFilterInstancie.size() > a)
-				arrayFilterInstancie.get(a);
+				return arrayFilterInstancie.get(a);
+		return null;
 	}
 	
 	 private FilterManager(){

@@ -135,5 +135,13 @@ public abstract class Trigger extends BasicEntity implements ITrigger, IDisable,
 		enabled = !enabled;
 	}
 
+	public Filter getFilterEntityThatActivate() {
+		return filterEntityThatActivate;
+	}
+
+	public void setFilterEntityThatActivate(Filter filterEntityThatActivate) {
+		this.filterEntityThatActivate = filterEntityThatActivate;
+	}
+
 
 }

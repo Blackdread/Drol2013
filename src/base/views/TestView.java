@@ -16,7 +16,9 @@ import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
+import base.engine.entities.others.FilterManager;
 import base.engine.entities.others.InfoManager;
+import base.engine.entities.others.filters.FilterActivatorName;
 import base.engine.entities.others.info.InfoTarget;
 import base.engine.entities.others.triggers.TriggerTeleport;
 import base.engine.levels.LevelDrol;
@@ -58,15 +60,15 @@ public class TestView extends View{
 		{
 			try {
 				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (InterruptedException e) {e.printStackTrace();}
 		}
 		TriggerTeleport tr = new TriggerTeleport("teleport",200,20,40,40);
 		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
+		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
+		tr.setFilterEntityThatActivate(fil);
 		InfoManager.getInstance().addInfo(inf);
+		FilterManager.getInstance().addFilter(fil);
 		lvl.addEntity(tr);
 		lvl.addEntity(inf);
 		Deplacement.deplacerEntity(0, 0, tr.getId());
