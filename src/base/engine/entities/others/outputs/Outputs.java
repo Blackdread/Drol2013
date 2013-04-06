@@ -130,7 +130,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 						fireOutput();
 						hasBeenFiredAtleastOnce= true;
 					}
-					nameOfTheEntityToFireInput = "";
+					//nameOfTheEntityToFireInput = "";
 					parameter = null;
 					outputHasBeenDeclenched = false;	// A voir si c'est bien true ou false qu'il faut mettre
 				}
@@ -283,4 +283,20 @@ public class Outputs implements IFireOnce, IUpdatable{
 		hasBeenFiredAtleastOnce = hasBeenFired;
 	}
 
+	/*
+	// TODO A voir si c'est bien
+	@Override
+	public void setTargetName(String name) {
+		
+		 //N'est pas cense etre apellee
+		
+	}
+	/**
+	 * @return name of the output
+	 /
+	@Override
+	public String getTargetName() {
+		return nameOfTheOutput;
+	}
+	//*/
 }

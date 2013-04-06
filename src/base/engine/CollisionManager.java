@@ -64,7 +64,7 @@ public class CollisionManager{
 	        {
 	        	 for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
 	        		 if(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k) instanceof Trigger){
-	        			 ((TriggerTeleport)lvl.getTabNiveau()[j][i].getEntiteProcheAt(k)).addAnEntityToActON(e);
+	        			 ((TriggerObjectInZone)lvl.getTabNiveau()[j][i].getEntiteProcheAt(k)).addAnEntityToActON(e);
 	        			 System.out.println("ajouter");
 	        		 }
 	        }

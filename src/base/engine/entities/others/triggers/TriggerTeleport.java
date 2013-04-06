@@ -61,6 +61,10 @@ public class TriggerTeleport extends TriggerObjectInZone {
 								i = (int) (Math.random()*taille);
 								// Dans le principe, un InfoTarget ou InfoTeleportDestination n'ont pas 
 								// le meme nom que les autres type Info => Pas de verification
+								if(taille == 0){
+									taille = -1;
+									break;
+								}
 							}
 							taille = i + 1;
 						}

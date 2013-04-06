@@ -221,6 +221,7 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 			}
 		
 		arrayEntityToActON.remove(entity);
+		arrayEntityToActON.trimToSize();
 	}
 	
 	public boolean isEntityAlreadyInArray(final int id){

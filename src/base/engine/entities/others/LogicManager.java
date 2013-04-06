@@ -2,6 +2,7 @@ package base.engine.entities.others;
 
 import java.util.ArrayList;
 
+import base.engine.entities.BasicEntity;
 import base.engine.entities.others.logics.Logic;
 import base.engine.entities.others.outputs.IUpdatable;
 
@@ -11,7 +12,7 @@ import base.engine.entities.others.outputs.IUpdatable;
  * @author Yoann CAPLAIN
  * 
  */
-public class LogicManager implements IUpdatable{
+public class LogicManager extends Manager implements IUpdatable{
 
 	private static LogicManager instance;
 	
@@ -21,17 +22,6 @@ public class LogicManager implements IUpdatable{
 	 * Ils sont juste appelés par des Outputs
 	 */
 	private ArrayList<Logic> arrayLogicThatImplementsIUpdatable = new ArrayList<Logic>();
-	
-	private ArrayList<Logic> arrayLogicInstancie = new ArrayList<Logic>();
-	
-	/*
-	 * Je sais pas trop si c'est interessant de faire ca comme ca. Ca permet de chercher par rapport au targetname sauf
-	 * que je ne le considere pas comme pouvant etre unique donc...
-	 */
-	//private static HashMap<String, Logic> hashTrigger = new HashMap<String, Logic>();
-	// sinon :
-	//private static HashMap<String, ArrayList<Logic>> hashTrigger = new HashMap<String, ArrayList<Logic>>();
-	
 	
 	public static LogicManager getInstance(){
 		if (null == instance) { // Premier appel
@@ -51,70 +41,49 @@ public class LogicManager implements IUpdatable{
 				((IUpdatable)v).update(delta);
 	}
 	
-	public void addLogic(Logic a){
-		if(a instanceof IUpdatable)
-			arrayLogicThatImplementsIUpdatable.add(a);
-		else
-			arrayLogicInstancie.add(a);
-	}
-	/**
-	 * May be deleted, useless since we have two separate array list
-	 */
-	@Deprecated
-	public void getLogicAt(int a){
-		if(arrayLogicInstancie != null)
-			if(arrayLogicInstancie.size() > a)
-				arrayLogicInstancie.get(a);
+	@Override
+	synchronized public void addEntity(BasicEntity entity) {
+		super.addEntity(entity);
+		if(entity instanceof IUpdatable)
+			arrayLogicThatImplementsIUpdatable.add((Logic) entity);
 	}
 	
-	/**
-	 * Remove logic that matches the name
-	 * @param nameOfLogic (not case sensitive)
-	 */
-	public void removeLogic(final String nameOfLogic){
-		int i;
-		int k;
-		if(arrayLogicInstancie != null){
-			k = arrayLogicInstancie.size();
-			for(i=0; i <  k ;i++){
-				if(arrayLogicInstancie.get(i) != null)
-					if(arrayLogicInstancie.get(i).getTargetName().equalsIgnoreCase(nameOfLogic)){
-						OutputManager.getInstance().removeOutput(nameOfLogic);
-						arrayLogicInstancie.remove(i);
-						k--;
-						i--;
-						//break;	-> name is supposed not unique
-					}
-				//i++;	
-			}
-		}
-		
-		if(arrayLogicThatImplementsIUpdatable != null){
-			k = arrayLogicThatImplementsIUpdatable.size();
-			for(i=0; i <  k ;i++){
-				if(arrayLogicThatImplementsIUpdatable.get(i) != null)
-					if(arrayLogicThatImplementsIUpdatable.get(i).getTargetName().equalsIgnoreCase(nameOfLogic)){
-						arrayLogicThatImplementsIUpdatable.remove(i);
-						k--;
-						i--;
-						//return;	-> name is supposed not unique
-					}
-				//i++;
-			}
+	@Override
+	synchronized public void removeEntity(final String entityName) {
+		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
+		if(tmp != null){
+			tmp.clear();
+			tmp.trimToSize();
 		}
 	}
 	
-	/**
-	 * I prefer to use targetName to remove entities
-	 * @param logicInstance
-	 */
-	@Deprecated
-	public void removeLogic(Object logicInstance){
-		if(arrayLogicInstancie != null)
-			arrayLogicInstancie.remove(logicInstance);
-		
-		if(arrayLogicThatImplementsIUpdatable != null)
-			arrayLogicThatImplementsIUpdatable.remove(logicInstance);
+	synchronized public void removeEntity(final String entityName, final int idEntity) {
+		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
+		if(tmp != null){
+			for(int i=0; i < tmp.size(); i++)
+				if(tmp.get(i) != null)
+					if(tmp.get(i).getId() == idEntity){
+						tmp.remove(i);
+						break;
+					}
+			tmp.trimToSize();
+		}
+	}
+	
+
+	synchronized public ArrayList<BasicEntity> getEntity(final String entityName) {
+		return hashMapEntity.get(entityName);
+	}
+	
+
+	synchronized public BasicEntity getEntity(final String entityName, final int id) {
+		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
+		if(tmp != null)
+			for(BasicEntity v : tmp)
+				if(v != null)
+					if(v.getId() == id)
+						return v;
+		return null;
 	}
 	
 	 private LogicManager(){

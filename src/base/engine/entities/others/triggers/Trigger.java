@@ -12,6 +12,7 @@ import base.utils.Timer;
 /**
  * Trigger is a brush entity
  * It is a volume that fires outputs when a specified type of entity enters or leaves it.
+ * @see TriggerObjectInZone TriggerObjectInZone is the ONLY class that may herit from Trigger
  * @author Yoann CAPLAIN
  *
  */

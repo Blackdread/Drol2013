@@ -1,10 +1,10 @@
 package base.engine.entities.others;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map.Entry;
 
-import org.newdawn.slick.AngelCodeFont;
-
+import base.engine.entities.BasicEntity;
+import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.triggers.Trigger;
 
 /**
@@ -19,15 +19,9 @@ import base.engine.entities.others.triggers.Trigger;
  * @author Yoann CAPLAIN
  * 
  */
-public class TriggerManager {
+public class TriggerManager extends Manager implements IUpdatable{
 
 	private static TriggerManager instance;
-	
-	private ArrayList<Trigger> arrayTriggerInstancie = new ArrayList<Trigger>();
-	/*
-	 * Je sais pas trop si c'est interessant de faire ca comme ca. Ca permet de chercher par rapport au targetname
-	 */
-	//private static HashMap<String, Trigger> hashTrigger = new HashMap<String, Trigger>();
 	
 	public static TriggerManager getInstance(){
 		if (null == instance) { // Premier appel
@@ -37,17 +31,18 @@ public class TriggerManager {
                 }
             }
         }
-        return instance;
-	    }
-	
-	synchronized public void addTrigger(Trigger a){
-		if(arrayTriggerInstancie != null)
-			arrayTriggerInstancie.add(a);
+		return instance;
 	}
-	synchronized public void getTriggerAt(int a){
-		if(arrayTriggerInstancie != null)
-			if(arrayTriggerInstancie.size() > a)
-				arrayTriggerInstancie.get(a);
+	
+	@Override
+	public void update(final int delta) {
+		for(ArrayList<BasicEntity> v : hashMapEntity.values()){
+			if(v != null)
+				for(BasicEntity w :  v)
+					if(w != null){
+						((Trigger)w).update(delta);	// pas de verification, on est dans TriggerManager il doit y avoir que des Trigger !
+					}
+		}
 	}
 	
 	/**
@@ -57,4 +52,5 @@ public class TriggerManager {
 		 
 	 }
 	 private static Object objetSynchrone = new Object();
+
 }

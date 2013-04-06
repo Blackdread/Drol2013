@@ -1,23 +1,27 @@
 package base.engine.entities.others;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.ITargetName;
+import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.Outputs;
 
-public class OutputManager {
+/**
+ * Classe a part des autres Manager car elle ne peut pas heriter de Manager
+ * Elle est specifique par rapport aux outputs
+ * @author Yoann CAPLAIN
+ *
+ */
+public class OutputManager implements IUpdatable{
 
 private static OutputManager instance;
 	
 	private ArrayList<Outputs> arrayOutputInstancie = new ArrayList<Outputs>();
-	/*
-	 * Je sais pas trop si c'est interessant de faire ca comme ca. Ca permet de chercher par rapport au targetname
-	 * 
-	 * ATTENTION ICI, CE n'est pas forcement bien car on veut des output ORDONNES hors un HashMap ne garanti pas l'ordre des
-	 * elements
-	 * 
-	 */
-	//private static HashMap<String, OutputManager> hashTrigger = new HashMap<String, OutputManager>();
+	
+	protected HashMap<String, ArrayList<Outputs>> hashMapOutputsOuputName = new HashMap<String, ArrayList<Outputs>>();
+	protected HashMap<String, ArrayList<Outputs>> hashMapOutputsInputName = new HashMap<String, ArrayList<Outputs>>();
 	
 	public static OutputManager getInstance() {
 		if (null == instance) { // Premier appel
@@ -29,6 +33,12 @@ private static OutputManager instance;
         }
         return instance;
      }
+	
+	@Override
+	public void update(int delta) {
+		
+		
+	}
 	
 	/**
 	 * Will delete outputs that are trigger Once and has fired there output (delay is passed)
@@ -109,16 +119,11 @@ private static OutputManager instance;
 		if(arrayOutputInstancie != null)
 			arrayOutputInstancie.add(a);
 	}
-	synchronized public void getOutputAt(int a){
+	synchronized public Outputs getOutputAt(int a){
 		if(arrayOutputInstancie != null)
 			if(arrayOutputInstancie.size() > a)
-				arrayOutputInstancie.get(a);
-	}
-	@Deprecated
-	synchronized public void removeOutputAt(int a){
-		if(arrayOutputInstancie != null)
-			if(arrayOutputInstancie.size() > a)
-				arrayOutputInstancie.remove(a);
+				return arrayOutputInstancie.get(a);
+		return null;
 	}
 	
 	 private OutputManager(){
@@ -126,4 +131,6 @@ private static OutputManager instance;
 	 }
 	 
 	 private static Object objetSynchrone = new Object();
+
+
 }
