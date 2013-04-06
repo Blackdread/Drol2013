@@ -3,13 +3,19 @@ package base.engine.logics;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+<<<<<<< .mine
+import base.engine.CollisionManager;
 import base.engine.entities.ActiveEntity;
+import base.engine.entities.BasicEntity;
+=======
+import base.engine.entities.ActiveEntity;
+import base.engine.entities.others.outputs.IUpdatable;
+>>>>>>> .r138
 import base.engine.entities.others.outputs.IUpdatable;
 
 public class IA implements IUpdatable{
-	
+
 	private static IA instance;
-	
 	public static IA getInstance() {
 		if (null == instance) { // Premier appel
             synchronized(objetSynchrone) {
@@ -32,6 +38,13 @@ public class IA implements IUpdatable{
 					v.getValue().update(delta);
 				}
 	}
+	
+	public void ajouterEntite(ActiveEntity e)
+	{
+		updatable.put(e.getId(), e);
+	}
+	
+	private static Object objetSynchrone = new Object();
 
 	
 	public void addEntity(ActiveEntity entity){
@@ -50,5 +63,4 @@ public class IA implements IUpdatable{
 		 
 	 }
 	 
-	 private static Object objetSynchrone = new Object();
 }
