@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
-import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.IDisable;
+import base.engine.entities.others.outputs.PointEntity;
 
 /**
  * math_counter is a point entity available in all Source games. 
@@ -16,7 +16,7 @@ import base.engine.entities.others.outputs.IDisable;
  * @author Yoann CAPLAIN
  *
  */
-public class MathCounter extends BasicEntity implements IDisable{
+public class MathCounter extends PointEntity implements IDisable{
 	
 	private boolean enabled;
 	
@@ -43,8 +43,7 @@ public class MathCounter extends BasicEntity implements IDisable{
 
 	@Override
 	public void render(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
+		super.render("MathCounter", g, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){

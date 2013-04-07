@@ -48,4 +48,5 @@ public class FilterDamageType extends Filter {
 		
 	}
 
+
 }

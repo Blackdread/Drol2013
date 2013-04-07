@@ -1,6 +1,5 @@
 package base.engine.entities.others.info;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 /**
@@ -35,9 +34,7 @@ public class InfoTarget extends Info {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		g.setColor(Color.blue);
-		g.fillRect(x, y, 10, 10);
+		super.render("InfoTarget", g, x, y);
 	}
 
 }

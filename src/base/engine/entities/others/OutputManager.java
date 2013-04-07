@@ -3,7 +3,6 @@ package base.engine.entities.others;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.ITargetName;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.Outputs;
@@ -20,8 +19,11 @@ private static OutputManager instance;
 	
 	private ArrayList<Outputs> arrayOutputInstancie = new ArrayList<Outputs>();
 	
-	protected HashMap<String, ArrayList<Outputs>> hashMapOutputsOuputName = new HashMap<String, ArrayList<Outputs>>();
-	protected HashMap<String, ArrayList<Outputs>> hashMapOutputsInputName = new HashMap<String, ArrayList<Outputs>>();
+	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheOwner = new HashMap<String, ArrayList<Outputs>>();
+	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheReceiver = new HashMap<String, ArrayList<Outputs>>();
+	
+	//protected HashMap<String, ArrayList<Outputs>> hashOuputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
+	//protected HashMap<String, ArrayList<Outputs>> hashInputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
 	
 	public static OutputManager getInstance() {
 		if (null == instance) { // Premier appel

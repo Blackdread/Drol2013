@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
@@ -11,6 +12,7 @@ import org.newdawn.slick.geom.Transform;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.outputs.IActivator;
+import base.utils.ResourceManager;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
  * Ne pas oublier d'initialiser l'array et de le "remplir"
@@ -55,9 +57,22 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
+		//*
 		Color col = new Color(255,180,0,90);
 		g.setColor(col);
 		g.fill(shape.transform(Transform.createTranslateTransform(x, y)));
+		//g.fill(getCollisionShape());
+		//*/
+		Image tmp = ResourceManager.getImage("Trigger");
+		if(tmp != null){
+			tmp = tmp.getScaledCopy(0.6f);
+			g.setWorldClip(x,y,shape.getWidth(),shape.getHeight());
+			for(int i=0 ; i< shape.getHeight() / 64 + 1; i++)
+				for(int j=0 ; j< shape.getWidth() / 64 + 1; j++)
+					g.drawImage(tmp, x+64*j, y+64*i);
+			g.clearWorldClip();
+		}
+		
 	}
 	
 	@Override

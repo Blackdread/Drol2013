@@ -139,10 +139,10 @@ public class LevelDrol extends Level {
 						if(tabNiveau[i][j].getEntiteProcheAt(k) != null)
 						{
 							//System.out.println("ren "+j+" "+i);
-							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProche().get(k).getId())){
+							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProcheAt(k).getId())){
 								tabNiveau[i][j].getEntiteProcheAt(k).render(graph, (int)tabNiveau[i][j].getEntiteProcheAt(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProcheAt(k).getY()-scroll.getyScroll());
 								//System.out.println("x "+((int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll())+" y"+ ((int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll()));
-								//entiteAffiche.add(tabNiveau[i][j].getEntiteProche().get(k).getId());
+								//entiteAffiche.add(tabNiveau[i][j].getEntiteProcheAt(k).getId());
 								//if(tabNiveau[i][j].getEntiteProcheAt(k).getId() != 0)
 								//	System.out.println("affiche "+i+" "+j+" "+tabNiveau[i][j].getEntiteProcheAt(k).getId());
 								//for(int kk=0; kk < tabNiveau[i][j].getEntiteProche().size() ; kk++)

@@ -6,9 +6,6 @@ package base.engine.entities.others.logics;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-
-import base.utils.ResourceManager;
 
 /**
  * It compares an input to up to 16 configured values, firing a corresponding output if there is a match (on InValue), 
@@ -39,9 +36,7 @@ public class LogicCase extends Logic {
 
 	@Override
 	public void render(Graphics g, int x, int y) {
-		Image tmp = ResourceManager.getImage("logicCase");
-		if(tmp != null)
-			g.drawImage(tmp, x, y);
+		super.render("LogicCase", g, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){

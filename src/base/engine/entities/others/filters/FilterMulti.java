@@ -36,8 +36,7 @@ public class FilterMulti extends Filter {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		// TODO Auto-generated method stub
-		
+		super.render("FilterMultiple", g, x, y);
 	}
 	
 	/**

@@ -3,10 +3,8 @@ package base.engine.entities.others.logics;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 import base.engine.entities.others.outputs.Outputs;
-import base.utils.ResourceManager;
 
 /**
  * It examines the relationship between two numbers ("value" and "compare value"), and fires appropriate output(s).
@@ -45,9 +43,7 @@ public class LogicCompare extends Logic {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		Image tmp = ResourceManager.getImage("logicCompare");
-		if(tmp != null)
-			g.drawImage(tmp, x, y);
+		super.render("LogicCompare", g, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){

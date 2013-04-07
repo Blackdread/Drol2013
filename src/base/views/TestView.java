@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -25,6 +26,7 @@ import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
+import base.utils.Configuration;
 import base.utils.ResourceManager;
 import base.engine.LogicEngine;
 

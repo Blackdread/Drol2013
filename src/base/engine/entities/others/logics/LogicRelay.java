@@ -3,13 +3,11 @@ package base.engine.entities.others.logics;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.Outputs;
-import base.utils.ResourceManager;
 import base.utils.Timer;
 
 /**
@@ -86,9 +84,7 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		Image tmp = ResourceManager.getImage("logicRelay");
-		if(tmp != null)
-			g.drawImage(tmp, x, y);
+		super.render("LogicRelay", g, x, y);
 	}
 	
 	public ArrayList<String> get_list_outputs(){

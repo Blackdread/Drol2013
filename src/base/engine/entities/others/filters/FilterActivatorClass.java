@@ -36,8 +36,7 @@ public class FilterActivatorClass extends Filter {
 	
 	@Override
 	public void render(Graphics g, int x, int y) {
-		
-		
+		super.render("FilterClass", g, x, y);
 	}
 
 	@Override
