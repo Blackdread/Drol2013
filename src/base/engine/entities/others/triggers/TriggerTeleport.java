@@ -49,7 +49,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 			if(entity instanceof IActivator)	// TODO sur ?
 			if(testFilter(entity))
 				if(remoteDestination != null){
-					ArrayList<Info> tmp = InfoManager.getInstance().getInfo(remoteDestination);
+					ArrayList<BasicEntity> tmp = InfoManager.getInstance().getEntity(remoteDestination);
 					if(tmp != null){
 						int taille = tmp.size();
 						if(taille > 1){
@@ -69,7 +69,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 							taille = i + 1;
 						}
 						if(taille >= 1){
-							Info tmpInfo = tmp.get(taille-1);
+							Info tmpInfo = (Info) tmp.get(taille-1);
 							if(tmpInfo != null)
 								if(tmpInfo instanceof InfoTarget /*|| tmpInfo instanceof InfoTeleportDestination*/){
 									Message m = new Message();

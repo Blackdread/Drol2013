@@ -67,8 +67,8 @@ public class TestView extends View{
 		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
-		InfoManager.getInstance().addInfo(inf);
-		FilterManager.getInstance().addFilter(fil);
+		InfoManager.getInstance().addEntity(inf);
+		FilterManager.getInstance().addEntity(fil);
 		lvl.addEntity(tr);
 		lvl.addEntity(inf);
 		Deplacement.deplacerEntity(0, 0, tr.getId());
