@@ -91,6 +91,7 @@ public class LogicEngine extends Engine {
 									t.setLocation(x, y);
 									IA.getInstance().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);
+									IA.getInstance().ajouterEntite(t);
 									Deplacement.deplacerEntity(0, 0, t.getId());
 									tmp =  System.currentTimeMillis();
 									}
