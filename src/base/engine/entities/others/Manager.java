@@ -60,7 +60,7 @@ public abstract class Manager {
 	/**
 	 * 
 	 * @param entityName entity name
-	 * @return An array list containing all entity that matches given name
+	 * @return An array list containing all entity that matches given name or null if not found
 	 */
 	synchronized public ArrayList<BasicEntity> getEntity(final String entityName) {
 		return hashMapEntity.get(entityName);

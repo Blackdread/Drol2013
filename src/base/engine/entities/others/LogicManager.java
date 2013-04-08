@@ -50,42 +50,44 @@ public class LogicManager extends Manager implements IUpdatable{
 	
 	@Override
 	synchronized public void removeEntity(final String entityName) {
-		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
-		if(tmp != null){
-			tmp.clear();
-			tmp.trimToSize();
-		}
+		super.removeEntity(entityName);
+		for(int i= 0; i < arrayLogicThatImplementsIUpdatable.size(); i++)
+			if(arrayLogicThatImplementsIUpdatable.get(i) != null)
+				if(arrayLogicThatImplementsIUpdatable.get(i).getTargetName().equalsIgnoreCase(entityName)){
+					arrayLogicThatImplementsIUpdatable.remove(i);
+					i--;
+				}
+		arrayLogicThatImplementsIUpdatable.trimToSize();
 	}
 	
+	@Override
 	synchronized public void removeEntity(final String entityName, final int idEntity) {
-		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
-		if(tmp != null){
-			for(int i=0; i < tmp.size(); i++)
-				if(tmp.get(i) != null)
-					if(tmp.get(i).getId() == idEntity){
-						tmp.remove(i);
-						break;
-					}
-			tmp.trimToSize();
-		}
+		super.removeEntity(entityName, idEntity);
+		for(int i= 0; i < arrayLogicThatImplementsIUpdatable.size(); i++)
+			if(arrayLogicThatImplementsIUpdatable.get(i) != null)
+				if(arrayLogicThatImplementsIUpdatable.get(i).getId() == idEntity){
+					arrayLogicThatImplementsIUpdatable.remove(i);
+					break;
+				}
+		arrayLogicThatImplementsIUpdatable.trimToSize();
 	}
 	
-
+	/*	n'a pas besoin d'etre redefinie normalement
 	synchronized public ArrayList<BasicEntity> getEntity(final String entityName) {
-		return hashMapEntity.get(entityName);
-	}
-	
-
-	synchronized public BasicEntity getEntity(final String entityName, final int id) {
-		ArrayList<BasicEntity> tmp = hashMapEntity.get(entityName);
-		if(tmp != null)
-			for(BasicEntity v : tmp)
+		ArrayList<BasicEntity> tmp = super.getEntity(entityName);
+		if(tmp == null){
+			tmp = new ArrayList<BasicEntity>();
+			for(BasicEntity v : arrayLogicThatImplementsIUpdatable)
 				if(v != null)
-					if(v.getId() == id)
-						return v;
-		return null;
+					if(v.getTargetName().equalsIgnoreCase(entityName))
+						tmp.add(v);
+		}
+		return tmp;
 	}
-	
+	synchronized public BasicEntity getEntity(final String entityName, final int id) {
+		
+	}
+	//*/
 	 private LogicManager(){
 		 
 	 }

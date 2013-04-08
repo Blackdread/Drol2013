@@ -185,11 +185,11 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	}
 	/**
 	 *  Cancel any events fired by this relay that are currently pending in the I/O event queue
-	 *  Cancel inputs pending on him (use the targetName so it should be UNIQUE)
+	 *  Cancel inputs pending on him (use the targetName)
 	 */
 	public void cancelAllPending(){
 		cancelPending();
-		/*
+		/* TODO
 		 * A faire pour les inputs
 		 */
 	}

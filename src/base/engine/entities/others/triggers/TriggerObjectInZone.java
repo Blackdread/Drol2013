@@ -200,9 +200,10 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	 * So if OnStartTouch() or OnTouching() or OnEndTouchAll() or ... is fired, this is fired
 	 */
 	protected void OnTrigger(){
-		if(isTriggerable())	// TODO ERREUR ERREUR !!! car dans isTriggerable() le timer est remis a zero hors cette output est appele sur la 2eme fois donc jamais fired
+		if(isTriggerable()){	// TODO ERREUR ERREUR !!! car dans isTriggerable() le timer est remis a zero hors cette output est appele sur la 2eme fois donc jamais fired
 			fireOutput("OnTrigger");
-		delayBeforeReset.resetTime();
+			delayBeforeReset.resetTime();
+		}
 	}
 	
 	/**
@@ -246,8 +247,8 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 					return true;
 		return false;
 	}
-	
-	public boolean isEntityAlreadyInArray(String entity){
+	@Deprecated
+	public boolean isEntityAlreadyInArray(final String entity){
 		for(BasicEntity v : arrayEntityToActON)
 			if(v != null)
 				if(v.getTargetName().equalsIgnoreCase(entity))

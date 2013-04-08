@@ -8,19 +8,21 @@ import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.Outputs;
 
 /**
- * Classe a part des autres Manager car elle ne peut pas heriter de Manager
+ * Classe a part des autres Manager car elle ne peut pas heriter de Manager (ou mettre Object)
  * Elle est specifique par rapport aux outputs
  * @author Yoann CAPLAIN
  *
  */
 public class OutputManager implements IUpdatable{
 
-private static OutputManager instance;
+	private static OutputManager instance;
 	
 	private ArrayList<Outputs> arrayOutputInstancie = new ArrayList<Outputs>();
 	
 	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheOwner = new HashMap<String, ArrayList<Outputs>>();
 	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheReceiver = new HashMap<String, ArrayList<Outputs>>();
+	
+	// TODO faire une fonction qui met l'activator a jour pour les entites qui en ont besoin -> attention Pas toute donc c'est un peu plus dur a faire
 	
 	//protected HashMap<String, ArrayList<Outputs>> hashOuputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
 	//protected HashMap<String, ArrayList<Outputs>> hashInputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
@@ -47,14 +49,11 @@ private static OutputManager instance;
 	 */
 	public void removeOutputsThatAreTriggerOnceAndFiredThereOutput(){
 		int i;
-		int k;
 		if(arrayOutputInstancie != null){
-			k = arrayOutputInstancie.size();
-			for(i=0; i <  k ;i++){
+			for(i=0; i <  arrayOutputInstancie.size() ;i++){
 				if(arrayOutputInstancie.get(i) != null){
 					if(arrayOutputInstancie.get(i).isFireOnce() && arrayOutputInstancie.get(i).isHasBeenFiredAtleastOnce()){
 						arrayOutputInstancie.remove(i);
-						k--;
 						i--;
 					}
 				}
@@ -68,15 +67,12 @@ private static OutputManager instance;
 	 */
 	public void removeOutput(final String nameOfEntityThatOutputOn){
 		int i;
-		int k;
 		if(arrayOutputInstancie != null){
-			k = arrayOutputInstancie.size();
-			for(i=0; i <  k ;i++){	// TODO Erreur dans le target name
+			for(i=0; i <  arrayOutputInstancie.size() ;i++){	// TODO Erreur dans le target name
 				if(arrayOutputInstancie.get(i) != null){	// Verifier que c'est bien une instance de ITargetName ?
 					if(((ITargetName)arrayOutputInstancie.get(i)).getTargetName().equalsIgnoreCase(nameOfEntityThatOutputOn)){
 						arrayOutputInstancie.get(i).setParameter(null);
 						arrayOutputInstancie.remove(i);
-						k--;
 						i--;
 						//break;	-> name is supposed not unique
 					}
@@ -120,12 +116,6 @@ private static OutputManager instance;
 	synchronized public void addOutput(Outputs a){
 		if(arrayOutputInstancie != null)
 			arrayOutputInstancie.add(a);
-	}
-	synchronized public Outputs getOutputAt(int a){
-		if(arrayOutputInstancie != null)
-			if(arrayOutputInstancie.size() > a)
-				return arrayOutputInstancie.get(a);
-		return null;
 	}
 	
 	 private OutputManager(){
