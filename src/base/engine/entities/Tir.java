@@ -49,4 +49,6 @@ public class Tir extends MoveableEntity {
 		
 		
 	}
+
+
 }

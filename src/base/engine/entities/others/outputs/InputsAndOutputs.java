@@ -2,6 +2,8 @@ package base.engine.entities.others.outputs;
 
 import java.util.ArrayList;
 
+import base.engine.entities.others.OutputManager;
+
 /**
  * TODO Pour le moment toutes les entites herite de cette classe, plus tard certaines entites auront besoin d'une zone (comme les TriggerObjectInZone)
  * mais d'autres n'auront pas besoin de ca (brush) on pourra donc faire heriter les entiter de 2 classes filles differentes
@@ -19,7 +21,6 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	protected String name;
 	
 	public static int currentId = 0;
-	
 	protected int id;
 	
 	protected float x;
@@ -207,9 +208,15 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * @param activator
 	 */
 	public void setActivatorToAllOutputs(InputsAndOutputs activator){
-		for(Outputs v : array_outputs)
+		//*
+		for(Outputs v : array_outputs){
 			if(v != null)
 				v.setActivator(activator);
+		}
+		//*/	ou faire :	TODO il serait preferable de faire ca mais c'est pas encore fait
+		/*
+		OutputManager.getInstance().setActivatorForThe_IO_chain(activator);
+		//*/
 	}
 	
 	@Override
@@ -268,5 +275,18 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	/**
+	 * 
+	 * @param id of the Output
+	 */
+	public void removeOutputsThatMatchOutputId(final int id){
+		for(int i=0 ; i < array_outputs.size();i++){
+			if(array_outputs.get(i) != null)
+				if(array_outputs.get(i).getId() == id){
+					array_outputs.remove(i);
+					break;
+				}
+		}
 	}
 }

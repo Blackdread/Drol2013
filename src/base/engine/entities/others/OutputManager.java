@@ -3,12 +3,12 @@ package base.engine.entities.others;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import base.engine.entities.others.outputs.ITargetName;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.Outputs;
 
 /**
- * Classe a part des autres Manager car elle ne peut pas heriter de Manager (ou mettre Object)
+ * Classe a part des autres Manager car elle ne peut pas heriter de Manager
  * Elle est specifique par rapport aux outputs
  * @author Yoann CAPLAIN
  *
@@ -17,15 +17,12 @@ public class OutputManager implements IUpdatable{
 
 	private static OutputManager instance;
 	
-	private ArrayList<Outputs> arrayOutputInstancie = new ArrayList<Outputs>();
+	protected HashMap<Integer, Outputs> hashId = new HashMap<Integer, Outputs>();
 	
 	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheOwner = new HashMap<String, ArrayList<Outputs>>();
 	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheReceiver = new HashMap<String, ArrayList<Outputs>>();
 	
 	// TODO faire une fonction qui met l'activator a jour pour les entites qui en ont besoin -> attention Pas toute donc c'est un peu plus dur a faire
-	
-	//protected HashMap<String, ArrayList<Outputs>> hashOuputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
-	//protected HashMap<String, ArrayList<Outputs>> hashInputName = new HashMap<String, ArrayList<Outputs>>(); not interesting
 	
 	public static OutputManager getInstance() {
 		if (null == instance) { // Premier appel
@@ -40,25 +37,75 @@ public class OutputManager implements IUpdatable{
 	
 	@Override
 	public void update(int delta) {
-		
-		
+		for(Outputs v : hashId.values()){
+			if(v != null)
+				v.update(delta);
+		}
+		// TODO y a des boolean a ajouter pour savoir s'il faut enlever des outputs etc
 	}
 	
 	/**
 	 * Will delete outputs that are trigger Once and has fired there output (delay is passed)
 	 */
 	public void removeOutputsThatAreTriggerOnceAndFiredThereOutput(){
-		int i;
-		if(arrayOutputInstancie != null){
-			for(i=0; i <  arrayOutputInstancie.size() ;i++){
-				if(arrayOutputInstancie.get(i) != null){
-					if(arrayOutputInstancie.get(i).isFireOnce() && arrayOutputInstancie.get(i).isHasBeenFiredAtleastOnce()){
-						arrayOutputInstancie.remove(i);
-						i--;
-					}
+		for(Outputs v : hashId.values())
+			if(v != null)
+				if(v.isFireOnce() && v.isHasBeenFiredAtleastOnce()){
+					removeOutputsOfTheOwner(v.getId());
+					removeOutputs(v.getId());
 				}
+	}
+	
+	/**
+	 * Remove an output from a owner
+	 * @param id of the output
+	 */
+	public void removeOutputsOfTheOwner(final int id){
+		Outputs tmp = hashId.get(id);
+		if(tmp != null)
+			tmp.removeThisOutputsFromOwner();
+	}
+	
+	/**
+	 * Delete output that match id
+	 * @param id unique
+	 */
+	public void removeOutputs(final int id){
+		
+		removeOutputsOfTheOwner(id);
+		
+		boolean continuer = true;
+		for(ArrayList<Outputs> w : hashNameOfTheOwner.values()){
+			if(w != null){
+				for(int i=0;i<w.size();i++)
+					if(w.get(i) != null)
+						if(w.get(i).getId() == id){
+							w.remove(i);
+							w.trimToSize();
+							continuer = false;
+							break;
+						}
+				if(!continuer)
+					break;
 			}
 		}
+		continuer = true;			
+		for(ArrayList<Outputs> w : hashNameOfTheReceiver.values()){
+			if(w != null){
+				for(int i=0;i<w.size();i++)
+					if(w.get(i) != null)
+						if(w.get(i).getId() == id){
+							w.remove(i);
+							w.trimToSize();
+							continuer = false;
+							break;
+						}
+				if(!continuer)
+					break;
+			}
+		}
+		
+		hashId.remove(id);
 	}
 	
 	/**
@@ -66,20 +113,22 @@ public class OutputManager implements IUpdatable{
 	 * @param nameOfEntityThatOutputOn name of the entity that outputs may trigger on (not case sensitive)
 	 */
 	public void removeOutput(final String nameOfEntityThatOutputOn){
-		int i;
-		if(arrayOutputInstancie != null){
-			for(i=0; i <  arrayOutputInstancie.size() ;i++){	// TODO Erreur dans le target name
-				if(arrayOutputInstancie.get(i) != null){	// Verifier que c'est bien une instance de ITargetName ?
-					if(((ITargetName)arrayOutputInstancie.get(i)).getTargetName().equalsIgnoreCase(nameOfEntityThatOutputOn)){
-						arrayOutputInstancie.get(i).setParameter(null);
-						arrayOutputInstancie.remove(i);
-						i--;
-						//break;	-> name is supposed not unique
-					}
-				//i++;
-				}
+		hashNameOfTheReceiver.remove(nameOfEntityThatOutputOn);
+		
+		for(ArrayList<Outputs> w : hashNameOfTheOwner.values())
+			if(w != null){
+				for(int i=0;i < w.size();i++)
+					if(w.get(i) != null)
+						if(w.get(i).getNameOfTheEntityToFireInput().equalsIgnoreCase(nameOfEntityThatOutputOn)){
+							
+							removeOutputsOfTheOwner(w.get(i).getId());
+							
+							hashId.remove(w.get(i).getId());	// ATTENTION est ce bien juste ? car si l'ajout est mal fait etc
+							w.remove(i);
+						}
+				w.trimToSize();
 			}
-		}
+						
 	}
 	/**
 	 * 
@@ -87,18 +136,7 @@ public class OutputManager implements IUpdatable{
 	 * @return An arraylist that contains Outputs that triggers those entities with targetname == nameWeSearch
 	 */
 	public ArrayList<Outputs> getAllOutputsThatTriggerOn(final String nameWeSearch){
-		/*
-		 * v doit implementer ITargetName sinon ça plantera !! A voir si je fais les verifications pour eviter les erreurs
-		 */
-		ArrayList<Outputs> array = new ArrayList<Outputs>();
-		if(arrayOutputInstancie != null)
-			for(Outputs v : arrayOutputInstancie)
-				if(v != null)
-					if(v.getNameOfTheEntityToFireInput().equalsIgnoreCase(nameWeSearch)){
-						array.add(v);
-					}
-		
-		return array;
+		return hashNameOfTheReceiver.get(nameWeSearch);
 	}
 	/**
 	 * A besoin de chercher dans toutes les entites qui peuvent recevoir des inputs si leur nom
@@ -113,9 +151,38 @@ public class OutputManager implements IUpdatable{
 		// TODO
 	}
 	
-	synchronized public void addOutput(Outputs a){
-		if(arrayOutputInstancie != null)
-			arrayOutputInstancie.add(a);
+	/**
+	 * Set the activator of I/O chain
+	 * 
+	 * Don't forget to call it !!!
+	 * Ex: If an entity enter a trigger and that entity implements IActivator then the trigger must call this function
+	 * and the entity in the parameter
+	 * Triggers must call this function if needed
+	 * Ex: func_tracktrain and path_track -> see Valve User And Outputs
+	 * @param activator
+	 */
+	public void setActivatorForThe_IO_chain(InputsAndOutputs activator){
+		// Rajouter dans les parametres l'entite qui commence cette I/O chain (generalement l'entite qui passe dans un trigger ou un logicTimer)
+	}
+	
+	public void addOutput(Outputs a){
+		ArrayList<Outputs> tmp = hashNameOfTheOwner.get(a.getNameOfTheOwner());
+		if(tmp == null){
+			tmp = new ArrayList<Outputs>();
+			tmp.add(a);
+			hashNameOfTheOwner.put(a.getNameOfTheOwner(), tmp);
+		}else
+			tmp.add(a);	// Pas de verification que l'objet est y deja
+		
+		ArrayList<Outputs> tmp2 = hashNameOfTheReceiver.get(a.getNameOfTheEntityToFireInput());
+		if(tmp2 == null){
+			tmp2 = new ArrayList<Outputs>();
+			tmp2.add(a);
+			hashNameOfTheReceiver.put(a.getNameOfTheOwner(), tmp2);
+		}else
+			tmp2.add(a);	// Pas de verification que l'objet est y deja
+		
+		hashId.put(a.getId(), a);
 	}
 	
 	 private OutputManager(){

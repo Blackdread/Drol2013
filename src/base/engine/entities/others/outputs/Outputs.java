@@ -8,10 +8,13 @@ import base.utils.Timer;
  * Outputs may be delayed or triggered immediatly
  * Outputs may be triggered once then destroyed
  * @author Yoann CAPLAIN
- *
+ * TODO Possible qu'un output est une ID unique, ca permettrait d'enlever les outputs par id ou les activer etc -> plus rapide
  */
 public class Outputs implements IFireOnce, IUpdatable{
 
+	private int id;
+	public static int currentId = 0;
+	
 	//TODO: Un outputs a besoin de savoir a quelle entite elle appartient car elle peut avoir besoin d'execute un input sur 
 	// elle-meme (pas sur l'output mais sur l'entite)
 	// Soit faire une recherche la liste des entites et chercher celle qui contient cette output, soit avoir 
@@ -83,6 +86,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 		nameOfTheOutput = "";
 		nameOfTheInput = "";
 		parameter = null;
+		
+		id = Outputs.currentId;
+		Outputs.currentId++;
 	}
 	
 	public Outputs(InputsAndOutputs entityWhoHasThisOutput, String nameEntity){
@@ -95,6 +101,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 		nameOfTheOutput = "";
 		nameOfTheInput = "";
 		parameter = null;
+		
+		id = Outputs.currentId;
+		Outputs.currentId++;
 	}
 	
 	public Outputs(InputsAndOutputs entityWhoHasThisOutput, String nameEntity,int delay){
@@ -107,6 +116,9 @@ public class Outputs implements IFireOnce, IUpdatable{
 		nameOfTheOutput = "";
 		nameOfTheInput = "";
 		parameter = null;
+		
+		id = Outputs.currentId;
+		Outputs.currentId++;
 	}
 	
 	/**
@@ -283,6 +295,17 @@ public class Outputs implements IFireOnce, IUpdatable{
 		hasBeenFiredAtleastOnce = hasBeenFired;
 	}
 
+	
+	public String getNameOfTheOwner(){
+		if(entityWhoHasThisOutput != null)
+			return entityWhoHasThisOutput.getTargetName();
+		return null;
+	}
+	
+	public void removeThisOutputsFromOwner(){
+		entityWhoHasThisOutput.removeOutputsThatMatchOutputId(id);
+	}
+	
 	/*
 	// TODO A voir si c'est bien
 	@Override
@@ -299,4 +322,8 @@ public class Outputs implements IFireOnce, IUpdatable{
 		return nameOfTheOutput;
 	}
 	//*/
+
+	public int getId() {
+		return id;
+	}
 }

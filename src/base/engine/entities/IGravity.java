@@ -24,6 +24,9 @@ public interface IGravity {
 	public Vector2f getvitesse();
 	public void setVitesse(Vector2f vitesse);
 	
+	public float getVitesseMax();
+	public void setVitesseMax(float vitesse);
+	
 	public Vector2f getAcceleration();
 	public void setAcceleration(Vector2f acceleration);
 	

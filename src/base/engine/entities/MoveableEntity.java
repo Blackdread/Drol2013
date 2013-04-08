@@ -18,8 +18,12 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	/**
 	 * Weight
 	 */
-	protected int mass;
+	protected int mass = 1;
 	protected Vector2f vitesse;
+	/**
+	 * If = 0 -> no limit
+	 */
+	protected float vitesseMax;
 	
 	protected Vector2f acceleration;
 	
@@ -27,7 +31,6 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		super(name, maxLife);
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
-		
 	}
 
 	public MoveableEntity(String name, int maxLife, int vx, int vy) {
@@ -91,6 +94,16 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void setMass(int mass){
 		this.mass = mass;
+	}
+	
+	@Override
+	public float getVitesseMax() {
+		return vitesseMax;
+	}
+
+	@Override
+	public void setVitesseMax(float vitesse) {
+		vitesseMax = vitesse;
 	}
 	
 }
