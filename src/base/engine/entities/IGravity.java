@@ -37,6 +37,12 @@ public interface IGravity {
 	public boolean isGravityON();
 	public void setGravityON(boolean gravity);
 	
+	/**
+	 * C'est juste un static (une constante), normalement 9.81f
+	 * @return
+	 */
+	public float getGravity();
+	
 	//public boolean isDamagedFixedOrDamageMultiVitesse();
 	//public void setDamagedFixedOrDamageMultiVitesse(boolean a);
 }

@@ -13,12 +13,14 @@ import base.engine.MessageKey;
  */
 public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	
-	protected boolean gravityON;
+	protected boolean gravityON = true;
+	protected static final float gravity = 9.81f;
 	
 	/**
 	 * Weight
+	 * in grammes (not sure, maybe mg)
 	 */
-	protected int mass = 1;
+	protected int mass = 2;
 	protected Vector2f vitesse;
 	/**
 	 * If = 0 -> no limit
@@ -45,6 +47,12 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void update(int delta) {
 		vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
+		
+		if(gravityON){
+			// TODO gerer le poids
+			//vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
+		}
+			
 		
 		Message m = new Message();
 		m.instruction = MessageKey.I_MOVE_ENTITY;
@@ -106,4 +114,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		vitesseMax = vitesse;
 	}
 	
+	public float getGravity(){
+		return gravity;
+	}
 }

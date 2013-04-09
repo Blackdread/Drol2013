@@ -64,7 +64,7 @@ public class TestView extends View{
 				Thread.sleep(10);
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
-		TriggerTeleport tr = new TriggerTeleport("teleport",200,20,40,40);
+		TriggerTeleport tr = new TriggerTeleport("teleport",200,36,40,40);
 		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
 		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
