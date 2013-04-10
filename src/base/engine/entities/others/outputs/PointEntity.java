@@ -16,7 +16,7 @@ public abstract class PointEntity extends BasicEntity implements IRenderPointEnt
 	public PointEntity(String name) {
 		super(name);
 	}
-
+	
 	@Override
 	public void render(final String imageName, Graphics g, final int x, final int y) {
 		Image tmp = ResourceManager.getImage(imageName);

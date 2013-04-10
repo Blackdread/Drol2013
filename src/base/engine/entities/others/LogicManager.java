@@ -72,6 +72,18 @@ public class LogicManager extends Manager implements IUpdatable{
 		arrayLogicThatImplementsIUpdatable.trimToSize();
 	}
 	
+	@Override
+	synchronized public void removeEntity(final int idEntity) {
+		super.removeEntity(idEntity);
+		for(int i= 0; i < arrayLogicThatImplementsIUpdatable.size(); i++)
+			if(arrayLogicThatImplementsIUpdatable.get(i) != null)
+				if(arrayLogicThatImplementsIUpdatable.get(i).getId() == idEntity){
+					arrayLogicThatImplementsIUpdatable.remove(i);
+					break;
+				}
+		arrayLogicThatImplementsIUpdatable.trimToSize();
+	}
+	
 	/*	n'a pas besoin d'etre redefinie normalement
 	synchronized public ArrayList<BasicEntity> getEntity(final String entityName) {
 		ArrayList<BasicEntity> tmp = super.getEntity(entityName);

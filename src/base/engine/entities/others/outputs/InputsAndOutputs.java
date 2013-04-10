@@ -136,6 +136,18 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 			array_outputs.add(output);
 	}
 	
+	/**
+	 * 
+	 * @param nameOfOutput 
+	 * @param parameter 
+	 */
+	public void setParameterForOutputs(String nameOfOutput,Object parameter){
+		for(Outputs v : array_outputs)
+			if(v != null)
+				if(v.getNameOfTheOutput().equalsIgnoreCase(nameOfOutput))
+					v.setParameter(parameter);
+	}
+	
 	@Override
 	public String getTargetName() {
 		return name;
@@ -149,10 +161,13 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * Clear the array that contains outputs and remove outputs from OutputsManager
 	 */
 	public void removeAllOutputsThatEntityHas(){
-		// TODO enlever les outputs du manager (ceux qui appartiennent a CETTE entite)
+		for(Outputs v : array_outputs){
+			if(v != null)
+				OutputManager.getInstance().removeOutputs(v.getId());
+		}
 		
-		if(array_outputs != null)
-			array_outputs.clear();
+		array_outputs.clear();
+		array_outputs.trimToSize();
 	}
 	
 	public void removeChildrenThatEntityHas(){

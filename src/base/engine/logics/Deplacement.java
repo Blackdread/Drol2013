@@ -29,7 +29,6 @@ public class Deplacement {
 			
 			
 			//On vérifie qu'il n'y a pas de collision
-			//if(!c_manager.testerCollision(x, y, e))
 			if(!CollisionManager.getInstance().testerCollision(x, y, e))
 			{
 				//System.out.println(ex + " " + ey);

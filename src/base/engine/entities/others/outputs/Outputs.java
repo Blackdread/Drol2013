@@ -169,7 +169,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 				hasBeenFiredAtleastOnce= true;
 			
 			if(nameOfTheEntityToFireInput != null)
-				if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, ...
+				if(nameOfTheEntityToFireInput.equalsIgnoreCase("!self")){	// il peut y avoir !self, !activator, !player -> solo, !multiplayer...
 					if(entityWhoHasThisOutput != null){
 						if(parameter == null)
 							entityWhoHasThisOutput.fireInputs(nameOfTheInput);
@@ -181,6 +181,7 @@ public class Outputs implements IFireOnce, IUpdatable{
 					if(activator != null){
 						// TODO A voir s'il faut passer l'activator afin que l'activator soit donnee dans tout les outputs
 						// suivant mais ca peut faire des choses pas forcement souhaitait (imprevue)
+						// On remet pas a null l'activator pour le moment
 						if(parameter == null){	
 							activator.fireInputs(nameOfTheInput);
 						}else{

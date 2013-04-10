@@ -58,6 +58,27 @@ public abstract class Manager {
 	}
 	
 	/**
+	 * Remove an entity that matches id
+	 * @param idEntity id of the entity to remove (unique)
+	 */
+	synchronized public void removeEntity(final int idEntity) {
+		boolean conti = true;
+		for(ArrayList<BasicEntity> tmp : hashMapEntity.values())
+			if(tmp != null){
+				for(int i=0; i < tmp.size(); i++)
+					if(tmp.get(i) != null)
+						if(tmp.get(i).getId() == idEntity){
+							tmp.remove(i);
+							conti = false;
+							break;
+						}
+				tmp.trimToSize();
+				if(!conti)
+					break;
+			}
+	}
+	
+	/**
 	 * 
 	 * @param entityName entity name
 	 * @return An array list containing all entity that matches given name or null if not found

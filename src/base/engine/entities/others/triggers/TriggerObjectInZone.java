@@ -207,7 +207,7 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	}
 	
 	/**
-	 * Devra ajouter l'entite et declencler les outputs OnStartTouch
+	 * Devra ajouter l'entite (ajoute seulement si elle n'y est pas deja) et declencler les outputs OnStartTouch
 	 * @param entity to add
 	 */
 	public void addAnEntityToActON(BasicEntity entity) {
@@ -224,6 +224,7 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	}
 	/**
 	 * Devra enlever l'entite et declencler les outputs OnEndTouch et/ou OnEndTouchAll
+	 * L'entite est suppose etre dans le trigger a l'etat d'avant
 	 * @param entity to remove
 	 */
 	public void removeAnEntityToActON(BasicEntity entity) {

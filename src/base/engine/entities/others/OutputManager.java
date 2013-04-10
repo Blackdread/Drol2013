@@ -161,8 +161,16 @@ public class OutputManager implements IUpdatable{
 	 * Ex: func_tracktrain and path_track -> see Valve User And Outputs
 	 * @param activator
 	 */
-	public void setActivatorForThe_IO_chain(InputsAndOutputs activator){
+	public void setActivatorForThe_IO_chain(InputsAndOutputs activator){	// TODO Manque des parametres
 		// Rajouter dans les parametres l'entite qui commence cette I/O chain (generalement l'entite qui passe dans un trigger ou un logicTimer)
+		/*
+		 * Algo :
+		 * Parcourir les outputs de l'entite (que ceux qui vont etre active ? -> besoin d'un parametre en plus)
+		 * Mettre l'activator dans les outputs parcouru
+		 * Parcourir les outputs des entites sur lesquelles les 1er outputs ont ete active et 
+		 * ainsi de suite jusqu'a atteindre la fin de la I/O chain (Attention il peut y avoir des boucles)
+		 * 
+		 */
 	}
 	
 	public void addOutput(Outputs a){

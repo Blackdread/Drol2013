@@ -23,7 +23,7 @@ public interface ICollidableObject {
 	
 	//public int getCollisionType();
 	
-	public void updateShape();
+	//public void updateShape();
  
 	/**
 	 * Check with getCollisionShape()

@@ -20,7 +20,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 * Weight
 	 * in grammes (not sure, maybe mg)
 	 */
-	protected int mass = 2;
+	protected int mass = 1;
 	protected Vector2f vitesse;
 	/**
 	 * If = 0 -> no limit
@@ -50,7 +50,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		
 		if(gravityON){
 			// TODO gerer le poids
-			//vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
+			vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
 		}
 			
 		

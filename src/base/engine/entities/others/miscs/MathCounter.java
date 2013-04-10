@@ -278,7 +278,8 @@ public class MathCounter extends PointEntity implements IDisable{
 	 * Fired when the counter value changes
 	 */
 	private void OutValue(){
-
+		setParameterForOutputs("OutValue", initialValue);
+		fireOutput("OutValue");
 	}
 	/**
 	 * Fired when the counter value meets or goes below the min value. 
