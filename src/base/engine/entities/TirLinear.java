@@ -11,8 +11,12 @@ import base.engine.MessageKey;
 
 public class TirLinear extends Tir {
 
+	public TirLinear(){
+		super("TirLinear", 1);
+	}
+	
 	public TirLinear(int maxLife, Vector2f vitesse) {
-		super("TirLinear", maxLife, vitesse);
+		super("TirLinear", maxLife);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
 	}
@@ -23,7 +27,7 @@ public class TirLinear extends Tir {
 	}
 	
 	public TirLinear(String name, int maxLife, Vector2f vitesse) {
-		super(name, maxLife, vitesse);
+		super(name, maxLife);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
 	}
