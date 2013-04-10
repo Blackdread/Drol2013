@@ -3,7 +3,9 @@ package base.engine;
 import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.MoveableEntity;
 import base.engine.entities.Tir;
+import base.engine.entities.TirLinear;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
 import base.engine.logics.IA;
@@ -52,6 +54,15 @@ public class LogicEngine extends Engine {
 					}
 					break;
 					
+				case MessageKey.I_STOP_ENTITY:
+					if(mes.i_data.containsKey(MessageKey.P_ID))
+					{
+						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						if(tmp instanceof MoveableEntity)
+							((MoveableEntity)tmp).setVitesseToZero();
+					}
+					break;
+					
 				case MessageKey.I_MOVE_ENTITY_TO:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
@@ -87,7 +98,7 @@ public class LogicEngine extends Engine {
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
 									if(System.currentTimeMillis() - tmp > 500){	// juste pour debug, ce sera pas la plus tard
-									Tir t = new Tir(1, vitesse);
+									Tir t = new TirLinear(1, vitesse);
 									t.setLocation(x, y);
 									IA.getInstance().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);

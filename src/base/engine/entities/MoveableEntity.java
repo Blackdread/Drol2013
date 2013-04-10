@@ -25,9 +25,10 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	/**
 	 * If = 0 -> no limit
 	 */
-	protected float vitesseMax;
+	protected float vitesseMax = 1;
 	
 	protected Vector2f acceleration;
+	protected float accelerationEntity;
 	
 	public MoveableEntity(String name, int maxLife) {
 		super(name, maxLife);
@@ -42,17 +43,29 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	}
 
 	/**
-	 * Gestion de la gravite dans cette update
+	 * Gestion de la gravite dans cette update et du deplacement
 	 */
 	@Override
 	public void update(int delta) {
-		vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
+		//vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
 		
-		if(gravityON){
-			// TODO gerer le poids
-			vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
+		if(acceleration.x != 0 || acceleration.y != 0){
+			if(vitesseMax != 0){
+				if(Math.sqrt(Math.abs(vitesse.dot(vitesse))) >= vitesseMax){
+					// On garde le vecteur dans la meme orientation mais on le reduit pour ne pas depasser la vitesse max
+				}else{
+					vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
+				}
+			}else
+				vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
 		}
 			
+		if(gravityON){
+			// TODO gerer le poids
+			// Est-ce bien vitesse qu'il faut changer ou la position ?
+			vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
+		}
+		
 		
 		Message m = new Message();
 		m.instruction = MessageKey.I_MOVE_ENTITY;
@@ -113,8 +126,26 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	public void setVitesseMax(float vitesse) {
 		vitesseMax = vitesse;
 	}
-	
+	@Override
 	public float getGravity(){
 		return gravity;
+	}
+	@Override
+	public void setVitesseToZero(){
+		vitesse.x = 0;
+		vitesse.y = 0;
+	}
+	@Override
+	public void setAccelerationToZero(){
+		acceleration.x = 0;
+		acceleration.y = 0;
+	}
+	@Override
+	public float getAccelerationEntity(){
+		return accelerationEntity;
+	}
+	@Override
+	public void setAccelerationEntity(float acceleration){
+		accelerationEntity = acceleration;
 	}
 }

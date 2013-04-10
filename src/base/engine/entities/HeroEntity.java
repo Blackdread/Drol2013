@@ -25,7 +25,6 @@ public class HeroEntity extends MoveableEntity {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		
 	}
 
 	@Override

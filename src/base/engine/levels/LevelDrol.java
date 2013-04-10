@@ -267,6 +267,10 @@ public class LevelDrol extends Level {
 	public HashMap<Integer, BasicEntity> getArrayEntite() {
 		return arrayEntite;
 	}
+	
+	public BasicEntity getEntity(final int id){
+		return arrayEntite.get(id);
+	}
 
 	public void setArrayEntite(HashMap<Integer, BasicEntity> arrayEntite) {
 		this.arrayEntite = arrayEntite;

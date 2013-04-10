@@ -23,12 +23,26 @@ public interface IGravity {
 	
 	public Vector2f getvitesse();
 	public void setVitesse(Vector2f vitesse);
+	public void setVitesseToZero();
 	
 	public float getVitesseMax();
 	public void setVitesseMax(float vitesse);
 	
 	public Vector2f getAcceleration();
 	public void setAcceleration(Vector2f acceleration);
+	public void setAccelerationToZero();
+	
+	/**
+	 * C'est l'acceleration de l'entite pour passer de la vitesse 0 a une vitesse de mouvement
+	 * @return
+	 */
+	public float getAccelerationEntity();
+	/**
+	 * C'est l'acceleration de l'entite pour passer de la vitesse 0 a une vitesse de mouvement
+	 */
+	public void setAccelerationEntity(float acceleration);
+	
+	
 	
 	//public int getDamagedDoneOnImpact();
 	//public void setDamagedDoneOnImpact(int damage);

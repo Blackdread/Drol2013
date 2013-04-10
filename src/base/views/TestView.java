@@ -24,6 +24,7 @@ import base.engine.entities.others.info.InfoTarget;
 import base.engine.entities.others.triggers.TriggerTeleport;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
+import base.engine.logics.IA;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
 import base.utils.Configuration;
@@ -75,6 +76,7 @@ public class TestView extends View{
 		Deplacement.deplacerEntity(0, 0, inf.getId());
 		lvl.getArrayEntite().put(hero.getId(), hero);
 		lvl.getTabNiveau()[2][0].ajouterEntite(hero);
+		IA.getInstance().addEntity(hero);
 	}
 	
 	@Override
