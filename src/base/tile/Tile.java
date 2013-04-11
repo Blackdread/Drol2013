@@ -24,13 +24,11 @@ public class Tile {
 		//*
 		for(int i=0;i<entiteProche.size();i++)
 			if(entiteProche.get(i).getId() == idEntite){
-				System.out.println("enlever entite "+entiteProche.get(i).getId()+" pos "+i+" taille"+entiteProche.size());
 				entiteProche.remove(i);
-				System.out.println("enlever entite pos "+i+" taille"+entiteProche.size());
-				return;
-				//break;
+				//return;
+				break;
 			}
-		//entiteProche.trimToSize();
+		entiteProche.trimToSize();
 		//*/
 		/*
 		entiteProche.remove(idEntite);

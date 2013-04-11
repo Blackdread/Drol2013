@@ -11,7 +11,6 @@ import base.engine.entities.others.outputs.Outputs;
  * Classe a part des autres Manager car elle ne peut pas heriter de Manager
  * Elle est specifique par rapport aux outputs
  * @author Yoann CAPLAIN
- *
  */
 public class OutputManager implements IUpdatable{
 

@@ -20,59 +20,22 @@ public class Deplacement {
 		
 		BasicEntity e = lvl.getArrayEntite().get(id);
 		
-		if(e != null)
-		{
-			int largeur = e.getWidth();
-			int hauteur = e.getHeight();
-			int ex = (int) e.getX();
-			int ey = (int) e.getY();
-			
-			
+		if(e != null){
 			//On vérifie qu'il n'y a pas de collision
-			if(!CollisionManager.getInstance().testerCollision(x, y, e))
-			{
-				//System.out.println(ex + " " + ey);
+			if(!CollisionManager.getInstance().testerCollision(x, y, e)){
 				
 				//Enlever l'entité des tiles avant le déplacement
-				for(int i = ex/lvl.getLargeurTile(); i < (ex + largeur)/lvl.getLargeurTile(); i++)
-				{
-					for(int j = ey/lvl.getHauteurTile(); j < (ey + hauteur)/lvl.getHauteurTile(); j++)
-					{
-						lvl.getTabNiveau()[j][i].enleverEntite(id);
-					}
-				}
+				enleverEntiteDesTiles(e);
 				
 				//On déplace l'entité
 				e.setLocation((float)(x + e.getX()), (float)(y + e.getY()));
-				lvl.getArrayEntite().put(id, e);
 				
 				//On replace l'entité dans les tiles
-				for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i < ((x + e.getX()) + largeur)/lvl.getLargeurTile(); i++)
-				{
-					for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j < ((y + e.getY()) + hauteur)/lvl.getHauteurTile(); j++)
-					{
-						//System.out.println(i + " " + j);
-						lvl.getTabNiveau()[j][i].ajouterEntite(e);
-						//for(int k = 0; k < lvl.getTabNiveau()[j][i].getEntiteProche().size(); k++)
-						//if(lvl.getTabNiveau()[j][i].getEntiteProche().get(i) instanceof Trigger)
-						//{
-							
-						//}
-							
-					}
-				}
+				ajouterEntiteDansTiles(e);
 				
 				//Si l'entité est le héro, il faut mettre à jour le scroll
 				if(e instanceof HeroEntity)
-				{
-					//Si le scroll sort de l'écran on met à 0 ou max sinon on centre sur le héro
-					if((x + e.getX()-(lvl.getScroll().getWidth()/2)) < 0)
-						lvl.getScroll().setxScroll(0);
-					else if((x + e.getX() + (lvl.getScroll().getWidth()/2)) > (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
-						lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());
-					else
-						lvl.getScroll().setxScroll((int) ((x + e.getX()-(lvl.getScroll().getWidth()/2))));	
-				}
+					mettreAJourScroll(e);
 			}
 			else{
 				System.out.println("Collision");
@@ -80,7 +43,7 @@ public class Deplacement {
 					((ICollidableObject)e).onCollision(null);	// TODO
 			}
 		}else{
-			System.out.println("Fonction deplacer Entity : Entité non trouve, e = null");
+			System.err.println("Fonction deplacer Entity : Entité non trouve, e = null");
 		}
 	}
 	
@@ -94,49 +57,47 @@ public class Deplacement {
 	 */
 	public static void enleverEntiteDesTiles(final BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
 		
-		for(int i = ex/lvl.getLargeurTile(); i < (ex + e.getWidth())/lvl.getLargeurTile(); i++)
-		{
-			for(int j = ey/lvl.getHauteurTile(); j < (ey + e.getHeight())/lvl.getHauteurTile(); j++)
-			{
+		int larg = lvl.getLargeurTile();
+		int haut = lvl.getHauteurTile();
+		int x = (int)e.getX();
+		int y = (int)e.getY();
+		
+		for(int j = y/haut ; j <= (y + e.getHeight())/haut ; j++)
+			for(int i = x/larg ; i <= (x + e.getWidth())/larg ; i++){
 				lvl.getTabNiveau()[j][i].enleverEntite(e.getId());
+				//System.out.println("enlever ("+j+","+i+") "+e.getId());
 			}
-		}
+		//System.out.println("fin enlever");
 	}
 	
 	/**
 	 * Ajoute l'entite dans les tiles qu'il faut (partout o l'entite touche la tile)
 	 * @param e entite a ajouter
-	 * @param x 
-	 * @param y 
 	 */
-	public static void ajouterEntiteDansTiles(final BasicEntity e, final int x, final int y){
+	public static void ajouterEntiteDansTiles(final BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		
-		for(int i = (int) ((x + e.getX())/lvl.getLargeurTile()); i < ((x + e.getX()) + e.getWidth())/lvl.getLargeurTile(); i++)
-		{
-			for(int j = (int) ((y + e.getY())/lvl.getHauteurTile()); j < ((y + e.getY()) + e.getHeight())/lvl.getHauteurTile(); j++)
-			{
+		int larg = lvl.getLargeurTile();
+		int haut = lvl.getHauteurTile();
+		int x = (int)e.getX();
+		int y = (int)e.getY();
+		
+		for(int j = y/haut ; j <= (y + e.getHeight())/haut ; j++)
+			for(int i = x/larg ; i <= (x + e.getWidth())/larg ; i++){
 				lvl.getTabNiveau()[j][i].ajouterEntite(e);
+				//System.out.println("ajouter ("+j+","+i+") "+e.getId());
 			}
-		}
+		//System.out.println("fin ajouter");
 	}
 	
 	/**
 	 * Si le scroll sort de l'écran on met à 0 ou max sinon on centre sur le héro
 	 * @param e entite sur laquelle centre le scroll
-	 * @param x c quoi ?
 	 */
-	public static void mettreAJourScroll(final BasicEntity e, final int x){
+	public static void mettreAJourScroll(final BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		
-		if((x + e.getX()-(lvl.getScroll().getWidth()/2)) < 0)
-			lvl.getScroll().setxScroll(0);
-		else if((x + e.getX() + (lvl.getScroll().getWidth()/2)) > (lvl.getLargeurNiveau()*lvl.getLargeurTile()))
-			lvl.getScroll().setxScroll(lvl.getLargeurNiveau()*lvl.getLargeurTile()-lvl.getScroll().getWidth());
-		else
-			lvl.getScroll().setxScroll((int) ((x + e.getX()-(lvl.getScroll().getWidth()/2))));	
+		lvl.getScroll().mettreAJourScroll(e);
 	}
 }

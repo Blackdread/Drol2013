@@ -98,17 +98,19 @@ public class LevelDrol extends Level {
 		}
 	}
 	
-	//TODO
-	public Graphics generateLevelGraphic()
+	/**
+	 * 
+	 * @param graph graphics to draw
+	 * @param xPos position x to start drawing (top left corner)
+	 * @param yPos position y to start drawing (top left corner)
+	 */
+	public void generateLevelGraphic(Graphics graph, final int xPos, final int yPos)
 	{
 		
 		//TODO :
 		ArrayList<Integer> entiteAffiche = new ArrayList<Integer>();
 		
-		
-		Graphics graph = new Graphics(scroll.getWidth(), scroll.getHeight());
-		graph.setColor(Color.blue);
-		graph.fillRect(0, 0, scroll.getWidth(), scroll.getHeight());
+		graph.setClip(xPos, yPos, scroll.getWidth(), scroll.getHeight());
 		
 		//Variable necessaire a l'affichage de la fenetre de scrolling
 		int minX, minY, maxX, maxY, largeurTile, hauteurTile, indexTile;
@@ -116,13 +118,16 @@ public class LevelDrol extends Level {
 		largeurTile = tileSet.getSpriteSource().getSprite(0, 0).getWidth();
 		hauteurTile = tileSet.getSpriteSource().getSprite(0, 0).getHeight();
 		
-		
 		minX = scroll.getxScroll() / largeurTile;
-		maxX = (scroll.getxScroll() + scroll.getWidth())/largeurTile;
+		maxX = (scroll.getxScroll() + scroll.getWidth())/largeurTile + 1;
 		
 		minY = scroll.getyScroll() / hauteurTile;
-		maxY = (scroll.getyScroll() + scroll.getHeight())/hauteurTile;
+		maxY = (scroll.getyScroll() + scroll.getHeight())/hauteurTile + 1;
 		
+		if(maxY > hauteurNiveau)
+			maxY = hauteurNiveau;
+		if(maxX > largeurNiveau)
+			maxX = largeurNiveau;
 		
 		for(int i = minY; i < maxY; i++)
 		{
@@ -130,37 +135,47 @@ public class LevelDrol extends Level {
 			{
 				//Affiche le decors
 				indexTile = tabNiveau[i][j].getIndex();
-				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), j*largeurTile-scroll.getxScroll(), i*hauteurTile-scroll.getyScroll());
-				
+				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), xPos + j*largeurTile-scroll.getxScroll(), yPos + i*hauteurTile-scroll.getyScroll());
+			}
+		}
+		afficherGrilleTile(graph, xPos, yPos);
+		
+		for(int i = minY; i < maxY; i++)
+		{
+			for(int j = minX; j < maxX; j++)
+			{
 				//Affiche les entitees au voisinage de la tile et qui n'ont pas encore ete affiche
-				if(!tabNiveau[i][j].isEntiteProcheEmpty())
-				{
+				if(!tabNiveau[i][j].isEntiteProcheEmpty()){
+					
 					for(int k = 0; k < tabNiveau[i][j].getEntiteProcheSize();k++){
-						if(tabNiveau[i][j].getEntiteProcheAt(k) != null)
-						{
-							//System.out.println("ren "+j+" "+i);
-							//if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProcheAt(k).getId())){
-								tabNiveau[i][j].getEntiteProcheAt(k).render(graph, (int)tabNiveau[i][j].getEntiteProcheAt(k).getX()-scroll.getxScroll(), (int)tabNiveau[i][j].getEntiteProcheAt(k).getY()-scroll.getyScroll());
-								//System.out.println("x "+((int)tabNiveau[i][j].getEntiteProche().get(k).getX()-scroll.getxScroll())+" y"+ ((int)tabNiveau[i][j].getEntiteProche().get(k).getY()-scroll.getyScroll()));
-								//entiteAffiche.add(tabNiveau[i][j].getEntiteProcheAt(k).getId());
-								if(tabNiveau[i][j].getEntiteProcheAt(k).getId() != 0 && tabNiveau[i][j].getEntiteProcheAt(k).getId() != 1 && tabNiveau[i][j].getEntiteProcheAt(k).getId() != 2)
-									System.out.println("affiche "+i+" "+j+" "+tabNiveau[i][j].getEntiteProcheAt(k).getId());
-								//for(int kk=0; kk < tabNiveau[i][j].getEntiteProche().size() ; kk++)
-									//System.out.println(""+i+" "+j+" entite "+tabNiveau[i][j].getEntiteProche().get(kk).getId());
-							//}
+						
+						if(tabNiveau[i][j].getEntiteProcheAt(k) != null){
+							
+							if(!entiteAffiche.contains(tabNiveau[i][j].getEntiteProcheAt(k).getId())){
+								tabNiveau[i][j].getEntiteProcheAt(k).render(graph, xPos + (int)tabNiveau[i][j].getEntiteProcheAt(k).getX()-scroll.getxScroll(), yPos + (int)tabNiveau[i][j].getEntiteProcheAt(k).getY()-scroll.getyScroll());
+								
+								entiteAffiche.add(tabNiveau[i][j].getEntiteProcheAt(k).getId());
+								
+							}
 						}
 					}
-					System.out.println("fin");
+					//System.out.println("fin ("+i+","+j+")");
 				}
-				
 			}
 		}
 		
-		
-		
-		return graph;
+		graph.clearClip();
 	}
 	
+	private void afficherGrilleTile(Graphics g, int x, int y){
+		g.setColor(Color.red);
+		for(int i=0;i<500/32;i++){
+			for(int j=0;j<500/32;j++)
+					g.drawString(""+i+" "+j, j*32+x, i*32+y);
+			g.drawLine(x, y+i*32, x+500, y+i*32);
+			g.drawLine(x+i*32, y, x+i*32, y+500);
+		}
+	}
 	
 
 	public void loadLevel(){
@@ -193,22 +208,15 @@ public class LevelDrol extends Level {
 			int hauteur = e.getHeight();
 			int ex = (int) e.getX();
 			int ey = (int) e.getY();
-			
-			System.out.println("enl");
-			/*
-			for(int j=0 ; j < this.hauteurNiveau;j++)
-				for(int i=0; i<this.largeurNiveau;i++)
-					tabNiveau[j][i].enleverEntite(id);
-			//*/
-			//*
-			for(int i = ex/getLargeurTile(); i <= (ex + largeur)/getLargeurTile(); i++)
+
+			for(int j = ey/getHauteurTile(); j <= (ey + hauteur)/getHauteurTile(); j++)
 			{
-				for(int j = ey/getHauteurTile(); j <= (ey + hauteur)/getHauteurTile(); j++)
+				for(int i = ex/getLargeurTile(); i <= (ex + largeur)/getLargeurTile(); i++)
 				{
 					tabNiveau[j][i].enleverEntite(id);
-					System.out.println("enl "+j+" "+i);
+					//System.out.println("enl "+j+" "+i);
 				}
-			}//*/
+			}
 		}
 		arrayEntite.remove(id);
 	}

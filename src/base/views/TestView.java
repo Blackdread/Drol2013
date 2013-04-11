@@ -55,7 +55,7 @@ public class TestView extends View{
 		lvl.loadLevel();
 		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
 		hero = new HeroEntity("bla", 500);
-		hero.setLocation(64, 32);
+		hero.setLocation(70, 70);
 		
 		while(!lvl.isLoadOver())
 		{
@@ -74,8 +74,8 @@ public class TestView extends View{
 		lvl.addEntity(inf);
 		Deplacement.deplacerEntity(0, 0, tr.getId());
 		Deplacement.deplacerEntity(0, 0, inf.getId());
-		lvl.getArrayEntite().put(hero.getId(), hero);
-		lvl.getTabNiveau()[2][0].ajouterEntite(hero);
+		lvl.addEntity(hero);
+		Deplacement.deplacerEntity(0, 0, hero.getId());
 		IA.getInstance().addEntity(hero);
 	}
 	
@@ -88,52 +88,12 @@ public class TestView extends View{
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
-			lvl.generateLevelGraphic().flush();
+			lvl.generateLevelGraphic(g, 300, 0);
 	}
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
-	{
-		if(Keyboard.isKeyDown(Input.KEY_RIGHT) || Keyboard.isKeyDown(Input.KEY_D))
-		{
-			Message m = new Message();
-			m.instruction = MessageKey.I_MOVE_ENTITY;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, 1);
-			m.i_data.put(MessageKey.P_Y, 0);
-			
-			engineManager.getTabEngine()[1].receiveMessage(m);
-		}else if(Keyboard.isKeyDown(Input.KEY_LEFT) || Keyboard.isKeyDown(Input.KEY_A))
-		{
-			Message m = new Message();
-			m.instruction = MessageKey.I_MOVE_ENTITY;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, -1);
-			m.i_data.put(MessageKey.P_Y, 0);
-			
-			engineManager.getTabEngine()[1].receiveMessage(m);
-		}
-		if(Keyboard.isKeyDown(Input.KEY_UP))
-		{
-			Message m = new Message();
-			m.instruction = MessageKey.I_MOVE_ENTITY;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, 0);
-			m.i_data.put(MessageKey.P_Y, -1);
-			
-			engineManager.getTabEngine()[1].receiveMessage(m);
-		}
-		if(Keyboard.isKeyDown(Input.KEY_DOWN))
-		{
-			Message m = new Message();
-			m.instruction = MessageKey.I_MOVE_ENTITY;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_X, 0);
-			m.i_data.put(MessageKey.P_Y, 1);
-			
-			engineManager.getTabEngine()[1].receiveMessage(m);
-		}
-		
+	{	
 		if(Keyboard.isKeyDown(Input.KEY_LSHIFT))
 		{
 			Message m = new Message();
@@ -147,7 +107,6 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 5));
 				m.i_data.put(MessageKey.P_VITESSE_X, 0);
 				m.i_data.put(MessageKey.P_VITESSE_Y, -5);
-				//System.out.println("heroX "+ hero.getX());
 				
 			}
 			else if(hero.getDirection() == BasicEntity.BAS)
@@ -189,12 +148,57 @@ public class TestView extends View{
 		super.keyPressed(key, c);
 		
 		switch(key){
-		/*
-		case Input.KEY_RIGHT:
-			lvl.getScroll().setxScroll((lvl.getScroll().getxScroll()+3));
-			break;*/
+			case Input.KEY_SPACE:
+				hero.jump();
+				break;
+			case Input.KEY_RIGHT:
+				Message m = new Message();
+				m.instruction = MessageKey.I_START_ENTITY_MOVE;
+				m.i_data.put(MessageKey.P_ID, hero.getId());
+				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
+				m.engine = EngineManager.LOGIC_ENGINE;
+				
+				engineManager.receiveMessage(m);
+				break;
+			case Input.KEY_LEFT:
+				Message m2 = new Message();
+				m2.instruction = MessageKey.I_START_ENTITY_MOVE;
+				m2.i_data.put(MessageKey.P_ID, hero.getId());
+				m2.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
+				m2.engine = EngineManager.LOGIC_ENGINE;
+				
+				engineManager.receiveMessage(m2);
+			break;
 		}
 		
+	}
+	@Override
+	public void keyReleased(int key, char c) {
+		switch(key){
+		case Input.KEY_SPACE:
+			hero.jump();
+			break;
+		case Input.KEY_RIGHT:
+			Message m = new Message();
+			m.instruction = MessageKey.I_START_ENTITY_MOVE;
+			m.i_data.put(MessageKey.P_ID, hero.getId());
+			m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
+			m.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
+			m.engine = EngineManager.LOGIC_ENGINE;
+			
+			engineManager.receiveMessage(m);
+			break;
+		case Input.KEY_LEFT:
+			Message m2 = new Message();
+			m2.instruction = MessageKey.I_START_ENTITY_MOVE;
+			m2.i_data.put(MessageKey.P_ID, hero.getId());
+			m2.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
+			m2.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
+			m2.engine = EngineManager.LOGIC_ENGINE;
+			
+			engineManager.receiveMessage(m2);
+		break;
+	}
 	}
 	
 	@Override

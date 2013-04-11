@@ -10,33 +10,38 @@ import base.engine.Message;
 import base.engine.MessageKey;
 
 public class TirLinear extends Tir {
-
+	
 	public TirLinear(){
 		super("TirLinear", 1);
+		gravityON = false;
 	}
 	
 	public TirLinear(int maxLife, Vector2f vitesse) {
 		super("TirLinear", maxLife);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
+		gravityON = false;
 	}
 	
 	public TirLinear(String name, int maxLife) {
 		super(name, maxLife);
 		shape = new Rectangle(0,0,10,10);
+		gravityON = false;
 	}
 	
 	public TirLinear(String name, int maxLife, Vector2f vitesse) {
 		super(name, maxLife);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
+		gravityON = false;
 	}
 
 	@Override
-	public void render(Graphics g, int xx, int yy) {
+	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		g.setColor(Color.cyan);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
+		System.out.println("render tir");
 	}
 	
 	@Override

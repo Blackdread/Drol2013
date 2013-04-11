@@ -2,6 +2,7 @@ package base.engine.entities;
 
 import org.newdawn.slick.geom.Vector2f;
 
+import base.engine.CollisionManager;
 import base.engine.EngineManager;
 import base.engine.Message;
 import base.engine.MessageKey;
@@ -14,7 +15,7 @@ import base.engine.MessageKey;
 public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	
 	protected boolean gravityON = true;
-	protected static final float gravity = 9.81f;
+	protected static final float gravity = 0.00681f;
 	
 	/**
 	 * Weight
@@ -25,7 +26,11 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	/**
 	 * If = 0 -> no limit
 	 */
-	protected float vitesseMax = 1;
+	protected float vitesseMax = 0;
+	/**
+	 * @see IGravity
+	 */
+	protected float defaultVitesse = 2;
 	
 	protected Vector2f acceleration;
 	protected float accelerationEntity;
@@ -35,46 +40,59 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
 	}
-
+	
+	/*
 	public MoveableEntity(String name, int maxLife, int vx, int vy) {
 		super(name, maxLife);
 		vitesse = new Vector2f(vx, vy);
 		acceleration = new Vector2f(0, 0);
 	}
-
+	*/
 	/**
 	 * Gestion de la gravite dans cette update et du deplacement
 	 */
 	@Override
 	public void update(int delta) {
 		//vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
-		
+
 		if(acceleration.x != 0 || acceleration.y != 0){
 			if(vitesseMax != 0){
 				if(Math.sqrt(Math.abs(vitesse.dot(vitesse))) >= vitesseMax){
 					// On garde le vecteur dans la meme orientation mais on le reduit pour ne pas depasser la vitesse max
+					
 				}else{
 					vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
+
+					System.err.println("222222");
 				}
-			}else
+			}else{
 				vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
+				System.err.println("1111111");
+			}
 		}
 			
 		if(gravityON){
 			// TODO gerer le poids
-			// Est-ce bien vitesse qu'il faut changer ou la position ?
-			vitesse.y += (float)mass/1000.0f * gravity * (float)delta/1000.0f;	// TODO formule juste ?
+			vitesse.y += mass * gravity * delta;
 		}
-		
-		
-		Message m = new Message();
-		m.instruction = MessageKey.I_MOVE_ENTITY;
-		m.i_data.put(MessageKey.P_ID, id);
-		m.i_data.put(MessageKey.P_X, (int)vitesse.x);
-		m.i_data.put(MessageKey.P_Y, (int)vitesse.y);
-		m.engine = EngineManager.LOGIC_ENGINE;
-		
-		EngineManager.getInstance().receiveMessage(m);
+
+		if(vitesse.x != 0 || vitesse.y != 0){
+			Message m = new Message();
+			m.instruction = MessageKey.I_MOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, id);
+			m.i_data.put(MessageKey.P_X, (int)vitesse.x);
+			m.i_data.put(MessageKey.P_Y, (int)vitesse.y);
+			m.engine = EngineManager.LOGIC_ENGINE;
+			
+			EngineManager.getInstance().receiveMessage(m);
+		}
+	}
+	
+	@Override
+	public void onCollision(ICollidableObject collideWith) {
+		// TODO collision sur les x
+		if(collideWith == null && !CollisionManager.isEntityCollidingWithLeftOrRight(this))	// TODO verifier que c bien la collision sur y
+			vitesse.y = 0;
 	}
 	
 	@Override
@@ -147,5 +165,13 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void setAccelerationEntity(float acceleration){
 		accelerationEntity = acceleration;
+	}
+	@Override
+	public float getDefaultVitesse(){
+		return defaultVitesse;
+	}
+	@Override
+	public void setDefaultVitesse(float vitesse){
+		defaultVitesse = vitesse;
 	}
 }

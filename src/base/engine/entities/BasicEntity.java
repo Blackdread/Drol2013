@@ -14,13 +14,18 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
 	protected Shape shape;
 	
-	//protected int direction;
-	protected Vector2f direction;
+	protected int direction;
+	//protected Vector2f direction;
 	
-	public static final Vector2f HAUT = new Vector2f(0,1);
-	public static final Vector2f BAS = new Vector2f(0,-1);
-	public static final Vector2f GAUCHE = new Vector2f(-1,0);
-	public static final Vector2f DROITE = new Vector2f(1,0);
+	//public static final Vector2f HAUT = new Vector2f(0,1);
+	//public static final Vector2f BAS = new Vector2f(0,-1);
+	//public static final Vector2f GAUCHE = new Vector2f(-1,0);
+	//public static final Vector2f DROITE = new Vector2f(1,0);
+	
+	public static final int HAUT = 0;
+	public static final int BAS = 1;
+	public static final int GAUCHE = 2;
+	public static final int DROITE = 3;
 	
 	public BasicEntity(String name) {
 		super(name);
@@ -45,12 +50,21 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 			return 32;
 	}
 
+	
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	/*
 	public Vector2f getDirection() {
 		return direction;
 	}
 
 	public void setDirection(Vector2f direction) {
 		this.direction = direction;
-	}
+	}*/
 	
 }

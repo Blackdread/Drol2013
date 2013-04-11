@@ -51,7 +51,10 @@ public abstract class MessageKey {
 	 * Mettre vitesse a 0 et acceleration ?
 	 */
 	public static final int I_STOP_ENTITY = 14;
-	
+	/**
+	 * Met la vitesse de l'entite a default vitesse et met sa direction
+	 */
+	public static final int I_START_ENTITY_MOVE = 15;
 	
 	// Parameters
 	public static final int P_ID = 5;
@@ -61,7 +64,8 @@ public abstract class MessageKey {
 	public static final int P_MAX_LIFE = 9;
 	public static final int P_VITESSE_X = 10;
 	public static final int P_VITESSE_Y = 11;
-	
+	public static final int P_DIRECTION = 12;
+	public static final int P_CHANGE_DIRECTION = 13;
 	
 	/*
 	 * 

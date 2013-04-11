@@ -348,11 +348,6 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 		return shape.transform(Transform.createTranslateTransform(x, y));
 	}
 
-	@Override
-	public void updateShape() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean isCollidingWith(ICollidableObject collidable) {

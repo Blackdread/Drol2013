@@ -54,6 +54,33 @@ public class LogicEngine extends Engine {
 					}
 					break;
 					
+				case MessageKey.I_START_ENTITY_MOVE:
+					if(mes.i_data.containsKey(MessageKey.P_ID))
+					{
+						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						boolean changeDir = true;
+						if(mes.b_data.containsKey(MessageKey.P_CHANGE_DIRECTION))
+							changeDir = mes.b_data.get(MessageKey.P_CHANGE_DIRECTION);
+						if(tmp != null)
+							if(tmp instanceof MoveableEntity){
+								Vector2f vec = ((MoveableEntity)tmp).getvitesse();
+								if(mes.i_data.containsKey(MessageKey.P_DIRECTION))
+									switch(mes.i_data.get(MessageKey.P_DIRECTION)){
+									case BasicEntity.DROITE:
+										vec.x += ((MoveableEntity)tmp).getDefaultVitesse();
+										if(changeDir)
+											tmp.setDirection(BasicEntity.DROITE);
+										break;
+									case BasicEntity.GAUCHE:
+										vec.x -= ((MoveableEntity)tmp).getDefaultVitesse();
+										if(changeDir)
+											tmp.setDirection(BasicEntity.GAUCHE);
+										break;
+									}
+							}
+					}
+					break;
+					
 				case MessageKey.I_STOP_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{

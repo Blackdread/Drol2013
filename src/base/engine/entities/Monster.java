@@ -2,7 +2,7 @@ package base.engine.entities;
 
 import org.newdawn.slick.Graphics;
 
-public class Monster extends MoveableEntity {
+public class Monster extends PlayableEntity {
 
 	public Monster(String name, int maxLife) {
 		super(name, maxLife);

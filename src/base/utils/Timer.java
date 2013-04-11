@@ -158,5 +158,8 @@ public class Timer {
 	public float getDeltaStock() {
 		return deltaStock;
 	}
+	public int getLimit() {
+		return limit;
+	}
 
 }

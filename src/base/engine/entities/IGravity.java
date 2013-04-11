@@ -28,6 +28,13 @@ public interface IGravity {
 	public float getVitesseMax();
 	public void setVitesseMax(float vitesse);
 	
+	/**
+	 * C'est la vitesse de base pour les deplacement de l'entite (Il n'y a pas de phase d'acceleration)
+	 * @return
+	 */
+	public float getDefaultVitesse();
+	public void setDefaultVitesse(float vitesse);
+	
 	public Vector2f getAcceleration();
 	public void setAcceleration(Vector2f acceleration);
 	public void setAccelerationToZero();
