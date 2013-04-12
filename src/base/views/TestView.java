@@ -88,7 +88,7 @@ public class TestView extends View{
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		if(lvl.isLoadOver())
-			lvl.generateLevelGraphic(g, 300, 0);
+			lvl.generateLevelGraphic(g, 200, 100);
 	}
 	
 	@Override

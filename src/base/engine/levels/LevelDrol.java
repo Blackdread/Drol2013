@@ -128,6 +128,10 @@ public class LevelDrol extends Level {
 			maxY = hauteurNiveau;
 		if(maxX > largeurNiveau)
 			maxX = largeurNiveau;
+		if(minX < 0)
+			minX = 0;
+		if(minY < 0)
+			minY = 0;
 		
 		for(int i = minY; i < maxY; i++)
 		{

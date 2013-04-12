@@ -72,6 +72,31 @@ public class CollisionManager{
 		return false;
 	}
 
+	public static boolean isEntityCollidingWithTop(BasicEntity e){
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		
+		if(e.getY() < 0)
+			return true;
+		
+		int tileXMin, tileXMax, tileYMin;
+		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
+	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
+	    tileYMin = (int) (e.getY() / lvl.getHauteurTile());
+	    if(tileXMin < 0)
+			tileXMin = 0;
+	    if(tileXMax > lvl.getLargeurNiveau() - 1)
+	    	tileXMax = lvl.getLargeurNiveau() - 1;
+	    
+    	for(int i = tileXMin; i <= tileXMax; i++)
+        {
+        	//C'est un mur, il y a donc collision
+            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMin][i].getIndex()).isMur())
+                return true;
+        }
+	    
+	    return false;
+		
+	}
 	
 	public static boolean isEntityCollidingWithGround(BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
@@ -83,7 +108,11 @@ public class CollisionManager{
 		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
 	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
 	    tileYMax = (int) ((e.getY() + e.getHeight() ) / lvl.getHauteurTile());
-	    
+	    if(tileXMin < 0)
+			tileXMin = 0;
+	    if(tileXMax > lvl.getLargeurNiveau() - 1)
+	    	tileXMax = lvl.getLargeurNiveau() - 1;
+	    	    
     	for(int i = tileXMin; i <= tileXMax; i++)
         {
         	//C'est un mur, il y a donc collision
@@ -102,10 +131,10 @@ public class CollisionManager{
 		
 		int tileXMin, tileXMax, tileYMin, tileYMax;
 		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
-		if(tileXMin < 1)
-			tileXMin = 1;
 	    tileYMin = (int) (e.getY() / lvl.getHauteurTile());
 	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
+	    if(tileXMin < 1)
+			tileXMin = 1;
 	    if(tileXMax > lvl.getLargeurNiveau() - 1)
 	    	tileXMax = lvl.getLargeurNiveau() - 1;
 	    tileYMax = (int) ((e.getY() + e.getHeight() ) / lvl.getHauteurTile());

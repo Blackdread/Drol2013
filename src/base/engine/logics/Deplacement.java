@@ -1,6 +1,9 @@
 package base.engine.logics;
 
 import base.engine.CollisionManager;
+import base.engine.EngineManager;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.ICollidableObject;
@@ -38,12 +41,55 @@ public class Deplacement {
 					mettreAJourScroll(e);
 			}
 			else{
+				deplacerEntityX(x,e);
+				deplacerEntityY(y,e);
 				System.out.println("Collision");
 				if(e instanceof ICollidableObject)
 					((ICollidableObject)e).onCollision(null);	// TODO
 			}
 		}else{
 			System.err.println("Fonction deplacer Entity : Entité non trouve, e = null");
+		}
+	}
+	
+	private static void deplacerEntityX(int x,BasicEntity e){
+		if(!CollisionManager.getInstance().testerCollision(x, 0, e)){
+			
+			//Enlever l'entité des tiles avant le déplacement
+			enleverEntiteDesTiles(e);
+			
+			//On déplace l'entité
+			e.setLocation((float)(x + e.getX()), e.getY());
+			
+			//On replace l'entité dans les tiles
+			ajouterEntiteDansTiles(e);
+			if(e instanceof HeroEntity)
+				mettreAJourScroll(e);
+		}
+		else{
+			if(x != 0)
+				deplacerEntityX(x/2,e);
+		}
+	}
+	private static void deplacerEntityY(int y,BasicEntity e){
+		if(!CollisionManager.getInstance().testerCollision(0, y, e)){
+			
+			//Enlever l'entité des tiles avant le déplacement
+			enleverEntiteDesTiles(e);
+			
+			//On déplace l'entité
+			e.setLocation(e.getX(), e.getY() + y);
+			
+			//On replace l'entité dans les tiles
+			ajouterEntiteDansTiles(e);
+			if(e instanceof HeroEntity)
+				mettreAJourScroll(e);
+		}
+		else{
+			if(y != 0){
+				deplacerEntityY(y/2,e);
+			}
+				
 		}
 	}
 	

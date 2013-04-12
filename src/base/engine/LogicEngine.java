@@ -64,17 +64,27 @@ public class LogicEngine extends Engine {
 						if(tmp != null)
 							if(tmp instanceof MoveableEntity){
 								Vector2f vec = ((MoveableEntity)tmp).getvitesse();
+								float defVit = ((MoveableEntity)tmp).getDefaultVitesse();
+								if(mes.f_data.containsKey(MessageKey.P_VITESSE_Y))
+									defVit = mes.f_data.get(MessageKey.P_VITESSE_Y);
+								
+								
 								if(mes.i_data.containsKey(MessageKey.P_DIRECTION))
 									switch(mes.i_data.get(MessageKey.P_DIRECTION)){
 									case BasicEntity.DROITE:
-										vec.x += ((MoveableEntity)tmp).getDefaultVitesse();
+										vec.x += defVit;
 										if(changeDir)
 											tmp.setDirection(BasicEntity.DROITE);
 										break;
 									case BasicEntity.GAUCHE:
-										vec.x -= ((MoveableEntity)tmp).getDefaultVitesse();
+										vec.x -= defVit;
 										if(changeDir)
 											tmp.setDirection(BasicEntity.GAUCHE);
+										break;
+									case BasicEntity.HAUT:
+										vec.y -= defVit;
+										if(changeDir)
+											tmp.setDirection(BasicEntity.HAUT);
 										break;
 									}
 							}
@@ -146,6 +156,17 @@ public class LogicEngine extends Engine {
 						lvl.removeEntity(mes.i_data.get(MessageKey.P_ID));
 						IA.getInstance().removeEntity(mes.i_data.get(MessageKey.P_ID));
 						
+					}
+					break;
+					
+				case MessageKey.I_SET_VARIABLES_ENTITY:
+					if(mes.i_data.containsKey(MessageKey.P_ID)){
+						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						if(tmp != null){
+							if(mes.f_data.containsKey(MessageKey.P_VITESSE_Y))
+								if(tmp instanceof MoveableEntity)
+									((MoveableEntity)tmp).getvitesse().y = mes.f_data.get(MessageKey.P_VITESSE_Y);
+						}
 					}
 					break;
 			}

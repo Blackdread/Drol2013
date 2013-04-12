@@ -41,13 +41,6 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		acceleration = new Vector2f(0, 0);
 	}
 	
-	/*
-	public MoveableEntity(String name, int maxLife, int vx, int vy) {
-		super(name, maxLife);
-		vitesse = new Vector2f(vx, vy);
-		acceleration = new Vector2f(0, 0);
-	}
-	*/
 	/**
 	 * Gestion de la gravite dans cette update et du deplacement
 	 */
@@ -63,11 +56,11 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 				}else{
 					vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
 
-					System.err.println("222222");
+					
 				}
 			}else{
 				vitesse.add(acceleration.scale(((float)delta)/1000.0f)); // Si le vecteur acceleration n'est pas colineaire a la vitesse, la trajectoire va changer, etc
-				System.err.println("1111111");
+				
 			}
 		}
 			
@@ -91,8 +84,12 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void onCollision(ICollidableObject collideWith) {
 		// TODO collision sur les x
-		if(collideWith == null && !CollisionManager.isEntityCollidingWithLeftOrRight(this))	// TODO verifier que c bien la collision sur y
-			vitesse.y = 0;
+		//if(collideWith == null && !CollisionManager.isEntityCollidingWithLeftOrRight(this)){	// TODO verifier que c bien la collision sur y
+		if(collideWith == null && (CollisionManager.isEntityCollidingWithGround(this) || CollisionManager.isEntityCollidingWithTop(this))){
+			vitesse.y = 0.00000f;
+			
+			System.out.println("vitesse mis a zero");
+		}
 	}
 	
 	@Override

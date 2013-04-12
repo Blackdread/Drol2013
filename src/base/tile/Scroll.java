@@ -11,7 +11,7 @@ public class Scroll {
 	public Scroll() {
 		xScroll = 0;
 		yScroll = 0;
-		width = 500;
+		width = 1000;
 		height = 500;
 	}
 	
