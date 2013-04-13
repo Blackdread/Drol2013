@@ -7,6 +7,7 @@ import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.ICollidableObject;
+import base.engine.entities.Tir;
 import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
@@ -101,14 +102,12 @@ public class Deplacement {
 				mettreAJourScroll(e);
 		}
 		else if(x != 0)
+		{
 			/*
 			 * On affine le deplacement afin que l'on colle au mur
 			 * Possibilité d'optimisation
 			 */
 			deplacerEntityX(x/2,e);
-		else
-		{
-			//Collision 
 			if(e instanceof ICollidableObject)
 				((ICollidableObject)e).onCollision(null);
 		}
@@ -132,11 +131,10 @@ public class Deplacement {
 				mettreAJourScroll(e);
 		}
 		else if(y != 0)
+		{
 			//On affine le deplacement afin que l'on colle au mur
 			deplacerEntityY(y/2,e);
-		else
-		{
-			//Collison avec un mur !
+
 			if(e instanceof ICollidableObject)
 				((ICollidableObject)e).onCollision(null);
 		}

@@ -135,7 +135,7 @@ public class LogicEngine extends Engine {
 									Vector2f vitesse = new Vector2f();
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
-									if(System.currentTimeMillis() - tmp > 500){	// juste pour debug, ce sera pas la plus tard
+									if(System.currentTimeMillis() - tmp > 100){	// juste pour debug, ce sera pas la plus tard
 									Tir t = new TirLinear(1, vitesse);
 									t.setLocation(x, y);
 									IA.getInstance().addEntity(t);
