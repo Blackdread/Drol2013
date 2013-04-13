@@ -23,73 +23,122 @@ public class Deplacement {
 		
 		BasicEntity e = lvl.getArrayEntite().get(id);
 		
+		
+		
 		if(e != null){
-			//On vÈrifie qu'il n'y a pas de collision
+			/* V2
+			 * 
+			 */
+			
+			/*
+			 * Si le d√©placement est trop rapide on le d√©coupe en deux. Cela evite de traverser des tiles
+			 * Algo recursif √† mettre dans le dossier !
+			 */
+			
+			if(x >= lvl.getLargeurTile() || y >= lvl.getHauteurTile())
+			{
+				deplacerEntity(x/2, y/2, id);
+				deplacerEntity(x-x/2, y-y/2, id);
+			}
+			else{
+				/*
+				 * Le d√©placement n'est pas trop grand on d√©place selon les y puis selons les x
+				 */
+				deplacerEntityY(y,e);
+				deplacerEntityX(x,e);
+			}
+			
+			
+			
+			
+			
+			/* V1
+			//On v√©rifie qu'il n'y a pas de collision
 			if(!CollisionManager.getInstance().testerCollision(x, y, e)){
 				
-				//Enlever l'entitÈ des tiles avant le dÈplacement
+				//Enlever l'entit√© des tiles avant le d√©placement
 				enleverEntiteDesTiles(e);
 				
-				//On dÈplace l'entitÈ
+				//On d√©place l'entit√©
 				e.setLocation((float)(x + e.getX()), (float)(y + e.getY()));
 				
-				//On replace l'entitÈ dans les tiles
+				//On replace l'entit√© dans les tiles
 				ajouterEntiteDansTiles(e);
 				
-				//Si l'entitÈ est le hÈro, il faut mettre ‡ jour le scroll
+				//Si l'entit√© est le h√©ro, il faut mettre √† jour le scroll
 				if(e instanceof HeroEntity)
 					mettreAJourScroll(e);
 			}
 			else{
-				deplacerEntityX(x,e);
 				deplacerEntityY(y,e);
+				deplacerEntityX(x,e);
 				System.out.println("Collision");
 				if(e instanceof ICollidableObject)
 					((ICollidableObject)e).onCollision(null);	// TODO
 			}
+			*/
 		}else{
-			System.err.println("Fonction deplacer Entity : EntitÈ non trouve, e = null");
+			System.err.println("Fonction deplacer Entity : Entit√© non trouve, e = null");
 		}
 	}
 	
 	private static void deplacerEntityX(int x,BasicEntity e){
+		
+		/*
+		 * Si l'on n'est pas en collision on d√©place
+		 */
 		if(!CollisionManager.getInstance().testerCollision(x, 0, e)){
 			
-			//Enlever l'entitÈ des tiles avant le dÈplacement
+			//Enlever l'entit√© des tiles avant le d√©placement
 			enleverEntiteDesTiles(e);
 			
-			//On dÈplace l'entitÈ
+			//On d√©place l'entit√©
 			e.setLocation((float)(x + e.getX()), e.getY());
 			
-			//On replace l'entitÈ dans les tiles
+			//On replace l'entit√© dans les tiles
 			ajouterEntiteDansTiles(e);
 			if(e instanceof HeroEntity)
 				mettreAJourScroll(e);
 		}
-		else{
-			if(x != 0)
-				deplacerEntityX(x/2,e);
+		else if(x != 0)
+			/*
+			 * On affine le deplacement afin que l'on colle au mur
+			 * Possibilit√© d'optimisation
+			 */
+			deplacerEntityX(x/2,e);
+		else
+		{
+			//Collision 
+			if(e instanceof ICollidableObject)
+				((ICollidableObject)e).onCollision(null);
 		}
 	}
 	private static void deplacerEntityY(int y,BasicEntity e){
+		
+		/*
+		 * Si l'on n'est pas en collision on d√©place
+		 */
 		if(!CollisionManager.getInstance().testerCollision(0, y, e)){
 			
-			//Enlever l'entitÈ des tiles avant le dÈplacement
+			//Enlever l'entit√© des tiles avant le d√©placement
 			enleverEntiteDesTiles(e);
 			
-			//On dÈplace l'entitÈ
+			//On d√©place l'entit√©
 			e.setLocation(e.getX(), e.getY() + y);
 			
-			//On replace l'entitÈ dans les tiles
+			//On replace l'entit√© dans les tiles
 			ajouterEntiteDansTiles(e);
 			if(e instanceof HeroEntity)
 				mettreAJourScroll(e);
 		}
-		else{
-			if(y != 0){
-				deplacerEntityY(y/2,e);
-			}
-				
+		else if(y != 0)
+			//On affine le deplacement afin que l'on colle au mur
+			deplacerEntityY(y/2,e);
+		else
+		{
+			//Collison avec un mur !
+			if(e instanceof ICollidableObject)
+				((ICollidableObject)e).onCollision(null);
 		}
 	}
 	
@@ -98,7 +147,7 @@ public class Deplacement {
 	}
 	
 	/**
-	 * Enleve l'entite des tiles où elle se trouve
+	 * Enleve l'entite des tiles oÔøΩ elle se trouve
 	 * @param e entite a enlever des tiles qui la contiennent
 	 */
 	public static void enleverEntiteDesTiles(final BasicEntity e){
@@ -118,7 +167,7 @@ public class Deplacement {
 	}
 	
 	/**
-	 * Ajoute l'entite dans les tiles qu'il faut (partout où l'entite touche la tile)
+	 * Ajoute l'entite dans les tiles qu'il faut (partout oÔøΩ l'entite touche la tile)
 	 * @param e entite a ajouter
 	 */
 	public static void ajouterEntiteDansTiles(final BasicEntity e){
@@ -138,7 +187,7 @@ public class Deplacement {
 	}
 	
 	/**
-	 * Si le scroll sort de l'Ècran on met ‡ 0 ou max sinon on centre sur le hÈro
+	 * Si le scroll sort de l'√©cran on met √† 0 ou max sinon on centre sur le h√©ro
 	 * @param e entite sur laquelle centre le scroll
 	 */
 	public static void mettreAJourScroll(final BasicEntity e){
