@@ -4,6 +4,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.entities.BasicEntity;
 import base.engine.entities.MoveableEntity;
+import base.engine.entities.PlayableEntity;
 import base.engine.entities.Tir;
 import base.engine.entities.TirLinear;
 import base.engine.levels.LevelDrol;
@@ -158,7 +159,15 @@ public class LogicEngine extends Engine {
 						
 					}
 					break;
-					
+				case MessageKey.I_JUMP:
+					if(mes.i_data.containsKey(MessageKey.P_ID)){
+						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						if(tmp != null && tmp instanceof PlayableEntity){
+							((PlayableEntity)tmp).jump();
+						}
+					}
+					break;
+				
 				case MessageKey.I_SET_VARIABLES_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID)){
 						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));

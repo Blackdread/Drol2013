@@ -146,13 +146,17 @@ public class TestView extends View{
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
-		
+		Message m = new Message();
 		switch(key){
 			case Input.KEY_SPACE:
-				hero.jump();
+				//hero.jump();
+				m.instruction = MessageKey.I_JUMP;
+				m.i_data.put(MessageKey.P_ID, hero.getId());
+				m.engine = EngineManager.LOGIC_ENGINE;
+				
+				EngineManager.getInstance().receiveMessage(m);
 				break;
 			case Input.KEY_RIGHT:
-				Message m = new Message();
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
 				m.i_data.put(MessageKey.P_ID, hero.getId());
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
@@ -161,25 +165,25 @@ public class TestView extends View{
 				engineManager.receiveMessage(m);
 				break;
 			case Input.KEY_LEFT:
-				Message m2 = new Message();
-				m2.instruction = MessageKey.I_START_ENTITY_MOVE;
-				m2.i_data.put(MessageKey.P_ID, hero.getId());
-				m2.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
-				m2.engine = EngineManager.LOGIC_ENGINE;
+				m.instruction = MessageKey.I_START_ENTITY_MOVE;
+				m.i_data.put(MessageKey.P_ID, hero.getId());
+				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
+				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				engineManager.receiveMessage(m2);
+				engineManager.receiveMessage(m);
 			break;
 		}
 		
 	}
 	@Override
 	public void keyReleased(int key, char c) {
+		Message m = new Message();
 		switch(key){
 		case Input.KEY_SPACE:
 			hero.jump();
 			break;
 		case Input.KEY_RIGHT:
-			Message m = new Message();
+			
 			m.instruction = MessageKey.I_START_ENTITY_MOVE;
 			m.i_data.put(MessageKey.P_ID, hero.getId());
 			m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);

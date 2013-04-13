@@ -55,10 +55,12 @@ public abstract class MessageKey {
 	 * Met la vitesse de l'entite a default vitesse et met sa direction
 	 */
 	public static final int I_START_ENTITY_MOVE = 15;
+	public static final int I_JUMP = 16;
 	/**
 	 * Switch between P_keys and set the value
 	 */
-	public static final int I_SET_VARIABLES_ENTITY = 16;
+	@Deprecated
+	public static final int I_SET_VARIABLES_ENTITY = 17;
 	
 	// Parameters
 	public static final int P_ID = 5;
