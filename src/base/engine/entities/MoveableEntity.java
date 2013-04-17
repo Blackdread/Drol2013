@@ -35,10 +35,13 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	protected Vector2f acceleration;
 	protected float accelerationEntity;
 	
+	protected boolean moving;
+	
 	public MoveableEntity(String name, int maxLife) {
 		super(name, maxLife);
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
+		moving = false;
 	}
 	
 	/**
@@ -70,6 +73,8 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		}
 
 		if(vitesse.x != 0 || vitesse.y != 0){
+			//Si il bouge
+			
 			Message m = new Message();
 			m.instruction = MessageKey.I_MOVE_ENTITY;
 			m.i_data.put(MessageKey.P_ID, id);
@@ -170,5 +175,13 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void setDefaultVitesse(float vitesse){
 		defaultVitesse = vitesse;
+	}
+
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
 	}
 }
