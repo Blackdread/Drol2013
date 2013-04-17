@@ -136,7 +136,16 @@ public class LogicEngine extends Engine {
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
 									if(System.currentTimeMillis() - tmp > 100){	// juste pour debug, ce sera pas la plus tard
-									Tir t = new TirLinear(1, vitesse);
+									Tir t = new TirLinear(1, vitesse, null);
+									
+									if(mes.o_data.containsKey(MessageKey.P_ENTITY))
+									{
+										System.out.println("Contient");
+										Object b = mes.o_data.get(MessageKey.P_ENTITY);
+										if(b instanceof BasicEntity)
+											t.setExpediteur((BasicEntity)b);
+									}
+									
 									t.setLocation(x, y);
 									IA.getInstance().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);

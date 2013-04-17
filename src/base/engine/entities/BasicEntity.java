@@ -12,7 +12,7 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
  */
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
-	protected Shape shape;
+	
 	
 	protected int direction;
 	//protected Vector2f direction;

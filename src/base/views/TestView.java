@@ -77,6 +77,8 @@ public class TestView extends View{
 		lvl.addEntity(hero);
 		Deplacement.deplacerEntity(0, 0, hero.getId());
 		IA.getInstance().addEntity(hero);
+		
+		System.out.println("hero : " + hero);
 	}
 	
 	@Override
@@ -134,6 +136,8 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_VITESSE_X, 5);
 				m.i_data.put(MessageKey.P_VITESSE_Y, 0);
 			}
+			
+			m.o_data.put(MessageKey.P_ENTITY, hero);
 			
 			engineManager.getTabEngine()[1].receiveMessage(m);
 			
