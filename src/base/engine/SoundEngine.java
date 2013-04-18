@@ -54,10 +54,12 @@ public class SoundEngine extends Engine {
 				break;
 			
 			case MessageKey.I_CHANGE_VOLUME_MUSIC:
-				if(music != null)
+				if(music != null){
 					if(mes.f_data.containsKey(MessageKey.P_VOLUME)){
 						music.setVolume((mes.f_data.get(MessageKey.P_VOLUME)));
-					}
+					}else
+						music.setVolume(Configuration.getMusicVolume());
+				}
 				break;
 			
 			case MessageKey.I_PLAY_AT_MUSIC:

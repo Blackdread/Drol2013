@@ -56,7 +56,7 @@ public class ElementResolution extends Elements{
 			if(!resolution.equals(new Resolution(container.getWidth(),container.getHeight())) && resolution.getHeight() >= Game.MINIMUM_SCREEN_HAUTEUR){
 				try {
 					Game.changeResolution(resolution.getWidth(), resolution.getHeight());
-					//Game.rechargerToutesLesRessources();
+					Game.rechargerToutesLesRessources();
 					Configuration.setWidth(resolution.getWidth());
 					Configuration.setHeight(resolution.getHeight());
 					try {

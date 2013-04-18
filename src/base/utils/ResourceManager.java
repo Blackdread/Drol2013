@@ -21,6 +21,8 @@ import org.newdawn.slick.particles.ParticleSystem;
  * @version 1.0 Changed from original
  * On n'utilise plus le jar mais seulement un repertoire qui contient les ressources, plus simple et plus rapide pour faire
  * les tests
+ * @IMPORTANT Slick 2D -> RessourceManager mal penser, il faut charger les ressources au fur et a mesure que l'on en a besoin
+ * 
  * 
  * This class provide access to all resources contents in a single jar.
  * 

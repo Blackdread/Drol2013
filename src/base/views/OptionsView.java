@@ -1,5 +1,7 @@
 package base.views;
 
+import java.io.IOException;
+
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
@@ -17,7 +19,10 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import base.utils.Resolution;
 import base.engine.gui.ListeDeroulante;
 import base.engine.gui.Slider;
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
 
@@ -35,20 +40,22 @@ public class OptionsView extends View {
 	MouseOverArea butQuitter, butFullscreen, butSonDesacti, butSonActi;
 	private ListeDeroulante listeDerTailleScreen;
 	private Slider sliderMusic;
-	private RoundedRectangle zone;
+	private RoundedRectangle zone[] = new RoundedRectangle[3];
 
 	@Override
 	public void initResources() {
-		int zoneX1 = container.getWidth()/10;
-		int zoneX2 = zoneX1*2 + 10;
-		int zoneX3 = zoneX1*3 + 10;
+		final int MARGIN = 30;
+		int zoneX1 = container.getWidth()/3;
+		int zoneX2 = zoneX1*2 + MARGIN;
 		
-		int zoneY1 = container.getHeight()/10;
-		int zoneY1max = container.getHeight()*3/4;
-		int zoneY2 = zoneY1;
 		
-		zone = new RoundedRectangle(zoneX1, zoneY1, zoneX2 - 10,zoneY1max, 5);
+		int zoneY1max = container.getHeight()*8/10;
 		
+		zone[0] = new RoundedRectangle(MARGIN, MARGIN, zoneX1 - MARGIN,zoneY1max, 5);
+		zone[1] = new RoundedRectangle(zoneX1 + MARGIN, MARGIN, zoneX1 - MARGIN,zoneY1max, 5);
+		zone[2] = new RoundedRectangle(zoneX2, MARGIN, zoneX1 - MARGIN * 2,zoneY1max, 5);
+		
+		// TODO PLACER les elements dans les differentes zones
 		
 		background = ResourceManager.getImage("options_view_background").getScaledCopy(container.getWidth(), container.getHeight());
 		
@@ -89,8 +96,14 @@ public class OptionsView extends View {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(background, 0, 0);
-		g.setColor(Color.red);
-		g.fill(zone);
+		g.setDrawMode(Graphics.MODE_COLOR_MULTIPLY);
+		for(int iii=0;iii<3;iii++){
+			g.setColor(Color.gray);
+			g.fill(zone[iii]);
+			g.setColor(Color.orange);
+			g.draw(zone[iii]);
+		}
+		g.setDrawMode(Graphics.MODE_NORMAL);
 		
 		butFullscreen.render(container, g);
 		g.setColor(Color.white);
@@ -120,6 +133,8 @@ public class OptionsView extends View {
 	@Override
 	public void mouseReleased(int but, int x, int y) {
 		super.mouseReleased(but, x, y);
+		Message m = new Message();
+		
 		if(butQuitter.isMouseOver())
 			goToMenu();
 		if(butFullscreen.isMouseOver())
@@ -127,24 +142,40 @@ public class OptionsView extends View {
 		if(butSonDesacti.isMouseOver()){
 			if(Configuration.isMusicOn()){
 				Configuration.setMusicOn(false);
-				GameMusic.stopMainTheme();
+				m.instruction = MessageKey.I_STOP_MUSIC;
+				m.engine = EngineManager.SOUND_ENGINE;
+				EngineManager.getInstance().receiveMessage(m);
 			}else{	//(butSonActi.isMouseOver())
 				Configuration.setMusicOn(true);
-				GameMusic.loopMainTheme();
+				m.instruction = MessageKey.I_PLAY_MUSIC;
+				// TODO donner le nom de la musique a jouer
+				
+				m.engine = EngineManager.SOUND_ENGINE;
+				EngineManager.getInstance().receiveMessage(m);
 			}
 		}
 		
 		listeDerTailleScreen.isMouseOver();
+		
 		if(sliderMusic.mouseReleased()){
 			Configuration.setMusicVolume(sliderMusic.getValuePrecision2());
-			float temp1 = GameMusic.getMusicPosition();
+			/*float temp1 = GameMusic.getMusicPosition();
 			GameMusic.setMusicVolume(sliderMusic.getValuePrecision2());
-			GameMusic.setMusicPostion(temp1);
+			GameMusic.setMusicPostion(temp1);*/
+			m.instruction = MessageKey.I_CHANGE_VOLUME_MUSIC;
+			m.engine = EngineManager.SOUND_ENGINE;
+			EngineManager.getInstance().receiveMessage(m);
 		}
 	}
 
 	private void goToMenu() {
+		//Game.rechargerToutesLesRessources();
 		container.setMouseGrabbed(false);
+		try {
+			Configuration.saveNewConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 

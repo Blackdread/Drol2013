@@ -140,4 +140,18 @@ public class Game extends StateBasedGame {
 	public static void changeResolution(int width, int height) throws SlickException{
 		((AppGameContainer) Game.container).setDisplayMode(width, height, Configuration.isFullScreen());
 	}
+
+	/**
+	 * Plus simple que de devoir recharger que celles dont on a besoin. C'est un petit jeu apres tout :)
+	 * C'est Slick 2D qui a ete mal pense sur sa facon de fonctionner, le RessourceManager ne devrait pas tous charger mais le
+	 * faire progressivement selon la vue ou on se trouve.
+	 */
+	@Deprecated
+	public static void rechargerToutesLesRessources(){
+		for(View v : states)
+			if(v!=null){
+				v.initResources();
+			}
+		
+	}
 }
