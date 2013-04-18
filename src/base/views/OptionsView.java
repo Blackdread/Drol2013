@@ -57,7 +57,7 @@ public class OptionsView extends View {
 		
 		// TODO PLACER les elements dans les differentes zones
 		
-		background = ResourceManager.getImage("options_view_background").getScaledCopy(container.getWidth(), container.getHeight());
+		background = ResourceManager.getImage("background_options_view").getScaledCopy(container.getWidth(), container.getHeight());
 		
 		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitter"), container.getWidth()/10, container.getHeight()-container.getHeight()/10 - 50, ResourceManager.getImage("MenuQuitterOver").getWidth(), ResourceManager.getImage("MenuQuitterOver").getHeight());
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitterOver"));

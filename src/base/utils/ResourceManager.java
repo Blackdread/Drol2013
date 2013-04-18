@@ -18,12 +18,6 @@ import org.newdawn.slick.particles.ParticleSystem;
 
 
 /**
- * @version 1.0 Changed from original
- * On n'utilise plus le jar mais seulement un repertoire qui contient les ressources, plus simple et plus rapide pour faire
- * les tests
- * @IMPORTANT Slick 2D -> RessourceManager mal penser, il faut charger les ressources au fur et a mesure que l'on en a besoin
- * 
- * 
  * This class provide access to all resources contents in a single jar.
  * 
  * Use the init() method with the jar path location to initialize the resources,
@@ -44,6 +38,14 @@ import org.newdawn.slick.particles.ParticleSystem;
  * Example: 40_40_sprites.png
  * 
  * /resources /fonts /images /maps /musics /sounds /sprites /systems
+ * 
+ * @version 1.0 Changed from original
+ * On n'utilise plus le jar mais seulement un repertoire qui contient les ressources, plus simple et plus rapide pour faire
+ * les tests
+ * @IMPORTANT Slick 2D -> RessourceManager mal penser, il faut charger les ressources au fur et a mesure que l'on en a besoin
+ * @TODO Mal penser encore -> il charge que ce qui se trouve apres les dossiers "images" "sprites" etc mais si on veut rajouter des
+ * dossier il ne sera pas en mesure de charger ce qui se trouve plus loin
+ * 
  * 
  * @author Yoann CAPLAIN
  * @author Kevin

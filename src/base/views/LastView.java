@@ -28,7 +28,7 @@ public class LastView extends View{
 	public void initResources() {
 		ready = false;
 		timer = new Timer(WAIT_TIME_BEFORE_NEXTR);	
-		background = ResourceManager.getImage("main_menu_view_background").getScaledCopy(container.getWidth(), container.getHeight());
+		background = ResourceManager.getImage("background_last_view").getScaledCopy(container.getWidth(), container.getHeight());
 	}
 	
 	@Override

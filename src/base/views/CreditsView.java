@@ -27,7 +27,7 @@ public class CreditsView extends View {
 	
 	@Override
 	public void initResources() {
-		background = ResourceManager.getImage("credit_view_background").getScaledCopy(container.getWidth(), container.getHeight());
+		background = ResourceManager.getImage("background_credits_view").getScaledCopy(container.getWidth(), container.getHeight());
 		
 		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitterOver"), container.getWidth()/10, container.getHeight()-container.getHeight()/10 - 50, ResourceManager.getImage("MenuQuitterOver").getWidth(), ResourceManager.getImage("MenuQuitterOver").getHeight());
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitter"));
