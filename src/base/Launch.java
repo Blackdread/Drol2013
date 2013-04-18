@@ -20,7 +20,7 @@ public class Launch {
 		// TODO Auto-generated method stub
 		try {
 			//Game g = new Game("config/config.properties", "libs/resources.jar");
-			Game g = new Game("config/config.properties", "resources");
+			Game g = new Game("config/config.properties", "resources/");
 			g.launch();
 		} catch (IOException e) {
 			e.printStackTrace();

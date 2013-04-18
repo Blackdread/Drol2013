@@ -126,7 +126,8 @@ public class OptionsView extends View {
 		super.keyPressed(key, c);
 		switch(key){
 		case Input.KEY_ESCAPE:
-			goToMenu();
+			//goToMenu();
+			gotoPreviousView();
 			break;
 		}
 	}
@@ -135,8 +136,10 @@ public class OptionsView extends View {
 		super.mouseReleased(but, x, y);
 		Message m = new Message();
 		
-		if(butQuitter.isMouseOver())
-			goToMenu();
+		if(butQuitter.isMouseOver()){
+			//goToMenu();
+			gotoPreviousView();
+		}
 		if(butFullscreen.isMouseOver())
 			inverseFullscreen();
 		if(butSonDesacti.isMouseOver()){
@@ -169,7 +172,6 @@ public class OptionsView extends View {
 	}
 
 	private void goToMenu() {
-		//Game.rechargerToutesLesRessources();
 		container.setMouseGrabbed(false);
 		try {
 			Configuration.saveNewConfig();
@@ -205,6 +207,16 @@ public class OptionsView extends View {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+	}
+	
+	@Override
+	protected void gotoPreviousView(){
+		try {
+			Configuration.saveNewConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		super.gotoPreviousView();
 	}
 
 }

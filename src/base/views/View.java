@@ -11,6 +11,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.imageout.ImageOut;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.Transition;
 
 import base.engine.EngineManager;
 import base.engine.Game;
@@ -28,10 +31,12 @@ public abstract class View extends BasicGameState {
 	protected GameContainer container;
 	protected static Game game;
 	protected EngineManager engineManager;
+	protected static int lastViewID = 0;
 
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
 		super.leave(container, game);
+		lastViewID = this.getID();
 	}
 
 	@Override
@@ -83,4 +88,21 @@ public abstract class View extends BasicGameState {
 	 */
 	public abstract void initResources();
 
+	/**
+	 * Retourne a la vue precedente
+	 * Avec transition de fadeOut et fadeIn
+	 */
+	protected void gotoPreviousView(){
+		container.setMouseGrabbed(false);
+		game.enterState(lastViewID, new FadeOutTransition(), new FadeInTransition());
+	}
+	/**
+	 * Retourne a la vue precedente
+	 * @param out transition out
+	 * @param in transition in
+	 */
+	protected void gotoPreviousView(Transition out, Transition in){
+		container.setMouseGrabbed(false);
+		game.enterState(lastViewID, out, in);
+	}
 }

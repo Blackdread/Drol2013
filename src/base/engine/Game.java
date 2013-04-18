@@ -41,9 +41,11 @@ public class Game extends StateBasedGame {
 	public static final int MAIN_MENU_VIEW_ID = 1;
 	public static final int OPTIONS_VIEW_ID = 4;
 	public static final int CREDITS_VIEW_ID = 8;
-	public static final int LEVELS_VIEW_ID = 16;
-	public static final int TRANSITION_VIEW_ID = 32;
-	public static final int LAST_VIEW_ID = 64;
+	public static final int SOLO_VIEW_ID = 16;
+	public static final int MULTI_VIEW_ID = 32;
+	
+	public static final int TRANSITION_VIEW_ID = 512;
+	public static final int LAST_VIEW_ID = 1024;
 	
 	public static final int TEST_STATE_ID = 100;
 	
@@ -63,6 +65,8 @@ public class Game extends StateBasedGame {
 		addState(new MainMenuView());
 		addState(new OptionsView());
 		addState(new CreditsView());
+		addState(new SoloView());
+		addState(new MultiView());
 		addState(new TransitionView());
 		addState(new LastView());
 		

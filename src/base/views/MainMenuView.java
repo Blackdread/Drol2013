@@ -27,20 +27,30 @@ import base.utils.ResourceManager;
 public class MainMenuView extends View {
 
 	private Image background;
-	MouseOverArea butJouer, butOption, butQuitter, butCredits;
+	MouseOverArea butJouer, butSolo, butMulti, butOption, butQuitter, butCredits;
+	
+	private boolean wasOverJouer = false;
 
 	@Override
 	public void initResources() {
 		background = ResourceManager.getImage("background_main_menu_view").getScaledCopy(container.getWidth(), container.getHeight());
 
-		int larg = ResourceManager.getImage("MenuJouer").getWidth();
-		int haut = ResourceManager.getImage("MenuJouer").getHeight();
+		Image tmp = ResourceManager.getImage("MenuJouer");
+		
+		int larg = tmp.getWidth();
+		int haut = tmp.getHeight();
 		
 		int x = container.getWidth() / 2 - larg/2;
 		int y = container.getHeight() / 2 - haut/2 * 4;
 		
-		butJouer = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), x, y, larg, haut);
+		butJouer = new MouseOverArea(container, tmp, x, y, larg, haut);
 		butJouer.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		
+		butSolo = new MouseOverArea(container, ResourceManager.getImage("MenuSolo"), x + tmp.getWidth(), y,  ResourceManager.getImage("MenuSolo").getWidth(),  ResourceManager.getImage("MenuSolo").getHeight());
+		butSolo.setMouseOverImage(ResourceManager.getImage("MenuSoloOver"));
+		
+		butMulti = new MouseOverArea(container, ResourceManager.getImage("MenuMulti"), x + tmp.getWidth() + ResourceManager.getImage("MenuSolo").getWidth(), y, ResourceManager.getImage("MenuMulti").getWidth(), ResourceManager.getImage("MenuMulti").getHeight());
+		butMulti.setMouseOverImage(ResourceManager.getImage("MenuMultiOver"));
 		
 		butOption = new MouseOverArea(container, ResourceManager.getImage("MenuOption"), x, y+haut, larg, haut);
 		butOption.setMouseOverImage(ResourceManager.getImage("MenuOptionOver"));
@@ -57,6 +67,10 @@ public class MainMenuView extends View {
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
 		g.drawImage(background, 0, 0);
 		butJouer.render(container, g);
+		if(wasOverJouer){
+			butSolo.render(container, g);
+			butMulti.render(container, g);
+		}
 		butOption.render(container, g);
 		butQuitter.render(container, g);
 		butCredits.render(container, g);
@@ -64,6 +78,16 @@ public class MainMenuView extends View {
 		//font.drawString(container.getWidth()-font.getWidth(Game.VERSION)-5, container.getHeight()-font.getHeight(Game.VERSION)-5, Game.VERSION, Color.cyan);
 		g.drawString(Game.VERSION, 5, container.getHeight() - 20);
 		super.render(container, sbgame, g);
+	}
+	
+	@Override
+	public void mouseMoved(int oldx, int oldy, int newx, int newy){
+		if(wasOverJouer){
+			if(!butSolo.isMouseOver() && !butMulti.isMouseOver())
+				wasOverJouer = false;
+		}
+		if(butJouer.isMouseOver())
+			wasOverJouer = true;
 	}
 	
 	@Override
@@ -79,18 +103,28 @@ public class MainMenuView extends View {
 	public void mousePressed(int button, int x, int y) {
 		super.mousePressed(button, x, y);
 		if(butJouer.isMouseOver())
-			gotoJouer();
+			gotoJouerSolo();
 		else if(butOption.isMouseOver())
 			gotoOption();
 		else if(butCredits.isMouseOver())
 			gotoCredits();
 		else if(butQuitter.isMouseOver())
 			gotoLastView();
+		else if(wasOverJouer){
+			if(butSolo.isMouseOver())
+				gotoJouerSolo();
+			if(butMulti.isMouseOver())
+				gotoJouerMulti();
+		}
 	}
 
-	private void gotoJouer() {
+	private void gotoJouerSolo() {
 		container.setMouseGrabbed(false);
-		game.enterState(Game.LEVELS_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
+		game.enterState(Game.SOLO_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
+	}
+	private void gotoJouerMulti() {
+		container.setMouseGrabbed(false);
+		game.enterState(Game.MULTI_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	private void gotoOption() {
 		container.setMouseGrabbed(false);
@@ -100,7 +134,8 @@ public class MainMenuView extends View {
 		container.setMouseGrabbed(false);
 		game.enterState(Game.CREDITS_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
-	private void gotoLastView() {
+	
+	protected void gotoLastView() {
 		container.setMouseGrabbed(false);
 		game.enterState(Game.LAST_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
