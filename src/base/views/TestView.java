@@ -138,8 +138,9 @@ public class TestView extends View{
 			}
 			
 			m.o_data.put(MessageKey.P_ENTITY, hero);
+			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			engineManager.getTabEngine()[1].receiveMessage(m);
+			EngineManager.getInstance().receiveMessage(m);
 			
 			
 		}
