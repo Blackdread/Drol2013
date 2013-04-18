@@ -166,7 +166,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				engineManager.receiveMessage(m);
+				EngineManager.getInstance().receiveMessage(m);
 				break;
 			case Input.KEY_LEFT:
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
@@ -174,7 +174,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				engineManager.receiveMessage(m);
+				EngineManager.getInstance().receiveMessage(m);
 			break;
 		}
 		
