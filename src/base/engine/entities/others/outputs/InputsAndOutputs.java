@@ -2,6 +2,8 @@ package base.engine.entities.others.outputs;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.geom.Shape;
+
 import base.engine.entities.others.OutputManager;
 
 /**
@@ -18,6 +20,8 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	 * Should be unique	-> depends, it cas be useful sometimes to not be unique
 	 * Everywhere the name will be supposed not unique
 	 */
+	
+	protected Shape shape;
 	protected String name;
 	
 	public static int currentId = 0;
@@ -255,33 +259,41 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	@Override
 	public void setXorigin(float x) {
 		this.xOrigin = x;
+		this.shape.setCenterX(x);
 	}
 
 	@Override
 	public void setYorigin(float y) {
 		this.yOrigin = y;
+		this.shape.setCenterY(y);
 	}
 
 	@Override
 	public void setLocationOrigin(float x, float y) {
 		this.xOrigin = x;
 		this.yOrigin = y;
+		this.shape.setCenterX(x);
+		this.shape.setCenterY(y);
 	}
 
 	@Override
 	public void setLocation(float x, float y) {
 		this.x = x;
 		this.y = y;
+		this.shape.setX(x);
+		this.shape.setY(y);
 	}
 	
 	@Override
 	public void setX(float x) {
 		this.x = x;
+		this.shape.setX(x);
 	}
 
 	@Override
 	public void setY(float y) {
 		this.y = y;
+		this.shape.setY(y);
 	}
 	
 	public int getId() {
@@ -291,6 +303,14 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	public void setId(int id) {
 		this.id = id;
 	}
+	public Shape getShape() {
+		return shape;
+	}
+
+	public void setShape(Shape shape) {
+		this.shape = shape;
+	}
+
 	/**
 	 * 
 	 * @param id of the Output

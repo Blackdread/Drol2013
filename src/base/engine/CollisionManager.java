@@ -1,5 +1,7 @@
 package base.engine;
 
+import java.util.HashMap;
+
 import base.engine.entities.BasicEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.triggers.Trigger;
@@ -72,6 +74,40 @@ public class CollisionManager{
 		return false;
 	}
 
+	public HashMap testerCollisionEntites(int x, int y, BasicEntity e)
+	{
+		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		HashMap<Integer, BasicEntity> hm = new HashMap<Integer, BasicEntity>();
+		
+		int tileXMin = (int) ((e.getX()+x) / lvl.getLargeurTile());
+	    int tileYMin = (int) ((e.getY()+y) / lvl.getHauteurTile());
+	    int tileXMax = (int) ((e.getX() + x + e.getWidth() - 1) / lvl.getLargeurTile());
+	    int tileYMax = (int) ((e.getY() + y + e.getHeight() - 1) / lvl.getHauteurTile());
+	    
+	    for(int i = tileXMin; i <= tileXMax; i++)
+	    {
+	        for(int j= tileYMin; j <= tileYMax; j++)
+	        {
+	        	//On vérifie les entités proches
+	        	for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
+	        	{
+	        		/*
+	        		 * Si on trouve une entité proche et qu'elle est en collision, on l'ajoute dans le hashmap
+	        		 */
+	        		
+	        		BasicEntity b = lvl.getTabNiveau()[j][i].getEntiteProcheAt(k);
+	        		
+	        		if(e.getShape().intersects(b.getShape()))
+	        			hm.put(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k).getId(), lvl.getTabNiveau()[j][i].getEntiteProcheAt(k));
+	        		
+	        	}
+	        }
+	    }
+	    
+	    return hm;
+	    
+	}
+	
 	public static boolean isEntityCollidingWithTop(BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		

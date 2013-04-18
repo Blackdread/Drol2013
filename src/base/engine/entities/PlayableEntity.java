@@ -15,7 +15,7 @@ public abstract class PlayableEntity extends MoveableEntity {
 	public void jump(){
 		//if((int)vitesse.y == 0)
 		if(CollisionManager.isEntityCollidingWithGround(this)){
-			vitesse.y = -4.4f;
+			vitesse.y = -5.3f;
 			//vitesse.y += -5; // ou
 			/*
 			Message m = new Message();

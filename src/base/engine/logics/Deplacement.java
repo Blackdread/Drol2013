@@ -1,13 +1,19 @@
 package base.engine.logics;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.MoveableEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.Tir;
+import base.engine.entities.others.triggers.Trigger;
+import base.engine.entities.others.triggers.TriggerObjectInZone;
 import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
@@ -45,42 +51,40 @@ public class Deplacement {
 				/*
 				 * Le déplacement n'est pas trop grand on déplace selon les y puis selons les x
 				 */
+				gererCollisionEntity(x, y, e);
+				
 				deplacerEntityY(y,e);
 				deplacerEntityX(x,e);
 			}
-			
-			
-			
-			
-			
-			/* V1
-			//On vérifie qu'il n'y a pas de collision
-			if(!CollisionManager.getInstance().testerCollision(x, y, e)){
-				
-				//Enlever l'entité des tiles avant le déplacement
-				enleverEntiteDesTiles(e);
-				
-				//On déplace l'entité
-				e.setLocation((float)(x + e.getX()), (float)(y + e.getY()));
-				
-				//On replace l'entité dans les tiles
-				ajouterEntiteDansTiles(e);
-				
-				//Si l'entité est le héro, il faut mettre à jour le scroll
-				if(e instanceof HeroEntity)
-					mettreAJourScroll(e);
-			}
-			else{
-				deplacerEntityY(y,e);
-				deplacerEntityX(x,e);
-				System.out.println("Collision");
-				if(e instanceof ICollidableObject)
-					((ICollidableObject)e).onCollision(null);	// TODO
-			}
-			*/
 		}else{
 			System.err.println("Fonction deplacer Entity : Entité non trouve, e = null");
 		}
+	}
+	
+	private static void gererCollisionEntity(int x, int y, BasicEntity e)
+	{
+		HashMap<Integer, BasicEntity> hm = CollisionManager.getInstance().testerCollisionEntites(x, y, e);
+		
+		if(!hm.isEmpty())
+		{
+			for(Entry<Integer, BasicEntity> entry : hm.entrySet()) {
+			    BasicEntity b = entry.getValue();
+			    
+			    if(b != e)
+			    {
+			    	if(b instanceof Trigger){
+	        			 ((TriggerObjectInZone)b).addAnEntityToActON(e);
+	        			 System.out.println("ajouter dans Trigger");
+	        		 }
+	        		 else
+	        		 {
+	        			 if(b instanceof ICollidableObject && e instanceof ICollidableObject)
+	        				 ((ICollidableObject)b).onCollision((ICollidableObject)e);
+	        		 }
+			    }
+			}
+		}
+		
 	}
 	
 	private static void deplacerEntityX(int x,BasicEntity e){
@@ -98,6 +102,7 @@ public class Deplacement {
 			
 			//On replace l'entité dans les tiles
 			ajouterEntiteDansTiles(e);
+			
 			if(e instanceof HeroEntity)
 				mettreAJourScroll(e);
 		}

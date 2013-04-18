@@ -12,25 +12,25 @@ import base.engine.MessageKey;
 public class TirLinear extends Tir {
 	
 	public TirLinear(){
-		super("TirLinear", 1);
+		super("TirLinear", 1, null);
 		gravityON = false;
 	}
 	
-	public TirLinear(int maxLife, Vector2f vitesse) {
-		super("TirLinear", maxLife);
+	public TirLinear(int maxLife, Vector2f vitesse, BasicEntity e) {
+		super("TirLinear", maxLife, e);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
 		gravityON = false;
 	}
 	
-	public TirLinear(String name, int maxLife) {
-		super(name, maxLife);
+	public TirLinear(String name, int maxLife, BasicEntity e) {
+		super(name, maxLife, e);
 		shape = new Rectangle(0,0,10,10);
 		gravityON = false;
 	}
 	
-	public TirLinear(String name, int maxLife, Vector2f vitesse) {
-		super(name, maxLife);
+	public TirLinear(String name, int maxLife, Vector2f vitesse, BasicEntity e) {
+		super(name, maxLife, e);
 		this.vitesse = vitesse;
 		shape = new Rectangle(0,0,10,10);
 		gravityON = false;
@@ -54,13 +54,14 @@ public class TirLinear extends Tir {
 	public void onCollision(ICollidableObject collideWith) {
 		// TODO envoyer un message pour declencher les outputs OnKilled()
 		
-		Message m = new Message();
-		m.instruction = MessageKey.I_REMOVE_ENTITY;
-		m.i_data.put(MessageKey.P_ID, id);
-		m.engine = EngineManager.LOGIC_ENGINE;
-		
-		EngineManager.getInstance().receiveMessage(m);
-		
-		
+		if(collideWith != expediteur)
+		{
+			Message m = new Message();
+			m.instruction = MessageKey.I_REMOVE_ENTITY;
+			m.i_data.put(MessageKey.P_ID, id);
+			m.engine = EngineManager.LOGIC_ENGINE;
+			
+			EngineManager.getInstance().receiveMessage(m);
+		}
 	}
 }
