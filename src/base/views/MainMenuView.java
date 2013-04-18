@@ -27,36 +27,36 @@ import base.utils.ResourceManager;
 public class MainMenuView extends View {
 
 	private Image background;
-	MouseOverArea butJouer, butEditeur, butOption, butQuitter, butCredits;
+	MouseOverArea butJouer, butOption, butQuitter, butCredits;
 
 	@Override
 	public void initResources() {
 		background = ResourceManager.getImage("main_menu_view_background").getScaledCopy(container.getWidth(), container.getHeight());
+
+		int larg = ResourceManager.getImage("MenuJouer").getWidth();
+		int haut = ResourceManager.getImage("MenuJouer").getHeight();
 		
-		int x = container.getWidth() / 2 - 75;
-		int y = container.getHeight() / 2 - 100;
+		int x = container.getWidth() / 2 - larg/2;
+		int y = container.getHeight() / 2 - haut/2 * 4;
 		
-		butJouer = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), x, y, 150, 30);
+		butJouer = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), x, y, larg, haut);
 		butJouer.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
-		butEditeur = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), x, y+60, 150, 30);
-		butEditeur.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
-		
-		butOption = new MouseOverArea(container, ResourceManager.getImage("MenuOption"), x, y+120, 150, 30);
+		butOption = new MouseOverArea(container, ResourceManager.getImage("MenuOption"), x, y+haut, larg, haut);
 		butOption.setMouseOverImage(ResourceManager.getImage("MenuOptionOver"));
 		
-		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitter"), x, y+180, 150, 30);
+		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitter"), x, y+haut*2-25, larg, haut);
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitterOver"));
 		
-		butCredits = new MouseOverArea(container, ResourceManager.getImage("MenuCredits"), x, y+240, 150, 30);
+		butCredits = new MouseOverArea(container, ResourceManager.getImage("MenuCredits"), x, y+haut*3-50, larg, haut);
 		butCredits.setMouseOverImage(ResourceManager.getImage("MenuCreditsOver"));
+		
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
 		g.drawImage(background, 0, 0);
 		butJouer.render(container, g);
-		butEditeur.render(container, g);
 		butOption.render(container, g);
 		butQuitter.render(container, g);
 		butCredits.render(container, g);
@@ -80,8 +80,6 @@ public class MainMenuView extends View {
 		super.mousePressed(button, x, y);
 		if(butJouer.isMouseOver())
 			gotoJouer();
-		else if(butEditeur.isMouseOver())
-			gotoEditeur();
 		else if(butOption.isMouseOver())
 			gotoOption();
 		else if(butCredits.isMouseOver())
@@ -93,10 +91,6 @@ public class MainMenuView extends View {
 	private void gotoJouer() {
 		container.setMouseGrabbed(false);
 		game.enterState(Game.LEVELS_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
-	}
-	private void gotoEditeur() {
-		container.setMouseGrabbed(false);
-		game.enterState(Game.EDITEUR_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	private void gotoOption() {
 		container.setMouseGrabbed(false);

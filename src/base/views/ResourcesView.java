@@ -139,8 +139,8 @@ public class ResourcesView extends View {
 	private void goToMenu() {
 		if (ready) {
 			container.setMouseGrabbed(false);
-			//game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
-			game.enterState(Game.TEST_STATE_ID, new FadeOutTransition(), new FadeInTransition());
+			game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
+			//game.enterState(Game.TEST_STATE_ID, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 

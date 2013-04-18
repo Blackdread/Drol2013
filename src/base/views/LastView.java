@@ -1,11 +1,9 @@
 package base.views;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -30,11 +28,9 @@ public class LastView extends View{
 	public void initResources() {
 		ready = false;
 		timer = new Timer(WAIT_TIME_BEFORE_NEXTR);	
-		background = ResourceManager.getImage("main_menu_view_background");
-		background = background.getScaledCopy(container.getWidth(), container.getHeight());
-		
+		background = ResourceManager.getImage("main_menu_view_background").getScaledCopy(container.getWidth(), container.getHeight());
 	}
-
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbGame, Graphics g) throws SlickException {
 		super.render(container, game, g);

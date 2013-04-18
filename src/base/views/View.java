@@ -26,7 +26,7 @@ import base.utils.Configuration;
 public abstract class View extends BasicGameState {
 
 	protected GameContainer container;
-	protected Game game;
+	protected static Game game;
 	protected EngineManager engineManager;
 
 	@Override

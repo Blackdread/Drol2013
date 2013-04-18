@@ -11,7 +11,7 @@ import base.engine.logics.IA;
  *@author Yoann CAPLAIN
  *@author Nicolas DUPIN
  */
-public class EngineManager {
+public class EngineManager{
 	
 	public static final char SOUND_ENGINE = '0';
 	public static final char LOGIC_ENGINE = '1';

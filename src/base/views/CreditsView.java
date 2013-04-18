@@ -27,11 +27,9 @@ public class CreditsView extends View {
 	
 	@Override
 	public void initResources() {
-		background = ResourceManager.getImage("credit_view_background");
-		//title = ResourceManager.getSpriteSheet("menutitles").getSprite(0, 4);
+		background = ResourceManager.getImage("credit_view_background").getScaledCopy(container.getWidth(), container.getHeight());
 		
-		
-		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitterOver"), container.getWidth()/10, container.getHeight()-container.getHeight()/10, 150, 50);
+		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitterOver"), container.getWidth()/10, container.getHeight()-container.getHeight()/10 - 50, ResourceManager.getImage("MenuQuitterOver").getWidth(), ResourceManager.getImage("MenuQuitterOver").getHeight());
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitter"));
 	}
 
@@ -46,7 +44,6 @@ public class CreditsView extends View {
 	public void render(GameContainer container, StateBasedGame sbGame, Graphics g) throws SlickException {
 		super.render(container, game, g);
 		g.drawImage(background, 0, 0);
-		//g.drawImage(title, container.getWidth() / 2 - 65, container.getHeight() / 2 - 280);
 		
 		butQuitter.render(container, g);
 	}

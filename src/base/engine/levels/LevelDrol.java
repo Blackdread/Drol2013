@@ -99,6 +99,15 @@ public class LevelDrol extends Level {
 	}
 	
 	/**
+	 * Vider les arraylist, etc
+	 * 
+	 */
+	@Override
+	public void releaseMemoryOfLevel(){
+		super.releaseMemoryOfLevel();
+	}
+	
+	/**
 	 * 
 	 * @param graph graphics to draw
 	 * @param xPos position x to start drawing (top left corner)
@@ -296,12 +305,5 @@ public class LevelDrol extends Level {
 		this.scroll = scroll;
 	}
 
-	/**
-	 * Vider les arraylist, etc
-	 * 
-	 */
-	public void releaseMemoryOfLevel(){
-		super.releaseMemoryOfLevel();
-	}
 	
 }
