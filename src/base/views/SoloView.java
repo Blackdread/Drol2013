@@ -94,6 +94,10 @@ public class SoloView extends View {
 		listeScoresKey.setMaxElementsToDraw(maxToDraw);
 		listeScoresValue.setMaxElementsToDraw(maxToDraw);
 		
+		// Je ne veux pas que slick les notifie a ma place
+		listeStatsKey.setAcceptingInput(false);
+		listeStatsValue.setAcceptingInput(false);
+		
 		getStats();
 		getScores();
 	}
@@ -114,11 +118,14 @@ public class SoloView extends View {
 		g.draw(shapeScore);
 		g.draw(shapeStats);
 		
+		g.setClip(shapeStats);
 		listeStatsKey.renderString(container, g);
 		listeStatsValue.renderString(container, g);
 		
+		g.setClip(shapeScore);
 		listeScoresKey.renderString(container, g);
 		listeScoresValue.renderString(container, g);
+		g.clearClip();
 		
 		butRetour.render(container, g);
 		butJouer.render(container, g);
@@ -144,14 +151,14 @@ public class SoloView extends View {
 	}
 	@Override
 	public void mouseWheelMoved(int change){
-		//if(listeStatsValue.isMouseOver() || listeStatsKey.isMouseOver()){
-			listeStatsKey.mouseWheelMoved(change);
-			listeStatsValue.mouseWheelMoved(change);
-		//}
-			listeScoresKey.mouseWheelMoved(change);
-			listeScoresValue.mouseWheelMoved(change);
+		listeStatsKey.mouseWheelMoved(change);
+		listeStatsValue.mouseWheelMoved(change);
 	}
 	
+	/**
+	 * 
+	 * TODO pas sur, tronquer les mots s'ils depassent de la zone d'affichage
+	 */
 	private void getStats(){
 		stats.loadStats();
 		

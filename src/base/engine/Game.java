@@ -32,6 +32,8 @@ public class Game extends StateBasedGame {
 	 */
 	public static final String VERSION = "Version 1.0 Beta";
 	
+	private static final EngineManager engineManager = new EngineManager();
+	
 	private static ArrayList<View> states;
 	
 	public static final int MINIMUM_SCREEN_HAUTEUR = 768;
@@ -158,5 +160,9 @@ public class Game extends StateBasedGame {
 				v.initResources();
 			}
 		
+	}
+
+	public static EngineManager getEngineManager() {
+		return engineManager;
 	}
 }

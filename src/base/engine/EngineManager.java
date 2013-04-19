@@ -19,15 +19,10 @@ public class EngineManager{
 	public static final char NETWORK_ENGINE = '2';
 	
 	private static final int NB_ENGINE = 3;
-	private static EngineManager instance;
 	/**
 	 * TODO A changer par un hashMap normalement
 	 */
 	private Engine tabEngine[];
-
-	public Engine[] getTabEngine() {
-		return tabEngine;
-	}//*/
 
 	public void receiveMessage(Message mes){
 		switch(mes.engine){
@@ -43,7 +38,7 @@ public class EngineManager{
 		}
 	}
 
-	private EngineManager(){
+	public EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
 		tabEngine[0] = new SoundEngine();
 		tabEngine[1] = new LogicEngine();
@@ -88,19 +83,6 @@ public class EngineManager{
 	public long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
-	
-	private static Object objetSynchrone = new Object();
-	
-	public static EngineManager getInstance() {
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
-                if (null == instance) {
-                    instance = new EngineManager();
-                }
-            }
-        }
-		return instance;
-	 }
 	
 	
 }
