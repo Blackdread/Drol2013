@@ -13,8 +13,6 @@ import base.engine.entities.others.outputs.Outputs;
  * @author Yoann CAPLAIN
  */
 public class OutputManager implements IUpdatable{
-
-	private static OutputManager instance;
 	
 	protected HashMap<Integer, Outputs> hashId = new HashMap<Integer, Outputs>();
 	
@@ -22,17 +20,6 @@ public class OutputManager implements IUpdatable{
 	protected HashMap<String, ArrayList<Outputs>> hashNameOfTheReceiver = new HashMap<String, ArrayList<Outputs>>();
 	
 	// TODO faire une fonction qui met l'activator a jour pour les entites qui en ont besoin -> attention Pas toute donc c'est un peu plus dur a faire
-	
-	public static OutputManager getInstance() {
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {
-                if (null == instance) {
-                    instance = new OutputManager();
-                }
-            }
-        }
-        return instance;
-     }
 	
 	@Override
 	public void update(int delta) {
@@ -192,11 +179,24 @@ public class OutputManager implements IUpdatable{
 		hashId.put(a.getId(), a);
 	}
 	
+	/*	N'est plus un singleton depuis l'ajout du serveur
 	 private OutputManager(){
 		 
 	 }
 	 
 	 private static Object objetSynchrone = new Object();
 
+		public static OutputManager getInstance() {
+			if (null == instance) { // Premier appel
+	            synchronized(objetSynchrone) {
+	                if (null == instance) {
+	                    instance = new OutputManager();
+	                }
+	            }
+	        }
+	        return instance;
+	     }
 
+		private static OutputManager instance;
+		*/
 }

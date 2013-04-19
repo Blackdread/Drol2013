@@ -10,11 +10,9 @@ import base.engine.entities.others.outputs.IUpdatable;
  * 
  * 
  * @author Yoann CAPLAIN
- * 
+ * @since 19/03/2013
  */
 public class LogicManager extends Manager implements IUpdatable{
-
-	private static LogicManager instance;
 	
 	/**
 	 * On perd un peu le principe de : je ne sais pas ce que peuvent ajouter les programmeurs mais au moins 
@@ -22,17 +20,6 @@ public class LogicManager extends Manager implements IUpdatable{
 	 * Ils sont juste appelés par des Outputs
 	 */
 	private ArrayList<Logic> arrayLogicThatImplementsIUpdatable = new ArrayList<Logic>();
-	
-	public static LogicManager getInstance(){
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
-                if (null == instance) {
-                    instance = new LogicManager();
-                }
-            }
-        }
-        return instance;
-	    }
 	
 	@Override
 	public void update(final int delta) {
@@ -100,11 +87,23 @@ public class LogicManager extends Manager implements IUpdatable{
 		
 	}
 	//*/
+	
+	/*	N'est plus un singleton depuis l'ajout du serveur
 	 private LogicManager(){
 		 
 	 }
 	 private static Object objetSynchrone = new Object();
-
-
+	 private static LogicManager instance;
+		public static LogicManager getInstance(){
+			if (null == instance) { // Premier appel
+	            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
+	                if (null == instance) {
+	                    instance = new LogicManager();
+	                }
+	            }
+	        }
+	        return instance;
+		    }
+		    */
 }
 

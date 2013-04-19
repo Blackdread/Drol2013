@@ -19,7 +19,11 @@ public abstract class Engine {
 	
 	protected Queue<Message> message_queue = new LinkedList<Message>(); 
 	
-	protected EngineManager engineManager = Game.getEngineManager();
+	protected EngineManager engineManager;
+	
+	public Engine(EngineManager engineManager){
+		this.engineManager = engineManager;
+	}
 	
 	synchronized public void receiveMessage(Message mes){
 		this.message_queue.add(mes);

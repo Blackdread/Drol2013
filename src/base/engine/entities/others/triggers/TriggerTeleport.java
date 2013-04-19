@@ -50,7 +50,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 			if(entity instanceof IActivator)	// TODO sur ?
 			if(testFilter(entity))
 				if(remoteDestination != null){
-					ArrayList<BasicEntity> tmp = InfoManager.getInstance().getEntity(remoteDestination);
+					ArrayList<BasicEntity> tmp = Game.getEngineManager().getInfoManager().getEntity(remoteDestination);
 					if(tmp != null){
 						int taille = tmp.size();
 						if(taille > 1){

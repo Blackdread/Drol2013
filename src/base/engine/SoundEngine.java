@@ -1,6 +1,3 @@
-/**
- * 
- */
 package base.engine;
 
 import org.newdawn.slick.Music;
@@ -20,8 +17,8 @@ public class SoundEngine extends Engine {
 	/**
 	 * 
 	 */
-	public SoundEngine() {
-		
+	public SoundEngine(EngineManager engineManager) {
+		super(engineManager);
 	}
 
 	/* (non-Javadoc)
@@ -82,6 +79,7 @@ public class SoundEngine extends Engine {
 			case MessageKey.I_STOP_MUSIC:
 				if(music != null)
 					music.stop();
+				//music = null;
 				break;
 				
 			case MessageKey.I_PAUSE_MUSIC:
@@ -94,7 +92,7 @@ public class SoundEngine extends Engine {
 				
 				if(name3!=null){
 					float vol;
-					boolean loop;
+					boolean loop = true;
 					
 					if(mes.f_data.containsKey(MessageKey.P_VOLUME))
 						vol = mes.f_data.get(MessageKey.P_VOLUME);
@@ -103,8 +101,8 @@ public class SoundEngine extends Engine {
 					
 					if(mes.b_data.containsKey(MessageKey.P_LOOP))
 						loop = mes.b_data.get(MessageKey.P_LOOP);
-					else
-						loop = true;
+					//else
+						//loop = true;
 					
 					playMusic(name3,vol,loop);
 				}
@@ -186,17 +184,19 @@ public class SoundEngine extends Engine {
 	}
 	
 	private void playMusic(final String name, final float volume, final boolean loop){
-		if(music != null)
-			music.fade(2000, 0, true);
+		if(music != null && music.playing())	// ATTENTION sans music.playing() ca bug car la music est fade pendant trop longtemps puis si on relance la meme, ça marche pas
+			music.fade(1000, 0, true);	// TO pas encore tester avec si on met une autre music car ca peut bug car slick2d ne gere qu'une music a la fois !!!
 		
 		music = ResourceManager.getMusic(name);
 		if(music != null){
+			System.out.println("ddd"+volume);
 			if(loop)
 				music.loop();
 			else
 				music.play();
 			music.setVolume(volume);
-		}
+		}else
+			System.out.println("null "+name+" "+volume);
 	}
 
 	public Music getMusic() {

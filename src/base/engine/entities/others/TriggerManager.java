@@ -20,19 +20,6 @@ import base.engine.entities.others.triggers.Trigger;
  * 
  */
 public class TriggerManager extends Manager implements IUpdatable{
-
-	private static TriggerManager instance;
-	
-	public static TriggerManager getInstance(){
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
-                if (null == instance) {
-                    instance = new TriggerManager();
-                }
-            }
-        }
-		return instance;
-	}
 	
 	@Override
 	public void update(final int delta) {
@@ -45,12 +32,22 @@ public class TriggerManager extends Manager implements IUpdatable{
 		}
 	}
 	
-	/**
-	 * 
-	 */
+	/*	N'est plus un singleton depuis l'ajout du serveur
 	 private TriggerManager(){
 		 
 	 }
 	 private static Object objetSynchrone = new Object();
-
+		private static TriggerManager instance;
+		
+		public static TriggerManager getInstance(){
+			if (null == instance) { // Premier appel
+	            synchronized(objetSynchrone) {	// evite d'avoir (multi-thread) plusieurs thread qui instansie en meme temps le manager
+	                if (null == instance) {
+	                    instance = new TriggerManager();
+	                }
+	            }
+	        }
+			return instance;
+		}
+*/
 }

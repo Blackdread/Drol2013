@@ -33,7 +33,9 @@ public interface ICollidableObject {
 	public boolean isCollidingWith(ICollidableObject collidable);
 	
 	/**
-	 * @return false means the entity doesn't need to verify it's colliding with anything
+	 * @return false means the entity doesn't need to verify it's colliding with anything but doesn't mean that others entities that
+	 * collides with this entity does not interact with it if there is an collision
+	 * Exemple: A player is in mode "noClip" (no collision) but he mays still trigger TriggerObjectInZone, etc
 	 */
 	public boolean isCollisionON();
 	public void setCollisionON(boolean collision);

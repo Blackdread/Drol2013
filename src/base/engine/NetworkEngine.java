@@ -11,8 +11,9 @@ public class NetworkEngine extends Engine {
 
 	private boolean serveur;
 	
-	public NetworkEngine()
+	public NetworkEngine(EngineManager engineManager)
 	{
+		super(engineManager);
 		this.serveur = false;
 	}
 	

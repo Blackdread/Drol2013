@@ -15,18 +15,15 @@ import base.engine.logics.IA;
  * 
  * @author Yoann CAPLAIN
  * @author Nicolas DUPIN
+ * @since 19/03/2013
  */
 public class LogicEngine extends Engine {
 
-	private CollisionManager c_manager;
-	private LevelDrol lvl;	// TODO A enlever ? et recuperer seulement quand necessaire
 	public static long tmp = System.currentTimeMillis();
 	
-	public LogicEngine()
+	public LogicEngine(EngineManager engineManager)
 	{
-		super();
-		this.lvl = null;
-		c_manager = CollisionManager.getInstance();
+		super(engineManager);
 		tmp = System.currentTimeMillis();
 	}
 	
@@ -58,7 +55,7 @@ public class LogicEngine extends Engine {
 				case MessageKey.I_START_ENTITY_MOVE:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
-						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
 						boolean changeDir = true;
 						if(mes.b_data.containsKey(MessageKey.P_CHANGE_DIRECTION))
 							changeDir = mes.b_data.get(MessageKey.P_CHANGE_DIRECTION);
@@ -95,7 +92,7 @@ public class LogicEngine extends Engine {
 				case MessageKey.I_STOP_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
-						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
 						if(tmp instanceof MoveableEntity)
 							((MoveableEntity)tmp).setVitesseToZero();
 					}
@@ -147,9 +144,9 @@ public class LogicEngine extends Engine {
 									}
 									
 									t.setLocation(x, y);
-									engineManager.getIA().addEntity(t);
-									lvl.getArrayEntite().put(t.getId(), t);
-									engineManager.getIA().addEntity(t);
+									engineManager.getIA().addEntity(t); 	// TODO ?? pk 2 fois ?
+									engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
+									engineManager.getIA().addEntity(t);		// TODO ?? pk 2 fois ?
 									Deplacement.deplacerEntity(0, 0, t.getId());
 									tmp =  System.currentTimeMillis();
 									}
@@ -163,14 +160,14 @@ public class LogicEngine extends Engine {
 				case MessageKey.I_REMOVE_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
-						lvl.removeEntity(mes.i_data.get(MessageKey.P_ID));
+						engineManager.getCurrentLevelUsed().removeEntity(mes.i_data.get(MessageKey.P_ID));
 						engineManager.getIA().removeEntity(mes.i_data.get(MessageKey.P_ID));
 						
 					}
 					break;
 				case MessageKey.I_JUMP:
 					if(mes.i_data.containsKey(MessageKey.P_ID)){
-						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
+						BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
 						if(tmp != null && tmp instanceof PlayableEntity){
 							((PlayableEntity)tmp).jump();
 						}
@@ -183,11 +180,4 @@ public class LogicEngine extends Engine {
 		return true;
 	}
 
-	public LevelDrol getLvl() {
-		return lvl;
-	}
-
-	public void setLvl(LevelDrol lvl) {
-		this.lvl = lvl;
-	}
 }

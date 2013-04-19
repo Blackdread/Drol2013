@@ -13,6 +13,10 @@ public abstract class Manager {
 	
 	protected HashMap<String, ArrayList<BasicEntity>> hashMapEntity = new HashMap<String, ArrayList<BasicEntity>>();
 	
+	public Manager(){
+		
+	}
+	
 	/**
 	 * Add entity in a HashMap then an array list
 	 * @param entity

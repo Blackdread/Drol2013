@@ -152,6 +152,7 @@ public class OptionsView extends View {
 				Configuration.setMusicOn(true);
 				m.instruction = MessageKey.I_PLAY_MUSIC;
 				// TODO donner le nom de la musique a jouer
+				m.s_data.put(MessageKey.P_NAME, "tron");
 				
 				m.engine = EngineManager.SOUND_ENGINE;
 				engineManager.receiveMessage(m);
@@ -169,6 +170,7 @@ public class OptionsView extends View {
 			m.engine = EngineManager.SOUND_ENGINE;
 			engineManager.receiveMessage(m);
 		}
+		engineManager.update(0);	// forcer la prise en compte des messages
 	}
 
 	private void goToMenu() {
