@@ -19,6 +19,8 @@ public abstract class Engine {
 	
 	protected Queue<Message> message_queue = new LinkedList<Message>(); 
 	
+	protected EngineManager engineManager = Game.getEngineManager();
+	
 	synchronized public void receiveMessage(Message mes){
 		this.message_queue.add(mes);
 	}
@@ -28,5 +30,13 @@ public abstract class Engine {
 	 * @return Boolean true if message_queue is not empty
 	 */
 	public abstract boolean processMessage();
+
+	public EngineManager getEngineManager() {
+		return engineManager;
+	}
+
+	public void setEngineManager(EngineManager engineManager) {
+		this.engineManager = engineManager;
+	}
 	
 }

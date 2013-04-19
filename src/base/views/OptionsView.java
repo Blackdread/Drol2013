@@ -41,7 +41,7 @@ public class OptionsView extends View {
 	private ListeDeroulante listeDerTailleScreen;
 	private Slider sliderMusic;
 	private RoundedRectangle zone[] = new RoundedRectangle[3];
-
+	
 	@Override
 	public void initResources() {
 		final int MARGIN = 30;
@@ -147,14 +147,14 @@ public class OptionsView extends View {
 				Configuration.setMusicOn(false);
 				m.instruction = MessageKey.I_STOP_MUSIC;
 				m.engine = EngineManager.SOUND_ENGINE;
-				EngineManager.getInstance().receiveMessage(m);
+				engineManager.receiveMessage(m);
 			}else{	//(butSonActi.isMouseOver())
 				Configuration.setMusicOn(true);
 				m.instruction = MessageKey.I_PLAY_MUSIC;
 				// TODO donner le nom de la musique a jouer
 				
 				m.engine = EngineManager.SOUND_ENGINE;
-				EngineManager.getInstance().receiveMessage(m);
+				engineManager.receiveMessage(m);
 			}
 		}
 		
@@ -167,7 +167,7 @@ public class OptionsView extends View {
 			GameMusic.setMusicPostion(temp1);*/
 			m.instruction = MessageKey.I_CHANGE_VOLUME_MUSIC;
 			m.engine = EngineManager.SOUND_ENGINE;
-			EngineManager.getInstance().receiveMessage(m);
+			engineManager.receiveMessage(m);
 		}
 	}
 

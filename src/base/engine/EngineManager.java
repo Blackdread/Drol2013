@@ -1,7 +1,10 @@
 package base.engine;
 
+import java.util.HashMap;
+
 import org.lwjgl.Sys;
 
+import base.engine.levels.Level;
 import base.engine.logics.IA;
 
 
@@ -18,12 +21,28 @@ public class EngineManager{
 	public static final char LOGIC_ENGINE = '1';
 	public static final char NETWORK_ENGINE = '2';
 	
+	public static final char IA = '3';
+	
 	private static final int NB_ENGINE = 3;
 	/**
 	 * TODO A changer par un hashMap normalement
 	 */
 	private Engine tabEngine[];
-
+	//private HashMap<Character, Engine> tabEngine;
+	
+	private IA ia;
+	
+	public Level currentLevelUsed = null;
+	
+	public EngineManager(){
+		tabEngine = new Engine[NB_ENGINE];
+		tabEngine[0] = new SoundEngine();
+		tabEngine[1] = new LogicEngine();
+		tabEngine[2] = new NetworkEngine();
+		
+		ia = new IA();
+	}
+	
 	public void receiveMessage(Message mes){
 		switch(mes.engine){
 		case SOUND_ENGINE:
@@ -37,19 +56,12 @@ public class EngineManager{
 			break;
 		}
 	}
-
-	public EngineManager(){
-		tabEngine = new Engine[NB_ENGINE];
-		tabEngine[0] = new SoundEngine();
-		tabEngine[1] = new LogicEngine();
-		tabEngine[2] = new NetworkEngine();
-	}
 	
 	/**
 	 * 
 	 */
 	public void update(int delta){
-		IA.getInstance().update(delta);
+		ia.update(delta);
 		
 		for(int i=0;i<NB_ENGINE;i++)
 			while(tabEngine[i].processMessage());
@@ -60,6 +72,8 @@ public class EngineManager{
 	 * @param delta
 	 */
 	public void update2(int delta){
+		ia.update(delta);
+		
 		long time;
 		for(int i=0;i<NB_ENGINE;i++){
 			time = getTime();
@@ -71,6 +85,8 @@ public class EngineManager{
 	 * @param delta
 	 */
 	public void update3(int delta){
+		ia.update(delta);
+		
 		long time = getTime();
 			do{
 				for(int i=0;i<NB_ENGINE;i++)
@@ -84,5 +100,19 @@ public class EngineManager{
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 	
+	public IA getIA(){
+		return ia;
+	}
 	
+	public Level getCurrentLevelUsed() {
+		return currentLevelUsed;
+	}
+
+	public void setCurrentLevelUsed(Level currentLevelUsed) {
+		Level.currentLevelUsed = currentLevelUsed;
+	}
+	
+	public Engine[] getTabEngine(){
+		return tabEngine;
+	}
 }

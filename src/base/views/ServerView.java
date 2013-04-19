@@ -30,12 +30,10 @@ public class ServerView extends View {
 	private LevelDrol lvl;
 	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
 	HeroEntity hero;
-	EngineManager engineManager;
 
 	@Override
 	public void initResources() {
 		// TODO Auto-generated method stub
-		engineManager = EngineManager.getInstance();
 		tp.add(new TilePropriety(0, false, "fodfnd"));
 		tp.add(new TilePropriety(1, false, "fond"));
 		tp.add(new TilePropriety(2, true, "fodnd"));

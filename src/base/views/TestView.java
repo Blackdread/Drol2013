@@ -37,11 +37,10 @@ public class TestView extends View{
 	private LevelDrol lvl;
 	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
 	HeroEntity hero;
-	EngineManager engineManager;
 	
 	public void initResources()
 	{
-		engineManager = EngineManager.getInstance();
+		
 		tp.add(new TilePropriety(0, false, "fodfnd"));
 		tp.add(new TilePropriety(1, false, "fond"));
 		tp.add(new TilePropriety(2, true, "fodnd"));
@@ -75,7 +74,7 @@ public class TestView extends View{
 		Deplacement.deplacerEntity(0, 0, inf.getId());
 		lvl.addEntity(hero);
 		Deplacement.deplacerEntity(0, 0, hero.getId());
-		IA.getInstance().addEntity(hero);
+		engineManager.getIA().addEntity(hero);
 		
 		System.out.println("hero : " + hero);
 	}
@@ -141,7 +140,7 @@ public class TestView extends View{
 			m.o_data.put(MessageKey.P_ENTITY, hero);
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			EngineManager.getInstance().receiveMessage(m);
+			engineManager.receiveMessage(m);
 			
 			
 		}
@@ -160,7 +159,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_ID, hero.getId());
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				EngineManager.getInstance().receiveMessage(m);
+				engineManager.receiveMessage(m);
 				break;
 			case Input.KEY_RIGHT:
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
@@ -168,7 +167,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				EngineManager.getInstance().receiveMessage(m);
+				engineManager.receiveMessage(m);
 				break;
 			case Input.KEY_LEFT:
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
@@ -176,7 +175,7 @@ public class TestView extends View{
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
-				EngineManager.getInstance().receiveMessage(m);
+				engineManager.receiveMessage(m);
 			break;
 		}
 		

@@ -7,22 +7,12 @@ import base.engine.entities.ActiveEntity;
 import base.engine.entities.others.outputs.IUpdatable;
 
 public class IA implements IUpdatable{
-
-	private static IA instance;
-	
-	public static IA getInstance() {
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {
-                if (null == instance) {
-                    instance = new IA();
-                }
-            }
-        }
-        return instance;
-	 }
 	
 	private HashMap<Integer, ActiveEntity> updatable = new HashMap<Integer, ActiveEntity>();
 	
+	 public IA(){
+		 
+	 }
 	
 	@Override
 	public void update(int delta) {
@@ -38,9 +28,6 @@ public class IA implements IUpdatable{
 				v.update(delta);
 	}
 	
-	private static Object objetSynchrone = new Object();
-
-	
 	public void addEntity(ActiveEntity entity){
 		updatable.put(entity.getId(), entity);
 	}
@@ -52,9 +39,5 @@ public class IA implements IUpdatable{
 		updatable.remove(id);
 	}
 	
-
-	 private IA(){
-		 
-	 }
 	 
 }

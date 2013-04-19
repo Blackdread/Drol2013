@@ -30,9 +30,9 @@ public abstract class View extends BasicGameState {
 
 	protected GameContainer container;
 	protected static Game game;
-	protected EngineManager engineManager;
+	protected EngineManager engineManager = Game.getEngineManager();;
 	protected static int lastViewID = 0;
-
+	
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
 		super.leave(container, game);

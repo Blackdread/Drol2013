@@ -4,6 +4,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
+import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 
@@ -82,7 +83,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 			m.i_data.put(MessageKey.P_Y, (int)vitesse.y);
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			EngineManager.getInstance().receiveMessage(m);
+			Game.getEngineManager().receiveMessage(m);
 		}
 	}
 	

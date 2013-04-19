@@ -147,9 +147,9 @@ public class LogicEngine extends Engine {
 									}
 									
 									t.setLocation(x, y);
-									IA.getInstance().addEntity(t);
+									engineManager.getIA().addEntity(t);
 									lvl.getArrayEntite().put(t.getId(), t);
-									IA.getInstance().ajouterEntite(t);
+									engineManager.getIA().addEntity(t);
 									Deplacement.deplacerEntity(0, 0, t.getId());
 									tmp =  System.currentTimeMillis();
 									}
@@ -164,7 +164,7 @@ public class LogicEngine extends Engine {
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
 						lvl.removeEntity(mes.i_data.get(MessageKey.P_ID));
-						IA.getInstance().removeEntity(mes.i_data.get(MessageKey.P_ID));
+						engineManager.getIA().removeEntity(mes.i_data.get(MessageKey.P_ID));
 						
 					}
 					break;
@@ -173,17 +173,6 @@ public class LogicEngine extends Engine {
 						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
 						if(tmp != null && tmp instanceof PlayableEntity){
 							((PlayableEntity)tmp).jump();
-						}
-					}
-					break;
-				
-				case MessageKey.I_SET_VARIABLES_ENTITY:
-					if(mes.i_data.containsKey(MessageKey.P_ID)){
-						BasicEntity tmp = lvl.getEntity(mes.i_data.get(MessageKey.P_ID));
-						if(tmp != null){
-							if(mes.f_data.containsKey(MessageKey.P_VITESSE_Y))
-								if(tmp instanceof MoveableEntity)
-									((MoveableEntity)tmp).getvitesse().y = mes.f_data.get(MessageKey.P_VITESSE_Y);
 						}
 					}
 					break;

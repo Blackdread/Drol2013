@@ -3,6 +3,7 @@ package base.engine.entities.others.triggers;
 import java.util.ArrayList;
 
 import base.engine.EngineManager;
+import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
@@ -79,7 +80,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 									m.i_data.put(MessageKey.P_Y, (int)tmpInfo.getY());
 									m.engine = EngineManager.LOGIC_ENGINE;
 									
-									EngineManager.getInstance().receiveMessage(m);
+									Game.getEngineManager().receiveMessage(m);
 							}
 						}
 					}else
