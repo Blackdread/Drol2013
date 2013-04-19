@@ -38,11 +38,6 @@ public class IA implements IUpdatable{
 				v.update(delta);
 	}
 	
-	public void ajouterEntite(ActiveEntity e)
-	{
-		updatable.put(e.getId(), e);
-	}
-	
 	private static Object objetSynchrone = new Object();
 
 	
