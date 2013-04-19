@@ -29,7 +29,9 @@ public class ListeDeroulante extends MouseOverArea {
 	 */
 	private boolean decalerElements;
 	
-	private static ArrayList<Elements> elements;
+	private boolean autoriserWheel = true;
+	
+	private ArrayList<Elements> elements;
 	private Elements currentElementUsed;
 	//private String name;
 	private boolean scrolled;
@@ -178,18 +180,20 @@ public class ListeDeroulante extends MouseOverArea {
 	
 	public void mouseWheelMoved(final int change){
 		//System.out.println(""+change);
-		elements.add(elements.get(0));
-		elements.remove(0);
-		/*
-		for(int i=0;i<elements.size()-1;i++){
-			if(elements.get(i)==null){
-				elements.remove(i);
-				continue;
-			}
-			elements.set(i, elements.get(i+1));
-			}
-		//*/
-		update();
+		if(autoriserWheel){
+			elements.add(elements.get(0));
+			elements.remove(0);
+			/*
+			for(int i=0;i<elements.size()-1;i++){
+				if(elements.get(i)==null){
+					elements.remove(i);
+					continue;
+				}
+				elements.set(i, elements.get(i+1));
+				}
+			//*/
+			update();
+		}
 	}
 
 	public boolean isScrolled() {
@@ -278,5 +282,13 @@ public class ListeDeroulante extends MouseOverArea {
 			int width, int height){
 		elements.add(new ElementResolution(container, image, x, y, withReso, heightReso, width, height));
 		update();	// pas obliger
+	}
+
+	public boolean isAutoriserWheel() {
+		return autoriserWheel;
+	}
+
+	public void setAutoriserWheel(boolean autoriserWheel) {
+		this.autoriserWheel = autoriserWheel;
 	}
 }

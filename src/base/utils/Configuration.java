@@ -11,7 +11,7 @@ import java.util.Properties;
  * This class is link to the configuration file and provide static
  * getters/setters to use the current game configuration.
  * 
- * @author 
+ * @author Yoann CAPLAIN
  * @since 12 10 2012
  */
 public class Configuration {

@@ -24,7 +24,9 @@ public class MultiView extends View {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
 		
+	
 		
+		super.render(container, sbgame, g);
 	}
 	
 	@Override

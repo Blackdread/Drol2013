@@ -25,13 +25,30 @@ public class ElementString extends Elements {
 		chaine = a;
 	}
 
+	/**
+	 * 
+	 * @param container
+	 * @param image
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param a
+	 */
 	public ElementString(GUIContext container, Image image, int x, int y,
 			int width, int height, String a) {
 		super(container, image, x, y, width, height);
 		// TODO Auto-generated constructor stub
 		chaine = a;
 	}
-
+	/**
+	 * 
+	 * @param container
+	 * @param image
+	 * @param x
+	 * @param y
+	 * @param a
+	 */
 	public ElementString(GUIContext container, Image image, int x, int y, String a) {
 		super(container, image, x, y);
 		// TODO Auto-generated constructor stub
@@ -59,7 +76,7 @@ public class ElementString extends Elements {
 	public void render(GUIContext container, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		super.render(container, g);
-		g.drawString(""+chaine, x+decalageX, y + super.getHeight()/4 +decalageY);
+		g.drawString(""+chaine, x+decalageX, y + super.getHeight()/4 + decalageY);
 	}
 
 	@Override
