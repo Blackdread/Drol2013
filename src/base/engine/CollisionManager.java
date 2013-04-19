@@ -123,11 +123,13 @@ public class CollisionManager{
 	    if(tileXMax > lvl.getLargeurNiveau() - 1)
 	    	tileXMax = lvl.getLargeurNiveau() - 1;
 	    
-    	for(int i = tileXMin; i <= tileXMax; i++)
+    	for(int i = tileXMin; i < tileXMax; i++)
         {
         	//C'est un mur, il y a donc collision
-            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMin][i].getIndex()).isMur())
+            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMin][i].getIndex()).isMur()){
+            	System.out.println("Colission haut");
                 return true;
+            }
         }
 	    
 	    return false;
@@ -152,8 +154,10 @@ public class CollisionManager{
     	for(int i = tileXMin; i <= tileXMax; i++)
         {
         	//C'est un mur, il y a donc collision
-            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMax][i].getIndex()).isMur())
+            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMax][i].getIndex()).isMur()){
+            	System.out.println("Colission bas");
                 return true;
+            }
         }
 	    
 	    return false;
@@ -178,10 +182,14 @@ public class CollisionManager{
         for(int j= tileYMin; j <= tileYMax; j++)
         {
         	//C'est un mur, il y a donc collision
-            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMin].getIndex()).isMur())
+            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMin].getIndex()).isMur()){
+            	System.out.println("Colission gauche");
                 return true;
-            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMax].getIndex()).isMur())
+            }
+            if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMax].getIndex()).isMur()){
+            	System.out.println("Colission droite");
                 return true;
+            }
         }
 	    
 	    return false;

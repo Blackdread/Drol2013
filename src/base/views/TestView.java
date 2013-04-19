@@ -51,7 +51,7 @@ public class TestView extends View{
 		
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
-		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
+		engineManager.setCurrentLevelUsed(lvl);
 		hero = new HeroEntity("bla", 500);
 		hero.setLocation(70, 70);
 		
@@ -66,8 +66,8 @@ public class TestView extends View{
 		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
-		InfoManager.getInstance().addEntity(inf);
-		FilterManager.getInstance().addEntity(fil);
+		engineManager.getInfoManager().addEntity(inf);
+		engineManager.getFilterManager().addEntity(fil);
 		lvl.addEntity(tr);
 		lvl.addEntity(inf);
 		Deplacement.deplacerEntity(0, 0, tr.getId());
