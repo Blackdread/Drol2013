@@ -32,6 +32,9 @@ public class Game extends StateBasedGame {
 	 */
 	public static final String VERSION = "Version 1.0 Beta";
 	
+	/**
+	 * Instance d'EngineManager pour le Client. Le serveur ne s'en sert pas !
+	 */
 	private static final EngineManager engineManager = new EngineManager();
 	
 	private static ArrayList<View> states;
@@ -162,6 +165,10 @@ public class Game extends StateBasedGame {
 		
 	}
 
+	/**
+	 * Instance d'EngineManager pour le Client. Le serveur ne s'en sert pas !
+	 * @return EngineManager
+	 */
 	public static EngineManager getEngineManager() {
 		return engineManager;
 	}

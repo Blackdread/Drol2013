@@ -44,7 +44,7 @@ public class ServerView extends View {
 		
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
-		((LogicEngine)engineManager.getTabEngine()[1]).setLvl(lvl);
+		engineManager.setCurrentLevelUsed(lvl);
 		hero = new HeroEntity("bla", 500);
 		hero.setLocation(70, 70);
 		

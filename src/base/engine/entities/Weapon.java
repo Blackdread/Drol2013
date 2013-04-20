@@ -38,7 +38,7 @@ public class Weapon implements IUpdatable{
 		Class<Tir> tmp = null;
 		try {
 			tmp = (Class<Tir>) Class.forName(""+bullet);
-			
+			//tmp.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

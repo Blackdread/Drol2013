@@ -1,5 +1,6 @@
 package base.views;
 
+import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import org.newdawn.slick.Color;
@@ -178,13 +179,24 @@ public class SoloView extends View {
 	private void getScores(){
 		scores.loadStats();
 		
+		ArrayList<Elements> arrayKey = new ArrayList<Elements>();
+		ArrayList<Elements> arrayValue = new ArrayList<Elements>();
+		
 		for(Entry<String, String> v : scores.getHashStats().entrySet())
 			if(v != null && v.getKey() != null && v.getValue() != null){
 				Elements tmp = new ElementString(container, ResourceManager.getImage("transparent").getScaledCopy(10, container.getDefaultFont().getHeight("1")+2), 0,0,""+v.getKey());
-				listeScoresKey.addElement(tmp);
+				//listeScoresKey.addElement(tmp);
+				arrayKey.add(tmp);
 				Elements tmp2 = new ElementString(container, ResourceManager.getImage("transparent").getScaledCopy(10, container.getDefaultFont().getHeight("1")+2), 0,0,""+v.getValue());
-				listeScoresValue.addElement(tmp2);
+				//listeScoresValue.addElement(tmp2);
+				arrayValue.add(tmp2);
 			}
+		
+		for(int i=1; i < arrayValue.size(); i++){
+			if(Integer.valueOf(arrayValue.get(i).toString()) < Integer.valueOf(arrayValue.get(i-1).toString())){
+				
+			}
+		}
 		
 	}
 	

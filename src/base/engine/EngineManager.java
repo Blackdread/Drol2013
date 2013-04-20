@@ -54,8 +54,9 @@ public class EngineManager{
 		tabEngine[1] = new LogicEngine(this);
 		tabEngine[2] = new NetworkEngine(this);
 		
-		ia = new IA();
+		ia = new IA();	// lien vers manager ?
 		
+		// TODO ont-ils besoin d'un lien vers l'engineManager ?
 		filterManager = new FilterManager();
 		infoManager = new InfoManager();
 		logicManager = new LogicManager();
@@ -177,7 +178,8 @@ public class EngineManager{
 		this.currentLevelUsed = currentLevelUsed;
 	}
 	
+	/*
 	public Engine[] getTabEngine(){
 		return tabEngine;
-	}
+	}*/
 }

@@ -19,6 +19,9 @@ public abstract class Engine {
 	
 	protected Queue<Message> message_queue = new LinkedList<Message>(); 
 	
+	/**
+	 * Instance du serveur et peut etre une instance du client
+	 */
 	protected EngineManager engineManager;
 	
 	public Engine(EngineManager engineManager){
