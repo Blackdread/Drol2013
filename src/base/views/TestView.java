@@ -62,7 +62,10 @@ public class TestView extends View{
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
 		TriggerTeleport tr = new TriggerTeleport("teleport",200,36,40,40);
+		tr.setEngineManager(engineManager);
 		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
+		inf.setEngineManager(engineManager);
+		hero.setEngineManager(engineManager);
 		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);

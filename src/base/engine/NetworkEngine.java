@@ -28,8 +28,13 @@ public class NetworkEngine extends Engine {
 	
 	@Override
 	public synchronized boolean processMessage() {
+		//while(!this.message_queue.isEmpty()){
+		if(!this.message_queue.isEmpty())
+			engineManager.receiveMessage(this.message_queue.poll());
+		else
+			return false;
 		
-		return false;
+		return true;
 	}
 
 	public boolean connect(String ip, int port) throws UnknownHostException, IOException

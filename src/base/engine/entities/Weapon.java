@@ -61,7 +61,7 @@ public class Weapon implements IUpdatable{
 			m.i_data.put(MessageKey.P_Y, yPos);
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			EngineManager.getInstance().receiveMessage(m);
+			engineManage.receiveMessage(m);
 			
 			delayBetweenShoot.resetTime();
 		}

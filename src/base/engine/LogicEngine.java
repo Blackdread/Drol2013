@@ -135,6 +135,7 @@ public class LogicEngine extends Engine {
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
 									if(System.currentTimeMillis() - tmp > 100){	// juste pour debug, ce sera pas la plus tard
 									Tir t = new TirLinear(1, vitesse, null);
+									t.setEngineManager(engineManager);
 									
 									if(mes.o_data.containsKey(MessageKey.P_ENTITY))
 									{

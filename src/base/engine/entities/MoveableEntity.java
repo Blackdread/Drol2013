@@ -83,7 +83,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 			m.i_data.put(MessageKey.P_Y, (int)vitesse.y);
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			Game.getEngineManager().receiveMessage(m);
+			engineManager.receiveMessage(m);
 		}
 	}
 	

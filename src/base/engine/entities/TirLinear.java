@@ -62,7 +62,7 @@ public class TirLinear extends Tir {
 			m.i_data.put(MessageKey.P_ID, id);
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
-			Game.getEngineManager().receiveMessage(m);
+			engineManager.receiveMessage(m);
 		}
 	}
 }
