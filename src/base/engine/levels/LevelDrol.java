@@ -151,7 +151,7 @@ public class LevelDrol extends Level {
 				graph.drawImage(tileSet.getSpriteSource().getSubImage(indexTile % tileSet.getNbTileLargeur(), indexTile/tileSet.getNbTileLargeur()), xPos + j*largeurTile-scroll.getxScroll(), yPos + i*hauteurTile-scroll.getyScroll());
 			}
 		}
-		afficherGrilleTile(graph, xPos, yPos);
+		//afficherGrilleTile(graph, xPos, yPos);
 		
 		for(int i = minY; i < maxY; i++)
 		{

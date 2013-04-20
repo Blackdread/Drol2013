@@ -3,6 +3,7 @@ package base.engine;
 import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.Monster;
 import base.engine.entities.MoveableEntity;
 import base.engine.entities.PlayableEntity;
 import base.engine.entities.Tir;
@@ -28,7 +29,7 @@ public class LogicEngine extends Engine {
 	}
 	
 	@Override
-	public boolean processMessage() {
+	public synchronized boolean processMessage() {
 		Message mes;
 		//while(!this.message_queue.isEmpty()){
 		

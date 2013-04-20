@@ -17,6 +17,7 @@ import java.util.Queue;
  */
 public abstract class Engine {
 	
+	
 	protected Queue<Message> message_queue = new LinkedList<Message>(); 
 	
 	/**

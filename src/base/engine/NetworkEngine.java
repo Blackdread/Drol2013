@@ -8,7 +8,6 @@ package base.engine;
  *
  */
 public class NetworkEngine extends Engine {
-
 	private boolean serveur;
 	
 	public NetworkEngine(EngineManager engineManager)
@@ -17,10 +16,8 @@ public class NetworkEngine extends Engine {
 		this.serveur = false;
 	}
 	
-	
 	@Override
-	public boolean processMessage() {
-		// TODO Auto-generated method stub
+	public synchronized boolean processMessage() {
 
 		return false;
 	}
