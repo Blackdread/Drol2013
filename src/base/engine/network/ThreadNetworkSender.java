@@ -14,6 +14,7 @@ public class ThreadNetworkSender implements Runnable{
 	private ObjectOutputStream oos;
 	private NetworkEngine net;
 	private Queue<Message> message_queue = new LinkedList<Message>();
+	boolean active;
 	
 
 	public ThreadNetworkSender(Socket s, NetworkEngine e) throws IOException {
@@ -24,7 +25,8 @@ public class ThreadNetworkSender implements Runnable{
 
 	@Override
 	public void run() {
-		while(true)
+		active = true;
+		while(active)
 		{
 			Message m;
 			if((m = retirerMessage()) != null)
@@ -38,7 +40,12 @@ public class ThreadNetworkSender implements Runnable{
 			}
 		}
 		
-		oos.close();
+		try {
+			oos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	synchronized public void ajoutMessage(Message m)
@@ -52,6 +59,11 @@ public class ThreadNetworkSender implements Runnable{
 	synchronized public Message retirerMessage()
 	{
 		return message_queue.poll();
+	}
+	
+	public void desactive()
+	{
+		active = false;
 	}
 
 }

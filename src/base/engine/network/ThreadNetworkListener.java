@@ -12,6 +12,7 @@ public class ThreadNetworkListener implements Runnable{
 	private Socket sock;
 	private ObjectInputStream ois;
 	private NetworkEngine net;
+	boolean active;
 	
 	
 	public ThreadNetworkListener(Socket s, NetworkEngine e) throws UnknownHostException, IOException {
@@ -22,7 +23,8 @@ public class ThreadNetworkListener implements Runnable{
 
 	@Override
 	public void run() {
-		while(true)
+		active = true;
+		while(active)
 		{
 			try {
 				Object o = ois.readObject();
@@ -37,7 +39,17 @@ public class ThreadNetworkListener implements Runnable{
 			}
 		}
 		
-		ois.close();
+		try {
+			ois.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void desactive()
+	{
+		active = false;
 	}
 
 }
