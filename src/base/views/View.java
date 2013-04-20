@@ -30,7 +30,7 @@ public abstract class View extends BasicGameState {
 
 	protected GameContainer container;
 	protected static Game game;
-	protected EngineManager engineManager = Game.getEngineManager();;
+	protected EngineManager engineManager = Game.getEngineManager();
 	protected static int lastViewID = 0;
 	
 	@Override

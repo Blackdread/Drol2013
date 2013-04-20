@@ -81,11 +81,11 @@ public class SoloView extends View {
 		
 		listeScoresKey = new ListeDeroulante(container, ResourceManager.getImage("transparent"), (int)shapeScore.getX() + MARGIN , (int)shapeScore.getY() + 2);
 		listeScoresKey.setScrolled(true);
-		listeScoresKey.setAutoriserWheel(false);	// TODO sur ?
+		listeScoresKey.setAutoriserWheel(false);
 		
 		listeScoresValue = new ListeDeroulante(container, ResourceManager.getImage("transparent"), (int)shapeScore.getX() + (int)shapeScore.getWidth() / 2 + MARGIN , (int)shapeScore.getY() + 2);
 		listeScoresValue.setScrolled(true);
-		listeScoresValue.setAutoriserWheel(false);	// TODO sur ?
+		listeScoresValue.setAutoriserWheel(false);
 		
 		int hautLettre = container.getDefaultFont().getHeight("1")+2;
 		int maxToDraw =  (int) (shapeStats.getHeight()/hautLettre);
@@ -172,10 +172,6 @@ public class SoloView extends View {
 			}
 	}
 	
-	/**
-	 * 
-	 * TODO trier les scores pour les avoir du meilleur au moins bon
-	 */
 	private void getScores(){
 		scores.loadStats();
 		
@@ -204,6 +200,10 @@ public class SoloView extends View {
 					 arrayKey.set(i-1, tmp3);
 				}
 			}
+		for(int i=0; i < arrayValue.size(); i++){
+			listeScoresKey.addElement(arrayKey.get(i));
+			listeScoresValue.addElement(arrayValue.get(i));
+		}
 		
 	}
 	
