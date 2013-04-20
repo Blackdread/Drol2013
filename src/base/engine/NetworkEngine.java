@@ -17,8 +17,8 @@ import base.engine.network.ThreadNetworkSender;
 public class NetworkEngine extends Engine {
 	private boolean serveur;
 	private Socket sock;
-	Thread threadList;
-	Thread threadSend;
+	Runnable threadList;
+	Runnable threadSend;
 	
 	public NetworkEngine(EngineManager engineManager)
 	{
@@ -28,19 +28,19 @@ public class NetworkEngine extends Engine {
 	
 	@Override
 	public synchronized boolean processMessage() {
-
+		
 		return false;
 	}
 
 	public boolean connect(String ip, int port) throws UnknownHostException, IOException
 	{
 		sock = new Socket(ip, port);
-		Runnable r1 = new ThreadNetworkListener(sock, this);
-		threadList = new Thread(r1);
-		threadList.start();
-		Runnable r2 = new ThreadNetworkSender(sock, this);
-		threadSend = new Thread(r2);
-		threadSend.start();
+		threadList = new ThreadNetworkListener(sock, this);
+		threadList = new Thread(threadList);
+		((Thread) threadList).start();
+		threadSend = new ThreadNetworkSender(sock, this);
+		threadSend = new Thread(threadSend);
+		((Thread) threadSend).start();
 		
 		return true;
 	}
@@ -48,7 +48,7 @@ public class NetworkEngine extends Engine {
 	public boolean disconnect()
 	{
 		//Appeler les fonctions pour desactiver
-		threadList.
+		((ThreadNetworkListener)threadList).desactive();
 		
 		return true;
 	}

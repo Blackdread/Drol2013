@@ -191,12 +191,19 @@ public class SoloView extends View {
 				//listeScoresValue.addElement(tmp2);
 				arrayValue.add(tmp2);
 			}
-		
-		for(int i=1; i < arrayValue.size(); i++){
-			if(Integer.valueOf(arrayValue.get(i).toString()) < Integer.valueOf(arrayValue.get(i-1).toString())){
-				
+		Elements tmp3;
+		for(int j=0; j < arrayValue.size(); j++)
+			for(int i=1; i < arrayValue.size(); i++){
+				if(Integer.valueOf(arrayValue.get(i).toString()) > Integer.valueOf(arrayValue.get(i-1).toString())){
+					 tmp3 = arrayValue.get(i);
+					 arrayValue.set(i, arrayValue.get(i-1));
+					 arrayValue.set(i-1, tmp3);
+					 
+					 tmp3 = arrayKey.get(i);
+					 arrayKey.set(i, arrayKey.get(i-1));
+					 arrayKey.set(i-1, tmp3);
+				}
 			}
-		}
 		
 	}
 	

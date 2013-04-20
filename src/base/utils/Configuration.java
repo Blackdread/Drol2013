@@ -257,6 +257,22 @@ public class Configuration {
 	public static void setDebug(boolean debug) {
 		configurationFile.setProperty("debug", (debug) ? "true" : "false");
 	}
+	
+	/**
+	 * Set the port (port for network engine)
+	 * @param port 
+	 */
+	public  static void setPort(int port){
+		configurationFile.setProperty("port", ""+port);
+	}
+	
+	/**
+	 * Get the port
+	 * @return default is 20000
+	 */
+	public  static int getPort(){
+		return Integer.parseInt(configurationFile.getProperty("port", "20000"));
+	}
 
 }
 
