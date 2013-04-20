@@ -33,7 +33,10 @@ public class ThreadNetworkListener implements Runnable{
 					net.receiveMessage(((Message)o));
 					
 					
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

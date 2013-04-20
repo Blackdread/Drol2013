@@ -189,7 +189,8 @@ public class Outputs implements IFireOnce, IUpdatable{
 					}else
 						System.err.println("In Outputs.java activator = null");
 				}else
-					OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
+					//OutputManager.getInstance().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
+					entityWhoHasThisOutput.getEngineManager().getOutputManager().triggerInputsOnEntity(nameOfTheEntityToFireInput, nameOfTheInput, parameter);
 		}else
 			outputHasBeenDeclenched = true;
 	}

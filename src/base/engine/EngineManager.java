@@ -64,7 +64,7 @@ public class EngineManager{
 		outputManager = new OutputManager();
 	}
 	
-	public void receiveMessage(Message mes){
+	synchronized public void receiveMessage(Message mes){
 		switch(mes.engine){
 		case SOUND_ENGINE:
 			tabEngine[0].receiveMessage(mes);

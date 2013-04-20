@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Shape;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.OutputManager;
 
 /**
@@ -16,13 +17,18 @@ import base.engine.entities.others.OutputManager;
 public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition {
 
 	/**
+	 * Some entity needs to have a reference to EngineManager
+	 */
+	protected EngineManager engineManager;
+	
+	/**
 	 * The targetname that other entities refer to this entity by
 	 * Should be unique	-> depends, it cas be useful sometimes to not be unique
 	 * Everywhere the name will be supposed not unique
 	 */
+	protected String name;
 	
 	protected Shape shape;
-	protected String name;
 	
 	public static int currentId = 0;
 	protected int id;
@@ -167,7 +173,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	public void removeAllOutputsThatEntityHas(){
 		for(Outputs v : array_outputs){
 			if(v != null)
-				OutputManager.getInstance().removeOutputs(v.getId());
+				engineManager.getOutputManager().removeOutputs(v.getId());
 		}
 		
 		array_outputs.clear();
@@ -323,5 +329,13 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 					break;
 				}
 		}
+	}
+
+	public EngineManager getEngineManager() {
+		return engineManager;
+	}
+
+	public void setEngineManager(EngineManager engineManager) {
+		this.engineManager = engineManager;
 	}
 }
