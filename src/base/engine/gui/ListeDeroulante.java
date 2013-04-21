@@ -180,7 +180,7 @@ public class ListeDeroulante extends MouseOverArea {
 	
 	public void mouseWheelMoved(final int change){
 		//System.out.println(""+change);
-		if(autoriserWheel){
+		if(autoriserWheel && elements.size() > 1){
 			elements.add(elements.get(0));
 			elements.remove(0);
 			/*
@@ -193,6 +193,7 @@ public class ListeDeroulante extends MouseOverArea {
 				}
 			//*/
 			update();
+			elements.trimToSize();
 		}
 	}
 
@@ -259,6 +260,15 @@ public class ListeDeroulante extends MouseOverArea {
 	public void addElement(Elements element){
 		elements.add(element);
 		update();
+	}
+	
+	public int size(){
+		return elements.size();
+	}
+	
+	public void clearList(){
+		elements.clear();
+		elements.trimToSize();
 	}
 	
 	public void chercherElementUsed(){
