@@ -16,6 +16,7 @@ import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
+import base.engine.entities.Zombi;
 import base.engine.entities.others.FilterManager;
 import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.filters.FilterActivatorName;
@@ -55,6 +56,9 @@ public class TestView extends View{
 		hero = new HeroEntity("bla", 500);
 		hero.setLocation(70, 70);
 		
+		Zombi z = new Zombi("zombi", 10);
+		z.setLocation(100, 40);
+		
 		while(!lvl.isLoadOver())
 		{
 			try {
@@ -66,6 +70,7 @@ public class TestView extends View{
 		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
 		inf.setEngineManager(engineManager);
 		hero.setEngineManager(engineManager);
+		z.setEngineManager(engineManager);
 		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
@@ -76,8 +81,11 @@ public class TestView extends View{
 		Deplacement.deplacerEntity(0, 0, tr.getId());
 		Deplacement.deplacerEntity(0, 0, inf.getId());
 		lvl.addEntity(hero);
+		lvl.addEntity(z);
 		Deplacement.deplacerEntity(0, 0, hero.getId());
+		Deplacement.deplacerEntity(0, 0, z.getId());
 		engineManager.getIA().addEntity(hero);
+		engineManager.getIA().addEntity(z);
 		
 		System.out.println("hero : " + hero);
 	}
@@ -168,14 +176,16 @@ public class TestView extends View{
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
 				m.i_data.put(MessageKey.P_ID, hero.getId());
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
+				m.b_data.put(MessageKey.P_BOOLEAN, true);//On mets en déplacement
 				m.engine = EngineManager.LOGIC_ENGINE;
-				
+		
 				engineManager.receiveMessage(m);
 				break;
 			case Input.KEY_LEFT:
 				m.instruction = MessageKey.I_START_ENTITY_MOVE;
 				m.i_data.put(MessageKey.P_ID, hero.getId());
 				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
+				m.b_data.put(MessageKey.P_BOOLEAN, true);//On mets en déplacement
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
 				engineManager.receiveMessage(m);
@@ -196,6 +206,7 @@ public class TestView extends View{
 			m.i_data.put(MessageKey.P_ID, hero.getId());
 			m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
 			m.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
+			m.b_data.put(MessageKey.P_BOOLEAN, false);//On arrête le déplacement
 			m.engine = EngineManager.LOGIC_ENGINE;
 			
 			engineManager.receiveMessage(m);
@@ -206,6 +217,7 @@ public class TestView extends View{
 			m2.i_data.put(MessageKey.P_ID, hero.getId());
 			m2.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
 			m2.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
+			m2.b_data.put(MessageKey.P_BOOLEAN, false);//On arrête le déplacement
 			m2.engine = EngineManager.LOGIC_ENGINE;
 			
 			engineManager.receiveMessage(m2);

@@ -68,6 +68,7 @@ public abstract class MessageKey {
 	public static final int P_DIRECTION = 12;
 	public static final int P_CHANGE_DIRECTION = 13;
 	public static final int P_ENTITY = 14;
+	public static final int P_BOOLEAN = 15;
 	
 	/*
 	 * 

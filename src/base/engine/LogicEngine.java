@@ -86,6 +86,12 @@ public class LogicEngine extends Engine {
 											tmp.setDirection(BasicEntity.HAUT);
 										break;
 									}
+								
+								//L'unité se déplace
+								if(mes.b_data.containsKey(MessageKey.P_BOOLEAN))
+								{
+									((MoveableEntity) tmp).setMoving(mes.b_data.get(MessageKey.P_BOOLEAN));
+								}
 							}
 					}
 					break;
@@ -95,7 +101,13 @@ public class LogicEngine extends Engine {
 					{
 						BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
 						if(tmp instanceof MoveableEntity)
+						{
 							((MoveableEntity)tmp).setVitesseToZero();
+							if(mes.b_data.containsKey(MessageKey.P_BOOLEAN))
+							{
+								((MoveableEntity) tmp).setMoving(mes.b_data.get(MessageKey.P_BOOLEAN));
+							}
+						}
 					}
 					break;
 					

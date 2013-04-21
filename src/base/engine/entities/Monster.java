@@ -4,6 +4,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
+import base.engine.CollisionManager;
+
 public class Monster extends PlayableEntity {
 
 	public Monster(String name, int maxLife) {
@@ -38,9 +40,17 @@ public class Monster extends PlayableEntity {
 			if(collideWith instanceof ActiveEntity)
 				((ActiveEntity)collideWith).kill();
 		}
-		else
+		else if(CollisionManager.isEntityCollidingWithLeftOrRight(this))
+		{	
+			
+			System.out.println("Coll monstre avec mur");
 			//Si il tape un mur il part dans le sens inverse
 			vitesse.x *= -1;
+			if(direction == BasicEntity.DROITE)
+				direction = BasicEntity.GAUCHE;
+			else
+				direction = BasicEntity.DROITE;
+		}
 	}
 
 
