@@ -117,7 +117,7 @@ public class CollisionManager{
 		int tileXMin, tileXMax, tileYMin;
 		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
 	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
-	    tileYMin = (int) (e.getY() / lvl.getHauteurTile());
+	    tileYMin = (int) ((e.getY() - 1) / lvl.getHauteurTile());
 	    if(tileXMin < 0)
 			tileXMin = 0;
 	    if(tileXMax > lvl.getLargeurNiveau() - 1)
@@ -145,7 +145,7 @@ public class CollisionManager{
 		int tileXMin, tileXMax, tileYMax;
 		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
 	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
-	    tileYMax = (int) ((e.getY() + e.getHeight() ) / lvl.getHauteurTile());
+	    tileYMax = (int) ((e.getY() + e.getHeight() + 1) / lvl.getHauteurTile());
 	    if(tileXMin < 0)
 			tileXMin = 0;
 	    if(tileXMax > lvl.getLargeurNiveau() - 1)
@@ -170,20 +170,20 @@ public class CollisionManager{
 			return true;
 		
 		int tileXMin, tileXMax, tileYMin, tileYMax;
-		tileXMin = (int) (e.getX() / lvl.getLargeurTile());
+		tileXMin = (int) ((e.getX() - 1) / lvl.getLargeurTile());
 	    tileYMin = (int) (e.getY() / lvl.getHauteurTile());
-	    tileXMax = (int) ((e.getX() + e.getWidth() ) / lvl.getLargeurTile());
+	    tileXMax = (int) ((e.getX() + e.getWidth()) / lvl.getLargeurTile());
 	    if(tileXMin < 1)
 			tileXMin = 1;
 	    if(tileXMax > lvl.getLargeurNiveau() - 1)
 	    	tileXMax = lvl.getLargeurNiveau() - 1;
 	    tileYMax = (int) ((e.getY() + e.getHeight() ) / lvl.getHauteurTile());
 	    
-        for(int j= tileYMin; j <= tileYMax; j++)
+        for(int j= tileYMin; j < tileYMax; j++)
         {
         	//C'est un mur, il y a donc collision
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMin].getIndex()).isMur()){
-            	System.out.println("Colission gauche");
+            	System.out.println("Colission gauche" + j );
                 return true;
             }
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMax].getIndex()).isMur()){
