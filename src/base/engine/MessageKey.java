@@ -80,6 +80,8 @@ public abstract class MessageKey {
 	public static final int I_JOIN_GAME = 101;
 	public static final int I_LEAVE_GAME = 102;
 	
+	public static final int I_LAUNCH_GAME = 103;
+	
 	// Parameters
 	
 }

@@ -15,7 +15,6 @@ import base.engine.network.ThreadNetworkSender;
  *
  */
 public class NetworkEngine extends Engine {
-	private boolean serveur;
 	private Socket sock;
 	Runnable threadList;
 	Runnable threadSend;
@@ -23,7 +22,6 @@ public class NetworkEngine extends Engine {
 	public NetworkEngine(EngineManager engineManager)
 	{
 		super(engineManager);
-		this.serveur = false;
 	}
 	
 	@Override
@@ -56,15 +54,6 @@ public class NetworkEngine extends Engine {
 		((ThreadNetworkListener)threadList).desactive();
 		
 		return true;
-	}
-
-	public boolean isServeur() {
-		return serveur;
-	}
-
-
-	public void setServeur(boolean serveur) {
-		this.serveur = serveur;
 	}
 
 }

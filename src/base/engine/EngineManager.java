@@ -46,7 +46,7 @@ public class EngineManager{
 	private TriggerManager triggerManager;
 	private OutputManager outputManager;
 	
-	public LevelDrol currentLevelUsed = null;
+	private LevelDrol currentLevelUsed = null;
 	
 	public EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
