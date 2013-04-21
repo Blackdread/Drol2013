@@ -1,7 +1,6 @@
 package base.engine.entities;
 
 import base.engine.entities.others.outputs.InputsAndOutputs;
-//
 /**
  * 
  * @author Yoann CAPLAIN
