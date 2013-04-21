@@ -37,7 +37,9 @@ public class Monster extends PlayableEntity {
 		
 		if(collideWith != null)
 		{
-			if(collideWith instanceof ActiveEntity)
+			if(collideWith instanceof Tir)
+				this.kill();
+			else if(collideWith instanceof ActiveEntity)
 				((ActiveEntity)collideWith).kill();
 		}
 		else if(CollisionManager.isEntityCollidingWithLeftOrRight(this))
