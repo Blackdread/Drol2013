@@ -38,7 +38,7 @@ public class HeroEntity extends PlayableEntity {
 		anim_mv_g = new Animation(ResourceManager.getSpriteSheet("rob"), 6, 0, 7, 0, true, 200, true);
 		anim_static = new Animation(ResourceManager.getSpriteSheet("rob"), 0, 0, 3, 0, true, 200, true);
 		current_anim = anim_static;
-		moving = true;
+		moving = false;
 	}
 
 	@Override
@@ -54,6 +54,8 @@ public class HeroEntity extends PlayableEntity {
 			else
 				anim_mv_g.draw(x, y);
 		}
+		else
+			anim_static.draw(x, y);
 	}
 	
 	@Override

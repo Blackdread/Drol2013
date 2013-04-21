@@ -1,18 +1,13 @@
 package base.engine.entities;
 
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Vector2f;
-
 import base.engine.entities.others.outputs.InputsAndOutputs;
-
+//
 /**
  * 
  * @author Yoann CAPLAIN
  *
  */
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
-	
-	
 	
 	protected int direction;
 	//protected Vector2f direction;
