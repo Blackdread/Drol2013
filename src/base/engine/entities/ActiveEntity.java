@@ -8,6 +8,7 @@ import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.utils.Timer;
 
 /**
  * 
@@ -22,6 +23,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected boolean dying;
 	protected boolean dead;
 	protected boolean visible;
+	protected Timer timer;
 	
 	protected boolean collisionON;
 	
@@ -34,8 +36,20 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		this.visible = true;
 		dying = false;
 		dead = false;
+		timer = new Timer(0);
 	}
-
+	
+	@Override
+	public void update(int delta)
+	{
+		if(dying && timer.isTimeComplete())
+		{	
+			
+			System.out.println("COMPLETE");
+			kill();
+		}
+	}
+	
 /*
 	public boolean mouseOver() {
 		return engine.getMouseX() > x && engine.getMouseX() < x + width && engine.getMouseY() > y && engine.getMouseY() < y + height;
@@ -58,14 +72,13 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	//A redéfinir si on veut faire quelque chose avec sa mort
 	public void onDying()
 	{
-		dead = true;
-		kill();
+		timer.reset();
 	}
 	
 	public void kill()
 	{
 		super.kill();
-		Message mes = new Message();;
+		Message mes = new Message();
 		mes.engine = EngineManager.LOGIC_ENGINE;
 		mes.instruction = MessageKey.I_REMOVE_ENTITY;
 		mes.i_data.put(MessageKey.P_ID, id);
