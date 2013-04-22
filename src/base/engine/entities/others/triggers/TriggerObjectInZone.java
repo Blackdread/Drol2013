@@ -9,6 +9,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
+import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.outputs.IActivator;
@@ -38,8 +39,8 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	 * @param w width
 	 * @param h height
 	 */
-	public TriggerObjectInZone(String name, int xx, int yy, int w, int h) {
-		super(name);
+	public TriggerObjectInZone(String name,EngineManager e , int xx, int yy, int w, int h) {
+		super(name, e);
 		x=xx;
 		y=yy;
 		shape = new Rectangle(0,0,w,h);

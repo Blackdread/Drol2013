@@ -2,6 +2,7 @@ package base.engine.entities.others.filters;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.ITargetName;
 
 /**
@@ -32,8 +33,8 @@ public class FilterActivatorName extends Filter{
 	 * @see Filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name, String classname){
-		super(name);
+	public FilterActivatorName(String name, EngineManager e, String classname){
+		super(name, e);
 		classNameFilter = classname;
 	}
 	/**
@@ -41,8 +42,8 @@ public class FilterActivatorName extends Filter{
 	 * @param negate invert the filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name, boolean negate, String classname){
-		super(name, negate);
+	public FilterActivatorName(String name,EngineManager e, boolean negate, String classname){
+		super(name, e, negate);
 		classNameFilter = classname;
 	}
 	

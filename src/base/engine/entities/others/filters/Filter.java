@@ -2,6 +2,7 @@ package base.engine.entities.others.filters;
 
 import java.util.ArrayList;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.PointEntity;
 
 /**
@@ -24,16 +25,16 @@ public abstract class Filter extends PointEntity{
 	 * 
 	 * @param String targetname that other entities refer to this entity by
 	 */
-	public Filter(String name){
-		super(name);
+	public Filter(String name, EngineManager e){
+		super(name, e);
 	}
 	/**
 	 * 
 	 * @param String targetname that other entities refer to this entity by
 	 * @param Boolean negate invert result
 	 */
-	public Filter(String name, boolean negate){
-		super(name);
+	public Filter(String name, EngineManager e,boolean negate){
+		super(name, e);
 		this.negateFilter = negate;
 	}
 	

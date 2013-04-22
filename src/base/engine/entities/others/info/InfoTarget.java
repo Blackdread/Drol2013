@@ -2,6 +2,8 @@ package base.engine.entities.others.info;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * info_target is a point entity available in all Source games. 
  * It can be used by many different entities, and is a great generic target for any entity 
@@ -18,12 +20,12 @@ import org.newdawn.slick.Graphics;
  */
 public class InfoTarget extends Info {
 	
-	public InfoTarget(String name) {
-		super(name);
+	public InfoTarget(String name, EngineManager e) {
+		super(name, e);
 	}
 	
-	public InfoTarget(String name, float xx, float yy) {
-		super(name);
+	public InfoTarget(String name, EngineManager e, float xx, float yy) {
+		super(name, e);
 		x=xx;
 		y=yy;
 		/* N'a pas besoin d'origin

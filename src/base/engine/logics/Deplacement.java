@@ -63,7 +63,7 @@ public class Deplacement {
 	
 	private static void gererCollisionEntity(int x, int y, BasicEntity e)
 	{
-		HashMap<Integer, BasicEntity> hm = CollisionManager.testerCollisionEntites(x, y, e);
+		HashMap<Integer, BasicEntity> hm = CollisionManager.getInstance().testerCollisionEntites(x, y, e);
 		
 		if(!hm.isEmpty())
 		{
@@ -92,7 +92,7 @@ public class Deplacement {
 		/*
 		 * Si l'on n'est pas en collision on déplace
 		 */
-		if(!CollisionManager.testerCollision(x, 0, e)){
+		if(!CollisionManager.getInstance().testerCollision(x, 0, e)){
 			
 			//Enlever l'entité des tiles avant le déplacement
 			enleverEntiteDesTiles(e);
@@ -122,7 +122,7 @@ public class Deplacement {
 		/*
 		 * Si l'on n'est pas en collision on déplace
 		 */
-		if(!CollisionManager.testerCollision(0, y, e)){
+		if(!CollisionManager.getInstance().testerCollision(0, y, e)){
 			
 			//Enlever l'entité des tiles avant le déplacement
 			enleverEntiteDesTiles(e);

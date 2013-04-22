@@ -1,5 +1,6 @@
 package base.engine.entities;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 /**
  * 
@@ -9,6 +10,7 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
 	protected int direction;
+	protected EngineManager engineManager;
 	//protected Vector2f direction;
 	
 	//public static final Vector2f HAUT = new Vector2f(0,1);
@@ -21,9 +23,10 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	public static final int GAUCHE = 2;
 	public static final int DROITE = 3;
 	
-	public BasicEntity(String name) {
+	public BasicEntity(String name, EngineManager e) {
 		super(name);
 		direction = HAUT;
+		engineManager = e;
 	}
 
 	@Override

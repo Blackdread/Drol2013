@@ -5,11 +5,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
 import base.engine.CollisionManager;
+import base.engine.EngineManager;
 
 public class Monster extends PlayableEntity {
 
-	public Monster(String name, int maxLife) {
-		super(name, maxLife);
+	public Monster(String name, EngineManager en, int maxLife) {
+		super(name, en, maxLife);
 		// TODO Auto-generated constructor stub
 		shape = new Rectangle(0,0,32,32);
 		gravityON = true;
@@ -38,9 +39,9 @@ public class Monster extends PlayableEntity {
 		if(collideWith != null)
 		{
 			if(collideWith instanceof Tir)
-				this.kill();
+				this.onDying();
 			else if(collideWith instanceof ActiveEntity)
-				((ActiveEntity)collideWith).kill();
+				((ActiveEntity)collideWith).onDying();
 		}
 		else if(CollisionManager.isEntityCollidingWithLeftOrRight(this))
 		{	

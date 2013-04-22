@@ -1,5 +1,7 @@
 package base.engine.entities;
 
+import base.engine.EngineManager;
+
 /**
  * 
  * @author Yoann CAPLAIN
@@ -7,8 +9,8 @@ package base.engine.entities;
  */
 public abstract class StaticEntity extends ActiveEntity {
 
-	public StaticEntity(String name, int maxLife) {
-		super(name, maxLife);
+	public StaticEntity(String name, EngineManager e, int maxLife) {
+		super(name, e, maxLife);
 		
 	}
 

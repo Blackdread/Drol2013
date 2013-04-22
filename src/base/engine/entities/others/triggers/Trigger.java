@@ -2,6 +2,7 @@ package base.engine.entities.others.triggers;
 
 import java.util.ArrayList;
 
+import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.others.filters.Filter;
 import base.engine.entities.others.outputs.IDisable;
@@ -57,8 +58,8 @@ public abstract class Trigger extends BasicEntity implements ITrigger, IDisable,
 	 */
 	protected boolean fireOnce;
 	
-	public Trigger(String name) {
-		super(name);
+	public Trigger(String name, EngineManager e) {
+		super(name, e);
 		hasbeenFired = false;
 		delayBeforeReset = new Timer(1000);
 	}

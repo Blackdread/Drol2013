@@ -3,6 +3,9 @@ package base.engine.entities;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
+import base.engine.EngineManager;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.IUpdatable;
 
@@ -16,19 +19,21 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected int maxLife;
 	protected int life;
 	protected boolean mouseOver;
-	protected boolean weak;
 	protected boolean dying;
+	protected boolean dead;
 	protected boolean visible;
 	
 	protected boolean collisionON;
 	
 	//protected boolean remove; se trouve deja dans InputAndOutputs
 
-	public ActiveEntity(String name, int maxLife) {
-		super(name);
+	public ActiveEntity(String name, EngineManager e, int maxLife) {
+		super(name, e);
 		this.maxLife = maxLife;
 		this.life = maxLife;
 		this.visible = true;
+		dying = false;
+		dead = false;
 	}
 
 /*
@@ -38,34 +43,33 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	
 	public void addLife(int bonus) {
 		life = (life + bonus <= maxLife) ? life + bonus : maxLife;
-		if ((float) life / (float) maxLife > 0.5f) {
-			weak = false;
-			dying = false;
-		} else {
-			if ((float) life / (float) maxLife > 0.2f) {
-				dying = false;
-			}
-		}
-		//remove = false;
 	}
 
 	public void removeLife(int damage) {
+		//Il vient d'être tuer. On peut executer des choses avant de supprimer l'unité : boolean dying
 		life -= damage;
-		if (life <= 0) {
-			//if (!remove) {
-				//remove();
-				//remove = true;
-			//}
+		if (life <= 0 && !dying) {
 			life = 0;
-		} else {
-			if ((float) life / (float) maxLife <= 0.2f) {
-				dying = true;
-			} else {
-				if ((float) life / (float) maxLife < 0.5f) {
-					weak = true;
-				}
-			}
+			dying = true;
+			onDying();
 		}
+	}
+	
+	//A redéfinir si on veut faire quelque chose avec sa mort
+	public void onDying()
+	{
+		dead = true;
+		kill();
+	}
+	
+	public void kill()
+	{
+		super.kill();
+		Message mes = new Message();;
+		mes.engine = EngineManager.LOGIC_ENGINE;
+		mes.instruction = MessageKey.I_REMOVE_ENTITY;
+		mes.i_data.put(MessageKey.P_ID, id);
+		engineManager.receiveMessage(mes);
 	}
 
 	public boolean isAlive() {

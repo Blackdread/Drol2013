@@ -8,8 +8,8 @@ import base.engine.MessageKey;
 
 public abstract class PlayableEntity extends MoveableEntity {
 
-	public PlayableEntity(String name, int maxLife) {
-		super(name, maxLife);
+	public PlayableEntity(String name, EngineManager e, int maxLife) {
+		super(name, e, maxLife);
 	}
 	
 	public void jump(){

@@ -146,7 +146,7 @@ public class LogicEngine extends Engine {
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
 									if(System.currentTimeMillis() - tmp > 100){	// juste pour debug, ce sera pas la plus tard
-									Tir t = new TirLinear(1, vitesse, null);
+									Tir t = new TirLinear(1, engineManager, vitesse, null);
 									t.setEngineManager(engineManager);
 									
 									if(mes.o_data.containsKey(MessageKey.P_ENTITY))
@@ -158,9 +158,8 @@ public class LogicEngine extends Engine {
 									}
 									
 									t.setLocation(x, y);
-									engineManager.getIA().addEntity(t); 	// TODO ?? pk 2 fois ?
+									engineManager.getIA().addEntity(t);
 									engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
-									engineManager.getIA().addEntity(t);		// TODO ?? pk 2 fois ?
 									Deplacement.deplacerEntity(0, 0, t.getId());
 									tmp =  System.currentTimeMillis();
 									}

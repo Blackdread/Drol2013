@@ -53,11 +53,11 @@ public class TestView extends View{
 		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
 		lvl.loadLevel();
 		engineManager.setCurrentLevelUsed(lvl);
-		hero = new HeroEntity("bla", 500);
+		hero = new HeroEntity("bla", engineManager, 500);
 		hero.setLocation(70, 70);
 		
-		Zombi z = new Zombi("zombi", 10);
-		z.setLocation(100, 40);
+		Zombi z = new Zombi("zombi", engineManager, 10);
+		z.setLocation(140, 40);
 		
 		while(!lvl.isLoadOver())
 		{
@@ -65,13 +65,12 @@ public class TestView extends View{
 				Thread.sleep(10);
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
-		TriggerTeleport tr = new TriggerTeleport("teleport",200,36,40,40);
-		tr.setEngineManager(engineManager);
-		InfoTarget inf = new InfoTarget("infotarget", 200, 250);
+		TriggerTeleport tr = new TriggerTeleport("teleport", engineManager, 200,36,40,40);
+		InfoTarget inf = new InfoTarget("infotarget", engineManager, 200, 250);
 		inf.setEngineManager(engineManager);
 		hero.setEngineManager(engineManager);
 		z.setEngineManager(engineManager);
-		FilterActivatorName fil = new FilterActivatorName("filtername",false,"bla");
+		FilterActivatorName fil = new FilterActivatorName("filtername",engineManager,false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
 		engineManager.getInfoManager().addEntity(inf);

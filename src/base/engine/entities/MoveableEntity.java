@@ -38,8 +38,8 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	
 	protected boolean moving;
 	
-	public MoveableEntity(String name, int maxLife) {
-		super(name, maxLife);
+	public MoveableEntity(String name, EngineManager e, int maxLife) {
+		super(name, e, maxLife);
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
 		moving = false;

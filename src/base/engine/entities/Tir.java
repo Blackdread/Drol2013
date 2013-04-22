@@ -1,12 +1,14 @@
 package base.engine.entities;
 
+import base.engine.EngineManager;
+
 
 public abstract class Tir extends MoveableEntity {
 	
 	protected BasicEntity expediteur;
 
-	public Tir(String name, int maxLife, BasicEntity e) {
-		super(name, maxLife);
+	public Tir(String name, EngineManager en, int maxLife, BasicEntity e) {
+		super(name, en, maxLife);
 		expediteur = e;
 	}
 

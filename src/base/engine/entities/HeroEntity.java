@@ -5,6 +5,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
+import base.engine.EngineManager;
 import base.utils.ResourceManager;
 
 /**
@@ -28,8 +29,8 @@ public class HeroEntity extends PlayableEntity {
 	protected Animation anim_static;
 	protected Animation current_anim;
 	
-	public HeroEntity(String name, int maxLife) {
-		super(name, maxLife);
+	public HeroEntity(String name, EngineManager en, int maxLife) {
+		super(name, en, maxLife);
 		// TODO Auto-generated constructor stub
 		shape = new Rectangle(0,0,32,48);
 		weapon = new Weapon("TirLinear", 500);
