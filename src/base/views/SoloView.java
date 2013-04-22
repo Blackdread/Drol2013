@@ -144,6 +144,8 @@ public class SoloView extends View {
 	}
 	@Override
 	public void mousePressed(int button, int x, int y) {
+		super.mousePressed(button, x, y);
+		
 		if(butJouer.isMouseOver())
 			startCampaign();
 		else if(butRetour.isMouseOver())

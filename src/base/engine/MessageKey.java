@@ -83,5 +83,5 @@ public abstract class MessageKey {
 	public static final int I_LAUNCH_GAME = 103;
 	
 	// Parameters
-	
+	public static final int P_ID_CLIENT = 200;
 }
