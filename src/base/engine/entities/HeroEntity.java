@@ -27,6 +27,7 @@ public class HeroEntity extends PlayableEntity {
 	protected Animation anim_mv_d;
 	protected Animation anim_mv_g;
 	protected Animation anim_static;
+	protected Animation anim_dying;
 	protected Animation current_anim;
 	
 	public HeroEntity(String name, EngineManager en, int maxLife) {
@@ -38,6 +39,8 @@ public class HeroEntity extends PlayableEntity {
 		anim_mv_d = new Animation(ResourceManager.getSpriteSheet("rob"), 4, 0, 5, 0, true, 200, true);
 		anim_mv_g = new Animation(ResourceManager.getSpriteSheet("rob"), 6, 0, 7, 0, true, 200, true);
 		anim_static = new Animation(ResourceManager.getSpriteSheet("rob"), 0, 0, 3, 0, true, 200, true);
+		anim_dying = new Animation(ResourceManager.getSpriteSheet("zombi"), 0, 0, 3, 0, true, 200, true);
+		anim_dying.setLooping(false);
 		current_anim = anim_static;
 		moving = false;
 	}
@@ -48,26 +51,60 @@ public class HeroEntity extends PlayableEntity {
 		/*
 		g.setColor(Color.red);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());*/
-		if(moving)
+		if(dying)
 		{
-			if(this.getDirection() == BasicEntity.DROITE)
-				anim_mv_d.draw(x, y);
-			else
-				anim_mv_g.draw(x, y);
+			current_anim = anim_dying;
 		}
 		else
-			anim_static.draw(x, y);
+		{
+			if(moving)
+			{
+				if(this.getDirection() == BasicEntity.DROITE)
+					current_anim = anim_mv_d;
+				else
+					current_anim = anim_mv_g;
+			}
+			else
+				current_anim = anim_static;
+		}
+		
+		current_anim.draw(x, y);
 	}
 	
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-
+		
+		if(dying)
+		{
+			timer.update(delta);
+			System.out.println(timer.getDeltaStock());
+		}
+	}
+	
+	public void onDying()
+	{
+		dying = true;
+		int duration = 0;
+		int tab[] = anim_dying.getDurations();
+		
+		for(int i = 0; i < tab.length; i++)
+			duration += tab[i];
+		
+		System.out.println("dur :" + duration);
+		timer.setEventTime(duration);
+		timer.reset();
 	}
 
 	@Override
 	public void onCollision(ICollidableObject collideWith) {
 		super.onCollision(collideWith);
+		
+		if(collideWith instanceof Monster)
+		{
+			if(!dying)
+				this.onDying();
+		}
 	}
 
 }

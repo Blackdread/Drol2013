@@ -51,7 +51,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	@Override
 	public void update(int delta) {
 		//vitesse = vitesse.add(acceleration.scale(((float)delta)/1000.0f));
-
+		super.update(delta);
 		if(acceleration.x != 0 || acceleration.y != 0){
 			if(vitesseMax != 0){
 				if(Math.sqrt(Math.abs(vitesse.dot(vitesse))) >= vitesseMax){
