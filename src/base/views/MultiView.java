@@ -1,5 +1,8 @@
 package base.views;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import base.engine.Game;
 import base.engine.gui.ListeDeroulante;
+import base.utils.Configuration;
 import base.utils.ResourceManager;
 
 /**
@@ -53,12 +57,14 @@ public class MultiView extends View {
 		shapePartie = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
 		
 		ipServerToJoin = new TextField(container, container.getDefaultFont(), 30, hautServer+50+MARGIN*2, 100, 20);
+		ipServerToJoin.setBackgroundColor(Color.darkGray);
+		
 		
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
 		
 		butRejoindreAvecIp = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg+MARGIN, yBut, larg, haut);
-		butRetour.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butRejoindreAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
 	}
 
@@ -81,6 +87,11 @@ public class MultiView extends View {
 		g.draw(shapeServer);
 		g.draw(shapePartie);
 		
+		ipServerToJoin.render(container, g);
+		
+		butRetour.render(container, g);
+		butRejoindreAvecIp.render(container, g);
+		
 		super.render(container, sbgame, g);
 	}
 	
@@ -101,10 +112,24 @@ public class MultiView extends View {
 		if(butRetour.isMouseOver())
 			gotoPreviousView();
 		else if(butRejoindreAvecIp.isMouseOver())
-			rejoindrePartieViaIp();
+			rejoindreServerViaIp();
 	}
 	
-	private void rejoindrePartieViaIp(){
+	private void rejoindreServerViaIp(){
+		String ip = ipServerToJoin.getText();
+		if(!ip.equalsIgnoreCase("")){
+			try {
+				System.out.println("1");
+				engineManager.getNetworkEngine().connect(ip, Configuration.getPort());
+				System.out.println("2");
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	
