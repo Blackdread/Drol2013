@@ -33,7 +33,7 @@ public class MultiView extends View {
 	 * (bouton retour)
 	 * 
 	 */
-	private MouseOverArea butRejoindreAvecIp, butRetour;
+	private MouseOverArea butRejoindreServerAvecIp, butRetour, butCreerPartie;
 	
 	private ListeDeroulante listeServer, listePartie;
 	private Rectangle shapeServer, shapePartie;
@@ -63,9 +63,11 @@ public class MultiView extends View {
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
 		
-		butRejoindreAvecIp = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg+MARGIN, yBut, larg, haut);
-		butRejoindreAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butRejoindreServerAvecIp = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg+MARGIN, yBut, larg, haut);
+		butRejoindreServerAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
+		butCreerPartie = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg*2+MARGIN*2, yBut, larg, haut);
+		butRejoindreServerAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 	}
 
 
@@ -90,7 +92,8 @@ public class MultiView extends View {
 		ipServerToJoin.render(container, g);
 		
 		butRetour.render(container, g);
-		butRejoindreAvecIp.render(container, g);
+		butRejoindreServerAvecIp.render(container, g);
+		butCreerPartie.render(container, g);
 		
 		super.render(container, sbgame, g);
 	}
@@ -111,17 +114,17 @@ public class MultiView extends View {
 		
 		if(butRetour.isMouseOver())
 			gotoPreviousView();
-		else if(butRejoindreAvecIp.isMouseOver())
+		else if(butRejoindreServerAvecIp.isMouseOver())
 			rejoindreServerViaIp();
+		else if(butCreerPartie.isMouseOver())
 	}
 	
 	private void rejoindreServerViaIp(){
 		String ip = ipServerToJoin.getText();
 		if(!ip.equalsIgnoreCase("")){
 			try {
-				System.out.println("1");
 				engineManager.getNetworkEngine().connect(ip, Configuration.getPort());
-				System.out.println("2");
+				System.out.println("Connecter au serveur");
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
