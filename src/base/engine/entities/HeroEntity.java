@@ -21,8 +21,8 @@ import base.utils.ResourceManager;
 
 public class HeroEntity extends PlayableEntity {
 	
-	protected Weapon weapon;
-	
+	protected WeaponRanged weapon;
+
 	//Peut être à disposer plus haut dans la hierarchie des classes (ie moveable entity)
 	protected Animation anim_mv_d;
 	protected Animation anim_mv_g;
@@ -33,7 +33,7 @@ public class HeroEntity extends PlayableEntity {
 		super(name, en, maxLife);
 		// TODO Auto-generated constructor stub
 		shape = new Rectangle(0,0,32,48);
-		weapon = new Weapon("TirLinear", 500);
+		weapon = new WeaponTirLinear(500);
 		//
 		anim_mv_d = new Animation(ResourceManager.getSpriteSheet("rob"), 4, 0, 5, 0, true, 200, true);
 		anim_mv_g = new Animation(ResourceManager.getSpriteSheet("rob"), 6, 0, 7, 0, true, 200, true);
@@ -62,7 +62,7 @@ public class HeroEntity extends PlayableEntity {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-
+		weapon.update(delta);
 	}
 
 	@Override
@@ -70,4 +70,11 @@ public class HeroEntity extends PlayableEntity {
 		super.onCollision(collideWith);
 	}
 
+	public WeaponRanged getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(WeaponRanged weapon) {
+		this.weapon = weapon;
+	}
 }

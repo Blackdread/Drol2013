@@ -3,6 +3,7 @@ package base.engine;
 import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.entities.BasicEntity;
+import base.engine.entities.HeroEntity;
 import base.engine.entities.Monster;
 import base.engine.entities.MoveableEntity;
 import base.engine.entities.PlayableEntity;
@@ -19,13 +20,10 @@ import base.engine.logics.IA;
  * @since 19/03/2013
  */
 public class LogicEngine extends Engine {
-
-	public static long tmp = System.currentTimeMillis();
 	
 	public LogicEngine(EngineManager engineManager)
 	{
 		super(engineManager);
-		tmp = System.currentTimeMillis();
 	}
 	
 	@Override
@@ -145,28 +143,32 @@ public class LogicEngine extends Engine {
 									Vector2f vitesse = new Vector2f();
 									vitesse.x = mes.i_data.get(MessageKey.P_VITESSE_X);
 									vitesse.y = mes.i_data.get(MessageKey.P_VITESSE_Y);
-									if(System.currentTimeMillis() - tmp > 100){	// juste pour debug, ce sera pas la plus tard
-									Tir t = new TirLinear(1, engineManager, vitesse, null);
-									t.setEngineManager(engineManager);
+									
+									
+									Tir t = null;//= new TirLinear(1, engineManager, vitesse, null);
 									
 									if(mes.o_data.containsKey(MessageKey.P_ENTITY))
 									{
 										System.out.println("Contient");
 										Object b = mes.o_data.get(MessageKey.P_ENTITY);
+										if(b instanceof HeroEntity)
+											t = ((HeroEntity)b).getWeapon().shoot();
+										
 										if(b instanceof BasicEntity)
+											if(t != null)
 											t.setExpediteur((BasicEntity)b);
 									}
-									
-									t.setLocation(x, y);
-									engineManager.getIA().addEntity(t);
-									engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
-									Deplacement.deplacerEntity(0, 0, t.getId());
-									tmp =  System.currentTimeMillis();
-									}
+									if(t != null){
+										t.setEngineManager(engineManager);
+										
+										t.setLocation(x, y);
+										engineManager.getIA().addEntity(t);
+										engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
+										Deplacement.deplacerEntity(0, 0, t.getId());
+									}else
+										System.out.println("NULLLLL");
 								}
 							}
-							
-							
 						}
 					}
 					break;
