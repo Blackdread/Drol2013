@@ -1,5 +1,6 @@
 package base.views;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,10 +29,10 @@ public class MultiView extends View {
 	 * (bouton retour)
 	 * 
 	 */
-	private MouseOverArea butDonnerIp, butRetour;
+	private MouseOverArea butRejoindreAvecIp, butRetour;
 	
 	private ListeDeroulante listeServer, listePartie;
-	private Rectangle shapeSercer, shapePartie;
+	private Rectangle shapeServer, shapePartie;
 	
 	private TextField ipServerToJoin;
 	
@@ -45,15 +46,40 @@ public class MultiView extends View {
 		
 		int yBut = h - haut - MARGIN;
 		
-		int hautServer = h/3 - MARGIN, largServer = w /2 - MARGIN;
+		int hautServer = h/2 - MARGIN, largServer = w/2 - MARGIN;
+		int hautPartie = h/2 - MARGIN, largPartie = w/2 - MARGIN;
+		
+		shapeServer = new Rectangle(30, 50, largServer, hautServer);
+		shapePartie = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
+		
+		ipServerToJoin = new TextField(container, container.getDefaultFont(), 30, hautServer+50+MARGIN*2, 100, 20);
+		
+		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
+		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
+		
+		butRejoindreAvecIp = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg+MARGIN, yBut, larg, haut);
+		butRetour.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
 	}
 
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
+		g.setColor(Color.white);
+		g.drawString("Liste des serveurs :", shapeServer.getX()+shapeServer.getWidth()/2-container.getDefaultFont().getWidth("Liste des serveurs :")/2, shapeServer.getY()-container.getDefaultFont().getHeight("Liste des serveurs :") - 2);
+		g.drawString("Liste des parties :", shapePartie.getX()+shapePartie.getWidth()/2-container.getDefaultFont().getWidth("Liste des parties :")/2, shapePartie.getY()-container.getDefaultFont().getHeight("Liste des parties :") - 2);
+		g.drawString("Rejoindre une partie avec l'ip :", ipServerToJoin.getX(), ipServerToJoin.getY()-container.getDefaultFont().getHeight("Rejoindre une partie avec l'ip :") - 2);
 		
 		
+		g.setDrawMode(Graphics.MODE_COLOR_MULTIPLY);
+		g.setColor(Color.gray);
+		g.fill(shapeServer);
+		g.fill(shapePartie);
+		g.setDrawMode(Graphics.MODE_NORMAL);
+		
+		g.setColor(Color.white);
+		g.draw(shapeServer);
+		g.draw(shapePartie);
 		
 		super.render(container, sbgame, g);
 	}
@@ -74,6 +100,11 @@ public class MultiView extends View {
 		
 		if(butRetour.isMouseOver())
 			gotoPreviousView();
+		else if(butRejoindreAvecIp.isMouseOver())
+			rejoindrePartieViaIp();
+	}
+	
+	private void rejoindrePartieViaIp(){
 		
 	}
 	

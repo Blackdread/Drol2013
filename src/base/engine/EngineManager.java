@@ -50,9 +50,9 @@ public class EngineManager{
 	
 	public EngineManager(){
 		tabEngine = new Engine[NB_ENGINE];
-		tabEngine[SOUND_ENGINE] = new SoundEngine(this);
-		tabEngine[LOGIC_ENGINE] = new LogicEngine(this);
-		tabEngine[NETWORK_ENGINE] = new NetworkEngine(this);
+		tabEngine[Integer.valueOf(""+SOUND_ENGINE)] = new SoundEngine(this);
+		tabEngine[Integer.valueOf(""+LOGIC_ENGINE)] = new LogicEngine(this);
+		tabEngine[Integer.valueOf(""+NETWORK_ENGINE)] = new NetworkEngine(this);
 		
 		ia = new IA();	// lien vers manager ?
 		
@@ -65,7 +65,7 @@ public class EngineManager{
 	}
 	
 	synchronized public void receiveMessage(Message mes){
-		tabEngine[mes.engine].receiveMessage(mes);
+		tabEngine[Integer.valueOf(""+mes.engine)].receiveMessage(mes);
 		/*switch(mes.engine){
 		case SOUND_ENGINE:
 			tabEngine[SOUND_ENGINE].receiveMessage(mes);
