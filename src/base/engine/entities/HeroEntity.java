@@ -80,7 +80,6 @@ public class HeroEntity extends PlayableEntity {
 		if(dying)
 		{
 			timer.update(delta);
-			System.out.println(timer.getDeltaStock());
 		}
 	}
 	
@@ -93,7 +92,6 @@ public class HeroEntity extends PlayableEntity {
 		for(int i = 0; i < tab.length; i++)
 			duration += tab[i];
 		
-		System.out.println("dur :" + duration);
 		timer.setEventTime(duration);
 		timer.reset();
 	}
