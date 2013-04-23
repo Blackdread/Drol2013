@@ -10,7 +10,6 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
 	protected int direction;
-	protected EngineManager engineManager;
 	//protected Vector2f direction;
 	
 	//public static final Vector2f HAUT = new Vector2f(0,1);
@@ -24,7 +23,7 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	public static final int DROITE = 3;
 	
 	public BasicEntity(String name, EngineManager e) {
-		super(name);
+		super(name, e);
 		direction = HAUT;
 		engineManager = e;
 	}

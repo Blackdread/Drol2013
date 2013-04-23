@@ -15,7 +15,7 @@ public class StatsSerializable implements Serializable{
 	 * Le 1er String peut etre le nom du stats (Nb de morts, Nb de fois gagné, Nb de personne sauvé, temps de jeu total, etc)
 	 * Le 2eme est la valeur (int, float, double, ...)
 	 */
-	private HashMap<String, String> hashStats = new HashMap<String, String>();;
+	private HashMap<String, String> hashStats = new HashMap<String, String>();
 	
 	public StatsSerializable(){
 	}

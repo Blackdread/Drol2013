@@ -3,6 +3,7 @@
  */
 package base.engine;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 
 import org.newdawn.slick.geom.Vector2f;
@@ -11,7 +12,7 @@ import org.newdawn.slick.geom.Vector2f;
  * @author Nico
  *
  */
-public class Message {
+public class Message implements Serializable{
 	
 	/**
 	 * Definit quelle instruction on desire executee

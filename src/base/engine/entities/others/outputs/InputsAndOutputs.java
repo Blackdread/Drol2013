@@ -52,8 +52,9 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	
 	protected ArrayList<Outputs> array_outputs = new ArrayList<Outputs>();
 	
-	public InputsAndOutputs(String name){
+	public InputsAndOutputs(String name,  EngineManager e){
 		this.name = name;
+		engineManager = e;
 		removeEntityFromWorld = false;
 		removeHierarchy = false;
 		id = InputsAndOutputs.currentId;

@@ -16,8 +16,10 @@ import base.engine.network.ThreadNetworkSender;
  */
 public class NetworkEngine extends Engine {
 	private Socket sock;
-	Runnable threadList;
-	Runnable threadSend;
+	ThreadNetworkListener runList;
+	ThreadNetworkSender runSend;
+	Thread threadList;
+	Thread threadSend;
 	
 	public NetworkEngine(EngineManager engineManager)
 	{
@@ -34,16 +36,27 @@ public class NetworkEngine extends Engine {
 		
 		return true;
 	}
+	
+	public boolean creerPartie(){
+		if(runSend != null){
+			Message mes = new Message();
+			mes.instruction = MessageKey.I_START_NEW_GAME;
+			
+			runSend.ajoutMessage(mes);
+			return true;
+		}
+		return false;
+	}
 
 	public boolean connect(String ip, int port) throws UnknownHostException, IOException
 	{
 		sock = new Socket(ip, port);
-		threadList = new ThreadNetworkListener(sock, this);
-		threadList = new Thread(threadList);
-		((Thread) threadList).start();
-		threadSend = new ThreadNetworkSender(sock, this);
-		threadSend = new Thread(threadSend);
-		((Thread) threadSend).start();
+		runList = new ThreadNetworkListener(sock, this);
+		threadList = new Thread(runList);
+		threadList.start();
+		runSend = new ThreadNetworkSender(sock, this);
+		threadSend = new Thread(runSend);
+		threadSend.start();
 		
 		return true;
 	}
@@ -51,7 +64,8 @@ public class NetworkEngine extends Engine {
 	public boolean disconnect()
 	{
 		//Appeler les fonctions pour desactiver
-		((ThreadNetworkListener)threadList).desactive();
+		runList.desactive();
+		runSend.desactive();
 		
 		return true;
 	}

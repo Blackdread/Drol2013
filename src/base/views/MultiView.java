@@ -13,6 +13,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
 import base.engine.gui.ListeDeroulante;
@@ -67,7 +69,7 @@ public class MultiView extends View {
 		butRejoindreServerAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
 		butCreerPartie = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg*2+MARGIN*2, yBut, larg, haut);
-		butRejoindreServerAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butCreerPartie.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 	}
 
 
@@ -117,6 +119,16 @@ public class MultiView extends View {
 		else if(butRejoindreServerAvecIp.isMouseOver())
 			rejoindreServerViaIp();
 		else if(butCreerPartie.isMouseOver())
+			creerPartie();
+	}
+	
+	private void creerPartie(){
+		if(engineManager.getNetworkEngine().creerPartie()){
+			gotoSalonView();
+		}else{
+			// TODO
+			System.out.println("Creer Partie FALSE");
+		}
 	}
 	
 	private void rejoindreServerViaIp(){
@@ -134,6 +146,11 @@ public class MultiView extends View {
 			}
 		}
 		
+	}
+	
+	private void gotoSalonView(){
+		container.setMouseGrabbed(false);
+		game.enterState(Game.SALON_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	
 	@Override
