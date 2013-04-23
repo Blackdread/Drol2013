@@ -24,6 +24,7 @@ public class NetworkEngine extends Engine {
 		super(engineManager);
 	}
 	
+	
 	@Override
 	public synchronized boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
@@ -37,14 +38,16 @@ public class NetworkEngine extends Engine {
 
 	public boolean connect(String ip, int port) throws UnknownHostException, IOException
 	{
+		System.out.println("debut thread");
 		sock = new Socket(ip, port);
 		threadList = new ThreadNetworkListener(sock, this);
 		threadList = new Thread(threadList);
 		((Thread) threadList).start();
+		System.out.println("entre thread");
 		threadSend = new ThreadNetworkSender(sock, this);
 		threadSend = new Thread(threadSend);
 		((Thread) threadSend).start();
-		
+		System.out.println("fin thread");
 		return true;
 	}
 	

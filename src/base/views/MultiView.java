@@ -116,7 +116,7 @@ public class MultiView extends View {
 			gotoPreviousView();
 		else if(butRejoindreServerAvecIp.isMouseOver())
 			rejoindreServerViaIp();
-		else if(butCreerPartie.isMouseOver())
+		else if(butCreerPartie.isMouseOver()){}
 	}
 	
 	private void rejoindreServerViaIp(){
