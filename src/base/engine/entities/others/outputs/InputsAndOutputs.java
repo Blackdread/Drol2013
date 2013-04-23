@@ -52,7 +52,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	
 	protected ArrayList<Outputs> array_outputs = new ArrayList<Outputs>();
 	
-	public InputsAndOutputs(String name,  EngineManager e){
+	public InputsAndOutputs(EngineManager e, String name){
 		this.name = name;
 		engineManager = e;
 		removeEntityFromWorld = false;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * 
  * Compares a set of inputs to each other. If they are all the same, fires an OnEqual output. 
@@ -21,8 +23,8 @@ public class LogicMulticompare extends Logic {
 	
 	private ArrayList<Integer> arrayValue;
 	
-	public LogicMulticompare(String name) {
-		super(name);
+	public LogicMulticompare(EngineManager e,String name) {
+		super(e,name);
 		arrayValue = new ArrayList<Integer>();
 	}
 

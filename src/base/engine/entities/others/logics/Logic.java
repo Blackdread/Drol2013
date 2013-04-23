@@ -1,5 +1,6 @@
 package base.engine.entities.others.logics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.PointEntity;
 
 /**
@@ -9,8 +10,8 @@ import base.engine.entities.others.outputs.PointEntity;
  */
 public abstract class Logic extends PointEntity {
 
-	public Logic(String name){
-		super(name);
+	public Logic(EngineManager e,String name){
+		super(e,name);
 	}
 	
 }

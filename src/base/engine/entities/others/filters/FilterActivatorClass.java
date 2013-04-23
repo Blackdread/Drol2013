@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * 
  * @author Yoann CAPLAIN
@@ -22,14 +24,14 @@ public class FilterActivatorClass extends Filter {
 	 */
 	protected ArrayList<String> NameToCompareTo;
 	
-	public FilterActivatorClass(String name, String classname) {
-		super(name);
+	public FilterActivatorClass(EngineManager e,String name, String classname) {
+		super(e, name);
 		classNameFilter = classname;
 		NameToCompareTo = new ArrayList<String>();
 	}
 	
-	public FilterActivatorClass(String name, boolean negate, String classname){
-		super(name, negate);
+	public FilterActivatorClass(EngineManager e,String name, boolean negate, String classname){
+		super(e, name, negate);
 		classNameFilter = classname;
 		NameToCompareTo = new ArrayList<String>();
 	}

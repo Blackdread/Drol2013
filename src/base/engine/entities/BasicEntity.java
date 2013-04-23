@@ -22,8 +22,8 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	public static final int GAUCHE = 2;
 	public static final int DROITE = 3;
 	
-	public BasicEntity(String name, EngineManager e) {
-		super(name, e);
+	public BasicEntity(EngineManager e, String name) {
+		super(e, name);
 		direction = HAUT;
 		engineManager = e;
 	}

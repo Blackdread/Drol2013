@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * @IMPORTANT unfinished
  * @author Yoann CAPLAIN
@@ -15,12 +17,12 @@ public class FilterDamageType extends Filter {
 	 */
 	ArrayList<Integer> arrayDamageTypeToFilter;
 	
-	public FilterDamageType(String name) {
-		super(name);
+	public FilterDamageType(EngineManager e,String name) {
+		super(e,name);
 		arrayDamageTypeToFilter = new ArrayList<Integer>();
 	}
-	public FilterDamageType(String name, ArrayList<Integer> array) {
-		super(name);
+	public FilterDamageType(EngineManager e,String name, ArrayList<Integer> array) {
+		super(e,name);
 		arrayDamageTypeToFilter = array;
 	}
 

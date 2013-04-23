@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * It tests a boolean value and fires an output based on whether the value is true (one) or false (zero). 
  * Use this entity to branch between two potential sets of events.  
@@ -16,8 +18,8 @@ public class LogicBranch extends Logic {
 
 	private boolean value;
 	
-	public LogicBranch(String name) {
-		super(name);
+	public LogicBranch(EngineManager e,String name) {
+		super(e,name);
 	}
 	
 	@Override

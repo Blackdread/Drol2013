@@ -20,12 +20,12 @@ import base.engine.EngineManager;
  */
 public class InfoTarget extends Info {
 	
-	public InfoTarget(String name, EngineManager e) {
-		super(name, e);
+	public InfoTarget(EngineManager e,String name) {
+		super(e,name);
 	}
 	
-	public InfoTarget(String name, EngineManager e, float xx, float yy) {
-		super(name, e);
+	public InfoTarget(EngineManager e,String name, float xx, float yy) {
+		super(e,name);
 		x=xx;
 		y=yy;
 		/* N'a pas besoin d'origin

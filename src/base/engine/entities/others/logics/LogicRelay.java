@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
 import base.engine.entities.others.outputs.IUpdatable;
@@ -51,8 +52,8 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 	 */
 	private boolean allowFastRetrigger;
 	
-	public LogicRelay(String name) {
-		super(name);
+	public LogicRelay(EngineManager e,String name) {
+		super(e,name);
 		allowFastRetrigger = false;
 		fireOnce = false;
 		enabled = true;

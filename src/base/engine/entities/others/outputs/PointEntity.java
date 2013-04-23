@@ -14,8 +14,8 @@ import base.utils.ResourceManager;
  */
 public abstract class PointEntity extends BasicEntity implements IRenderPointEntity{
 
-	public PointEntity(String name, EngineManager e) {
-		super(name, e);
+	public PointEntity(EngineManager e, String name) {
+		super(e,name);
 	}
 	
 	@Override

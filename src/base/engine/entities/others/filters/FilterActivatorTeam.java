@@ -2,6 +2,7 @@ package base.engine.entities.others.filters;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.ITeam;
 
 /**
@@ -19,13 +20,13 @@ public class FilterActivatorTeam extends Filter {
 	 */
 	protected int teamToCompareTo;
 	
-	public FilterActivatorTeam(String name, int team2) {
-		super(name);
+	public FilterActivatorTeam(EngineManager e,String name, int team2) {
+		super(e,name);
 		team = team2;
 	}
 	
-	public FilterActivatorTeam(String name, boolean negate, int team2){
-		super(name, negate);
+	public FilterActivatorTeam(EngineManager e,String name, boolean negate, int team2){
+		super(e,name, negate);
 		team = team2;
 	}
 	

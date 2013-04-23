@@ -11,8 +11,8 @@ import base.engine.entities.others.outputs.PointEntity;
  */
 public abstract class Info extends PointEntity {
 
-	public Info(String name, EngineManager e) {
-		super(name, e);
+	public Info(EngineManager e,String name) {
+		super(e,name);
 	}
 
 }

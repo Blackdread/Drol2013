@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IUpdatable;
 
 /**
@@ -30,11 +31,11 @@ public class LogicAuto extends Logic implements IUpdatable{
 	
 	private static LogicAuto instance;
 	
-	public static LogicAuto getInstance(String name) {
+	public static LogicAuto getInstance(EngineManager e,String name) {
 		if (null == instance) { // Premier appel
             synchronized(objetSynchrone__) {
                 if (null == instance) {
-                    instance = new LogicAuto(name);
+                    instance = new LogicAuto(e,name);
                 }
             }
         }
@@ -43,8 +44,8 @@ public class LogicAuto extends Logic implements IUpdatable{
 	 
 	private static Object objetSynchrone__;
 
-	private LogicAuto(String name) {
-		super(name);
+	private LogicAuto(EngineManager e,String name) {
+		super(e,name);
 	}
 	
 	@Override

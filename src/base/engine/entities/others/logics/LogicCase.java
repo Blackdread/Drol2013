@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
+
 /**
  * It compares an input to up to 16 configured values, firing a corresponding output if there is a match (on InValue), 
  * or fires a random output (on PickRandom)
@@ -26,8 +28,8 @@ public class LogicCase extends Logic {
 	
 	private boolean shuffleCaseReminder[];
 	
-	public LogicCase(String name) {
-		super(name);
+	public LogicCase(EngineManager e,String name) {
+		super(e,name);
 		shuffleCaseReminder = new boolean[NB_CASE+1 +1];
 		for(int i=0;i < NB_CASE + 1;i++)
 			shuffleCaseReminder[i] = false;

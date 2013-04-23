@@ -58,8 +58,8 @@ public abstract class Trigger extends BasicEntity implements ITrigger, IDisable,
 	 */
 	protected boolean fireOnce;
 	
-	public Trigger(String name, EngineManager e) {
-		super(name, e);
+	public Trigger(EngineManager e,String name) {
+		super(e,name);
 		hasbeenFired = false;
 		delayBeforeReset = new Timer(1000);
 	}

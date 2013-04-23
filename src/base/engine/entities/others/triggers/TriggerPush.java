@@ -3,6 +3,7 @@
  */
 package base.engine.entities.others.triggers;
 
+import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 
 /**
@@ -34,8 +35,8 @@ public class TriggerPush extends TriggerObjectInZone {
 	 */
 	private int speedOfPush;
 	
-	public TriggerPush(String name, int xx, int yy, int w, int h) {
-		super(name, xx, yy, w, h);
+	public TriggerPush(EngineManager e, String name, int xx, int yy, int w, int h) {
+		super(e, name, xx, yy, w, h);
 		//direction = PUSH_XY;
 	}
 

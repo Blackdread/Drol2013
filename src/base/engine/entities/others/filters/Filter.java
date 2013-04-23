@@ -25,16 +25,16 @@ public abstract class Filter extends PointEntity{
 	 * 
 	 * @param String targetname that other entities refer to this entity by
 	 */
-	public Filter(String name, EngineManager e){
-		super(name, e);
+	public Filter(EngineManager e,String name){
+		super(e, name);
 	}
 	/**
 	 * 
 	 * @param String targetname that other entities refer to this entity by
 	 * @param Boolean negate invert result
 	 */
-	public Filter(String name, EngineManager e,boolean negate){
-		super(name, e);
+	public Filter(EngineManager e, String name,boolean negate){
+		super(e, name);
 		this.negateFilter = negate;
 	}
 	

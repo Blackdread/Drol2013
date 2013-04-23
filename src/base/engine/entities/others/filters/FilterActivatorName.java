@@ -33,8 +33,8 @@ public class FilterActivatorName extends Filter{
 	 * @see Filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name, EngineManager e, String classname){
-		super(name, e);
+	public FilterActivatorName(EngineManager e,String name, String classname){
+		super(e,name);
 		classNameFilter = classname;
 	}
 	/**
@@ -42,8 +42,8 @@ public class FilterActivatorName extends Filter{
 	 * @param negate invert the filter
 	 * @param String classname Name this filter will compare to
 	 */
-	public FilterActivatorName(String name,EngineManager e, boolean negate, String classname){
-		super(name, e, negate);
+	public FilterActivatorName(EngineManager e,String name, boolean negate, String classname){
+		super(e,name, negate);
 		classNameFilter = classname;
 	}
 	

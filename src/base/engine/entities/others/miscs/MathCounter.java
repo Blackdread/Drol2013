@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.PointEntity;
 
@@ -37,8 +38,8 @@ public class MathCounter extends PointEntity implements IDisable{
 	private int maximumLegalValue;
 	 
 	
-	public MathCounter(String name) {
-		super(name);
+	public MathCounter(EngineManager e,String name) {
+		super(e,name);
 	}
 
 	@Override

@@ -35,8 +35,8 @@ public class TriggerTeleport extends TriggerObjectInZone {
 	 */
 	private String localDestinationLandmark;
 	
-	public TriggerTeleport(String name, EngineManager e, int xx, int yy, int w, int h) {
-		super(name, e, xx, yy, w, h);
+	public TriggerTeleport(EngineManager e, String name, int xx, int yy, int w, int h) {
+		super(e, name, xx, yy, w, h);
 		enabled = true;
 		
 	}

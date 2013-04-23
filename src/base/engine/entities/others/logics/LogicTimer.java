@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.utils.Timer;
@@ -65,8 +66,8 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 	 */
 	private boolean isOscillator;
 	
-	public LogicTimer(String name){
-		super(name);
+	public LogicTimer(EngineManager e,String name){
+		super(e,name);
 		refireInterval = 1000;
 		timer = new Timer(1000);
 		enabled = true;

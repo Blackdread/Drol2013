@@ -1,5 +1,7 @@
 package base.engine.entities.others.triggers;
 
+import base.engine.EngineManager;
+
 /**
  * It is a trigger volume damages entities that touch it
  * @author Yoann CAPLAIN
@@ -14,8 +16,8 @@ public class TriggerHurt extends TriggerObjectInZone {
 	 */
 	private int damage;
 	
-	public TriggerHurt(String name, int xx, int yy, int w, int h) {
-		super(name, xx, yy, w, h);
+	public TriggerHurt(EngineManager e, String name, int xx, int yy, int w, int h) {
+		super(e,name, xx, yy, w, h);
 	}
 	
 	@Override

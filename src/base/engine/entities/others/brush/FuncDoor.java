@@ -2,6 +2,7 @@ package base.engine.entities.others.brush;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 
 /**
@@ -11,8 +12,8 @@ import base.engine.entities.BasicEntity;
  */
 public class FuncDoor extends BasicEntity {
 	
-	public FuncDoor(String name) {
-		super(name);
+	public FuncDoor(EngineManager e, String name) {
+		super(e, name);
 	}
 	
 	@Override

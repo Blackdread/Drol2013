@@ -30,7 +30,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	//protected boolean remove; se trouve deja dans InputAndOutputs
 
 	public ActiveEntity(String name, EngineManager e, int maxLife) {
-		super(name, e);
+		super(e,name);
 		this.maxLife = maxLife;
 		this.life = maxLife;
 		this.visible = true;

@@ -39,8 +39,8 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	 * @param w width
 	 * @param h height
 	 */
-	public TriggerObjectInZone(String name,EngineManager e , int xx, int yy, int w, int h) {
-		super(name, e);
+	public TriggerObjectInZone(EngineManager e, String name, int xx, int yy, int w, int h) {
+		super(e,name);
 		x=xx;
 		y=yy;
 		shape = new Rectangle(0,0,w,h);

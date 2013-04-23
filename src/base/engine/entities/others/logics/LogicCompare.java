@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.Outputs;
 
 /**
@@ -29,16 +30,16 @@ public class LogicCompare extends Logic {
 	 * @see Logic
 	 * @param Float initial value
 	 */
-	public LogicCompare(String name, float initialValue){
-		super(name);
+	public LogicCompare(EngineManager e,String name, float initialValue){
+		super(e,name);
 	}
 	/**
 	 * @see Logic
 	 * @param Float initial value
 	 * @param Float compare value
 	 */
-	public LogicCompare(String name, float initialValue, float compareValue){
-		super(name);
+	public LogicCompare(EngineManager e,String name, float initialValue, float compareValue){
+		super(e,name);
 	}
 	
 	@Override
