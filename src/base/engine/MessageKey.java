@@ -81,6 +81,9 @@ public abstract class MessageKey {
 	public static final int I_LEAVE_GAME = 102;
 	
 	public static final int I_LAUNCH_GAME = 103;
+	public static final int I_CLIENT_END_LOADING = 104;
+	public static final int I_CHANGE_VIEW_TO_GAME = 105;
+	public static final int I_CHANGE_VIEW_TO_LOADING = 106;
 	
 	// Parameters
 	public static final int P_ID_CLIENT = 200;

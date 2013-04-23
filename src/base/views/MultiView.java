@@ -126,7 +126,7 @@ public class MultiView extends View {
 		if(engineManager.getNetworkEngine().creerPartie()){
 			gotoSalonView();
 		}else{
-			// TODO
+			// TODO oui oui
 			System.out.println("Creer Partie FALSE");
 		}
 	}

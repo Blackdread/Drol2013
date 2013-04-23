@@ -26,6 +26,7 @@ public class NetworkEngine extends Engine {
 		super(engineManager);
 	}
 	
+	
 	@Override
 	public synchronized boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
@@ -58,6 +59,7 @@ public class NetworkEngine extends Engine {
 		threadSend = new Thread(runSend);
 		threadSend.start();
 		
+		System.out.println("fin thread");
 		return true;
 	}
 	
