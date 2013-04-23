@@ -10,6 +10,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
 import base.engine.gui.ListeDeroulante;
@@ -40,6 +42,7 @@ public class SalonView extends View {
 		shapeTchat = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
 		
 		textTchat = new TextField(container, container.getDefaultFont(), (int)shapeTchat.getX(), (int)shapeTchat.getY()+(int)shapeTchat.getHeight()+2, (int)shapeTchat.getWidth(), 20);
+		textTchat.setBackgroundColor(Color.darkGray);
 		
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
@@ -91,6 +94,11 @@ public class SalonView extends View {
 		super.mousePressed(button, x, y);
 		
 		
+	}
+	
+	public void goToTransitionView(){
+		container.setMouseGrabbed(false);
+		game.enterState(Game.TRANSITION_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class MultiView extends View {
 		shapeServer = new Rectangle(30, 50, largServer, hautServer);
 		shapePartie = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
 		
-		ipServerToJoin = new TextField(container, container.getDefaultFont(), 30, hautServer+50+MARGIN*2, 100, 20);
+		ipServerToJoin = new TextField(container, container.getDefaultFont(), 30, hautServer+50+MARGIN*2, 180, 22);
 		ipServerToJoin.setBackgroundColor(Color.darkGray);
 		
 		
