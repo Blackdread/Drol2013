@@ -103,8 +103,8 @@ public class Deplacement {
 			//On replace l'entité dans les tiles
 			ajouterEntiteDansTiles(e);
 			
-			if(e instanceof HeroEntity)
-				mettreAJourScroll(e);
+			//if(e instanceof HeroEntity)
+				//mettreAJourScroll(e);
 		}
 		else if(x != 0)
 		{
@@ -132,8 +132,8 @@ public class Deplacement {
 			
 			//On replace l'entité dans les tiles
 			ajouterEntiteDansTiles(e);
-			if(e instanceof HeroEntity)
-				mettreAJourScroll(e);
+			//if(e instanceof HeroEntity)
+				//mettreAJourScroll(e);
 		}
 		else if(y != 0)
 		{
@@ -192,7 +192,10 @@ public class Deplacement {
 	/**
 	 * Si le scroll sort de l'écran on met à 0 ou max sinon on centre sur le héro
 	 * @param e entite sur laquelle centre le scroll
+	 * 
+	 * Sera supprimer car le scrolling est fait dans la vue
 	 */
+	@Deprecated
 	public static void mettreAJourScroll(final BasicEntity e){
 		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		

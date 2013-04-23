@@ -50,6 +50,7 @@ public class Game extends StateBasedGame {
 	public static final int MULTI_VIEW_ID = 32;
 	public static final int SERVER_VIEW_ID = 64;
 	public static final int SALON_VIEW_ID = 128;
+	public static final int IN_GAME_MULTI_VIEW_ID = 256;
 	
 	public static final int TRANSITION_VIEW_ID = 512;
 	public static final int LAST_VIEW_ID = 1024;
@@ -75,10 +76,12 @@ public class Game extends StateBasedGame {
 		addState(new SoloView());
 		addState(new MultiView());
 		addState(new SalonView());
+		
 		addState(new TransitionView());
 		addState(new LastView());
 		
 		addState(new TestView());
+		addState(new InGameMultiView());
 	}
 	
 	private void applyCurrentConfiguration(AppGameContainer container) throws IOException, SlickException {

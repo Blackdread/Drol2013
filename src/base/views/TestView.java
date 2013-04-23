@@ -50,7 +50,7 @@ public class TestView extends View{
 		
 		t = new TileSet(ResourceManager.getSpriteSheet("sprite"), tp);
 		
-		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t);
+		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t, Game.getEngineManager());
 		lvl.loadLevel();
 		engineManager.setCurrentLevelUsed(lvl);
 		hero = new HeroEntity("bla", engineManager, 500);
@@ -65,12 +65,9 @@ public class TestView extends View{
 				Thread.sleep(10);
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
-		TriggerTeleport tr = new TriggerTeleport("teleport", engineManager, 200,36,40,40);
-		InfoTarget inf = new InfoTarget("infotarget", engineManager, 200, 250);
-		inf.setEngineManager(engineManager);
-		hero.setEngineManager(engineManager);
-		z.setEngineManager(engineManager);
-		FilterActivatorName fil = new FilterActivatorName("filtername",engineManager,false,"bla");
+		TriggerTeleport tr = new TriggerTeleport(engineManager,"teleport", 200,36,40,40);
+		InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 250);
+		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"bla");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
 		engineManager.getInfoManager().addEntity(inf);

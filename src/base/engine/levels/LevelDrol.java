@@ -13,6 +13,7 @@ import java.util.HashMap;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import base.engine.EngineManager;
 import base.engine.entities.ActiveEntity;
 import base.engine.entities.BasicEntity;
 import base.tile.Scroll;
@@ -38,10 +39,10 @@ public class LevelDrol extends Level {
 	
 	
 	
-	public LevelDrol(File file, TileSet tile) {
+	public LevelDrol(File file, TileSet tile, EngineManager engineManager) {
 		super(file);
 		
-		scroll = new Scroll();
+		scroll = new Scroll(engineManager);
 		
 		tileSet = tile;
 		

@@ -13,7 +13,7 @@ public abstract class Level implements ILevel{
 	protected final int NB_LIGNE_MINIMUM_POUR_PARAMETRE = 3;
 	protected final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
 	
-	
+	@Deprecated
 	public static Level currentLevelUsed = null;
 	
 	// Nom d'un level
@@ -218,6 +218,7 @@ public abstract class Level implements ILevel{
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
 	}
 
+	@Deprecated
 	public static Level getCurrentLevelUsed() {
 		return currentLevelUsed;
 	}
