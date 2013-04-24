@@ -7,6 +7,7 @@ import base.engine.EngineManager;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
+import base.engine.entities.others.outputs.ITeam;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.utils.Timer;
 
@@ -15,7 +16,7 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable, ICollidableObject {
+public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable, ICollidableObject, ITeam {
 	
 	protected int maxLife;
 	protected int life;
@@ -26,6 +27,8 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected Timer timer;
 	
 	protected boolean collisionON;
+	
+	protected int team;
 	
 	//protected boolean remove; se trouve deja dans InputAndOutputs
 
@@ -140,6 +143,15 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	@Override
 	public void setCollisionON(boolean collision) {
 		collisionON = collision;
+	}
+	@Override
+	public int getTeam() {
+		return team;
+	}
+
+	@Override
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 }
