@@ -4,7 +4,6 @@ import org.newdawn.slick.geom.Vector2f;
 
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
-import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 

@@ -41,7 +41,7 @@ public abstract class WeaponRanged implements IUpdatable{
 	
 	@Override
 	public void update(final int delta) {
-		if(delayBetweenShoot.getLimit() != NO_DELAY){
+		if(delayBetweenShoot.getEventTime() != NO_DELAY){
 			delayBetweenShoot.update(delta);
 			System.out.println("updated "+delayBetweenShoot.getDeltaStock());
 		}

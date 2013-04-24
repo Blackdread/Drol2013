@@ -161,6 +161,7 @@ public class LogicEngine extends Engine {
 									if(t != null){
 										t.setEngineManager(engineManager);
 										
+										t.setVitesse(vitesse);
 										t.setLocation(x, y);
 										engineManager.getIA().addEntity(t);
 										engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);

@@ -15,6 +15,7 @@ public class TirLinear extends Tir {
 	public TirLinear(EngineManager e){
 		super("TirLinear", e, 1, null);
 		gravityON = false;
+		shape = new Rectangle(0,0,10,10);
 	}
 	
 	public TirLinear(int maxLife, EngineManager en, Vector2f vitesse, BasicEntity e) {

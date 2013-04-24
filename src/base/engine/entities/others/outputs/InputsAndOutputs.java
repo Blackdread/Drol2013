@@ -1,5 +1,6 @@
 package base.engine.entities.others.outputs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.newdawn.slick.geom.Shape;
@@ -14,7 +15,7 @@ import base.engine.entities.others.OutputManager;
  * 
  * @author Yoann CAPLAIN
  */
-public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition {
+public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition, Serializable {
 
 	/**
 	 * Some entity needs to have a reference to EngineManager

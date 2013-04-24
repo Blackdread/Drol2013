@@ -162,4 +162,8 @@ public class Timer {
 		return limit;
 	}
 
+	public float getEventTime() {
+		return eventTime;
+	}
+
 }
