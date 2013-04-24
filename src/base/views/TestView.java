@@ -218,7 +218,7 @@ public class TestView extends View{
 			
 			engineManager.receiveMessage(m2);
 		break;
-	}
+		}
 	}
 	
 	@Override
