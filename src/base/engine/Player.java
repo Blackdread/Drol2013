@@ -16,6 +16,8 @@ import base.engine.entities.others.outputs.ITeam;
  */
 public class Player implements Serializable, ITeam{
 
+	private static final long serialVersionUID = 5052989075642158186L;
+
 	private String pseudo = "";
 	
 	private PlayableEntity heroEntityHeIsPlaying;

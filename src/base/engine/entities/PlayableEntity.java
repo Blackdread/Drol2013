@@ -2,11 +2,11 @@ package base.engine.entities;
 
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
-import base.engine.Message;
-import base.engine.MessageKey;
 
 
 public abstract class PlayableEntity extends MoveableEntity {
+
+	private static final long serialVersionUID = -6493722952972541357L;
 
 	public PlayableEntity(String name, EngineManager e, int maxLife) {
 		super(name, e, maxLife);
