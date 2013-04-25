@@ -1,10 +1,12 @@
 package base.engine.entities.structures;
 
 /**
+ * not up to date
  * Mettre un boolean pour savoir si l'objet depend de la gravite
  * @author Yoann CAPLAIN
  *
  */
+@Deprecated 
 public interface IGravityBlock {
 	
 	//public void updateGravity();

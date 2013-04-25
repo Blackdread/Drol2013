@@ -18,6 +18,11 @@ import base.engine.entities.others.OutputManager;
 public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition, Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8332210732459262583L;
+
+	/**
 	 * Some entity needs to have a reference to EngineManager
 	 */
 	protected EngineManager engineManager;

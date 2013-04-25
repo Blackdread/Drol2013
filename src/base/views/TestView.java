@@ -74,12 +74,12 @@ public class TestView extends View{
 		engineManager.getFilterManager().addEntity(fil);
 		lvl.addEntity(tr);
 		lvl.addEntity(inf);
-		Deplacement.deplacerEntity(0, 0, tr.getId());
-		Deplacement.deplacerEntity(0, 0, inf.getId());
+		Deplacement.deplacerEntity(engineManager,0, 0, tr.getId());
+		Deplacement.deplacerEntity(engineManager,0, 0, inf.getId());
 		lvl.addEntity(hero);
 		lvl.addEntity(z);
-		Deplacement.deplacerEntity(0, 0, hero.getId());
-		Deplacement.deplacerEntity(0, 0, z.getId());
+		Deplacement.deplacerEntity(engineManager,0, 0, hero.getId());
+		Deplacement.deplacerEntity(engineManager,0, 0, z.getId());
 		engineManager.getIA().addEntity(hero);
 		engineManager.getIA().addEntity(z);
 		

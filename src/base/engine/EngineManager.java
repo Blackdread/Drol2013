@@ -65,8 +65,10 @@ public class EngineManager{
 	}
 	
 	synchronized public void receiveMessage(Message mes){
-		tabEngine[mes.engine].receiveMessage(mes);
-		/*switch(mes.engine){
+		if(mes.engine != Message.NO_ENGINE)
+			tabEngine[mes.engine].receiveMessage(mes);
+		/*
+		switch(mes.engine){
 		case SOUND_ENGINE:
 			tabEngine[SOUND_ENGINE].receiveMessage(mes);
 			break;
@@ -76,7 +78,8 @@ public class EngineManager{
 		case NETWORK_ENGINE:
 			tabEngine[NETWORK_ENGINE].receiveMessage(mes);
 			break;
-		}*/
+		}
+		//*/
 	}
 	
 	/**

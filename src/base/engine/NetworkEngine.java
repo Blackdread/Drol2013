@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import base.views.InGameMultiView;
 import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
 
@@ -28,11 +29,22 @@ public class NetworkEngine extends Engine {
 	
 	
 	@Override
-	public synchronized boolean processMessage() {
+	synchronized public boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
-		if(!this.message_queue.isEmpty())
-			engineManager.receiveMessage(this.message_queue.poll());
-		else
+		if(!this.message_queue.isEmpty()){
+			Message mes = message_queue.poll();
+			if(!mes.o_data.isEmpty())
+				for(Object v : mes.o_data.values())
+					if(v != null)
+						if(v instanceof MessageTchat){
+							// TODO envoyer le l'objet aux 2 vues qui s'en servent
+							((InGameMultiView)Game.getStateByID(Game.SALON_VIEW_ID)).tchatReceiveMessage((MessageTchat) v);
+							((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) v);
+						}
+							
+			
+			engineManager.receiveMessage(mes);
+		}else
 			return false;
 		
 		return true;

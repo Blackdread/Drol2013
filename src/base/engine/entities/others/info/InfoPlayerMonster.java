@@ -4,7 +4,6 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.ActiveEntity;
-import base.engine.entities.BasicEntity;
 import base.engine.entities.Monster;
 
 /**
@@ -26,6 +25,6 @@ public class InfoPlayerMonster extends InfoPlayerStart {
 	}
 	
 	public ActiveEntity spawn(){
-		return new Monster("", engineManager, BasicEntity.DROITE);
+		return new Monster("monster", engineManager, 500);
 	}
 }

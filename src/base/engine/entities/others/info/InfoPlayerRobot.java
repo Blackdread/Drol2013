@@ -26,6 +26,6 @@ public class InfoPlayerRobot extends InfoPlayerStart {
 	}
 	
 	public ActiveEntity spawn(){
-		return new HeroEntity("", engineManager, BasicEntity.DROITE);
+		return new HeroEntity("hero", engineManager, 500);
 	}
 }

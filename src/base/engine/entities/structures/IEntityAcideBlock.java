@@ -1,5 +1,10 @@
 package base.engine.entities.structures;
-
+/**
+ * not up to date
+ * @author Yoann CAPLAIN
+ *
+ */
+@Deprecated 
 public interface IEntityAcideBlock {
 
 	public boolean isAcideBlock();

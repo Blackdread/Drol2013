@@ -4,7 +4,6 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.ActiveEntity;
-import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 
 
@@ -27,6 +26,6 @@ public class InfoPlayerStart extends Info{
 	}
 	
 	public ActiveEntity spawn(){
-		return new HeroEntity("", engineManager, BasicEntity.DROITE);
+		return new HeroEntity("hero", engineManager, 500);
 	}
 }

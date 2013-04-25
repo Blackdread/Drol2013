@@ -16,26 +16,13 @@ import base.engine.levels.LevelDrol;
  * @author Nicolas DUPIN
  */
 public class CollisionManager{
-
-	private static CollisionManager instance;
-	
-	public static CollisionManager getInstance() {
-		if (null == instance) { // Premier appel
-            synchronized(objetSynchrone) {
-                if (null == instance) {
-                    instance = new CollisionManager();
-                }
-            }
-        }
-        return instance;
-	 }
 	
 	/**
 	 * Teste si il y a une collision aux coordonnées x,y de l'entitée e
 	 */
-	public boolean testerCollision(int x, int y, BasicEntity e)
+	public static boolean testerCollision(int x, int y, BasicEntity e)
 	{
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		int tileXMin, tileXMax, tileYMin, tileYMax;
 		
@@ -74,9 +61,9 @@ public class CollisionManager{
 		return false;
 	}
 
-	public HashMap testerCollisionEntites(int x, int y, BasicEntity e)
+	public static HashMap<Integer, BasicEntity> testerCollisionEntites(int x, int y, BasicEntity e)
 	{
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		HashMap<Integer, BasicEntity> hm = new HashMap<Integer, BasicEntity>();
 		
 		int tileXMin = (int) ((e.getX()+x) / lvl.getLargeurTile());
@@ -109,7 +96,7 @@ public class CollisionManager{
 	}
 	
 	public static boolean isEntityCollidingWithTop(BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		if(e.getY() < 0)
 			return true;
@@ -137,7 +124,7 @@ public class CollisionManager{
 	}
 	
 	public static boolean isEntityCollidingWithGround(BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		if((e.getY() + e.getHeight()) > lvl.getHauteurNiveau()*lvl.getHauteurTile())
 			return true;
@@ -164,7 +151,7 @@ public class CollisionManager{
 	}
 	
 	public static boolean isEntityCollidingWithLeftOrRight(BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		if(e.getX() < 0 || (e.getX() + e.getWidth()) > lvl.getLargeurNiveau()*lvl.getLargeurTile())
 			return true;
@@ -195,10 +182,5 @@ public class CollisionManager{
 	    return false;
 		
 	}
-	
-	 private CollisionManager(){
-		 
-	 }
-	 
-	 private static Object objetSynchrone = new Object();
+
 }

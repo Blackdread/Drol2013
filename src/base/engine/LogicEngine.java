@@ -45,7 +45,7 @@ public class LogicEngine extends Engine {
 							if(mes.i_data.containsKey(MessageKey.P_Y))
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
-								Deplacement.deplacerEntity(x, y, id);
+								Deplacement.deplacerEntity(engineManager,x, y, id);
 							}
 						}
 					}
@@ -165,7 +165,7 @@ public class LogicEngine extends Engine {
 										t.setLocation(x, y);
 										engineManager.getIA().addEntity(t);
 										engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
-										Deplacement.deplacerEntity(0, 0, t.getId());
+										Deplacement.deplacerEntity(engineManager,0, 0, t.getId());
 									}else
 										System.out.println("NULLLLL");
 								}

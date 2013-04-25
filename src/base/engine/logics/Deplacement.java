@@ -5,13 +5,8 @@ import java.util.Map.Entry;
 
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
-import base.engine.Message;
-import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
-import base.engine.entities.MoveableEntity;
-import base.engine.entities.HeroEntity;
 import base.engine.entities.ICollidableObject;
-import base.engine.entities.Tir;
 import base.engine.entities.others.triggers.Trigger;
 import base.engine.entities.others.triggers.TriggerObjectInZone;
 import base.engine.levels.Level;
@@ -24,12 +19,13 @@ import base.engine.levels.LevelDrol;
  */
 public class Deplacement {
 	
-	public static void deplacerEntity(int x, int y, int id)
+	public static void deplacerEntity(EngineManager engineManager, int x, int y, int id)
 	{
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
 		
-		BasicEntity e = lvl.getArrayEntite().get(id);
 		
+		BasicEntity e = engineManager.getCurrentLevelUsed().getArrayEntite().get(id);
+		
+		LevelDrol lvl = engineManager.getCurrentLevelUsed();
 		
 		
 		if(e != null){
@@ -44,8 +40,8 @@ public class Deplacement {
 			
 			if(x >= lvl.getLargeurTile() || y >= lvl.getHauteurTile())
 			{
-				deplacerEntity(x/2, y/2, id);
-				deplacerEntity(x-x/2, y-y/2, id);
+				deplacerEntity(engineManager,x/2, y/2, id);
+				deplacerEntity(engineManager,x-x/2, y-y/2, id);
 			}
 			else{
 				/*
@@ -63,7 +59,7 @@ public class Deplacement {
 	
 	private static void gererCollisionEntity(int x, int y, BasicEntity e)
 	{
-		HashMap<Integer, BasicEntity> hm = CollisionManager.getInstance().testerCollisionEntites(x, y, e);
+		HashMap<Integer, BasicEntity> hm = CollisionManager.testerCollisionEntites(x, y, e);
 		
 		if(!hm.isEmpty())
 		{
@@ -92,7 +88,7 @@ public class Deplacement {
 		/*
 		 * Si l'on n'est pas en collision on déplace
 		 */
-		if(!CollisionManager.getInstance().testerCollision(x, 0, e)){
+		if(!CollisionManager.testerCollision(x, 0, e)){
 			
 			//Enlever l'entité des tiles avant le déplacement
 			enleverEntiteDesTiles(e);
@@ -122,7 +118,7 @@ public class Deplacement {
 		/*
 		 * Si l'on n'est pas en collision on déplace
 		 */
-		if(!CollisionManager.getInstance().testerCollision(0, y, e)){
+		if(!CollisionManager.testerCollision(0, y, e)){
 			
 			//Enlever l'entité des tiles avant le déplacement
 			enleverEntiteDesTiles(e);
@@ -154,7 +150,7 @@ public class Deplacement {
 	 * @param e entite a enlever des tiles qui la contiennent
 	 */
 	public static void enleverEntiteDesTiles(final BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		int larg = lvl.getLargeurTile();
 		int haut = lvl.getHauteurTile();
@@ -174,7 +170,7 @@ public class Deplacement {
 	 * @param e entite a ajouter
 	 */
 	public static void ajouterEntiteDansTiles(final BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
+		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
 		
 		int larg = lvl.getLargeurTile();
 		int haut = lvl.getHauteurTile();
