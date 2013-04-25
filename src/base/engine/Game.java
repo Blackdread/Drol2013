@@ -152,6 +152,13 @@ public class Game extends StateBasedGame {
 		return (View) states.get(index);
 	}
 	
+	public static View getStateByID(int id) {
+		for(View v : states)
+			if(v != null && v.getID() == id)
+				return v;
+		return null;
+	}
+	
 	public static void changeResolution(int width, int height) throws SlickException{
 		((AppGameContainer) Game.container).setDisplayMode(width, height, Configuration.isFullScreen());
 	}

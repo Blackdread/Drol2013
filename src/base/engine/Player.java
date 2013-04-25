@@ -10,6 +10,7 @@ import base.engine.entities.others.outputs.ITeam;
 
 /**
  * Classe qui represente un joueur, ce sera plus simple pour le reseau car on envoie directement l'objet Player
+ * Et on gere les differentes actions possibles pour un joueur
  * @author Yoann CAPLAIN
  *
  */

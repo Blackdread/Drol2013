@@ -1,5 +1,7 @@
 package base.views;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +16,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
+import base.engine.MessageTchat;
 import base.engine.gui.ListeDeroulante;
 import base.utils.ResourceManager;
 
@@ -23,6 +26,7 @@ public class SalonView extends View {
 	
 	private ListeDeroulante listeJoueurs, listeMessage;
 	private Rectangle shapeTchat, shapeListeJoueur;
+	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
 	
 	@Override
@@ -52,6 +56,8 @@ public class SalonView extends View {
 		
 		butTchatSend = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), textTchat.getX()+textTchat.getWidth()/2, textTchat.getY()+textTchat.getHeight()+2, larg, haut);
 		butTchatSend.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		
+		arrayMessageTchat.clear();
 	}
 
 
@@ -70,6 +76,13 @@ public class SalonView extends View {
 		g.setColor(Color.white);
 		g.draw(shapeListeJoueur);
 		g.draw(shapeTchat);
+		
+		synchronized(arrayMessageTchat){
+			for(int i=0;i < arrayMessageTchat.size() && i <= (shapeTchat.getHeight()/20);i++)
+				if(arrayMessageTchat.get(i)!=null)
+					g.drawString(""+arrayMessageTchat.get(i).toString(), shapeTchat.getX()+5, shapeTchat.getY()+5+i*20);
+		}
+		textTchat.render(container, g);
 		
 		textTchat.render(container, g);
 		butTchatSend.render(container, g);
@@ -104,6 +117,16 @@ public class SalonView extends View {
 	@Override
 	public int getID() {
 		return Game.SALON_VIEW_ID;
+	}
+	
+	/**
+	 * Ajoute un message au chat
+	 * @param message
+	 */
+	public void tchatReceiveMessage(MessageTchat message){
+		synchronized(arrayMessageTchat){
+			arrayMessageTchat.add(message);
+		}
 	}
 
 }

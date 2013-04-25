@@ -14,6 +14,8 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
 import base.engine.Game;
+import base.engine.MessageTchat;
+import base.engine.Player;
 import base.engine.gui.ListeDeroulante;
 import base.utils.ResourceManager;
 import base.utils.Timer;
@@ -31,10 +33,12 @@ public class InGameMultiView extends View {
 	 */
 	private Timer timerShowMessageTchat;
 	private boolean showMessageTchat = false;
-	private ArrayList<String> arrayMessageTchat = new ArrayList<String>();
+	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
 	
 	private ArrayList<String> arrayScores = new ArrayList<String>();
+	
+	private Player player;
 	
 	@Override
 	public void initResources() {
@@ -71,13 +75,13 @@ public class InGameMultiView extends View {
 		
 		textTchat = new TextField(container, container.getDefaultFont(), xPosVueJeu+largeurVueDuJeu/2-90, yPosVueJeu+hauteurVueDuJeu, 180, 22);
 		textTchat.setBackgroundColor(Color.darkGray);
+		
+		arrayMessageTchat.clear();
 	}
 
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
-		
-		
 		if(engineManager.getCurrentLevelUsed() != null){
 			engineManager.getCurrentLevelUsed().generateLevelGraphic(g, xPosVueJeu, yPosVueJeu);
 		}
@@ -87,7 +91,7 @@ public class InGameMultiView extends View {
 			synchronized(arrayMessageTchat){
 				for(int i=0;i< arrayMessageTchat.size();i++)
 					if(arrayMessageTchat.get(i)!=null)
-						g.drawString(""+arrayMessageTchat.get(i), xPosVueJeu+largeurVueDuJeu/2-container.getDefaultFont().getWidth(""+arrayMessageTchat.get(i))/2, yPosVueJeu+hauteurVueDuJeu-30-i*tailleFont);
+						g.drawString(""+arrayMessageTchat.get(i).toString(), xPosVueJeu+largeurVueDuJeu/2-container.getDefaultFont().getWidth(""+arrayMessageTchat.get(i).toString())/2, yPosVueJeu+hauteurVueDuJeu-30-i*tailleFont);
 			}
 			textTchat.render(container, g);
 		}
@@ -107,6 +111,12 @@ public class InGameMultiView extends View {
 			}
 				
 		}
+		
+	}
+	
+	@Override
+	public void keyReleased(int key, char c) {
+		super.keyReleased(key, c);
 		
 	}
 	
@@ -144,6 +154,16 @@ public class InGameMultiView extends View {
 	@Override
 	public int getID() {
 		return Game.IN_GAME_MULTI_VIEW_ID;
+	}
+	
+	/**
+	 * Ajoute un message au chat
+	 * @param message
+	 */
+	public void tchatReceiveMessage(MessageTchat message){
+		synchronized(arrayMessageTchat){
+			arrayMessageTchat.add(message);
+		}
 	}
 
 }
