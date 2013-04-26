@@ -32,7 +32,7 @@ public class LogicEngine extends Engine {
 		//while(!this.message_queue.isEmpty()){
 		
 		if(!this.message_queue.isEmpty()){
-			mes = this.message_queue.poll();
+			mes = (Message) this.message_queue.poll();
 			switch(mes.instruction){
 				case MessageKey.I_MOVE_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID))

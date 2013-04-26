@@ -29,7 +29,7 @@ public class SoundEngine extends Engine {
 		Message mes;
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
-			mes = this.message_queue.poll();
+			mes = (Message) this.message_queue.poll();	// SoundEngine ne recoit que des Message pour le moment
 			switch(mes.instruction){
 			
 			case MessageKey.I_CHANGE_LOOP_MUSIC:

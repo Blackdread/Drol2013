@@ -35,7 +35,7 @@ public class MultiView extends View {
 	 * (bouton retour)
 	 * 
 	 */
-	private MouseOverArea butRejoindreServerAvecIp, butRetour, butCreerPartie;
+	private MouseOverArea butRejoindreServerAvecIp, butRetour, butCreerPartie, butRejoindrePartieAvecID;
 	
 	private ListeDeroulante listeServer, listePartie;
 	private Rectangle shapeServer, shapePartie;
@@ -70,6 +70,9 @@ public class MultiView extends View {
 		
 		butCreerPartie = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg*2+MARGIN*2, yBut, larg, haut);
 		butCreerPartie.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		
+		butRejoindrePartieAvecID = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN+larg*3+MARGIN*3, yBut, larg, haut);
+		butRejoindrePartieAvecID.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
 	}
 
 
@@ -96,6 +99,7 @@ public class MultiView extends View {
 		butRetour.render(container, g);
 		butRejoindreServerAvecIp.render(container, g);
 		butCreerPartie.render(container, g);
+		butRejoindrePartieAvecID.render(container, g);
 		
 		super.render(container, sbgame, g);
 	}
@@ -120,6 +124,8 @@ public class MultiView extends View {
 			rejoindreServerViaIp();
 		else if(butCreerPartie.isMouseOver())
 			creerPartie();
+		else if(butRejoindrePartieAvecID.isMouseOver())
+			rejoindrePartieViaID();
 	}
 	
 	private void creerPartie(){
@@ -145,6 +151,12 @@ public class MultiView extends View {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+	
+	private void rejoindrePartieViaID(){
+		// TODO
+		
 		
 	}
 	

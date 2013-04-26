@@ -35,6 +35,7 @@ public class InGameMultiView extends View {
 	private boolean showMessageTchat = false;
 	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
+	private int maxMessageToDraw;
 	
 	private ArrayList<String> arrayScores = new ArrayList<String>();
 	
@@ -112,6 +113,7 @@ public class InGameMultiView extends View {
 				
 		}
 		
+		engineManager.update(delta);
 	}
 	
 	@Override

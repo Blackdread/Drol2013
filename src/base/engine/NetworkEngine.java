@@ -10,7 +10,8 @@ import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
 
 /**
- * @author Blackdread
+ * NetworkEngine client
+ * @author Yoann CAPLAIN
  *
  */
 public class NetworkEngine extends Engine {
@@ -30,18 +31,20 @@ public class NetworkEngine extends Engine {
 	synchronized public boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
-			Message mes = message_queue.poll();
-			if(!mes.o_data.isEmpty())
-				for(Object v : mes.o_data.values())
-					if(v != null)
-						if(v instanceof MessageTchat){
-							// TODO envoyer le l'objet aux 2 vues qui s'en servent
-							((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).tchatReceiveMessage((MessageTchat) v);
-							((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) v);
-						}
-							
+			Object mes = message_queue.poll();
 			
-			engineManager.receiveMessage(mes);
+			if(mes instanceof MessageTchat){
+				// TODO envoyer l'objet aux 2 vues qui s'en servent
+				((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
+				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
+				System.out.println("tchat network client");
+			}else{
+				if(mes instanceof Message){
+					engineManager.receiveMessage((Message)mes);		
+					System.out.println("message network client");
+				}else
+					System.out.println("rien network client");
+			}
 		}else
 			return false;
 		
@@ -71,6 +74,13 @@ public class NetworkEngine extends Engine {
 		
 		System.out.println("fin thread");
 		return true;
+	}
+	/**
+	 * Envoie un object au server
+	 * @param ob
+	 */
+	public void sendObject(Object ob){
+		runSend.ajoutMessage(ob);
 	}
 	
 	public boolean disconnect()

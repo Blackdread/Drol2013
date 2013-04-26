@@ -13,7 +13,8 @@ public class ThreadNetworkSender implements Runnable{
 	private Socket sock;
 	private ObjectOutputStream oos;
 	private NetworkEngine net;
-	private Queue<Message> message_queue = new LinkedList<Message>();
+	//private Queue<Message> message_queue = new LinkedList<Message>();
+	private Queue<Object> message_queue = new LinkedList<Object>();	// Je commence a donner la possibilite d'envoyer tout ce qu'on veut
 	boolean active;
 	
 
@@ -28,7 +29,7 @@ public class ThreadNetworkSender implements Runnable{
 		active = true;
 		while(active)
 		{
-			Message m;
+			Object m;
 			if((m = retirerMessage()) != null)
 			{
 				try {
@@ -48,7 +49,7 @@ public class ThreadNetworkSender implements Runnable{
 		}
 	}
 	
-	synchronized public void ajoutMessage(Message m)
+	synchronized public void ajoutMessage(Object m)
 	{
 		if(m != null)
 		{
@@ -56,7 +57,7 @@ public class ThreadNetworkSender implements Runnable{
 		}
 	}
 	
-	synchronized public Message retirerMessage()
+	synchronized public Object retirerMessage()
 	{
 		return message_queue.poll();
 	}

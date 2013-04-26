@@ -64,9 +64,12 @@ public class EngineManager{
 		outputManager = new OutputManager();
 	}
 	
-	synchronized public void receiveMessage(Message mes){
-		if(mes.engine != Message.NO_ENGINE)
-			tabEngine[mes.engine].receiveMessage(mes);
+	synchronized public void receiveMessage(Object mes){
+		if(mes instanceof Message){
+			if(((Message)mes).engine != Message.NO_ENGINE)
+				tabEngine[((Message)mes).engine].receiveMessage(mes);
+		}else
+			tabEngine[NETWORK_ENGINE].receiveMessage(mes);
 		/*
 		switch(mes.engine){
 		case SOUND_ENGINE:

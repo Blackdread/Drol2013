@@ -29,8 +29,9 @@ public class ThreadNetworkListener implements Runnable{
 			try {
 				Object o = ois.readObject();
 				
-				if(o instanceof Message)
-					net.receiveMessage(((Message)o));
+				//if(o instanceof Message)
+					//net.receiveMessage(((Message)o));
+				net.receiveMessage(o);
 					
 					
 			} catch (IOException e) {

@@ -16,8 +16,10 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
+import base.engine.Message;
 import base.engine.MessageTchat;
 import base.engine.gui.ListeDeroulante;
+import base.utils.Configuration;
 import base.utils.ResourceManager;
 
 public class SalonView extends View {
@@ -28,6 +30,7 @@ public class SalonView extends View {
 	private Rectangle shapeTchat, shapeListeJoueur;
 	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
+	private int maxMessageToDraw;
 	
 	@Override
 	public void initResources() {
@@ -58,8 +61,20 @@ public class SalonView extends View {
 		butTchatSend.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
 		
 		arrayMessageTchat.clear();
+		maxMessageToDraw = (int) (shapeTchat.getHeight()/20);
 	}
 
+	@Override
+	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {
+		super.update(container, sbGame, delta);
+		
+		synchronized(arrayMessageTchat){
+			if(arrayMessageTchat.size() > maxMessageToDraw)
+				arrayMessageTchat.remove(0);
+		}
+		
+		engineManager.update(delta);
+	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
@@ -78,7 +93,7 @@ public class SalonView extends View {
 		g.draw(shapeTchat);
 		
 		synchronized(arrayMessageTchat){
-			for(int i=0;i < arrayMessageTchat.size() && i <= (shapeTchat.getHeight()/20);i++)
+			for(int i=0 ; i < arrayMessageTchat.size() && i < maxMessageToDraw;i++)
 				if(arrayMessageTchat.get(i)!=null)
 					g.drawString(""+arrayMessageTchat.get(i).toString(), shapeTchat.getX()+5, shapeTchat.getY()+5+i*20);
 		}
@@ -105,7 +120,13 @@ public class SalonView extends View {
 	@Override
 	public void mousePressed(int button, int x, int y) {
 		super.mousePressed(button, x, y);
-		
+		if(butTchatSend.isMouseOver()){
+			if(!textTchat.getText().equalsIgnoreCase("")){
+				//engineManager.getNetworkEngine().receiveMessage(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+				engineManager.getNetworkEngine().sendObject(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+				textTchat.setText("");
+			}
+		}
 		
 	}
 	

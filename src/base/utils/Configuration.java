@@ -274,5 +274,21 @@ public class Configuration {
 		return Integer.parseInt(configurationFile.getProperty("port", "20000"));
 	}
 
+	/**
+	 * 
+	 * @param pseudo
+	 */
+	public static void setPseudo(String pseudo){
+		configurationFile.setProperty("pseudo", ""+pseudo);
+	}
+	
+	/**
+	 * 
+	 * @return Default is noName
+	 */
+	public static String getPseudo(){
+		return configurationFile.getProperty("pseudo", "noName");
+	}
+	
 }
 
