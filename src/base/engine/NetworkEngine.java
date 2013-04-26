@@ -72,9 +72,21 @@ public class NetworkEngine extends Engine {
 		threadSend = new Thread(runSend);
 		threadSend.start();
 		
-		System.out.println("fin thread");
 		return true;
 	}
+
+	public boolean rejoindrePartieViaID(final int id){
+		if(runSend != null){
+			Message mes = new Message();
+			mes.instruction = MessageKey.I_JOIN_GAME;
+			mes.i_data.put(MessageKey.P_ID, id);
+			
+			engineManager.getNetworkEngine().sendObject(mes);
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Envoie un object au server
 	 * @param ob

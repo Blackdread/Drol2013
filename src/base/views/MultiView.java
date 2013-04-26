@@ -17,6 +17,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.gui.ListeDeroulante;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
@@ -41,6 +43,7 @@ public class MultiView extends View {
 	private Rectangle shapeServer, shapePartie;
 	
 	private TextField ipServerToJoin;
+	private int idPartieSelectionner;
 	
 	@Override
 	public void initResources() {
@@ -124,8 +127,9 @@ public class MultiView extends View {
 			rejoindreServerViaIp();
 		else if(butCreerPartie.isMouseOver())
 			creerPartie();
-		else if(butRejoindrePartieAvecID.isMouseOver())
-			rejoindrePartieViaID();
+		else if(butRejoindrePartieAvecID.isMouseOver()){
+			rejoindrePartieViaID(idPartieSelectionner);	// TODO idPartieSelectionner vaut tjr 0 pour le moment
+		}
 	}
 	
 	private void creerPartie(){
@@ -154,10 +158,8 @@ public class MultiView extends View {
 		
 	}
 	
-	private void rejoindrePartieViaID(){
-		// TODO
-		
-		
+	private void rejoindrePartieViaID(final int id){
+		engineManager.getNetworkEngine().rejoindrePartieViaID(id);
 	}
 	
 	private void gotoSalonView(){
