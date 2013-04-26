@@ -162,7 +162,7 @@ public class MultiView extends View {
 		engineManager.getNetworkEngine().rejoindrePartieViaID(id);
 	}
 	
-	private void gotoSalonView(){
+	public void gotoSalonView(){
 		container.setMouseGrabbed(false);
 		game.enterState(Game.SALON_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
 	}

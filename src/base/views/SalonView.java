@@ -126,6 +126,8 @@ public class SalonView extends View {
 				engineManager.getNetworkEngine().sendObject(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
 				textTchat.setText("");
 			}
+		}else if(butLancerPartie.isMouseOver()){
+			engineManager.getNetworkEngine().lancerPartie();
 		}
 		
 	}

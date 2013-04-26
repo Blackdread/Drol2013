@@ -6,6 +6,9 @@ import java.net.UnknownHostException;
 
 import base.views.InGameMultiView;
 import base.views.SalonView;
+import base.views.MultiView;
+import base.views.TransitionView;
+import base.views.InGameMultiView;
 import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
 
@@ -38,9 +41,28 @@ public class NetworkEngine extends Engine {
 				((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				System.out.println("tchat network client");
-			}else{
+			}//else if(mes instanceof BasicEntity){	// TODO a faire plus tard
+			
+			//}
+			else{
 				if(mes instanceof Message){
-					engineManager.receiveMessage((Message)mes);		
+					// TODO faudrait mettre en place le RMI mais on n'a pas le temps
+	        		Message mes2 = (Message)mes;
+	        		switch(mes2.instruction){
+	        		case MessageKey.I_CHANGE_VIEW_TO_SALON:
+	        			((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).gotoSalonView();
+	        			break;
+	        		case MessageKey.I_CHANGE_VIEW_TO_LOADING:
+	        			((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).goToTransitionView();
+	        			break;
+	        		case MessageKey.I_CHANGE_VIEW_TO_GAME:
+	        			((TransitionView)Game.getStateByID(Game.TRANSITION_VIEW_ID)).goToInGameMultiView();
+	        			break;
+	        		default:
+	        			if(mes2.engine != EngineManager.NETWORK_ENGINE)
+							engineManager.receiveMessage(mes2);	
+	        			break;
+	        		}
 					System.out.println("message network client");
 				}else
 					System.out.println("rien network client");
@@ -62,6 +84,14 @@ public class NetworkEngine extends Engine {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param ip
+	 * @param port
+	 * @return true if connected to server
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public boolean connect(String ip, int port) throws UnknownHostException, IOException
 	{
 		sock = new Socket(ip, port);
@@ -75,6 +105,11 @@ public class NetworkEngine extends Engine {
 		return true;
 	}
 
+	/**
+	 * Envoie un message au serveur que le client veut rejoindre la partie qui a cet ID
+	 * @param id ID de la partie
+	 * @return true if it has sent the message
+	 */
 	public boolean rejoindrePartieViaID(final int id){
 		if(runSend != null){
 			Message mes = new Message();
@@ -85,6 +120,27 @@ public class NetworkEngine extends Engine {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Envoie en serveur qui a la partie qu'il a fini de charger la partie
+	 */
+	public void envoyerLoadingIsFinished(){
+		if(runSend != null){
+			Message mes = new Message();
+			mes.instruction = MessageKey.I_CLIENT_END_LOADING;
+			
+			runSend.ajoutMessage(mes);
+		}
+	}
+	
+	public void lancerPartie(){
+		if(runSend != null){
+			Message mes = new Message();
+			mes.instruction = MessageKey.I_LAUNCH_GAME;
+			
+			runSend.ajoutMessage(mes);
+		}
 	}
 	
 	/**

@@ -7,6 +7,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Des stats (nb de fois morts, nb de fois gagner, perdu, ...)
+ * Peut aussi servir pour sauvegarder des scores, etc
+ * @author Yoann CAPLAIN
+ *
+ */
 public class StatsSerializable implements Serializable{
 
 	private String fileLocation;
@@ -46,7 +52,7 @@ public class StatsSerializable implements Serializable{
             ObjectInputStream oos = new ObjectInputStream(fos);
             
             hashStats = (HashMap<String, String>) oos.readObject();
-            //this = oos.readObject();
+            //StatsSerializable s = oos.readObject();
 
             oos.close();
         }catch(Exception e){e.printStackTrace();}

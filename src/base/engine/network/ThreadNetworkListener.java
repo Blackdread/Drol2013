@@ -35,7 +35,7 @@ public class ThreadNetworkListener implements Runnable{
 					
 					
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO Avoir une reference vers NetworkEngine et appeller la fonction disconnect()
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
