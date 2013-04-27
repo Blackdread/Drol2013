@@ -35,7 +35,7 @@ public class Game extends StateBasedGame {
 	/**
 	 * Instance d'EngineManager pour le Client. Le serveur ne s'en sert pas !!!!
 	 */
-	private static final EngineManager engineManager = new EngineManager();
+	private static final EngineManager engineManager = new EngineManager(false, false);
 	
 	private static ArrayList<View> states;
 	

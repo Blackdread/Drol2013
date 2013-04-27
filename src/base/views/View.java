@@ -34,6 +34,12 @@ public abstract class View extends BasicGameState {
 	protected static int lastViewID = 0;
 	
 	@Override
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+		super.enter(container, game);
+		
+	}
+	
+	@Override
 	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
 		super.leave(container, game);
 		lastViewID = this.getID();

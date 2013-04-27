@@ -13,9 +13,13 @@ import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.MessageTchat;
 import base.engine.Player;
+import base.engine.entities.BasicEntity;
 import base.engine.gui.ListeDeroulante;
 import base.utils.ResourceManager;
 import base.utils.Timer;
@@ -116,11 +120,12 @@ public class InGameMultiView extends View {
 		engineManager.update(delta);
 	}
 	
+	/*
 	@Override
 	public void keyReleased(int key, char c) {
 		super.keyReleased(key, c);
 		
-	}
+	}*/
 	
 	@Override
 	public void keyPressed(int key, char c) {

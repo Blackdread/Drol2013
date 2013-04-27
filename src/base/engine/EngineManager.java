@@ -53,7 +53,13 @@ public class EngineManager{
 	
 	private LevelDrol currentLevelUsed = null;
 	
-	public EngineManager(){
+	private boolean playingMulti = false;
+	private boolean server = false;
+	
+	public EngineManager(boolean partieMulti, boolean server){
+		playingMulti = partieMulti;
+		this.server = server;
+		
 		tabEngine = new Engine[NB_ENGINE];
 		tabEngine[SOUND_ENGINE] = new SoundEngine(this);
 		tabEngine[LOGIC_ENGINE] = new LogicEngine(this);
@@ -72,8 +78,11 @@ public class EngineManager{
 	
 	synchronized public void receiveMessage(Object mes){
 		if(mes instanceof Message){
-			if(((Message)mes).engine != Message.NO_ENGINE)
+			if(((Message)mes).engine != Message.NO_ENGINE){
 				tabEngine[((Message)mes).engine].receiveMessage(mes);
+				if(playingMulti && !server)
+					getNetworkEngine().sendObject(mes);
+			}
 		}else
 			tabEngine[NETWORK_ENGINE].receiveMessage(mes);
 		/*
@@ -198,4 +207,20 @@ public class EngineManager{
 	public Engine[] getTabEngine(){
 		return tabEngine;
 	}*/
+
+	public synchronized boolean isPlayingMulti() {
+		return playingMulti;
+	}
+
+	public synchronized boolean isServer() {
+		return server;
+	}
+
+	public synchronized void setPlayingMulti(boolean playingMulti) {
+		this.playingMulti = playingMulti;
+	}
+
+	public synchronized void setServer(boolean server) {
+		this.server = server;
+	}
 }

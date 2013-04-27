@@ -219,5 +219,9 @@ public class SoloView extends View {
 	public int getID() {
 		return Game.SOLO_VIEW_ID;
 	}
-
+	@Override
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+		super.enter(container, game);
+		engineManager.setPlayingMulti(false);
+	}
 }
