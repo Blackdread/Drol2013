@@ -55,6 +55,10 @@ public class TransitionView extends View {
 					doOnceLoadOver = true;
 					System.out.println("Envoie chargement fini");
 				}
+		
+		//engineManager.update(delta);
+		// ou faire :
+		engineManager.getNetworkEngine().processMessage();
 			
 	}
 	

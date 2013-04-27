@@ -43,6 +43,8 @@ public class MultiView extends View {
 	private Rectangle shapeServer, shapePartie;
 	
 	private TextField ipServerToJoin;
+	
+	private TextField textIDPartieARejoindre;
 	private int idPartieSelectionner;
 	
 	@Override
@@ -60,6 +62,9 @@ public class MultiView extends View {
 		
 		shapeServer = new Rectangle(30, 50, largServer, hautServer);
 		shapePartie = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
+		
+		textIDPartieARejoindre = new TextField(container, container.getDefaultFont(), (int)shapePartie.getX(), (int)shapePartie.getY()+(int)shapePartie.getHeight()+10, 50, 22);
+		textIDPartieARejoindre.setBackgroundColor(Color.darkGray);
 		
 		ipServerToJoin = new TextField(container, container.getDefaultFont(), 30, hautServer+50+MARGIN*2, 180, 22);
 		ipServerToJoin.setBackgroundColor(Color.darkGray);
@@ -84,8 +89,8 @@ public class MultiView extends View {
 		g.setColor(Color.white);
 		g.drawString("Liste des serveurs :", shapeServer.getX()+shapeServer.getWidth()/2-container.getDefaultFont().getWidth("Liste des serveurs :")/2, shapeServer.getY()-container.getDefaultFont().getHeight("Liste des serveurs :") - 2);
 		g.drawString("Liste des parties :", shapePartie.getX()+shapePartie.getWidth()/2-container.getDefaultFont().getWidth("Liste des parties :")/2, shapePartie.getY()-container.getDefaultFont().getHeight("Liste des parties :") - 2);
-		g.drawString("Rejoindre une partie avec l'ip :", ipServerToJoin.getX(), ipServerToJoin.getY()-container.getDefaultFont().getHeight("Rejoindre une partie avec l'ip :") - 2);
-		
+		g.drawString("Rejoindre un server avec l'ip :", ipServerToJoin.getX(), ipServerToJoin.getY()-container.getDefaultFont().getHeight("Rejoindre un server avec l'ip :") - 2);
+		g.drawString("ID de la partie a rejoindre",textIDPartieARejoindre.getX()+textIDPartieARejoindre.getWidth()+5,textIDPartieARejoindre.getY());
 		
 		g.setDrawMode(Graphics.MODE_COLOR_MULTIPLY);
 		g.setColor(Color.gray);
@@ -97,6 +102,7 @@ public class MultiView extends View {
 		g.draw(shapeServer);
 		g.draw(shapePartie);
 		
+		textIDPartieARejoindre.render(container, g);
 		ipServerToJoin.render(container, g);
 		
 		butRetour.render(container, g);
@@ -137,7 +143,14 @@ public class MultiView extends View {
 		else if(butCreerPartie.isMouseOver())
 			creerPartie();
 		else if(butRejoindrePartieAvecID.isMouseOver()){
-			rejoindrePartieViaID(idPartieSelectionner);	// TODO idPartieSelectionner vaut tjr 0 pour le moment
+			try{
+				int id = Integer.valueOf(textIDPartieARejoindre.getText());
+				rejoindrePartieViaID(id);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
 		}
 	}
 	
@@ -168,7 +181,8 @@ public class MultiView extends View {
 	}
 	
 	private void rejoindrePartieViaID(final int id){
-		engineManager.getNetworkEngine().rejoindrePartieViaID(id);
+		//if(id != -1)
+			engineManager.getNetworkEngine().rejoindrePartieViaID(id);
 	}
 	
 	public void gotoSalonView(){

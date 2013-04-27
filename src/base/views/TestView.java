@@ -66,7 +66,7 @@ public class TestView extends View{
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
 		TriggerTeleport tr = new TriggerTeleport(engineManager,"teleport", 200,36,40,40);
-		InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 250);
+		InfoTarget inf = new InfoTarget(engineManager,"infotarget", 700, 40);
 		//InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 36);
 		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"zombi");
 		tr.setRemoteDestination("infotarget");

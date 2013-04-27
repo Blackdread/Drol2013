@@ -120,7 +120,14 @@ public class LogicEngine extends Engine {
 							if(mes.i_data.containsKey(MessageKey.P_Y))
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
-								// TODO
+								// TODO est ce bon ? normalement oui
+								BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
+								if(tmp != null){
+									Deplacement.enleverEntiteDesTiles(tmp);
+									tmp.setLocation(x, y);
+									Deplacement.ajouterEntiteDansTiles(tmp);
+								}
+								
 							}
 						}
 					}

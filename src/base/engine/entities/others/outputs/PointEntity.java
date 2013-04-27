@@ -2,6 +2,7 @@ package base.engine.entities.others.outputs;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Rectangle;
 
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
@@ -16,6 +17,7 @@ public abstract class PointEntity extends BasicEntity implements IRenderPointEnt
 
 	public PointEntity(EngineManager e, String name) {
 		super(e,name);
+		shape = new Rectangle(0,0,32,32);
 	}
 	
 	@Override
