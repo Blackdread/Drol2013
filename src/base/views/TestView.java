@@ -67,7 +67,8 @@ public class TestView extends View{
 		}
 		TriggerTeleport tr = new TriggerTeleport(engineManager,"teleport", 200,36,40,40);
 		InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 250);
-		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"bla");
+		//InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 36);
+		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"zombi");
 		tr.setRemoteDestination("infotarget");
 		tr.setFilterEntityThatActivate(fil);
 		engineManager.getInfoManager().addEntity(inf);
@@ -94,9 +95,10 @@ public class TestView extends View{
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
-		if(lvl.isLoadOver())
+		lvl.getScroll().mettreAJourScroll(hero);
+		//if(lvl.isLoadOver())
 			lvl.generateLevelGraphic(g, 200, 100);
-		
+			
 		super.render(container, sbgame, g);
 	}
 	

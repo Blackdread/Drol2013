@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import base.engine.EngineManager;
 
 /**
- * info_target is a point entity available in all Source games. 
+ * info_target is a point entity. 
  * It can be used by many different entities, and is a great generic target for any entity 
  * that needs to point, shoot, look at, or walk to a specific target.
  * 

@@ -59,6 +59,7 @@ public class NetworkEngine extends Engine {
 	        			break;
 	        		case MessageKey.I_CHANGE_VIEW_TO_GAME:
 	        			((TransitionView)Game.getStateByID(Game.TRANSITION_VIEW_ID)).goToInGameMultiView();
+	        			System.out.println("go to inGameView client");
 	        			break;
 	        		default:
 	        			if(mes2.engine != EngineManager.NETWORK_ENGINE)
@@ -125,7 +126,7 @@ public class NetworkEngine extends Engine {
 	}
 	
 	/**
-	 * Envoie en serveur qui a la partie qu'il a fini de charger la partie
+	 * Envoie au serveur qu'il a fini de charger la partie (le level)
 	 */
 	public void envoyerLoadingIsFinished(){
 		if(runSend != null){
@@ -133,7 +134,8 @@ public class NetworkEngine extends Engine {
 			mes.instruction = MessageKey.I_CLIENT_END_LOADING;
 			
 			runSend.ajoutMessage(mes);
-		}
+		}else
+			System.err.println("runSend is null - Send loading over");
 	}
 	
 	public void lancerPartie(){
@@ -142,7 +144,8 @@ public class NetworkEngine extends Engine {
 			mes.instruction = MessageKey.I_LAUNCH_GAME;
 			
 			runSend.ajoutMessage(mes);
-		}
+		}else
+			System.err.println("runSend is null - Launch partie");
 	}
 	
 	/**

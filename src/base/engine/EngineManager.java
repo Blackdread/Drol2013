@@ -1,5 +1,7 @@
 package base.engine;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lwjgl.Sys;
@@ -13,6 +15,9 @@ import base.engine.entities.others.OutputManager;
 import base.engine.entities.others.TriggerManager;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.IA;
+import base.tile.TilePropriety;
+import base.tile.TileSet;
+import base.utils.ResourceManager;
 
 
 /**
@@ -62,6 +67,7 @@ public class EngineManager{
 		logicManager = new LogicManager();
 		triggerManager = new TriggerManager();
 		outputManager = new OutputManager();
+		
 	}
 	
 	synchronized public void receiveMessage(Object mes){
