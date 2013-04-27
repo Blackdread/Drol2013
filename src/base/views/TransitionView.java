@@ -11,6 +11,8 @@ import base.engine.Game;
 
 public class TransitionView extends View {
 
+	
+	
 	@Override
 	public void initResources() {
 		// TODO Auto-generated method stub
@@ -39,7 +41,7 @@ public class TransitionView extends View {
 	@Override
 	public void mouseReleased(int button, int x, int y) {
 		super.mouseReleased(button, x, y);
-		
+		engineManager.getNetworkEngine().envoyerLoadingIsFinished();
 		
 	}
 	

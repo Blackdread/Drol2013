@@ -142,7 +142,7 @@ public class CollisionManager{
         {
         	//C'est un mur, il y a donc collision
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMax][i].getIndex()).isMur()){
-            	System.out.println("Colission bas");
+            	//System.out.println("Colission bas");
                 return true;
             }
         }

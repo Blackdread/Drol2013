@@ -108,6 +108,15 @@ public class MultiView extends View {
 	}
 	
 	@Override
+	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {
+		super.update(container, sbGame, delta);
+		
+		//engineManager.update(delta);
+		// ou faire :
+		engineManager.getNetworkEngine().processMessage();
+	}
+	
+	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		switch(key){

@@ -51,9 +51,11 @@ public class NetworkEngine extends Engine {
 	        		switch(mes2.instruction){
 	        		case MessageKey.I_CHANGE_VIEW_TO_SALON:
 	        			((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).gotoSalonView();
+	        			System.out.println("go to Salon client");
 	        			break;
 	        		case MessageKey.I_CHANGE_VIEW_TO_LOADING:
 	        			((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).goToTransitionView();
+	        			System.out.println("go to transition client");
 	        			break;
 	        		case MessageKey.I_CHANGE_VIEW_TO_GAME:
 	        			((TransitionView)Game.getStateByID(Game.TRANSITION_VIEW_ID)).goToInGameMultiView();

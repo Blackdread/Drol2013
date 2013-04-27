@@ -73,7 +73,9 @@ public class SalonView extends View {
 				arrayMessageTchat.remove(0);
 		}
 		
-		engineManager.update(delta);
+		//engineManager.update(delta);
+		// ou faire :
+		engineManager.getNetworkEngine().processMessage();
 	}
 
 	@Override
@@ -114,6 +116,9 @@ public class SalonView extends View {
 		case Input.KEY_ESCAPE:
 			gotoPreviousView();
 			break;
+		case Input.KEY_ENTER:
+			envoyerMessageTchat();
+			break;
 		}
 	}
 	
@@ -121,15 +126,19 @@ public class SalonView extends View {
 	public void mousePressed(int button, int x, int y) {
 		super.mousePressed(button, x, y);
 		if(butTchatSend.isMouseOver()){
-			if(!textTchat.getText().equalsIgnoreCase("")){
-				//engineManager.getNetworkEngine().receiveMessage(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
-				engineManager.getNetworkEngine().sendObject(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
-				textTchat.setText("");
-			}
+			envoyerMessageTchat();
 		}else if(butLancerPartie.isMouseOver()){
 			engineManager.getNetworkEngine().lancerPartie();
 		}
-		
+	}
+	
+	private void envoyerMessageTchat(){
+		if(!textTchat.getText().equalsIgnoreCase("")){
+			//engineManager.getNetworkEngine().receiveMessage(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+			engineManager.getNetworkEngine().sendObject(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+			textTchat.setText("");
+			textTchat.setFocus(true);
+		}
 	}
 	
 	public void goToTransitionView(){

@@ -93,7 +93,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		if(collideWith == null && (CollisionManager.isEntityCollidingWithGround(this) || CollisionManager.isEntityCollidingWithTop(this))){
 			vitesse.y = 0.00000f;
 			
-			System.out.println("vitesse mis a zero");
+			//System.out.println("vitesse mis a zero");
 		}
 	}
 	
