@@ -86,6 +86,8 @@ public abstract class MessageKey {
 	public static final int I_CHANGE_VIEW_TO_LOADING = 106;
 	public static final int I_CHANGE_VIEW_TO_SALON = 107;
 	
+	public static final int I_REFRESH_LIST_PARTIE = 108;
+	
 	// Parameters
 	public static final int P_ID_CLIENT = 200;
 }

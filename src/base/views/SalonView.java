@@ -18,6 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageTchat;
+import base.engine.Player;
 import base.engine.gui.ListeDeroulante;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
@@ -31,6 +32,8 @@ public class SalonView extends View {
 	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
 	private int maxMessageToDraw;
+	
+	private ArrayList<Player> arrayPlayer = new ArrayList<Player>();
 	
 	@Override
 	public void initResources() {
@@ -99,6 +102,13 @@ public class SalonView extends View {
 				if(arrayMessageTchat.get(i)!=null)
 					g.drawString(""+arrayMessageTchat.get(i).toString(), shapeTchat.getX()+5, shapeTchat.getY()+5+i*20);
 		}
+		
+		synchronized(arrayPlayer){
+			for(int i=0; i < arrayPlayer.size(); i++)
+				if(arrayPlayer.get(i) != null)
+					g.drawString(""+arrayPlayer.get(i).getPseudo()+" "+arrayPlayer.get(i).getChoixEntiteAJouer()+" team: "+arrayPlayer.get(i).getTeam(), shapeListeJoueur.getX()+5, shapeListeJoueur.getY()+20*i);
+		}
+		
 		textTchat.render(container, g);
 		
 		textTchat.render(container, g);
@@ -158,6 +168,33 @@ public class SalonView extends View {
 	public void tchatReceiveMessage(MessageTchat message){
 		synchronized(arrayMessageTchat){
 			arrayMessageTchat.add(message);
+		}
+	}
+	
+	public void addNewPlayer(Player player){
+		synchronized(arrayPlayer){
+			if(!arrayPlayer.contains(player))	// marche pas vraiment, il faudrait faire par raport au pseudo mais ils sont pas vraiment unique car on n'a pas un vrai serveur pour creer des comptes
+				arrayPlayer.add(player);
+		}
+	}
+	public void removePlayer(Player player){
+		synchronized(arrayPlayer){
+			for(int i=0; i < arrayPlayer.size(); i++)
+				if(arrayPlayer.get(i) != null && arrayPlayer.get(i).getPseudo().equalsIgnoreCase(player.getPseudo())){
+					arrayPlayer.remove(i);
+					break;
+				}
+		}
+	}
+	public void clearListePlayer(){
+		synchronized(arrayPlayer){
+			arrayPlayer.clear();
+		}
+	}
+	public void remplacerArrayPlayer(ArrayList<Player> array){
+		synchronized(arrayPlayer){
+			arrayPlayer.clear();
+			arrayPlayer.addAll(array);
 		}
 	}
 

@@ -61,8 +61,10 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 		//*
 		Color col = new Color(255,180,0,90);
 		g.setColor(col);
+		shape.setLocation(0, 0);	// je dois faire ca car dupin a changer la fonction setLocation dans InputsAndOutputs donc TODO voir pk il a fait ca
 		g.fill(shape.transform(Transform.createTranslateTransform(x, y)));
 		//g.fill(getCollisionShape());
+		
 		//*/
 		Image tmp = ResourceManager.getImage("Trigger");
 		if(tmp != null){

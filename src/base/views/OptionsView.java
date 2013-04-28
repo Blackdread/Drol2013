@@ -12,6 +12,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.gui.MouseOverArea;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -41,6 +42,8 @@ public class OptionsView extends View {
 	private ListeDeroulante listeDerTailleScreen;
 	private Slider sliderMusic;
 	private RoundedRectangle zone[] = new RoundedRectangle[3];
+	
+	private TextField textPseudo;
 	
 	@Override
 	public void initResources() {
@@ -90,6 +93,9 @@ public class OptionsView extends View {
 		sliderMusic = new Slider(container, ResourceManager.getImage("slider"), ResourceManager.getImage("sliderCursor"), container.getWidth()/14, 190, Configuration.getMusicVolume(), 0, 1, true);
 		sliderMusic.getCursor().setMouseOverImage( ResourceManager.getImage("sliderCursorOver"));
 
+		textPseudo = new TextField(container, container.getDefaultFont(), zoneX2, 100, 170, 22);
+		textPseudo.setBackgroundColor(Color.darkGray);
+		textPseudo.setText(Configuration.getPseudo());
 	}
 
 	
@@ -111,6 +117,8 @@ public class OptionsView extends View {
 		g.drawString("Volume de la musique :"+sliderMusic.getValuePrecision2(), sliderMusic.getX()+10, sliderMusic.getY()-32);
 		
 		listeDerTailleScreen.render(container, g);
+		
+		textPseudo.render(container, g);
 		
 		if(Configuration.isMusicOn())
 			butSonDesacti.render(container, g);

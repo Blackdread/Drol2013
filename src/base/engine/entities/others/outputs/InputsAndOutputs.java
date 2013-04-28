@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Shape;
 
 import base.engine.EngineManager;
-import base.engine.entities.others.OutputManager;
 
 /**
  * TODO Pour le moment toutes les entites herite de cette classe, plus tard certaines entites auront besoin d'une zone (comme les TriggerObjectInZone)
@@ -15,7 +14,7 @@ import base.engine.entities.others.OutputManager;
  * 
  * @author Yoann CAPLAIN
  */
-public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition, Serializable {
+public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName, IOrigin, IPosition, Serializable, Cloneable {
 
 	/**
 	 * 
@@ -25,7 +24,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	/**
 	 * Some entity needs to have a reference to EngineManager
 	 */
-	protected EngineManager engineManager;
+	protected transient EngineManager engineManager;
 	
 	/**
 	 * The targetname that other entities refer to this entity by
@@ -67,6 +66,22 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		InputsAndOutputs.currentId++;
 		System.out.println("instance "+InputsAndOutputs.currentId);
 	}
+	
+	//*
+	public void copy(InputsAndOutputs objetACopier){
+		removeEntityFromWorld = objetACopier.removeEntityFromWorld;
+		removeHierarchy = objetACopier.removeHierarchy;
+		x = objetACopier.x;
+		y = objetACopier.y;
+		id = objetACopier.id;
+		xOrigin = objetACopier.xOrigin;
+		yOrigin = objetACopier.yOrigin;
+		name = objetACopier.name;
+		shape = objetACopier.shape;	// peut etre qu'il faut faire un clone()
+		
+		
+		// array_outputs = objetACopier.array_outputs; faire copy
+	}//*/
 	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();

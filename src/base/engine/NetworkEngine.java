@@ -3,12 +3,14 @@ package base.engine;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import base.views.InGameMultiView;
 import base.views.SalonView;
 import base.views.MultiView;
 import base.views.TransitionView;
-import base.views.InGameMultiView;
+import base.engine.entities.BasicEntity;
+import base.engine.network.InfoPartie;
 import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
 
@@ -41,10 +43,36 @@ public class NetworkEngine extends Engine {
 				((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				System.out.println("tchat network client");
-			}//else if(mes instanceof BasicEntity){	// TODO a faire plus tard
+			}else if(mes instanceof BasicEntity){
 			
-			//}
-			else{
+				((BasicEntity) mes).setEngineManager(engineManager);	// car l'engine est celui du serveur donc on met le bon
+				engineManager.addEntity((BasicEntity) mes);	// TODO la fonction est a jour ??
+				
+			}else if(mes instanceof Player){
+				Player tmp = ((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).getPlayer();
+				if(tmp == null)
+					tmp = new Player(engineManager, "");
+				tmp.copy((Player) mes);
+				tmp.setEngineManager(engineManager);
+				
+				//((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer((Player) mes);
+				((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer(tmp);
+				
+				//((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).setPlayer(tmp); TODO pas sur
+			
+			}else if(mes instanceof ArrayList){
+				/*
+				 * On suppose que les ArrayList envoyer ne contiennent que des objets du meme type
+				 */
+				ArrayList<?> array = (ArrayList<?>)mes;
+				
+				if(!array.isEmpty()){
+					if(array.get(0) instanceof Player)
+						((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).remplacerArrayPlayer((ArrayList<Player>) array);
+					if(array.get(0) instanceof InfoPartie)
+						((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).remplacerArrayPartie((ArrayList<InfoPartie>) array);
+				}
+			}else{
 				if(mes instanceof Message){
 					// TODO faudrait mettre en place le RMI mais on n'a pas le temps
 	        		Message mes2 = (Message)mes;
@@ -138,6 +166,19 @@ public class NetworkEngine extends Engine {
 			System.err.println("runSend is null - Send loading over");
 	}
 	
+	/**
+	 * 
+	 */
+	public void demanderUnRefreshListePartieServer(){
+		if(runSend != null){
+			Message mes = new Message();
+			mes.instruction = MessageKey.I_REFRESH_LIST_PARTIE;
+			
+			runSend.ajoutMessage(mes);
+		}else
+			System.err.println("runSend is null - Send refresh - normal si non connecte a un serveur");
+	}
+	
 	public void lancerPartie(){
 		if(runSend != null){
 			Message mes = new Message();
@@ -150,10 +191,14 @@ public class NetworkEngine extends Engine {
 	
 	/**
 	 * Envoie un object au server
+	 * Les ArrayList envoyes sont supposes contenir qu'un seul type de classe (a part l'heritage bien sur)
 	 * @param ob
 	 */
 	public void sendObject(Object ob){
-		runSend.ajoutMessage(ob);
+		if(runSend != null)
+			runSend.ajoutMessage(ob);
+		else
+			System.err.println("runSend is null - Send Object");
 	}
 	
 	public boolean disconnect()

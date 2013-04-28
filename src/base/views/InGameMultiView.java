@@ -120,16 +120,21 @@ public class InGameMultiView extends View {
 		engineManager.update(delta);
 	}
 	
-	/*
 	@Override
 	public void keyReleased(int key, char c) {
 		super.keyReleased(key, c);
+		if(player != null)
+			player.keyReleased(key, c);
 		
-	}*/
+	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
+		
+		if(player != null)
+			player.keyPressed(key, c);
+		
 		switch(key){
 		case Input.KEY_ESCAPE:
 			
@@ -173,4 +178,11 @@ public class InGameMultiView extends View {
 		}
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 }

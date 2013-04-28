@@ -14,6 +14,7 @@ import base.engine.EngineManager;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.Player;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.Zombi;
@@ -39,8 +40,9 @@ public class TestView extends View{
 	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
 	HeroEntity hero;
 	
-	public void initResources()
-	{
+	private Player player;
+	
+	public void initResources(){
 		
 		tp.add(new TilePropriety(0, false, "fodfnd"));
 		tp.add(new TilePropriety(1, false, "fond"));
@@ -85,6 +87,8 @@ public class TestView extends View{
 		engineManager.getIA().addEntity(z);
 		
 		System.out.println("hero : " + hero);
+		
+		player = new Player(engineManager, "pseudoSolo", hero.getId());
 	}
 	
 	@Override
@@ -105,54 +109,7 @@ public class TestView extends View{
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
 	{	
-		if(Keyboard.isKeyDown(Input.KEY_LSHIFT))
-		{
-			Message m = new Message();
-			m.instruction = MessageKey.I_SHOOT;
-			
-			if(hero.getDirection() == BasicEntity.HAUT)
-			{
-				//haut
-				//TODO: Gérer direction, vecteur du tir, update du tir
-				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getHeight()/2));
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() - 5));
-				m.i_data.put(MessageKey.P_VITESSE_X, 0);
-				m.i_data.put(MessageKey.P_VITESSE_Y, -5);
-				
-			}
-			else if(hero.getDirection() == BasicEntity.BAS)
-			{
-				//BAS
-				m.i_data.put(MessageKey.P_X, (int) hero.getX() + hero.getHeight()/2);
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getHeight() + 1));
-				m.i_data.put(MessageKey.P_VITESSE_X, 0);
-				m.i_data.put(MessageKey.P_VITESSE_Y, 5);
-			}
-			else if(hero.getDirection() == BasicEntity.GAUCHE)
-			{
-				//GAUCHE
-				m.i_data.put(MessageKey.P_X, (int) (hero.getX() - 5));
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getWidth()/2));
-				m.i_data.put(MessageKey.P_VITESSE_X, -5);
-				m.i_data.put(MessageKey.P_VITESSE_Y, 0);
-				
-			}
-			else if(hero.getDirection() == BasicEntity.DROITE)
-			{
-				//DROITE
-				m.i_data.put(MessageKey.P_X, (int) (hero.getX() + hero.getWidth() + 5));
-				m.i_data.put(MessageKey.P_Y, (int) (hero.getY() + hero.getWidth()/2));
-				m.i_data.put(MessageKey.P_VITESSE_X, 5);
-				m.i_data.put(MessageKey.P_VITESSE_Y, 0);
-			}
-			
-			m.o_data.put(MessageKey.P_ENTITY, hero);
-			m.engine = EngineManager.LOGIC_ENGINE;
-			
-			engineManager.receiveMessage(m);
-			
-			
-		}
+		player.update(delta);
 		
 		engineManager.update(delta);
 	}
@@ -160,6 +117,8 @@ public class TestView extends View{
 	@Override
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
+		player.keyPressed(key, c);
+		/*
 		Message m = new Message();
 		switch(key){
 			case Input.KEY_SPACE:
@@ -189,10 +148,13 @@ public class TestView extends View{
 				engineManager.receiveMessage(m);
 			break;
 		}
-		
+		//*/
 	}
 	@Override
 	public void keyReleased(int key, char c) {
+		super.keyReleased(key, c);
+		player.keyReleased(key, c);
+		/*
 		Message m = new Message();
 		switch(key){
 		case Input.KEY_SPACE:
@@ -221,6 +183,7 @@ public class TestView extends View{
 			engineManager.receiveMessage(m2);
 		break;
 		}
+		//*/
 	}
 	
 	@Override

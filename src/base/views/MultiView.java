@@ -2,6 +2,7 @@ package base.views;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -19,9 +20,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.Player;
 import base.engine.gui.ListeDeroulante;
+import base.engine.network.InfoPartie;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
+import base.utils.Timer;
 
 /**
  * 
@@ -47,8 +51,19 @@ public class MultiView extends View {
 	private TextField textIDPartieARejoindre;
 	private int idPartieSelectionner;
 	
+	private ArrayList<InfoPartie> arrayPartie = new ArrayList<InfoPartie>();
+	private int maxPartieToDraw;
+	private Timer refreshListePartie = new Timer(5000);
+	
+	/**
+	 * C'est l'instance de player qui sera utilise lorsque l'utilisateur entre dans une partie
+	 */
+	private Player player;
+	
 	@Override
 	public void initResources() {
+		player = new Player(engineManager, ""+Configuration.getPseudo());
+		
 		final int MARGIN = 30;
 		int w = container.getWidth(), h = container.getHeight();;
 		Image tmp = ResourceManager.getImage("butRetour");
@@ -62,6 +77,8 @@ public class MultiView extends View {
 		
 		shapeServer = new Rectangle(30, 50, largServer, hautServer);
 		shapePartie = new Rectangle(30+largServer+MARGIN, 50, largPartie-MARGIN, hautPartie);
+		
+		maxPartieToDraw = (int) (shapePartie.getHeight()/20);
 		
 		textIDPartieARejoindre = new TextField(container, container.getDefaultFont(), (int)shapePartie.getX(), (int)shapePartie.getY()+(int)shapePartie.getHeight()+10, 50, 22);
 		textIDPartieARejoindre.setBackgroundColor(Color.darkGray);
@@ -102,6 +119,12 @@ public class MultiView extends View {
 		g.draw(shapeServer);
 		g.draw(shapePartie);
 		
+		synchronized(arrayPartie){
+			for(int i=0 ; i < arrayPartie.size() && i < maxPartieToDraw;i++)
+				if(arrayPartie.get(i)!=null)
+					g.drawString(""+arrayPartie.get(i).toString(), shapePartie.getX()+5, shapePartie.getY()+5+i*20);
+		}
+		
 		textIDPartieARejoindre.render(container, g);
 		ipServerToJoin.render(container, g);
 		
@@ -116,6 +139,14 @@ public class MultiView extends View {
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {
 		super.update(container, sbGame, delta);
+		
+		refreshListePartie.update(delta);
+		
+		if(refreshListePartie.isTimeComplete()){
+			refreshListePartie.resetTime();
+			
+			engineManager.getNetworkEngine().demanderUnRefreshListePartieServer();
+		}
 		
 		//engineManager.update(delta);
 		// ou faire :
@@ -156,6 +187,8 @@ public class MultiView extends View {
 	
 	private void creerPartie(){
 		if(engineManager.getNetworkEngine().creerPartie()){
+			((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).clearListePlayer();
+			engineManager.getNetworkEngine().sendObject(player);
 			gotoSalonView();
 		}else{
 			// TODO oui oui
@@ -169,6 +202,7 @@ public class MultiView extends View {
 			try {
 				engineManager.getNetworkEngine().connect(ip, Configuration.getPort());
 				System.out.println("Connecter au serveur");
+				engineManager.getNetworkEngine().demanderUnRefreshListePartieServer();
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -182,7 +216,16 @@ public class MultiView extends View {
 	
 	private void rejoindrePartieViaID(final int id){
 		//if(id != -1)
+		((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).clearListePlayer();
 			engineManager.getNetworkEngine().rejoindrePartieViaID(id);
+			engineManager.getNetworkEngine().sendObject(player);
+	}
+	
+	public void remplacerArrayPartie(ArrayList<InfoPartie> array){
+		synchronized(arrayPartie){
+			arrayPartie.clear();
+			arrayPartie.addAll(array);
+		}
 	}
 	
 	public void gotoSalonView(){
@@ -198,5 +241,15 @@ public class MultiView extends View {
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
 		super.enter(container, game);
 		engineManager.setPlayingMulti(true);
+	}
+
+
+	public synchronized Player getPlayer() {
+		return player;
+	}
+
+
+	public synchronized void setPlayer(Player player) {
+		this.player = player;
 	}
 }

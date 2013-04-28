@@ -43,7 +43,6 @@ public class TirLinear extends Tir {
 		// TODO Auto-generated method stub
 		g.setColor(Color.cyan);
 		g.fillRect(x, y, this.getWidth(), this.getHeight());
-		System.out.println("render tir");
 	}
 	
 	@Override
