@@ -67,17 +67,42 @@ public class TestView extends View{
 				Thread.sleep(10);
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
-		TriggerTeleport tr = new TriggerTeleport(engineManager,"teleport", 200,36,40,40);
-		InfoTarget inf = new InfoTarget(engineManager,"infotarget", 700, 40);
+		TriggerTeleport trGauche = new TriggerTeleport(engineManager,"teleport", lvl.getLargeurTile()+2,lvl.getHauteurTile()+2,5,lvl.getHauteurTile()*(lvl.getHauteurNiveau()-2));
+		TriggerTeleport trTeleportDroite = new TriggerTeleport(engineManager,"teleport2", lvl.getLargeurTile()*(lvl.getLargeurNiveau()-1)-5,lvl.getHauteurTile()+2,5,lvl.getHauteurTile()*(lvl.getHauteurNiveau()-2));
+		trGauche.setRemoteDestination("infotargetDroite");	
+		trTeleportDroite.setRemoteDestination("infotargetGauche");
+		
+		
+		InfoTarget inf = new InfoTarget(engineManager,"infotargetMilieuHaut", 700, 40);
+		
+		InfoTarget infGauche[] = new InfoTarget[6];
+		for(int i=0;i<6;i++){
+			infGauche[i] = new InfoTarget(engineManager,"infotargetGauche", lvl.getLargeurTile()*2, (lvl.getHauteurTile()+5)+(lvl.getHauteurTile()*4*i));
+			engineManager.getInfoManager().addEntity(infGauche[i]);
+			//Deplacement.deplacerEntity(engineManager,0, 0, infGauche[i].getId());
+			Deplacement.ajouterEntiteDansTiles(infGauche[i]);
+		}
+		
+		InfoTarget infDroite[] = new InfoTarget[6];
+		for(int i=0;i<6;i++){
+			infDroite[i] = new InfoTarget(engineManager,"infotargetDroite", lvl.getLargeurTile()*lvl.getLargeurNiveau()-lvl.getLargeurTile()*3, (lvl.getHauteurTile()+5)+(lvl.getHauteurTile()*4*i));
+			engineManager.getInfoManager().addEntity(infDroite[i]);
+			//Deplacement.deplacerEntity(engineManager,0, 0, infDroite[i].getId());
+			Deplacement.ajouterEntiteDansTiles(infDroite[i]);
+		}
+		
 		//InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 36);
 		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"zombi");
-		tr.setRemoteDestination("infotarget");
-		tr.setFilterEntityThatActivate(fil);
+		
+		trGauche.setFilterEntityThatActivate(fil);	trTeleportDroite.setFilterEntityThatActivate(fil);
 		engineManager.getInfoManager().addEntity(inf);
 		engineManager.getFilterManager().addEntity(fil);
-		lvl.addEntity(tr);
+		//lvl.addEntity(tr);
+		engineManager.addEntity(trGauche);
+		engineManager.addEntity(trTeleportDroite);
 		lvl.addEntity(inf);
-		Deplacement.deplacerEntity(engineManager,0, 0, tr.getId());
+		//Deplacement.deplacerEntity(engineManager,0, 0, tr.getId());
+		Deplacement.ajouterEntiteDansTiles(trGauche);	Deplacement.ajouterEntiteDansTiles(trTeleportDroite);
 		Deplacement.deplacerEntity(engineManager,0, 0, inf.getId());
 		lvl.addEntity(hero);
 		lvl.addEntity(z);

@@ -208,14 +208,14 @@ public class LevelDrol extends Level {
 		*/
 	}
 	
-	public void addEntity(BasicEntity entity){
+	synchronized public void addEntity(BasicEntity entity){
 		arrayEntite.put(entity.getId(), entity);
 	}
 	
-	public void removeEntity(BasicEntity entity){
+	synchronized public void removeEntity(BasicEntity entity){
 		removeEntity(entity.getId());
 	}
-	public void removeEntity(int id){
+	synchronized public void removeEntity(int id){
 		BasicEntity e = arrayEntite.get(id);
 		if(e != null){
 			int largeur = e.getWidth();
@@ -286,7 +286,7 @@ public class LevelDrol extends Level {
 		this.tileSet = tileSet;
 	}
 
-	public HashMap<Integer, BasicEntity> getArrayEntite() {
+	synchronized public HashMap<Integer, BasicEntity> getArrayEntite() {
 		return arrayEntite;
 	}
 	
