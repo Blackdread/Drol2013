@@ -122,6 +122,22 @@ public class EngineManager{
 	}
 	
 	/**
+	 * Remove an entity from everywhere
+	 * @param id entity ID
+	 */
+	public void removeEntity(final int id){
+		currentLevelUsed.removeEntity(id);
+		triggerManager.removeEntity(id);
+		infoManager.removeEntity(id);
+		filterManager.removeEntity(id);
+		logicManager.removeEntity(id);
+		
+		ia.removeEntity(id);
+		
+		// TODO enlever les outputs de OutputsManager que l'entite avait
+	}
+	
+	/**
 	 * Fonction qui spawn une PlayableEntity en recherchant les spawns possibles sur le level
 	 * Il cherche les InfoPlayerStart puis les InfoPlayerRobot ou InfoPlayerMonster
 	 * @param play l'entite a spawn

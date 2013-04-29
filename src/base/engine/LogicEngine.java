@@ -181,13 +181,12 @@ public class LogicEngine extends Engine {
 					}
 					break;
 					
-					
-					
 				case MessageKey.I_REMOVE_ENTITY:
 					if(mes.i_data.containsKey(MessageKey.P_ID))
 					{
-						engineManager.getCurrentLevelUsed().removeEntity(mes.i_data.get(MessageKey.P_ID));
-						engineManager.getIA().removeEntity(mes.i_data.get(MessageKey.P_ID));
+						//engineManager.getCurrentLevelUsed().removeEntity(mes.i_data.get(MessageKey.P_ID));
+						//engineManager.getIA().removeEntity(mes.i_data.get(MessageKey.P_ID));
+						engineManager.removeEntity(mes.i_data.get(MessageKey.P_ID));
 						
 					}
 					break;

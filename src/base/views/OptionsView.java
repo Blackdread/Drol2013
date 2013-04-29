@@ -134,7 +134,6 @@ public class OptionsView extends View {
 		super.keyPressed(key, c);
 		switch(key){
 		case Input.KEY_ESCAPE:
-			//goToMenu();
 			enregistrerPseudo();
 			gotoPreviousView();
 			break;
@@ -146,7 +145,6 @@ public class OptionsView extends View {
 		Message m = new Message();
 		
 		if(butQuitter.isMouseOver()){
-			//goToMenu();
 			enregistrerPseudo();
 			gotoPreviousView();
 		}

@@ -198,8 +198,8 @@ public class MultiView extends View {
 			engineManager.getNetworkEngine().sendObject(player);
 			gotoSalonView();
 		}else{
-			// TODO oui oui
-			System.out.println("Creer Partie FALSE");
+			// TODO pas connecte
+			System.err.println("Creer Partie FALSE");
 		}
 	}
 	
@@ -211,10 +211,8 @@ public class MultiView extends View {
 				System.out.println("Connecter au serveur");
 				engineManager.getNetworkEngine().demanderUnRefreshListePartieServer();
 			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -28,9 +28,6 @@ public class Zombi extends Monster {
 	@Override
 	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		/*
-		g.setColor(Color.red);
-		g.fillRect(x, y, this.getWidth(), this.getHeight());*/
 		if(moving)
 		{
 			if(this.getDirection() == BasicEntity.DROITE)

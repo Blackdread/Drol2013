@@ -92,7 +92,7 @@ public class TestView extends View{
 		}
 		
 		//InfoTarget inf = new InfoTarget(engineManager,"infotarget", 200, 36);
-		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",false,"zombi");
+		FilterActivatorName fil = new FilterActivatorName(engineManager,"filtername",true,"tirlinear");
 		
 		trGauche.setFilterEntityThatActivate(fil);	trTeleportDroite.setFilterEntityThatActivate(fil);
 		engineManager.getInfoManager().addEntity(inf);
@@ -132,8 +132,7 @@ public class TestView extends View{
 	}
 	
 	@Override
-	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException 
-	{	
+	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {	
 		player.update(delta);
 		
 		engineManager.update(delta);
@@ -143,72 +142,13 @@ public class TestView extends View{
 	public void keyPressed(int key, char c) {
 		super.keyPressed(key, c);
 		player.keyPressed(key, c);
-		/*
-		Message m = new Message();
-		switch(key){
-			case Input.KEY_SPACE:
-				//hero.jump();
-				m.instruction = MessageKey.I_JUMP;
-				m.i_data.put(MessageKey.P_ID, hero.getId());
-				m.engine = EngineManager.LOGIC_ENGINE;
-				
-				engineManager.receiveMessage(m);
-				break;
-			case Input.KEY_RIGHT:
-				m.instruction = MessageKey.I_START_ENTITY_MOVE;
-				m.i_data.put(MessageKey.P_ID, hero.getId());
-				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
-				m.b_data.put(MessageKey.P_BOOLEAN, true);//On mets en déplacement
-				m.engine = EngineManager.LOGIC_ENGINE;
 		
-				engineManager.receiveMessage(m);
-				break;
-			case Input.KEY_LEFT:
-				m.instruction = MessageKey.I_START_ENTITY_MOVE;
-				m.i_data.put(MessageKey.P_ID, hero.getId());
-				m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
-				m.b_data.put(MessageKey.P_BOOLEAN, true);//On mets en déplacement
-				m.engine = EngineManager.LOGIC_ENGINE;
-				
-				engineManager.receiveMessage(m);
-			break;
-		}
-		//*/
 	}
 	@Override
 	public void keyReleased(int key, char c) {
 		super.keyReleased(key, c);
 		player.keyReleased(key, c);
-		/*
-		Message m = new Message();
-		switch(key){
-		case Input.KEY_SPACE:
-			hero.jump();
-			break;
-		case Input.KEY_RIGHT:
-			
-			m.instruction = MessageKey.I_START_ENTITY_MOVE;
-			m.i_data.put(MessageKey.P_ID, hero.getId());
-			m.i_data.put(MessageKey.P_DIRECTION, BasicEntity.GAUCHE);
-			m.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
-			m.b_data.put(MessageKey.P_BOOLEAN, false);//On arrête le déplacement
-			m.engine = EngineManager.LOGIC_ENGINE;
-			
-			engineManager.receiveMessage(m);
-			break;
-		case Input.KEY_LEFT:
-			Message m2 = new Message();
-			m2.instruction = MessageKey.I_START_ENTITY_MOVE;
-			m2.i_data.put(MessageKey.P_ID, hero.getId());
-			m2.i_data.put(MessageKey.P_DIRECTION, BasicEntity.DROITE);
-			m2.b_data.put(MessageKey.P_CHANGE_DIRECTION, false);
-			m2.b_data.put(MessageKey.P_BOOLEAN, false);//On arrête le déplacement
-			m2.engine = EngineManager.LOGIC_ENGINE;
-			
-			engineManager.receiveMessage(m2);
-		break;
-		}
-		//*/
+		
 	}
 	
 	@Override
