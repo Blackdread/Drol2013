@@ -124,7 +124,7 @@ public class TestView extends View{
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
-		lvl.getScroll().mettreAJourScroll(hero);
+		// lvl.getScroll().mettreAJourScroll(hero); fait dans Player
 		//if(lvl.isLoadOver())
 			lvl.generateLevelGraphic(g, 200, 100);
 			

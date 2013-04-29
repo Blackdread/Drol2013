@@ -8,6 +8,7 @@ import org.lwjgl.Sys;
 
 import base.engine.entities.ActiveEntity;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.PlayableEntity;
 import base.engine.entities.others.FilterManager;
 import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.LogicManager;
@@ -105,14 +106,25 @@ public class EngineManager{
 	/**
 	 * When an entity is created, it needs to be added in some Class
 	 * @param e the entity to add
-	 * TODO n'est jamais utiliser pour le moment
-	 * TODO pas sur que ce soit garder
+	 * TODO n'est jamais utiliser pour le moment -> depuis le 29 avril 2013, j'ai commence a l'utiliser
+	 * TODO pas sur que ce soit garder -> normalement c'est a garder !
 	 */
 	public void addEntity(BasicEntity e){
 		currentLevelUsed.getArrayEntite().put(e.getId(), e);
 		if(e instanceof ActiveEntity)
 			ia.addEntity((ActiveEntity)e);
 		// TODO Faire pour les trigger, info, etc
+	}
+	
+	/**
+	 * Fonction qui spawn une PlayableEntity en recherchant les spawns possibles sur le level
+	 * Il cherche les InfoPlayerStart puis les InfoPlayerRobot ou InfoPlayerMonster
+	 * @param play l'entite a spawn
+	 * 
+	 * TODO pas encore fait ni utiliser
+	 */
+	public void spawnNewUnit(PlayableEntity play/*  choisir quoi mettre en param    */){
+		
 	}
 	
 	/**

@@ -76,7 +76,10 @@ public class Player implements Serializable, ITeam, Cloneable{
 		if(idEntityHePlays != NOT_CONTROLING_UNIT)
 			hero = engineManager.getCurrentLevelUsed().getArrayEntite().get(idEntityHePlays);
 		
-		if(hero != null)
+		if(hero != null){
+			if(engineManager.getCurrentLevelUsed() != null)
+				engineManager.getCurrentLevelUsed().getScroll().mettreAJourScroll(hero);
+			
 			if(Keyboard.isKeyDown(Input.KEY_LSHIFT))
 			{
 				Message m = new Message();
@@ -123,6 +126,7 @@ public class Player implements Serializable, ITeam, Cloneable{
 				
 				engineManager.receiveMessage(m);
 			}	
+		}
 	}
 	
 	public void keyPressed(int key, char c) {
