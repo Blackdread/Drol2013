@@ -1,5 +1,7 @@
 package base.engine.entities;
 
+import java.io.Serializable;
+
 import base.engine.entities.others.outputs.IUpdatable;
 import base.utils.Timer;
 
@@ -9,7 +11,12 @@ import base.utils.Timer;
  * @author Yoann CAPLAIN
  *
  */
-public abstract class WeaponRanged implements IUpdatable{
+public abstract class WeaponRanged implements IUpdatable, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4134985850675158200L;
 
 	public final static int NO_DELAY = 0;
 	

@@ -11,7 +11,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
+import base.utils.Configuration;
 import base.utils.ResourceManager;
 
 
@@ -61,8 +65,26 @@ public class MainMenuView extends View {
 		butCredits = new MouseOverArea(container, ResourceManager.getImage("MenuCredits"), x, y+haut*3-50, larg, haut);
 		butCredits.setMouseOverImage(ResourceManager.getImage("MenuCreditsOver"));
 		
+		if(Configuration.isMusicOn()){
+			Message m = new Message();
+			m.instruction = MessageKey.I_PLAY_MUSIC;
+			// TODO donner le nom de la musique a jouer
+			m.s_data.put(MessageKey.P_NAME, "tron");
+			
+			m.engine = EngineManager.SOUND_ENGINE;
+			
+			engineManager.receiveMessage(m);
+		}
+		
 	}
-
+	
+	@Override
+	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {
+		super.update(container, sbGame, delta);
+		
+		engineManager.getSoundEngine().processMessage();
+	}
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
 		g.drawImage(background, 0, 0);

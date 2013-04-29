@@ -36,7 +36,6 @@ import base.engine.LogicEngine;
 public class TestView extends View{
 	
 	private TileSet t;
-	private LevelDrol lvl;
 	ArrayList<TilePropriety> tp = new ArrayList<TilePropriety>(0);
 	HeroEntity hero;
 	
@@ -52,7 +51,7 @@ public class TestView extends View{
 		
 		t = new TileSet(ResourceManager.getSpriteSheet("sprite"), tp);
 		
-		lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t, Game.getEngineManager());
+		LevelDrol lvl = new LevelDrol(new File("levels/lvl_0.lvl"), t, Game.getEngineManager());
 		lvl.loadLevel();
 		engineManager.setCurrentLevelUsed(lvl);
 		hero = new HeroEntity("bla", engineManager, 500);
@@ -125,7 +124,7 @@ public class TestView extends View{
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {
 		// lvl.getScroll().mettreAJourScroll(hero); fait dans Player
 		//if(lvl.isLoadOver())
-			lvl.generateLevelGraphic(g, 200, 100);
+			engineManager.getCurrentLevelUsed().generateLevelGraphic(g, 200, 100);
 			
 		super.render(container, sbgame, g);
 	}

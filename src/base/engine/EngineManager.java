@@ -15,6 +15,7 @@ import base.engine.entities.others.info.Info;
 import base.engine.entities.others.logics.Logic;
 import base.engine.entities.others.triggers.Trigger;
 import base.engine.levels.LevelDrol;
+import base.engine.logics.Deplacement;
 import base.engine.logics.IA;
 
 
@@ -108,6 +109,9 @@ public class EngineManager{
 	 */
 	public void addEntity(BasicEntity e){
 		currentLevelUsed.getArrayEntite().put(e.getId(), e);
+		
+		Deplacement.ajouterEntiteDansTiles(e);
+		
 		if(e instanceof ActiveEntity)
 			ia.addEntity((ActiveEntity)e);
 		// TODO Faire pour les trigger, info, etc

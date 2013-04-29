@@ -22,22 +22,22 @@ import base.tile.TileSet;
 
 public class LevelDrol extends Level {
 
+	private static final long serialVersionUID = 570127467730370283L;
+
 	protected final int NB_LIGNE_MINIMUM_POUR_PARAMETRE_POUR_DROL = 2;
 	
-	protected TileSet  tileSet;
+	protected transient TileSet  tileSet;
 	
 	protected int largeurNiveau;
 	protected int hauteurNiveau;
 	protected int largeurTile;
 	protected int hauteurTile;
-	protected Scroll scroll;
+	protected transient Scroll scroll;
 	
 	//HashMap : id/Entity
 	protected HashMap<Integer, BasicEntity> arrayEntite = new HashMap<Integer, BasicEntity>();
 	
 	protected Tile[][] tabNiveau;
-	
-	
 	
 	public LevelDrol(File file, TileSet tile, EngineManager engineManager) {
 		super(file);
@@ -97,6 +97,20 @@ public class LevelDrol extends Level {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void copy(LevelDrol level){
+		super.copy(level);
+		largeurNiveau = level.largeurNiveau;
+		hauteurNiveau = level.hauteurNiveau;
+		largeurTile = level.largeurTile;
+		hauteurTile = level.hauteurTile;
+		
+		// A voir
+		arrayEntite = level.arrayEntite;
+		
+		// pas sur
+		tabNiveau = level.tabNiveau;
 	}
 	
 	/**
@@ -181,6 +195,13 @@ public class LevelDrol extends Level {
 		graph.clearClip();
 	}
 	
+	/**
+	 * Afficher juste une grille pour debug
+	 * @param g
+	 * @param x
+	 * @param y
+	 */
+	@SuppressWarnings("unused")
 	private void afficherGrilleTile(Graphics g, int x, int y){
 		g.setColor(Color.red);
 		for(int i=0;i<500/32;i++){

@@ -10,6 +10,7 @@ import base.views.SalonView;
 import base.views.MultiView;
 import base.views.TransitionView;
 import base.engine.entities.BasicEntity;
+import base.engine.levels.LevelDrol;
 import base.engine.network.InfoPartie;
 import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
@@ -55,8 +56,7 @@ public class NetworkEngine extends Engine {
 				tmp.copy((Player) mes);
 				tmp.setEngineManager(engineManager);
 				
-				//((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer((Player) mes);
-				((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer(tmp);
+				//((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer(tmp);
 				
 				//((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).setPlayer(tmp); TODO pas sur
 			
@@ -67,11 +67,31 @@ public class NetworkEngine extends Engine {
 				ArrayList<?> array = (ArrayList<?>)mes;
 				
 				if(!array.isEmpty()){
-					if(array.get(0) instanceof Player)
+					if(array.get(0) instanceof Player){
 						((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).remplacerArrayPlayer((ArrayList<Player>) array);
+						((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).remplacerArrayPlayer((ArrayList<Player>) array);
+					}
 					if(array.get(0) instanceof InfoPartie)
 						((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).remplacerArrayPartie((ArrayList<InfoPartie>) array);
 				}
+			}else if(mes instanceof LevelDrol){
+				//*
+				if(engineManager.getCurrentLevelUsed() == null){
+					engineManager.setCurrentLevelUsed((LevelDrol)mes);
+					System.out.println("level remplacer client");
+				}else{
+					engineManager.getCurrentLevelUsed().copy((LevelDrol)mes);
+					System.out.println("level copy client");
+					
+					
+					// CECI EST UNE HORREUR, IL VAUT ENVOYER UNE BASICENTITY A LA FOIS ET LA REMPLACER CAR ON ENVOIE
+					// UNE ENTITE SEULEMENT SI ELLE A CHANGER D'ETAT
+					for(BasicEntity e : engineManager.getCurrentLevelUsed().getArrayEntite().values())
+						if(e != null)
+							e.setEngineManager(engineManager);
+				}//*/
+				
+				
 			}else{
 				if(mes instanceof Message){
 					// TODO faudrait mettre en place le RMI mais on n'a pas le temps
@@ -175,8 +195,8 @@ public class NetworkEngine extends Engine {
 			mes.instruction = MessageKey.I_REFRESH_LIST_PARTIE;
 			
 			runSend.ajoutMessage(mes);
-		}else
-			System.err.println("runSend is null - Send refresh - normal si non connecte a un serveur");
+		}//else
+			//System.err.println("runSend is null - Send refresh - normal si non connecte a un serveur");
 	}
 	
 	public void lancerPartie(){

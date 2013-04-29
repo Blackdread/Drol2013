@@ -64,6 +64,9 @@ public class CollisionManager{
 	public static HashMap<Integer, BasicEntity> testerCollisionEntites(int x, int y, BasicEntity e)
 	{
 		LevelDrol lvl = e.getEngineManager().getCurrentLevelUsed();
+		if(lvl == null)
+			System.err.println("lvl is null");
+		
 		HashMap<Integer, BasicEntity> hm = new HashMap<Integer, BasicEntity>();
 		
 		int tileXMin = (int) ((e.getX()+x) / lvl.getLargeurTile());
@@ -71,25 +74,30 @@ public class CollisionManager{
 	    int tileXMax = (int) ((e.getX() + x + e.getWidth() - 1) / lvl.getLargeurTile());
 	    int tileYMax = (int) ((e.getY() + y + e.getHeight() - 1) / lvl.getHauteurTile());
 	    
-	    for(int i = tileXMin; i <= tileXMax; i++)
-	    {
-	        for(int j= tileYMin; j <= tileYMax; j++)
-	        {
-	        	//On vérifie les entités proches
-	        	for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
-	        	{
-	        		/*
-	        		 * Si on trouve une entité proche et qu'elle est en collision, on l'ajoute dans le hashmap
-	        		 */
-	        		
-	        		BasicEntity b = lvl.getTabNiveau()[j][i].getEntiteProcheAt(k);
-	        		
-	        		if(e.getShape().intersects(b.getShape()))
-	        			hm.put(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k).getId(), lvl.getTabNiveau()[j][i].getEntiteProcheAt(k));
-	        		
-	        	}
-	        }
-	    }
+	    if(lvl.getTabNiveau() != null){
+		    for(int i = tileXMin; i <= tileXMax; i++)
+		    {
+		        for(int j= tileYMin; j <= tileYMax; j++)
+		        {
+		        	//On vérifie les entités proches
+		        	if(lvl.getTabNiveau()[j][i] != null){
+			        	for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
+			        	{
+			        		/*
+			        		 * Si on trouve une entité proche et qu'elle est en collision, on l'ajoute dans le hashmap
+			        		 */
+			        		
+			        		BasicEntity b = lvl.getTabNiveau()[j][i].getEntiteProcheAt(k);
+			        		
+			        		if(e.getShape().intersects(b.getShape()))
+			        			hm.put(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k).getId(), lvl.getTabNiveau()[j][i].getEntiteProcheAt(k));
+			        		
+			        	}
+		        	}
+		        }
+		    }
+	    }else
+	    	System.err.println("tabNiveau is null");
 	    
 	    return hm;
 	    

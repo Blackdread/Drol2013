@@ -39,10 +39,13 @@ public class InGameMultiView extends View {
 	private boolean showMessageTchat = false;
 	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;
-	private int maxMessageToDraw;
+	private int maxMessageToDraw = 20;
 	
-	private ArrayList<String> arrayScores = new ArrayList<String>();
-	
+	/**
+	 * Sert a afficher les joueurs et leur score
+	 */
+	private ArrayList<Player> arrayPlayer = new ArrayList<Player>();
+
 	private Player player;
 	
 	@Override
@@ -94,10 +97,17 @@ public class InGameMultiView extends View {
 		if(showMessageTchat){
 			g.setColor(Color.red);
 			synchronized(arrayMessageTchat){
-				for(int i=0;i< arrayMessageTchat.size();i++)
+				for(int i=0;i< arrayMessageTchat.size() &&  i<maxMessageToDraw;i++)
 					if(arrayMessageTchat.get(i)!=null)
 						g.drawString(""+arrayMessageTchat.get(i).toString(), xPosVueJeu+largeurVueDuJeu/2-container.getDefaultFont().getWidth(""+arrayMessageTchat.get(i).toString())/2, yPosVueJeu+hauteurVueDuJeu-30-i*tailleFont);
 			}
+			
+			synchronized(arrayPlayer){
+				for(int i=0;i< arrayPlayer.size();i++)
+					if(arrayPlayer.get(i)!=null)
+						g.drawString(""+arrayPlayer.get(i).getPseudo()+" "+arrayPlayer.get(i).getScore(), 10, 10+i*tailleFont);
+			}
+			
 			textTchat.render(container, g);
 		}
 		
@@ -175,6 +185,8 @@ public class InGameMultiView extends View {
 	public void tchatReceiveMessage(MessageTchat message){
 		synchronized(arrayMessageTchat){
 			arrayMessageTchat.add(message);
+			if(arrayMessageTchat.size() > maxMessageToDraw)
+				arrayMessageTchat.remove(0);
 		}
 	}
 
@@ -184,5 +196,17 @@ public class InGameMultiView extends View {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public void clearListePlayer(){
+		synchronized(arrayPlayer){
+			arrayPlayer.clear();
+		}
+	}
+	public void remplacerArrayPlayer(ArrayList<Player> array){
+		synchronized(arrayPlayer){
+			arrayPlayer.clear();
+			arrayPlayer.addAll(array);
+		}
 	}
 }

@@ -22,7 +22,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 * in grammes (not sure, maybe mg)
 	 */
 	protected int mass = 1;
-	protected Vector2f vitesse;
+	protected transient Vector2f vitesse;
 	/**
 	 * If = 0 -> no limit
 	 */
@@ -32,7 +32,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 */
 	protected float defaultVitesse = 2;
 	
-	protected Vector2f acceleration;
+	protected transient Vector2f acceleration;
 	protected float accelerationEntity;
 	
 	protected boolean moving;

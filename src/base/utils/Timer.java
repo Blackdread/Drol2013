@@ -1,5 +1,7 @@
 package base.utils;
 
+import java.io.Serializable;
+
 /**
  * This class represent a timer.
  * 
@@ -20,7 +22,7 @@ package base.utils;
  * @author Yoann CAPLAIN
  *
  */
-public class Timer {
+public class Timer implements Serializable{
 
 	private float eventTime;
 	private float deltaStock;

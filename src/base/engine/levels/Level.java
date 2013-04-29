@@ -7,14 +7,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 
-public abstract class Level implements ILevel{
+public abstract class Level implements ILevel, Serializable{
+	
+	private static final long serialVersionUID = 2758195643821767044L;
 	
 	protected final int NB_LIGNE_MINIMUM_POUR_PARAMETRE = 3;
 	protected final int NB_OBJET_MIN_SUPPOSER_PAR_LEVEL = 50;
-	
-	@Deprecated
-	public static Level currentLevelUsed = null;
 	
 	// Nom d'un level
 	// lvl_numero.lvl
@@ -54,8 +54,6 @@ public abstract class Level implements ILevel{
 	protected boolean isSaveOver;
 	
 	public Level(File file){
-		
-		Level.currentLevelUsed = this;	// A voir si ca reste
 		
 		isLoadOver = false;
 		isSaveOver = false;
@@ -107,6 +105,17 @@ public abstract class Level implements ILevel{
 				e.printStackTrace();
 			} 
 		}
+	}
+	
+	public void copy(Level level){
+		nom = level.nom;
+		numero = level.numero;
+		nbLigneFichier = level.nbLigneFichier;
+		nbLigneFichierLuPourLeLoading = level.nbLigneFichierLuPourLeLoading;
+		reussi = level.reussi;
+		
+		nomFichier = level.nomFichier;
+		cheminFichier = level.cheminFichier;
 	}
 	
 	public void loadLevel(){
@@ -217,15 +226,4 @@ public abstract class Level implements ILevel{
 	public String toString(){
 		return "nom: "+nom+" lvl: "+numero+" fait: "+reussi;
 	}
-
-	@Deprecated
-	public static Level getCurrentLevelUsed() {
-		return currentLevelUsed;
-	}
-
-	public static void setCurrentLevelUsed(Level currentLevelUsed) {
-		Level.currentLevelUsed = currentLevelUsed;
-	}
-	
-	
 }

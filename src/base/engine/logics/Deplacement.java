@@ -185,16 +185,4 @@ public class Deplacement {
 		//System.out.println("fin ajouter");
 	}
 	
-	/**
-	 * Si le scroll sort de l'écran on met à 0 ou max sinon on centre sur le héro
-	 * @param e entite sur laquelle centre le scroll
-	 * 
-	 * Sera supprimer car le scrolling est fait dans la vue
-	 */
-	@Deprecated
-	public static void mettreAJourScroll(final BasicEntity e){
-		LevelDrol lvl = (LevelDrol) Level.getCurrentLevelUsed();
-		
-		lvl.getScroll().mettreAJourScroll(e);
-	}
 }

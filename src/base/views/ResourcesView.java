@@ -62,16 +62,6 @@ public class ResourcesView extends View {
 		bar.setLocation(container.getWidth() / 2 - 100, 3*container.getHeight() / 4);
 		bar.setValue(40);
 		
-		if(Configuration.isMusicOn()){
-			Message m = new Message();
-			m.instruction = MessageKey.I_PLAY_MUSIC;
-			// TODO donner le nom de la musique a jouer
-			m.s_data.put(MessageKey.P_NAME, "tron");
-			
-			m.engine = EngineManager.SOUND_ENGINE;
-			engineManager.receiveMessage(m);
-		}
-		
 	}
 
 	@Override
@@ -99,7 +89,7 @@ public class ResourcesView extends View {
 					View view = ((Game) sbGame).getStateByIndex(i);
 					view.initResources();
 				}
-				engineManager.getSoundEngine().processMessage();
+				
 				ready = true;
 				
 

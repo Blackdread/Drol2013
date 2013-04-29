@@ -1,11 +1,15 @@
 package base.tile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import base.engine.entities.BasicEntity;
 
-public class Tile {
+public class Tile implements Serializable{
+	
+	private static final long serialVersionUID = 8903044779751945594L;
+
 	protected int index;
 	
 	protected ArrayList<BasicEntity> entiteProche = new ArrayList<BasicEntity>();
