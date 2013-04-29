@@ -1,9 +1,5 @@
 package base.engine;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.lwjgl.Sys;
 
 import base.engine.entities.ActiveEntity;
@@ -14,11 +10,12 @@ import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.LogicManager;
 import base.engine.entities.others.OutputManager;
 import base.engine.entities.others.TriggerManager;
+import base.engine.entities.others.filters.Filter;
+import base.engine.entities.others.info.Info;
+import base.engine.entities.others.logics.Logic;
+import base.engine.entities.others.triggers.Trigger;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.IA;
-import base.tile.TilePropriety;
-import base.tile.TileSet;
-import base.utils.ResourceManager;
 
 
 /**
@@ -114,6 +111,14 @@ public class EngineManager{
 		if(e instanceof ActiveEntity)
 			ia.addEntity((ActiveEntity)e);
 		// TODO Faire pour les trigger, info, etc
+		if(e instanceof Trigger)
+			triggerManager.addEntity(e);
+		if(e instanceof Info)
+			infoManager.addEntity(e);
+		if(e instanceof Filter)
+			filterManager.addEntity(e);
+		if(e instanceof Logic)
+			logicManager.addEntity(e);
 	}
 	
 	/**
@@ -124,7 +129,10 @@ public class EngineManager{
 	 * TODO pas encore fait ni utiliser
 	 */
 	public void spawnNewUnit(PlayableEntity play/*  choisir quoi mettre en param    */){
-		
+		if(currentLevelUsed != null){
+			
+		}else
+			System.err.println("currentLevelUsed is null - Spawn unit");
 	}
 	
 	/**

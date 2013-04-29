@@ -55,20 +55,14 @@ public class Player implements Serializable, ITeam, Cloneable{
 		this.engineManager = engineManager;
 	}
 	
-	//*
 	public void copy(Player objetACopier){
 		pseudo = ""+objetACopier.getPseudo();
 		team = objetACopier.getTeam();
 		idEntityHePlays = objetACopier.getIdEntityHePlays();
 		choixEntiteAJouer = objetACopier.getChoixEntiteAJouer();
-		/*
-		if(heroEntityHeIsPlaying == null){
-			heroEntityHeIsPlaying = objetACopier.getHeroEntityHeIsPlaying();
-			// L'engineManager n'est pas bon
-		}else{
-			// TODO a faire pour heroEntityHeIsPlaying
-		}*/
-	}//*/
+		score = objetACopier.score;
+		
+	}
 	
 	public void update(final int delta){
 		BasicEntity hero = null;
@@ -234,6 +228,14 @@ public class Player implements Serializable, ITeam, Cloneable{
 
 	public void setChoixEntiteAJouer(String choixEntiteAJouer) {
 		this.choixEntiteAJouer = choixEntiteAJouer;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 	
 	
