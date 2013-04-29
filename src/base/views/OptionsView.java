@@ -135,6 +135,7 @@ public class OptionsView extends View {
 		switch(key){
 		case Input.KEY_ESCAPE:
 			//goToMenu();
+			enregistrerPseudo();
 			gotoPreviousView();
 			break;
 		}
@@ -146,6 +147,7 @@ public class OptionsView extends View {
 		
 		if(butQuitter.isMouseOver()){
 			//goToMenu();
+			enregistrerPseudo();
 			gotoPreviousView();
 		}
 		if(butFullscreen.isMouseOver())
@@ -181,16 +183,6 @@ public class OptionsView extends View {
 		engineManager.update(0);	// forcer la prise en compte des messages
 	}
 
-	private void goToMenu() {
-		container.setMouseGrabbed(false);
-		try {
-			Configuration.saveNewConfig();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		game.enterState(Game.MAIN_MENU_VIEW_ID, new FadeOutTransition(), new FadeInTransition());
-	}
-
 	@Override
 	public int getID() {
 		return Game.OPTIONS_VIEW_ID;
@@ -200,6 +192,10 @@ public class OptionsView extends View {
 	public void mouseDragged(int oldx, int oldy, int newx, int newy){
 		super.mouseDragged(oldx, oldy, newx, newy);
 		sliderMusic.isMouseGrabbed(oldx, oldy, newx, newy);
+	}
+	
+	private void enregistrerPseudo(){
+		Configuration.setPseudo(""+textPseudo.getText());
 	}
 	
 	private void inverseFullscreen(){

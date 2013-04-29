@@ -36,6 +36,10 @@ public class LevelManager {
 				arrayLevel.add(new LevelDrol(list[i]));
 			}
 	}
+	
+	public void ajouterEntiteNecessaireSurLeLevel(LevelDrol level){
+		
+	}
 	 
 	private static LevelManager instance;
 	private static Object objetSynchrone = new Object();

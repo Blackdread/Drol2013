@@ -61,6 +61,13 @@ public class MultiView extends View {
 	private Player player;
 	
 	@Override
+	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+		super.enter(container, game);
+		engineManager.setPlayingMulti(true);
+		player.setPseudo(Configuration.getPseudo());
+	}
+	
+	@Override
 	public void initResources() {
 		player = new Player(engineManager, ""+Configuration.getPseudo());
 		
@@ -236,11 +243,6 @@ public class MultiView extends View {
 	@Override
 	public int getID() {
 		return Game.MULTI_VIEW_ID;
-	}
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-		super.enter(container, game);
-		engineManager.setPlayingMulti(true);
 	}
 
 

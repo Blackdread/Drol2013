@@ -6,7 +6,6 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
 import base.engine.entities.BasicEntity;
-import base.engine.entities.PlayableEntity;
 import base.engine.entities.others.outputs.ITeam;
 
 /**

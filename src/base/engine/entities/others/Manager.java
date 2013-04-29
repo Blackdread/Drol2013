@@ -28,7 +28,8 @@ public abstract class Manager {
 			tmp.add(entity);
 			hashMapEntity.put(entity.getTargetName(), tmp);
 		}else
-			tmp.add(entity);	// Pas de verification que l'objet est y deja
+			if(!isThereEntityIDIn(tmp, entity.getId()))
+				tmp.add(entity);
 	}
 
 	/**
@@ -105,5 +106,18 @@ public abstract class Manager {
 					if(v.getId() == id)
 						return v;
 		return null;
+	}
+	
+	/**
+	 * Check if the arrayList contains that entity ID
+	 * @param array array to check
+	 * @paran id entity id
+	 * @return true if the array contains that entity
+	 */
+	synchronized public boolean isThereEntityIDIn(ArrayList<BasicEntity> array,final int id){
+		for(BasicEntity v : array)
+			if(v != null && v.getId() == id)
+				return true;
+		return false;
 	}
 }
