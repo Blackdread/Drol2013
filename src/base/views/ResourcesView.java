@@ -12,8 +12,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.gui.ProgressBarFillRect;
+import base.utils.Configuration;
 import base.utils.ResourceManager;
 import base.utils.Timer;
 
@@ -57,6 +61,17 @@ public class ResourcesView extends View {
 		bar = new ProgressBarFillRect(2,8);
 		bar.setLocation(container.getWidth() / 2 - 100, 3*container.getHeight() / 4);
 		bar.setValue(40);
+		
+		if(Configuration.isMusicOn()){
+			Message m = new Message();
+			m.instruction = MessageKey.I_PLAY_MUSIC;
+			// TODO donner le nom de la musique a jouer
+			m.s_data.put(MessageKey.P_NAME, "tron");
+			
+			m.engine = EngineManager.SOUND_ENGINE;
+			engineManager.receiveMessage(m);
+		}
+		
 	}
 
 	@Override
@@ -84,7 +99,7 @@ public class ResourcesView extends View {
 					View view = ((Game) sbGame).getStateByIndex(i);
 					view.initResources();
 				}
-
+				engineManager.getSoundEngine().processMessage();
 				ready = true;
 				
 

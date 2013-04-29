@@ -113,12 +113,11 @@ public class TestView extends View{
 		
 		System.out.println("hero : " + hero);
 		
-		player = new Player(engineManager, "pseudoSolo", hero.getId());
+		player = new Player(engineManager, ""+Configuration.getPseudo(), hero.getId());
 	}
 	
 	@Override
-	public void enter(GameContainer container, StateBasedGame sbgame)
-	{
+	public void enter(GameContainer container, StateBasedGame sbgame){
 		
 	}
 	
