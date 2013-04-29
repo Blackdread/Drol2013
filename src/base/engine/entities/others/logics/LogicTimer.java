@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
@@ -19,6 +20,8 @@ import base.utils.Timer;
  *
  */
 public class LogicTimer extends Logic implements IDisable, IUpdatable{
+
+	private static final long serialVersionUID = -351235113786933740L;
 
 	/**
 	 * Makes the entity fire at random intervals
@@ -75,6 +78,18 @@ public class LogicTimer extends Logic implements IDisable, IUpdatable{
 		minimumRandomInterval = 1000;
 		maximumRandomInterval = 3000;
 		useRandomTime = false;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		refireInterval = ((LogicTimer)objetACopier).refireInterval;
+		timer = ((LogicTimer)objetACopier).timer;
+		enabled = ((LogicTimer)objetACopier).enabled;
+		remindLastOutputForOscillator = ((LogicTimer)objetACopier).remindLastOutputForOscillator;
+		minimumRandomInterval = ((LogicTimer)objetACopier).minimumRandomInterval;
+		maximumRandomInterval = ((LogicTimer)objetACopier).maximumRandomInterval;
+		useRandomTime = ((LogicTimer)objetACopier).useRandomTime;
 	}
 	
 	@Override

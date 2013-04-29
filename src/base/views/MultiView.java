@@ -18,8 +18,6 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
-import base.engine.Message;
-import base.engine.MessageKey;
 import base.engine.Player;
 import base.engine.gui.ListeDeroulante;
 import base.engine.network.InfoPartie;
@@ -65,6 +63,9 @@ public class MultiView extends View {
 		super.enter(container, game);
 		engineManager.setPlayingMulti(true);
 		player.setPseudo(Configuration.getPseudo());
+		
+		// ICI FAUT FAIRE GAFFE
+		engineManager.clearEverything();
 	}
 	
 	@Override

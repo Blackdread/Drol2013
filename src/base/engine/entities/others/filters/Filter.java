@@ -3,6 +3,7 @@ package base.engine.entities.others.filters;
 import java.util.ArrayList;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.PointEntity;
 
 /**
@@ -13,6 +14,8 @@ import base.engine.entities.others.outputs.PointEntity;
  *
  */
 public abstract class Filter extends PointEntity{
+	
+	private static final long serialVersionUID = 5482030053492906899L;
 	
 	/**
 	 * Inverts the filter, making the specified concept fail and all others pass
@@ -36,6 +39,12 @@ public abstract class Filter extends PointEntity{
 	public Filter(EngineManager e, String name,boolean negate){
 		super(e, name);
 		this.negateFilter = negate;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		negateFilter = ((Filter)objetACopier).negateFilter;
 	}
 	
 	public ArrayList<String> get_list_outputs(){

@@ -1,7 +1,6 @@
 package base.engine.logics;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import base.engine.entities.ActiveEntity;
 import base.engine.entities.others.outputs.IUpdatable;
@@ -39,5 +38,8 @@ public class IA implements IUpdatable{
 		updatable.remove(id);
 	}
 	
+	public void clear(){
+		updatable.clear();
+	}
 	 
 }

@@ -3,15 +3,16 @@ package base.engine.entities;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Vector2f;
 
+import base.utils.Vector2f;
 import base.engine.EngineManager;
-import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 
 public class TirLinear extends Tir {
 	
+	private static final long serialVersionUID = -2610195202139822039L;
+
 	public TirLinear(EngineManager e){
 		super("TirLinear", e, 1, null);
 		gravityON = false;
@@ -75,4 +76,5 @@ public class TirLinear extends Tir {
 			engineManager.receiveMessage(m);
 		}
 	}
+
 }

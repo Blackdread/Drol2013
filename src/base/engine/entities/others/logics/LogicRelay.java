@@ -8,6 +8,7 @@ import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.Outputs;
 import base.utils.Timer;
 
@@ -20,6 +21,8 @@ import base.utils.Timer;
  */
 public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable{
 
+	private static final long serialVersionUID = 4369521141369183037L;
+	
 	private static final int MINIMUM_DELAY = 2;
 	private static final int DELAY_BEFORE_FIRE_ON_SPAWN = 1000;
 	
@@ -61,7 +64,17 @@ public class LogicRelay extends Logic implements IDisable, IFireOnce, IUpdatable
 		hasbeenFired = false;
 		hasBeenFiredOnSpawn = false;
 	}
-
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		allowFastRetrigger = ((LogicRelay)objetACopier).allowFastRetrigger;
+		fireOnce = ((LogicRelay)objetACopier).fireOnce;
+		enabled = ((LogicRelay)objetACopier).enabled;
+		timerFastRetrigger = ((LogicRelay)objetACopier).timerFastRetrigger;
+		hasbeenFired = ((LogicRelay)objetACopier).hasbeenFired;
+		hasBeenFiredOnSpawn = ((LogicRelay)objetACopier).hasBeenFiredOnSpawn;
+	}
 
 	@Override
 	public void update(int delta) {

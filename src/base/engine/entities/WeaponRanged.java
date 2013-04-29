@@ -13,9 +13,6 @@ import base.utils.Timer;
  */
 public abstract class WeaponRanged implements IUpdatable, Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4134985850675158200L;
 
 	public final static int NO_DELAY = 0;

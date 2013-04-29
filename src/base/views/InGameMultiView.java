@@ -5,23 +5,15 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 
-import base.engine.EngineManager;
 import base.engine.Game;
-import base.engine.Message;
-import base.engine.MessageKey;
 import base.engine.MessageTchat;
 import base.engine.Player;
-import base.engine.entities.BasicEntity;
-import base.engine.gui.ListeDeroulante;
-import base.utils.ResourceManager;
+import base.utils.Configuration;
 import base.utils.Timer;
 
 public class InGameMultiView extends View {
@@ -102,14 +94,19 @@ public class InGameMultiView extends View {
 						g.drawString(""+arrayMessageTchat.get(i).toString(), xPosVueJeu+largeurVueDuJeu/2-container.getDefaultFont().getWidth(""+arrayMessageTchat.get(i).toString())/2, yPosVueJeu+hauteurVueDuJeu-30-i*tailleFont);
 			}
 			
-			synchronized(arrayPlayer){
-				for(int i=0;i< arrayPlayer.size();i++)
-					if(arrayPlayer.get(i)!=null)
-						g.drawString(""+arrayPlayer.get(i).getPseudo()+" "+arrayPlayer.get(i).getScore(), 10, 10+i*tailleFont);
-			}
-			
 			textTchat.render(container, g);
 		}
+		
+		g.setColor(Color.red);
+		synchronized(arrayPlayer){
+			for(int i=0;i< arrayPlayer.size();i++)
+				if(arrayPlayer.get(i)!=null)
+					g.drawString(""+arrayPlayer.get(i).getPseudo()+" "+arrayPlayer.get(i).getScore()+" id: "+arrayPlayer.get(i).getIdEntityHePlays(), 10, 50+i*tailleFont);
+		}
+		if(player != null)
+			synchronized(player){
+				g.drawString(""+player.getPseudo()+" "+player.getScore()+" id: "+player.getIdEntityHePlays(), container.getWidth()/2-20, 10);
+			}
 		
 		super.render(container, sbgame, g);
 	}
@@ -126,7 +123,10 @@ public class InGameMultiView extends View {
 			}
 				
 		}
-		
+		if(player != null){
+			player.setIdEntityHePlays(15);
+			engineManager.getCurrentLevelUsed().getScroll().mettreAJourScroll(player.getIdEntityHePlays());
+		}
 		engineManager.update(delta);
 	}
 	
@@ -156,6 +156,7 @@ public class InGameMultiView extends View {
 		case Input.KEY_ENTER:
 			if(showMessageTchat){
 				// TODO envoyer message
+				envoyerMessageTchat();
 			}else{
 				showMessageTchat = true;
 				timerShowMessageTchat.resetTime();	
@@ -190,12 +191,27 @@ public class InGameMultiView extends View {
 		}
 	}
 
+	private void envoyerMessageTchat(){
+		if(!textTchat.getText().equalsIgnoreCase("")){
+			//engineManager.getNetworkEngine().receiveMessage(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+			engineManager.getNetworkEngine().sendObject(new MessageTchat(Configuration.getPseudo(), textTchat.getText()));
+			textTchat.setText("");
+		}
+	}
+	
 	public Player getPlayer() {
-		return player;
+		if(player != null)
+			synchronized(player){
+				return player;
+			}
+		return null;
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		if(player != null)
+			synchronized(player){
+				this.player = player;
+			}
 	}
 	
 	public void clearListePlayer(){
@@ -203,6 +219,7 @@ public class InGameMultiView extends View {
 			arrayPlayer.clear();
 		}
 	}
+	
 	public void remplacerArrayPlayer(ArrayList<Player> array){
 		synchronized(arrayPlayer){
 			arrayPlayer.clear();

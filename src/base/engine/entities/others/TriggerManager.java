@@ -1,7 +1,6 @@
 package base.engine.entities.others;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 import base.engine.entities.BasicEntity;
 import base.engine.entities.others.outputs.IUpdatable;

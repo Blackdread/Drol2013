@@ -2,7 +2,7 @@ package base.engine.entities;
 
 public class WeaponTirLinear extends WeaponRanged {
 	
-	
+	private static final long serialVersionUID = -5447043794061220257L;
 
 	public WeaponTirLinear() {
 		super();

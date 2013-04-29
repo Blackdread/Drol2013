@@ -3,34 +3,24 @@ package base.views;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import base.engine.EngineManager;
 import base.engine.Game;
-import base.engine.Message;
-import base.engine.MessageKey;
 import base.engine.Player;
-import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.Zombi;
-import base.engine.entities.others.FilterManager;
-import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.filters.FilterActivatorName;
 import base.engine.entities.others.info.InfoTarget;
 import base.engine.entities.others.triggers.TriggerTeleport;
 import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
-import base.engine.logics.IA;
 import base.tile.TilePropriety;
 import base.tile.TileSet;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
-import base.engine.LogicEngine;
 
 
 public class TestView extends View{

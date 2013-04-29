@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.Outputs;
 
 /**
@@ -15,6 +16,8 @@ import base.engine.entities.others.outputs.Outputs;
  *
  */
 public class LogicCompare extends Logic {
+
+	private static final long serialVersionUID = 3487826003641457742L;
 
 	/**
 	 * intial value
@@ -40,6 +43,13 @@ public class LogicCompare extends Logic {
 	 */
 	public LogicCompare(EngineManager e,String name, float initialValue, float compareValue){
 		super(e,name);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		initialValue = ((LogicCompare)objetACopier).initialValue;
+		compareValue = ((LogicCompare)objetACopier).compareValue;
 	}
 	
 	@Override

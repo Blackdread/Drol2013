@@ -1,17 +1,12 @@
 package base.engine;
 
-import org.newdawn.slick.geom.Vector2f;
-
+import base.utils.Vector2f;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
-import base.engine.entities.Monster;
 import base.engine.entities.MoveableEntity;
 import base.engine.entities.PlayableEntity;
 import base.engine.entities.Tir;
-import base.engine.entities.TirLinear;
-import base.engine.levels.LevelDrol;
 import base.engine.logics.Deplacement;
-import base.engine.logics.IA;
 
 /**
  * 
@@ -27,7 +22,7 @@ public class LogicEngine extends Engine {
 	}
 	
 	@Override
-	public synchronized boolean processMessage() {
+	synchronized public boolean processMessage() {
 		Message mes;
 		//while(!this.message_queue.isEmpty()){
 		
@@ -121,7 +116,7 @@ public class LogicEngine extends Engine {
 							{
 								y = mes.i_data.get(MessageKey.P_Y);
 								// TODO est ce bon ? normalement oui
-								BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(mes.i_data.get(MessageKey.P_ID));
+								BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(id);
 								if(tmp != null){
 									Deplacement.enleverEntiteDesTiles(tmp);
 									tmp.setLocation(x, y);

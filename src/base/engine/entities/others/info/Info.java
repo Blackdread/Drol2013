@@ -11,6 +11,8 @@ import base.engine.entities.others.outputs.PointEntity;
  */
 public abstract class Info extends PointEntity {
 
+	private static final long serialVersionUID = -3244342247079846755L;
+
 	public Info(EngineManager e,String name) {
 		super(e,name);
 	}

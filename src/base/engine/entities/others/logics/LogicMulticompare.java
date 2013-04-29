@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 
@@ -21,6 +22,8 @@ public class LogicMulticompare extends Logic {
 
 	//private int value;
 	
+	private static final long serialVersionUID = -3483147134072639693L;
+	
 	private ArrayList<Integer> arrayValue;
 	
 	public LogicMulticompare(EngineManager e,String name) {
@@ -31,6 +34,12 @@ public class LogicMulticompare extends Logic {
 	@Override
 	public void render(Graphics g, int x, int y) {
 		super.render("LogicMulticompare", g, x, y);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		arrayValue = ((LogicMulticompare)objetACopier).arrayValue;
 	}
 	
 	public ArrayList<String> get_list_outputs(){

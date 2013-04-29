@@ -1,10 +1,5 @@
 package base.engine.entities.others.triggers;
 
-import java.util.ArrayList;
-
-import base.engine.Engine;
-import base.engine.entities.BasicEntity;
-
 /**
  * 
  * @author Yoann CAPLAIN

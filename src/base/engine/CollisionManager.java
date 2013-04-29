@@ -3,11 +3,8 @@ package base.engine;
 import java.util.HashMap;
 
 import base.engine.entities.BasicEntity;
-import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.triggers.Trigger;
 import base.engine.entities.others.triggers.TriggerObjectInZone;
-import base.engine.entities.others.triggers.TriggerTeleport;
-import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
 /**
@@ -73,6 +70,12 @@ public class CollisionManager{
 	    int tileYMin = (int) ((e.getY()+y) / lvl.getHauteurTile());
 	    int tileXMax = (int) ((e.getX() + x + e.getWidth() - 1) / lvl.getLargeurTile());
 	    int tileYMax = (int) ((e.getY() + y + e.getHeight() - 1) / lvl.getHauteurTile());
+	    
+	    if(tileXMax >= lvl.getLargeurNiveau())
+	    	tileXMax = lvl.getLargeurNiveau()-1;
+	    
+	    if(tileYMax >= lvl.getHauteurNiveau())
+	    	tileYMax = lvl.getHauteurNiveau()-1;
 	    
 	    if(lvl.getTabNiveau() != null){
 		    for(int i = tileXMin; i <= tileXMax; i++)

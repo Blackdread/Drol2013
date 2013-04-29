@@ -9,6 +9,7 @@ import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
 import base.engine.entities.others.outputs.ITeam;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
@@ -18,9 +19,10 @@ import base.utils.Timer;
  */
 public abstract class ActiveEntity extends BasicEntity implements IActivator, IUpdatable, ICollidableObject, ITeam {
 	
+	private static final long serialVersionUID = 513325436764223435L;
+	
 	protected int maxLife;
 	protected int life;
-	protected boolean mouseOver;
 	protected boolean dying;
 	protected boolean dead;
 	protected boolean visible;
@@ -40,6 +42,21 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		dying = false;
 		dead = false;
 		timer = new Timer(0);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		maxLife = ((ActiveEntity)objetACopier).maxLife;
+		life = ((ActiveEntity)objetACopier).life;
+		dying = ((ActiveEntity)objetACopier).dying;
+		dead = ((ActiveEntity)objetACopier).dead;
+		visible = ((ActiveEntity)objetACopier).visible;
+		timer = ((ActiveEntity)objetACopier).timer;
+		
+		collisionON = ((ActiveEntity)objetACopier).collisionON;
+		
+		team = ((ActiveEntity)objetACopier).team;
 	}
 	
 	@Override

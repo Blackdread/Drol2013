@@ -71,6 +71,11 @@ public class LogicManager extends Manager implements IUpdatable{
 		arrayLogicThatImplementsIUpdatable.trimToSize();
 	}
 	
+	synchronized public void clear(){
+		super.clear();
+		arrayLogicThatImplementsIUpdatable.clear();
+	}
+	
 	/*	n'a pas besoin d'etre redefinie normalement
 	synchronized public ArrayList<BasicEntity> getEntity(final String entityName) {
 		ArrayList<BasicEntity> tmp = super.getEntity(entityName);

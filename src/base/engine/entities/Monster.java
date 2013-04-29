@@ -9,6 +9,8 @@ import base.engine.EngineManager;
 
 public class Monster extends PlayableEntity {
 
+	private static final long serialVersionUID = 7869440638311123825L;
+
 	public Monster(String name, EngineManager en, int maxLife) {
 		super(name, en, maxLife);
 		// TODO Auto-generated constructor stub
@@ -17,6 +19,13 @@ public class Monster extends PlayableEntity {
 		vitesse.x = 1;
 		setLocation(64, 64);
 	}
+	
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	@Override
 	public void render(Graphics g, int x, int y) {
@@ -55,6 +64,7 @@ public class Monster extends PlayableEntity {
 				direction = BasicEntity.DROITE;
 		}
 	}
+
 
 
 }

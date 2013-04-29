@@ -26,6 +26,17 @@ public class Scroll {
 	}
 	
 	/**
+	 * 
+	 * @param id entity id
+	 */
+	public void mettreAJourScroll(final int id){
+		BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(id);
+		
+		if(tmp != null)
+			mettreAJourScroll(tmp);
+	}
+	
+	/**
 	 * Si le scroll sort de l'ecran on met 0 ou max sinon on centre sur l'entite
 	 * @param e entite sur laquelle centre le scroll
 	 */

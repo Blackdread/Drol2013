@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 
@@ -12,6 +13,8 @@ import base.engine.EngineManager;
  *
  */
 public class FilterActivatorClass extends Filter {
+
+	private static final long serialVersionUID = -6166239447649683318L;
 
 	/**
 	 * ClassName
@@ -34,6 +37,13 @@ public class FilterActivatorClass extends Filter {
 		super(e, name, negate);
 		classNameFilter = classname;
 		NameToCompareTo = new ArrayList<String>();
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		classNameFilter = ((FilterActivatorClass)objetACopier).classNameFilter;
+		NameToCompareTo = ((FilterActivatorClass)objetACopier).NameToCompareTo;
 	}
 	
 	@Override

@@ -15,6 +15,8 @@ import base.utils.ResourceManager;
  */
 public abstract class PointEntity extends BasicEntity implements IRenderPointEntity{
 
+	private static final long serialVersionUID = 4292012055400715359L;
+
 	public PointEntity(EngineManager e, String name) {
 		super(e,name);
 		shape = new Rectangle(0,0,32,32);
@@ -25,6 +27,12 @@ public abstract class PointEntity extends BasicEntity implements IRenderPointEnt
 		Image tmp = ResourceManager.getImage(imageName);
 		if(tmp != null)
 			g.drawImage(tmp.getScaledCopy(0.6f), x, y);
+	}
+	
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

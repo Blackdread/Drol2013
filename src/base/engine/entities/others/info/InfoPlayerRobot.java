@@ -4,7 +4,6 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.ActiveEntity;
-import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
 
 /**
@@ -14,7 +13,8 @@ import base.engine.entities.HeroEntity;
  */
 public class InfoPlayerRobot extends InfoPlayerStart {
 	
-	
+	private static final long serialVersionUID = -5422337581423270122L;
+
 	public InfoPlayerRobot(EngineManager e, String name) {
 		super(e, name);
 	}

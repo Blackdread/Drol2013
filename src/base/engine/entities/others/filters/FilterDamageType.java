@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * @IMPORTANT unfinished
@@ -12,6 +13,8 @@ import base.engine.EngineManager;
  */
 public class FilterDamageType extends Filter {
 
+	
+	private static final long serialVersionUID = 408527312364636644L;
 	/**
 	 * Contains damage type to filter
 	 */
@@ -26,6 +29,12 @@ public class FilterDamageType extends Filter {
 		arrayDamageTypeToFilter = array;
 	}
 
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		arrayDamageTypeToFilter = ((FilterDamageType)objetACopier).arrayDamageTypeToFilter;
+	}
+	
 	@Override
 	public void render(Graphics g, int x, int y) {
 		// TODO Auto-generated method stub

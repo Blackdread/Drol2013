@@ -14,7 +14,8 @@ import base.engine.entities.HeroEntity;
  */
 public class InfoPlayerStart extends Info{
 	
-	
+	private static final long serialVersionUID = 1900542643999872389L;
+
 	public InfoPlayerStart(EngineManager e, String name) {
 		super(e, name);
 	}
@@ -28,4 +29,6 @@ public class InfoPlayerStart extends Info{
 	public ActiveEntity spawn(){
 		return new HeroEntity("hero", engineManager, 500);
 	}
+
+
 }

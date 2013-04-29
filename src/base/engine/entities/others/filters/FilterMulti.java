@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * Whether to negate the result of the subfilters, after combining them using the Logic Type chosen.
@@ -14,6 +15,8 @@ import base.engine.EngineManager;
  *
  */
 public class FilterMulti extends Filter {
+
+	private static final long serialVersionUID = 8298492521789182992L;
 
 	protected ArrayList<Filter> arrayFilter = new ArrayList<Filter>();
 	
@@ -34,6 +37,13 @@ public class FilterMulti extends Filter {
 	 */
 	public FilterMulti(EngineManager e,String name, boolean negate){
 		super(e,name, negate);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		logicType = ((FilterMulti)objetACopier).logicType;
+		arrayFilter = ((FilterMulti)objetACopier).arrayFilter;
 	}
 	
 	@Override

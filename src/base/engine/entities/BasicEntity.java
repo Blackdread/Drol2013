@@ -9,6 +9,8 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
  */
 public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 	
+	private static final long serialVersionUID = 4440487135387241606L;
+
 	protected int direction;
 	//protected Vector2f direction;
 	
@@ -26,6 +28,13 @@ public abstract class BasicEntity extends InputsAndOutputs implements IEntity {
 		super(e, name);
 		direction = HAUT;
 		engineManager = e;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		direction = ((BasicEntity)objetACopier).direction;
+		
 	}
 	
 

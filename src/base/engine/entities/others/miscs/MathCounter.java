@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IDisable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.PointEntity;
 
 /**
@@ -19,6 +20,8 @@ import base.engine.entities.others.outputs.PointEntity;
  */
 public class MathCounter extends PointEntity implements IDisable{
 	
+	private static final long serialVersionUID = -6418031282467597130L;
+
 	private boolean enabled;
 	
 	/**
@@ -45,6 +48,14 @@ public class MathCounter extends PointEntity implements IDisable{
 	@Override
 	public void render(Graphics g, int x, int y) {
 		super.render("MathCounter", g, x, y);
+	}
+	
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		enabled = ((MathCounter)objetACopier).enabled;
+		initialValue = ((MathCounter)objetACopier).initialValue;
+		minimumLegalValue = ((MathCounter)objetACopier).minimumLegalValue;
+		maximumLegalValue = ((MathCounter)objetACopier).maximumLegalValue;
 	}
 	
 	public ArrayList<String> get_list_outputs(){

@@ -30,6 +30,12 @@ public class OutputManager implements IUpdatable{
 		// TODO y a des boolean a ajouter pour savoir s'il faut enlever des outputs etc
 	}
 	
+	public void clear(){
+		hashId.clear();
+		hashNameOfTheOwner.clear();
+		hashNameOfTheReceiver.clear();
+	}
+	
 	/**
 	 * Will delete outputs that are trigger Once and has fired there output (delay is passed)
 	 */

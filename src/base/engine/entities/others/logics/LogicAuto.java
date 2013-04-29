@@ -6,6 +6,7 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * It fires outputs immediately after a map loads, unlike most other entities that wait for input first. 
@@ -19,8 +20,11 @@ import base.engine.entities.others.outputs.IUpdatable;
  * @author Yoann CAPLAIN
  *
  */
+@SuppressWarnings("unused")
 public class LogicAuto extends Logic implements IUpdatable{
 	
+	private static final long serialVersionUID = 3333819349514764022L;
+
 	/*
 	 * Flags
 	 */
@@ -46,6 +50,12 @@ public class LogicAuto extends Logic implements IUpdatable{
 
 	private LogicAuto(EngineManager e,String name) {
 		super(e,name);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		removeOnFire = ((LogicAuto)objetACopier).removeOnFire;
 	}
 	
 	@Override

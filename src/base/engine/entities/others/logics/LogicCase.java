@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * It compares an input to up to 16 configured values, firing a corresponding output if there is a match (on InValue), 
@@ -17,6 +18,8 @@ import base.engine.EngineManager;
  *
  */
 public class LogicCase extends Logic {
+
+	private static final long serialVersionUID = -1057373904626305090L;
 
 	private final static int NB_CASE = 16;
 	
@@ -36,6 +39,13 @@ public class LogicCase extends Logic {
 		valueOfCase = new String[NB_CASE];
 	}
 
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		valueOfCase = ((LogicCase)objetACopier).valueOfCase;
+		shuffleCaseReminder = ((LogicCase)objetACopier).shuffleCaseReminder;
+	}
+	
 	@Override
 	public void render(Graphics g, int x, int y) {
 		super.render("LogicCase", g, x, y);

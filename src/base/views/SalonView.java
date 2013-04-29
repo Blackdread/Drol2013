@@ -16,10 +16,8 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
-import base.engine.Message;
 import base.engine.MessageTchat;
 import base.engine.Player;
-import base.engine.gui.ListeDeroulante;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
 
@@ -27,7 +25,7 @@ public class SalonView extends View {
 
 	private MouseOverArea butTchatSend, butRetour, butLancerPartie;
 	
-	private ListeDeroulante listeJoueurs, listeMessage;
+	//private ListeDeroulante listeJoueurs, listeMessage;
 	private Rectangle shapeTchat, shapeListeJoueur;
 	private ArrayList<MessageTchat> arrayMessageTchat = new ArrayList<MessageTchat>();
 	private TextField textTchat;

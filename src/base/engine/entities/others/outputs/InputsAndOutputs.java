@@ -67,7 +67,15 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		System.out.println("instance "+InputsAndOutputs.currentId);
 	}
 	
-	//*
+	/**
+	 * Some entities may not serialize some variables so we need to recreate them with that function
+	 */
+	public abstract void init();
+	
+	/**
+	 * 
+	 * @param objetACopier
+	 */
 	public void copy(InputsAndOutputs objetACopier){
 		removeEntityFromWorld = objetACopier.removeEntityFromWorld;
 		removeHierarchy = objetACopier.removeHierarchy;
@@ -81,7 +89,7 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 		
 		
 		// array_outputs = objetACopier.array_outputs; faire copy
-	}//*/
+	}
 	
 	public ArrayList<String> get_list_outputs(){
 		ArrayList<String> list_outputs = new ArrayList<String>();

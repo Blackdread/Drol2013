@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import base.engine.Message;
 import base.engine.NetworkEngine;
 
 public class ThreadNetworkListener implements Runnable{

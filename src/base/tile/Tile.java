@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import base.engine.entities.BasicEntity;
 
+@SuppressWarnings("unused")
 public class Tile implements Serializable{
 	
 	private static final long serialVersionUID = 8903044779751945594L;
@@ -70,6 +71,10 @@ public class Tile implements Serializable{
 	
 	public int getEntiteProcheSize(){
 		return entiteProche.size();
+	}
+	
+	public void clear(){
+		entiteProche.clear();
 	}
 	
 	/*

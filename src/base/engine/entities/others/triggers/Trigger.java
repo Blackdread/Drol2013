@@ -8,6 +8,7 @@ import base.engine.entities.others.filters.Filter;
 import base.engine.entities.others.outputs.IDisable;
 import base.engine.entities.others.outputs.IFireOnce;
 import base.engine.entities.others.outputs.IUpdatable;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
 
 /**
@@ -19,6 +20,8 @@ import base.utils.Timer;
  */
 public abstract class Trigger extends BasicEntity implements ITrigger, IDisable, IFireOnce, IUpdatable {
 	
+	private static final long serialVersionUID = 3728181400585125701L;
+
 	/**
 	 * true -> once it has been fired if it's a fireOnce this will be deleted from the world
 	 * Will always be false if it is not a fireOnce
@@ -62,6 +65,13 @@ public abstract class Trigger extends BasicEntity implements ITrigger, IDisable,
 		super(e,name);
 		hasbeenFired = false;
 		delayBeforeReset = new Timer(1000);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		hasbeenFired = ((Trigger)objetACopier).hasbeenFired;
+		// etc
 	}
 	
 	public ArrayList<String> get_list_inputs() {

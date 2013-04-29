@@ -48,7 +48,7 @@ public abstract class View extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.container = container;
-		this.game = (Game) game;
+		View.game = (Game) game;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.others.outputs.ITeam;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 
@@ -11,6 +12,8 @@ import base.engine.entities.others.outputs.ITeam;
  *
  */
 public class FilterActivatorTeam extends Filter {
+
+	private static final long serialVersionUID = 8371297026993903460L;
 
 	protected int team;
 	
@@ -28,6 +31,12 @@ public class FilterActivatorTeam extends Filter {
 	public FilterActivatorTeam(EngineManager e,String name, boolean negate, int team2){
 		super(e,name, negate);
 		team = team2;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		team = ((FilterActivatorTeam)objetACopier).team;
 	}
 	
 	@Override

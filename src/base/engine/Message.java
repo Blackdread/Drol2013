@@ -1,6 +1,3 @@
-/**
- * 
- */
 package base.engine;
 
 import java.io.Serializable;
@@ -19,6 +16,8 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class Message implements Serializable{
 	
+	private static final long serialVersionUID = -2100093853415993333L;
+
 	public static final char NO_ENGINE = 255;
 	
 	/**

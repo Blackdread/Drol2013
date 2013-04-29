@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * It tests a boolean value and fires an output based on whether the value is true (one) or false (zero). 
@@ -16,6 +17,7 @@ import base.engine.EngineManager;
  */
 public class LogicBranch extends Logic {
 
+	private static final long serialVersionUID = 9077736764803348475L;
 	private boolean value;
 	
 	public LogicBranch(EngineManager e,String name) {
@@ -25,6 +27,12 @@ public class LogicBranch extends Logic {
 	@Override
 	public void render(Graphics g, int x, int y) {
 		super.render("LogicBranch", g, x, y);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		value = ((LogicBranch)objetACopier).value;
 	}
 	
 	public ArrayList<String> get_list_outputs(){

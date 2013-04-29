@@ -81,7 +81,7 @@ public class EngineManager{
 				tabEngine[((Message)mes).engine].receiveMessage(mes);
 				if(playingMulti && !server){
 					getNetworkEngine().sendObject(mes);
-					System.out.println("objet envoyer EngineManager");
+					//System.out.println("objet envoyer EngineManager");
 				}
 			}
 		}else
@@ -153,6 +153,25 @@ public class EngineManager{
 			
 		}else
 			System.err.println("currentLevelUsed is null - Spawn unit");
+	}
+	
+	/**
+	 * Remove all entities
+	 */
+	public void clearEverything(){
+		System.out.println("clearEverything was called");
+		
+		ia.clear();
+		filterManager.clear();
+		logicManager.clear();
+		infoManager.clear();
+		triggerManager.clear();
+		outputManager.clear();
+		
+		currentLevelUsed.clear();
+		
+		for(int i=0;i<NB_ENGINE;i++)
+			tabEngine[i].clear();
 	}
 	
 	/**

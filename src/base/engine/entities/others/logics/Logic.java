@@ -10,6 +10,8 @@ import base.engine.entities.others.outputs.PointEntity;
  */
 public abstract class Logic extends PointEntity {
 
+	private static final long serialVersionUID = 299348676409392066L;
+
 	public Logic(EngineManager e,String name){
 		super(e,name);
 	}

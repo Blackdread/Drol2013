@@ -2,13 +2,10 @@ package base.engine.levels;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.newdawn.slick.SlickException;
 
 public class SaveLevelThread implements Runnable {
 
@@ -19,7 +16,9 @@ public class SaveLevelThread implements Runnable {
 	}
 	
 	@Override
+	@SuppressWarnings("unused")
 	public void run() {
+		
 		File file = new File(""+level.getCheminFichier()+""+level.getNomFichier());
 		InputStream ips;
 		InputStreamReader ipsr;

@@ -6,9 +6,9 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import base.engine.Message;
 import base.engine.NetworkEngine;
 
+@SuppressWarnings("unused")
 public class ThreadNetworkSender implements Runnable{
 	private Socket sock;
 	private ObjectOutputStream oos;

@@ -120,4 +120,8 @@ public abstract class Manager {
 				return true;
 		return false;
 	}
+	
+	synchronized public void clear(){
+		hashMapEntity.clear();
+	}
 }

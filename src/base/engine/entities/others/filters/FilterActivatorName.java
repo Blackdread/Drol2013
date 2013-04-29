@@ -4,6 +4,7 @@ import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
 import base.engine.entities.others.outputs.ITargetName;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  *  It is a filter that filters by the name of the activator.
@@ -15,6 +16,9 @@ import base.engine.entities.others.outputs.ITargetName;
  *
  */
 public class FilterActivatorName extends Filter{
+
+	
+	private static final long serialVersionUID = -5290143621709300617L;
 
 	/**
 	 * The class name to filter by. If the filter mode is Allow, only entities whose class name matches 
@@ -45,6 +49,13 @@ public class FilterActivatorName extends Filter{
 	public FilterActivatorName(EngineManager e,String name, boolean negate, String classname){
 		super(e,name, negate);
 		classNameFilter = classname;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		classNameFilter = ((FilterActivatorName)objetACopier).classNameFilter;
+		NameToCompareTo = ((FilterActivatorName)objetACopier).NameToCompareTo;
 	}
 	
 	@Override

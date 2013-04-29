@@ -15,6 +15,8 @@ import java.util.HashMap;
  */
 public class StatsSerializable implements Serializable{
 
+	private static final long serialVersionUID = -5606180233240844408L;
+
 	private String fileLocation;
 	
 	/**

@@ -14,8 +14,6 @@ import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.utils.Resolution;
 import base.engine.gui.ListeDeroulante;
@@ -45,6 +43,7 @@ public class OptionsView extends View {
 	
 	private TextField textPseudo;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void initResources() {
 		final int MARGIN = 30;

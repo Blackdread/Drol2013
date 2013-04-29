@@ -3,21 +3,13 @@ package base.views;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import base.engine.EngineManager;
 import base.engine.Game;
-import base.engine.Message;
-import base.engine.MessageKey;
 import base.engine.gui.ProgressBarFillRect;
-import base.utils.Configuration;
 import base.utils.ResourceManager;
 import base.utils.Timer;
 
@@ -37,7 +29,7 @@ public class ResourcesView extends View {
 	private static final int WAIT_TIME_BEFORE_NEXTR = 50;
 
 	private boolean ready;
-	private Image background;
+	//private Image background;
 	private ProgressBarFillRect bar;
 	private Timer timer;
 	
@@ -78,6 +70,7 @@ public class ResourcesView extends View {
 		
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void update(GameContainer container, StateBasedGame sbGame, int delta) throws SlickException {
 		super.update(container, sbGame, delta);

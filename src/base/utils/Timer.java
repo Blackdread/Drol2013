@@ -24,6 +24,8 @@ import java.io.Serializable;
  */
 public class Timer implements Serializable{
 
+	private static final long serialVersionUID = 3135927900452402805L;
+	
 	private float eventTime;
 	private float deltaStock;
 	private int limit;

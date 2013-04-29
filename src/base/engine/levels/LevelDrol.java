@@ -14,7 +14,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import base.engine.EngineManager;
-import base.engine.entities.ActiveEntity;
 import base.engine.entities.BasicEntity;
 import base.tile.Scroll;
 import base.tile.Tile;
@@ -97,6 +96,13 @@ public class LevelDrol extends Level {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void clear(){
+		arrayEntite.clear();
+		for(int i=0;i<hauteurNiveau;i++)
+			for(int j=0;j<largeurNiveau;j++)
+				tabNiveau[i][j].clear();
 	}
 	
 	public void copy(LevelDrol level){
@@ -311,7 +317,7 @@ public class LevelDrol extends Level {
 		return arrayEntite;
 	}
 	
-	public BasicEntity getEntity(final int id){
+	synchronized public BasicEntity getEntity(final int id){
 		return arrayEntite.get(id);
 	}
 

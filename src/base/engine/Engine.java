@@ -48,4 +48,7 @@ public abstract class Engine {
 		this.engineManager = engineManager;
 	}
 	
+	synchronized public void clear(){
+		message_queue.clear();
+	}
 }

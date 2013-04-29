@@ -1,6 +1,5 @@
 package base.engine.entities.others.outputs;
 
-import base.engine.entities.others.OutputManager;
 import base.utils.Timer;
 
 /**

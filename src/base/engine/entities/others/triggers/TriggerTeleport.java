@@ -7,7 +7,6 @@ import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
-import base.engine.entities.others.InfoManager;
 import base.engine.entities.others.info.Info;
 import base.engine.entities.others.info.InfoTarget;
 import base.engine.entities.others.outputs.IActivator;
@@ -22,6 +21,8 @@ import base.utils.Configuration;
  *
  */
 public class TriggerTeleport extends TriggerObjectInZone {
+
+	private static final long serialVersionUID = 8146371176634582789L;
 
 	/**
 	 * The entity specifying the point to which entities should be teleported. 

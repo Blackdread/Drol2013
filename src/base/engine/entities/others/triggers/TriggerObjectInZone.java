@@ -55,6 +55,10 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	public void update(int delta) {
 		delayBeforeReset.update(delta);
 	}
+	@Override
+	public void init() {
+		
+	}
 	
 	@Override
 	public void render(Graphics g, int x, int y) {

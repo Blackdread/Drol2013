@@ -20,6 +20,8 @@ import base.engine.EngineManager;
  */
 public class InfoTarget extends Info {
 	
+	private static final long serialVersionUID = 9085460629934014330L;
+
 	public InfoTarget(EngineManager e,String name) {
 		super(e,name);
 	}

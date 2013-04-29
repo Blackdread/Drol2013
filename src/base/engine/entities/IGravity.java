@@ -1,6 +1,6 @@
 package base.engine.entities;
 
-import org.newdawn.slick.geom.Vector2f;
+import base.utils.Vector2f;
 
 /**
  * Mettre un boolean pour savoir si l'objet depend de la gravite

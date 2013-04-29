@@ -13,7 +13,8 @@ import base.engine.entities.Monster;
  */
 public class InfoPlayerMonster extends InfoPlayerStart {
 
-	
+	private static final long serialVersionUID = 5768178422901747015L;
+
 	public InfoPlayerMonster(EngineManager e, String name) {
 		super(e, name);
 	}

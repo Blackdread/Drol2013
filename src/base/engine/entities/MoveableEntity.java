@@ -1,11 +1,11 @@
 package base.engine.entities;
 
-import org.newdawn.slick.geom.Vector2f;
-
+import base.utils.Vector2f;
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * 
@@ -13,6 +13,8 @@ import base.engine.MessageKey;
  *
  */
 public abstract class MoveableEntity extends ActiveEntity implements IGravity{
+	
+	private static final long serialVersionUID = 5333682621627159370L;
 	
 	protected boolean gravityON = true;
 	protected static final float gravity = 0.00681f;
@@ -22,7 +24,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 * in grammes (not sure, maybe mg)
 	 */
 	protected int mass = 1;
-	protected transient Vector2f vitesse;
+	protected Vector2f vitesse;
 	/**
 	 * If = 0 -> no limit
 	 */
@@ -32,7 +34,7 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 	 */
 	protected float defaultVitesse = 2;
 	
-	protected transient Vector2f acceleration;
+	protected Vector2f acceleration;
 	protected float accelerationEntity;
 	
 	protected boolean moving;
@@ -42,6 +44,20 @@ public abstract class MoveableEntity extends ActiveEntity implements IGravity{
 		vitesse = new Vector2f(0, 0);
 		acceleration = new Vector2f(0, 0);
 		moving = false;
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		gravityON = ((MoveableEntity)objetACopier).gravityON;
+		mass = ((MoveableEntity)objetACopier).mass;
+		vitesse = ((MoveableEntity)objetACopier).vitesse;
+		vitesseMax = ((MoveableEntity)objetACopier).vitesseMax;
+		defaultVitesse = ((MoveableEntity)objetACopier).defaultVitesse;
+		acceleration = ((MoveableEntity)objetACopier).acceleration;
+		accelerationEntity = ((MoveableEntity)objetACopier).accelerationEntity;
+		
+		moving = ((MoveableEntity)objetACopier).moving;
 	}
 	
 	/**

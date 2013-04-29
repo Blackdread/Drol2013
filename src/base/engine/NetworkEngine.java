@@ -11,6 +11,7 @@ import base.views.MultiView;
 import base.views.TransitionView;
 import base.engine.entities.BasicEntity;
 import base.engine.levels.LevelDrol;
+import base.engine.logics.Deplacement;
 import base.engine.network.InfoPartie;
 import base.engine.network.ThreadNetworkListener;
 import base.engine.network.ThreadNetworkSender;
@@ -45,9 +46,28 @@ public class NetworkEngine extends Engine {
 				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				System.out.println("tchat network client");
 			}else if(mes instanceof BasicEntity){
-			
+				/*
 				((BasicEntity) mes).setEngineManager(engineManager);	// car l'engine est celui du serveur donc on met le bon
-				engineManager.addEntity((BasicEntity) mes);	// TODO la fonction est a jour ??
+				((BasicEntity) mes).init();
+				engineManager.addEntity((BasicEntity) mes);
+				//*/
+				
+				BasicEntity tmp = engineManager.getCurrentLevelUsed().getArrayEntite().get(((BasicEntity)mes).getId());
+				
+				if(tmp == null){
+					((BasicEntity) mes).setEngineManager(engineManager);// car l'engine est celui du serveur donc on met le bon
+					((BasicEntity) mes).init();
+					engineManager.addEntity((BasicEntity) mes);
+					Deplacement.ajouterEntiteDansTiles((BasicEntity) mes);
+					
+					System.out.println("tmp was null");
+				}else{
+					Deplacement.enleverEntiteDesTiles(tmp);
+					tmp.copy(((BasicEntity) mes));
+					Deplacement.ajouterEntiteDansTiles(tmp);
+					
+					//System.out.println("tmp was not null");
+				}
 				
 			}else if(mes instanceof Player){
 				Player tmp = ((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).getPlayer();
@@ -55,6 +75,8 @@ public class NetworkEngine extends Engine {
 					tmp = new Player(engineManager, "");
 				tmp.copy((Player) mes);
 				tmp.setEngineManager(engineManager);
+				
+				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).setPlayer(tmp);
 				
 				//((SalonView)Game.getStateByID(Game.SALON_VIEW_ID)).addNewPlayer(tmp);
 				
@@ -87,8 +109,10 @@ public class NetworkEngine extends Engine {
 					// CECI EST UNE HORREUR, IL VAUT ENVOYER UNE BASICENTITY A LA FOIS ET LA REMPLACER CAR ON ENVOIE
 					// UNE ENTITE SEULEMENT SI ELLE A CHANGER D'ETAT
 					for(BasicEntity e : engineManager.getCurrentLevelUsed().getArrayEntite().values())
-						if(e != null)
+						if(e != null){
 							e.setEngineManager(engineManager);
+							e.init();
+						}
 				}//*/
 				
 				

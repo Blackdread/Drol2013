@@ -29,7 +29,7 @@ import base.utils.StatsSerializable;
  */
 public class SoloView extends View {
 
-	private Image background;
+	//private Image background;
 	private MouseOverArea butJouer, butRetour;
 	
 	private ListeDeroulante listeScoresKey, listeScoresValue, listeStatsKey, listeStatsValue;
@@ -37,10 +37,10 @@ public class SoloView extends View {
 	
 	private StatsSerializable stats, scores;
 	
-	/**
+	/*
 	 * Apres c'est reserver pour les boutons
 	 */
-	private int yMax;
+	//private int yMax;
 	
 	@Override
 	public void initResources() {
@@ -62,7 +62,6 @@ public class SoloView extends View {
 		int haut = tmp.getHeight();
 		
 		int yBut = y - haut - MARGIN;	// zone a ne pas depasser pour ce qui se trouve au-dessus
-		yMax = yBut;
 		
 		shapeScore = new Rectangle(MARGIN, 100, x/2 - MARGIN - 10, yBut - 100);
 		shapeStats = new Rectangle(x/2+10, 100, x/2 - MARGIN-10, yBut - 100);
