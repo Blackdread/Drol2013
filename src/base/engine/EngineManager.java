@@ -266,6 +266,10 @@ public class EngineManager{
 		return (NetworkEngine) tabEngine[NETWORK_ENGINE];
 	}
 	
+	public LogicEngine getLogicEngine(){
+		return (LogicEngine) tabEngine[LOGIC_ENGINE];
+	}
+	
 	public SoundEngine getSoundEngine(){
 		return (SoundEngine) tabEngine[SOUND_ENGINE];
 	}

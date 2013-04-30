@@ -2,6 +2,7 @@ package base.engine.entities;
 
 import java.io.Serializable;
 
+import base.engine.EngineManager;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.utils.Timer;
 
@@ -17,17 +18,25 @@ public abstract class WeaponRanged implements IUpdatable, Serializable{
 
 	public final static int NO_DELAY = 0;
 	
+	protected transient EngineManager engineManager;
+	
 	/**
 	 * If 0 there is no delay
 	 */
 	protected Timer delayBetweenShoot;
 	
-	public WeaponRanged(){
+	public WeaponRanged(EngineManager engineManager){
+		this.engineManager = engineManager;
 		delayBetweenShoot = new Timer(NO_DELAY);
 	}
 	
-	public WeaponRanged(final int delay){
+	public WeaponRanged(EngineManager engineManager, final int delay){
+		this.engineManager = engineManager;
 		delayBetweenShoot = new Timer(delay);
+	}
+	
+	public void copy(WeaponRanged objetACopier){
+		delayBetweenShoot = objetACopier.delayBetweenShoot;
 	}
 	
 	/**

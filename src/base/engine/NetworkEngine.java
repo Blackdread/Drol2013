@@ -38,14 +38,16 @@ public class NetworkEngine extends Engine {
 	
 	@Override
 	synchronized public boolean processMessage() {
+		
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
-			//*
+			/*
 			if(message_queue.size() > 200){
 				message_queue.clear();
-				System.err.println("**********\n**********\n**********\n**********\nVIDER**********\n**********\n**********\n**********\n");
+				System.err.println("**********\n**********\n**********\n**********\nVIDER\n**********\n**********\n**********\n**********\n");
 			}//*/
 			Object mes = message_queue.poll();
+			System.out.println(""+message_queue.size());
 			
 			if(mes instanceof MessageTchat){
 				// TODO envoyer l'objet aux 2 vues qui s'en servent
@@ -53,6 +55,7 @@ public class NetworkEngine extends Engine {
 				((InGameMultiView)Game.getStateByID(Game.IN_GAME_MULTI_VIEW_ID)).tchatReceiveMessage((MessageTchat) mes);
 				System.out.println("tchat network client");
 			}else if(mes instanceof BasicEntity){
+				System.out.println("process");
 				/*
 				((BasicEntity) mes).setEngineManager(engineManager);	// car l'engine est celui du serveur donc on met le bon
 				((BasicEntity) mes).init();

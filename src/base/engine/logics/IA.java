@@ -36,7 +36,8 @@ public class IA implements IUpdatable{
 				v.update(delta);
 		}
 		
-		spawnZombi.update(delta);
+		if(engineManager.isServer() || !engineManager.isPlayingMulti())
+			spawnZombi.update(delta);
 		
 		if(spawnZombi.isTimeComplete()){
 			spawnZombie();

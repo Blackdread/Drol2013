@@ -1,17 +1,24 @@
 package base.engine.entities;
 
+import base.engine.EngineManager;
+
 public class WeaponTirLinear extends WeaponRanged {
 	
 	private static final long serialVersionUID = -5447043794061220257L;
 
-	public WeaponTirLinear() {
-		super();
+	public WeaponTirLinear(EngineManager engineManager) {
+		super(engineManager);
 	}
 
-	public WeaponTirLinear(int delay) {
-		super(delay);
+	public WeaponTirLinear(EngineManager engineManager, int delay) {
+		super(engineManager, delay);
 	}
 
+	public void copy(WeaponRanged objetACopier){
+		super.copy(objetACopier);
+		
+	}
+	
 	@Override
 	public Tir shoot() {
 		if(delayBetweenShoot.isTimeComplete()){
@@ -30,6 +37,10 @@ public class WeaponTirLinear extends WeaponRanged {
 			return tmp;
 		}
 		return null;
+	}
+	
+	public void jouerSon(){
+		
 	}
 
 }

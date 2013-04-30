@@ -33,6 +33,10 @@ public class CollisionManager{
 	    tileXMax = (int) ((e.getX() + x + e.getWidth() - 1) / lvl.getLargeurTile());
 	    tileYMax = (int) ((e.getY() + y + e.getHeight() - 1) / lvl.getHauteurTile());
 	    
+	    if(tileXMin < 0)
+	    	tileXMin = 0;
+	    if(tileYMin < 0)
+	    	tileYMin = 0;
 	    
 	    for(int i = tileXMin; i <= tileXMax; i++)
 	    {
@@ -50,7 +54,7 @@ public class CollisionManager{
 	        	 for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
 	        		 if(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k) instanceof Trigger){
 	        			 ((TriggerObjectInZone)lvl.getTabNiveau()[j][i].getEntiteProcheAt(k)).addAnEntityToActON(e);
-	        			 System.out.println("ajouter dans Trigger");
+	        			// System.out.println("ajouter dans Trigger");
 	        		 }
 	        }
 	    }
@@ -77,6 +81,11 @@ public class CollisionManager{
 	    
 	    if(tileYMax >= lvl.getHauteurNiveau())
 	    	tileYMax = lvl.getHauteurNiveau()-1;
+	    
+	    if(tileXMin < 0)
+	    	tileXMin = 0;
+	    if(tileYMin < 0)
+	    	tileYMin = 0;
 	    
 	    if(lvl.getTabNiveau() != null){
 		    for(int i = tileXMin; i <= tileXMax; i++)
@@ -126,7 +135,7 @@ public class CollisionManager{
         {
         	//C'est un mur, il y a donc collision
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[tileYMin][i].getIndex()).isMur()){
-            	System.out.println("Colission haut");
+            	//System.out.println("Colission haut");
                 return true;
             }
         }
@@ -182,11 +191,11 @@ public class CollisionManager{
         {
         	//C'est un mur, il y a donc collision
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMin].getIndex()).isMur()){
-            	System.out.println("Colission gauche" + j );
+            	//System.out.println("Colission gauche" + j );
                 return true;
             }
             if (lvl.getTileSet().getCorrespondanceTile().get(lvl.getTabNiveau()[j][tileXMax].getIndex()).isMur()){
-            	System.out.println("Colission droite");
+            	//System.out.println("Colission droite");
                 return true;
             }
         }

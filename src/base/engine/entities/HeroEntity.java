@@ -37,7 +37,7 @@ public class HeroEntity extends PlayableEntity {
 		super(name, en, maxLife);
 		// TODO Auto-generated constructor stub
 		shape = new Rectangle(0,0,32,48);
-		weapon = new WeaponTirLinear(500);
+		weapon = new WeaponTirLinear(en,500);
 		init();
 		moving = false;
 	}
