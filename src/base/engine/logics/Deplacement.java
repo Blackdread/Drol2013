@@ -22,7 +22,7 @@ public class Deplacement {
 	{
 		
 		
-		BasicEntity e = engineManager.getCurrentLevelUsed().getArrayEntite().get(id);
+		BasicEntity e = engineManager.getCurrentLevelUsed().getEntity(id);
 		
 		LevelDrol lvl = engineManager.getCurrentLevelUsed();
 		

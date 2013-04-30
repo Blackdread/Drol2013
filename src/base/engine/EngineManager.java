@@ -64,7 +64,7 @@ public class EngineManager{
 		tabEngine[LOGIC_ENGINE] = new LogicEngine(this);
 		tabEngine[NETWORK_ENGINE] = new NetworkEngine(this);
 		
-		ia = new IA(this);	// lien vers manager ?
+		ia = new IA(this);
 		
 		// TODO ont-ils besoin d'un lien vers l'engineManager ?
 		filterManager = new FilterManager();
@@ -108,13 +108,14 @@ public class EngineManager{
 	 * TODO pas sur que ce soit garder -> normalement c'est a garder !
 	 */
 	public void addEntity(BasicEntity e){
-		currentLevelUsed.getArrayEntite().put(e.getId(), e);
+		//currentLevelUsed.getArrayEntite().put(e.getId(), e);
+		currentLevelUsed.addEntity(e);
 		
 		Deplacement.ajouterEntiteDansTiles(e);
 		
 		if(e instanceof ActiveEntity)
 			ia.addEntity((ActiveEntity)e);
-		// TODO Faire pour les trigger, info, etc
+		
 		if(e instanceof Trigger)
 			triggerManager.addEntity(e);
 		if(e instanceof Info)

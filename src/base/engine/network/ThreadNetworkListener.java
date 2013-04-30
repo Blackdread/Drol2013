@@ -31,8 +31,7 @@ public class ThreadNetworkListener implements Runnable{
 				//if(o instanceof Message)
 					//net.receiveMessage(((Message)o));
 				net.receiveMessage(o);
-					
-					
+				
 			} catch (IOException e) {
 				// TODO Avoir une reference vers NetworkEngine et appeller la fonction disconnect()
 				e.printStackTrace();

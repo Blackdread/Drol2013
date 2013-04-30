@@ -67,7 +67,8 @@ public class Player implements Serializable, ITeam, Cloneable{
 		BasicEntity hero = null;
 		
 		if(idEntityHePlays != NOT_CONTROLING_UNIT)
-			hero = engineManager.getCurrentLevelUsed().getArrayEntite().get(idEntityHePlays);
+			//hero = engineManager.getCurrentLevelUsed().getArrayEntite().get(idEntityHePlays);
+			hero = engineManager.getCurrentLevelUsed().getEntity(idEntityHePlays);
 		
 		if(hero != null){
 			if(engineManager.getCurrentLevelUsed() != null)

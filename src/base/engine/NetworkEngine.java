@@ -38,6 +38,10 @@ public class NetworkEngine extends Engine {
 	synchronized public boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
+			if(message_queue.size() > 100){
+				message_queue.clear();
+				System.err.println("**********\n**********\n**********\n**********\nVIDER**********\n**********\n**********\n**********\n");
+			}
 			Object mes = message_queue.poll();
 			
 			if(mes instanceof MessageTchat){
@@ -51,12 +55,14 @@ public class NetworkEngine extends Engine {
 				((BasicEntity) mes).init();
 				engineManager.addEntity((BasicEntity) mes);
 				//*/
+				System.out.println(""+((BasicEntity) mes).getTargetName()+" "+((BasicEntity) mes).getId()+" "+((BasicEntity) mes).getX()+" "+((BasicEntity) mes).getY());
 				
-				BasicEntity tmp = engineManager.getCurrentLevelUsed().getArrayEntite().get(((BasicEntity)mes).getId());
+				BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(((BasicEntity)mes).getId());
 				
 				if(tmp == null){
 					((BasicEntity) mes).setEngineManager(engineManager);// car l'engine est celui du serveur donc on met le bon
 					((BasicEntity) mes).init();
+					Deplacement.enleverEntiteDesTiles((BasicEntity) mes);
 					engineManager.addEntity((BasicEntity) mes);
 					Deplacement.ajouterEntiteDansTiles((BasicEntity) mes);
 					
@@ -66,7 +72,7 @@ public class NetworkEngine extends Engine {
 					tmp.copy(((BasicEntity) mes));
 					Deplacement.ajouterEntiteDansTiles(tmp);
 					
-					System.out.println(""+((BasicEntity) mes).getTargetName()+" "+((BasicEntity) mes).getId()+" "+((BasicEntity) mes).getX()+" "+((BasicEntity) mes).getY());
+					System.out.println(""+tmp.getTargetName()+" "+tmp.getId()+" "+tmp.getX()+" "+tmp.getY());
 				}
 				
 			}else if(mes instanceof Player){
@@ -99,7 +105,7 @@ public class NetworkEngine extends Engine {
 			}else if(mes instanceof LevelDrol){
 				/*
 				 * Ceci n'est plus utilise normalement mais je garde ce code au cas ou.
-				 * 
+				 * Ne pas utiliser ca, merci
 				 */
 				//*
 				if(engineManager.getCurrentLevelUsed() == null){

@@ -103,6 +103,9 @@ public class LevelDrol extends Level {
 		}
 	}
 	
+	/**
+	 * Vide l'array et vide le tableau qui contient les entites
+	 */
 	public void clear(){
 		arrayEntite.clear();
 		for(int i=0;i<hauteurNiveau;i++)
@@ -331,7 +334,8 @@ public class LevelDrol extends Level {
 	public void setTileSet(TileSet tileSet) {
 		this.tileSet = tileSet;
 	}
-
+	
+	@Deprecated
 	synchronized public HashMap<Integer, BasicEntity> getArrayEntite() {
 		return arrayEntite;
 	}
@@ -339,7 +343,8 @@ public class LevelDrol extends Level {
 	synchronized public BasicEntity getEntity(final int id){
 		return arrayEntite.get(id);
 	}
-
+	
+	@Deprecated
 	public void setArrayEntite(HashMap<Integer, BasicEntity> arrayEntite) {
 		this.arrayEntite = arrayEntite;
 	}

@@ -130,6 +130,7 @@ public class InGameMultiView extends View {
 		//engineManager.update(delta);
 		engineManager.getNetworkEngine().processMessage();
 		engineManager.getSoundEngine().processMessage();
+		
 	}
 	
 	@Override

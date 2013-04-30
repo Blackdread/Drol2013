@@ -56,6 +56,8 @@ public class IA implements IUpdatable{
 				
 				z.setLocation(vec.x, vec.y);
 				engineManager.addEntity(z);
+				
+				System.out.println("nouveau zombie");
 			}
 	}
 	

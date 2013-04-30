@@ -73,19 +73,19 @@ public abstract class InputsAndOutputs implements IInputsAndOutputs, ITargetName
 	public abstract void init();
 	
 	/**
-	 * 
+	 * Copy les variables de l'entite passer en parametre dans celle qui appelle la fonction
 	 * @param objetACopier
 	 */
 	public void copy(InputsAndOutputs objetACopier){
-		removeEntityFromWorld = objetACopier.removeEntityFromWorld;
-		removeHierarchy = objetACopier.removeHierarchy;
-		x = objetACopier.x;
-		y = objetACopier.y;
-		id = objetACopier.id;
-		xOrigin = objetACopier.xOrigin;
-		yOrigin = objetACopier.yOrigin;
-		name = objetACopier.name;
-		shape = objetACopier.shape;	// peut etre qu'il faut faire un clone()
+		this.removeEntityFromWorld = objetACopier.removeEntityFromWorld;
+		this.removeHierarchy = objetACopier.removeHierarchy;
+		this.x = objetACopier.x;
+		this.y = objetACopier.y;
+		this.id = objetACopier.id;
+		this.xOrigin = objetACopier.xOrigin;
+		this.yOrigin = objetACopier.yOrigin;
+		this.name = objetACopier.name;
+		this.shape = objetACopier.shape;	// peut etre qu'il faut faire un clone()
 		
 		
 		// array_outputs = objetACopier.array_outputs; faire copy
