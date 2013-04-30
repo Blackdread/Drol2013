@@ -66,7 +66,7 @@ public class NetworkEngine extends Engine {
 					tmp.copy(((BasicEntity) mes));
 					Deplacement.ajouterEntiteDansTiles(tmp);
 					
-					//System.out.println("tmp was not null");
+					System.out.println(""+((BasicEntity) mes).getTargetName()+" "+((BasicEntity) mes).getId()+" "+((BasicEntity) mes).getX()+" "+((BasicEntity) mes).getY());
 				}
 				
 			}else if(mes instanceof Player){

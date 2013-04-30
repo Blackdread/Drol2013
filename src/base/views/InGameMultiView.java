@@ -127,7 +127,9 @@ public class InGameMultiView extends View {
 			player.setIdEntityHePlays(15);
 			engineManager.getCurrentLevelUsed().getScroll().mettreAJourScroll(player.getIdEntityHePlays());
 		}
-		engineManager.update(delta);
+		//engineManager.update(delta);
+		engineManager.getNetworkEngine().processMessage();
+		engineManager.getSoundEngine().processMessage();
 	}
 	
 	@Override

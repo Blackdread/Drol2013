@@ -48,14 +48,15 @@ public class IA implements IUpdatable{
 	 * Spawn un zombie
 	 */
 	public void spawnZombie(){
-		if(engineManager.getCurrentLevelUsed().getMaxZombieEnMemeTemps() > engineManager.getCurrentLevelUsed().getNbZombie()){
-			Zombi z = new Zombi("zombi", engineManager, 10);
-			
-			Vector2f vec = engineManager.getCurrentLevelUsed().trouverZoneLibre(z);
-			
-			z.setLocation(vec.x, vec.y);
-			engineManager.addEntity(z);
-		}
+		if(engineManager.getCurrentLevelUsed() != null)
+			if(engineManager.getCurrentLevelUsed().getMaxZombieEnMemeTemps() > engineManager.getCurrentLevelUsed().getNbZombie()){
+				Zombi z = new Zombi("zombi", engineManager, 10);
+				
+				Vector2f vec = engineManager.getCurrentLevelUsed().trouverZoneLibre(z);
+				
+				z.setLocation(vec.x, vec.y);
+				engineManager.addEntity(z);
+			}
 	}
 	
 	public void addEntity(ActiveEntity entity){

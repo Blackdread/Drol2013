@@ -3,7 +3,6 @@ package base.engine.entities.others.triggers;
 import java.util.ArrayList;
 
 import base.engine.EngineManager;
-import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.BasicEntity;
@@ -51,7 +50,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 			if(entity instanceof IActivator)	// TODO sur ?
 			if(testFilter(entity))
 				if(remoteDestination != null){
-					ArrayList<BasicEntity> tmp = Game.getEngineManager().getInfoManager().getEntity(remoteDestination);
+					ArrayList<BasicEntity> tmp = engineManager.getInfoManager().getEntity(remoteDestination);
 					if(tmp != null){
 						int taille = tmp.size();
 						if(taille > 1){
@@ -81,7 +80,7 @@ public class TriggerTeleport extends TriggerObjectInZone {
 									m.i_data.put(MessageKey.P_Y, (int)tmpInfo.getY());
 									m.engine = EngineManager.LOGIC_ENGINE;
 									
-									Game.getEngineManager().receiveMessage(m);
+									engineManager.receiveMessage(m);
 							}
 						}
 					}else
