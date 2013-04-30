@@ -1,11 +1,16 @@
 package base.tile;
 
+import java.io.Serializable;
+
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 import base.engine.levels.LevelDrol;
 
-public class Scroll {
-	EngineManager engineManager;
+public class Scroll implements Serializable{
+	
+	private static final long serialVersionUID = 4756562631193845594L;
+	
+	private transient EngineManager engineManager;
 	private int xScroll, yScroll;
 	private int width, height;
 
@@ -93,6 +98,14 @@ public class Scroll {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public EngineManager getEngineManager() {
+		return engineManager;
+	}
+
+	public void setEngineManager(EngineManager engineManager) {
+		this.engineManager = engineManager;
 	}
 
 }

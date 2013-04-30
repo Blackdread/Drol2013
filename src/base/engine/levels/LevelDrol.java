@@ -116,6 +116,8 @@ public class LevelDrol extends Level {
 		hauteurNiveau = level.hauteurNiveau;
 		largeurTile = level.largeurTile;
 		hauteurTile = level.hauteurTile;
+		maxZombieEnMemeTemps = level.maxZombieEnMemeTemps;
+		nbZombie = level.nbZombie;
 		
 		// A voir
 		arrayEntite = level.arrayEntite;
