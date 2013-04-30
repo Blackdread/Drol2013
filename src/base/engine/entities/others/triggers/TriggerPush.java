@@ -5,6 +5,7 @@ package base.engine.entities.others.triggers;
 
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * It is a trigger volume that pushes entities that touch it, except those with a parent
@@ -18,6 +19,8 @@ public class TriggerPush extends TriggerObjectInZone {
 	//private final char PUSH_XZ = 1;
 	//private final char PUSH_YZ = 2;
 	
+	private static final long serialVersionUID = -656133020689450778L;
+
 	/**
 	 * Angles indicating the direction to push touched entities
 	 * 0 to 360 degrees
@@ -40,6 +43,13 @@ public class TriggerPush extends TriggerObjectInZone {
 		//direction = PUSH_XY;
 	}
 
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		angleDirection = ((TriggerPush)objetACopier).angleDirection;
+		speedOfPush = ((TriggerPush)objetACopier).speedOfPush;
+	}
+	
 	@Override
 	public void update(int delta) {
 		super.update(delta);

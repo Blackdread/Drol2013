@@ -13,6 +13,7 @@ import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.outputs.IActivator;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.ResourceManager;
 /**
  * Classe qui verifie si la liste des entites qu'elle possede se trouvent dans la zone definie
@@ -23,6 +24,7 @@ import base.utils.ResourceManager;
  */
 public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 	
+	private static final long serialVersionUID = 1345045512221111973L;
 	/**
 	 * ArrayList qui contient les entites sur lesquelles le trigger peut agir (pourrait)
 	 * Cet array contient les objets dans la zone
@@ -44,6 +46,12 @@ public class TriggerObjectInZone extends Trigger implements ICollidableObject{
 		x=xx;
 		y=yy;
 		shape = new Rectangle(0,0,w,h);
+	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		arrayEntityToActON = ((TriggerObjectInZone)objetACopier).arrayEntityToActON;
 	}
 	
 	/*

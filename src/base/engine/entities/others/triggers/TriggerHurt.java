@@ -1,6 +1,7 @@
 package base.engine.entities.others.triggers;
 
 import base.engine.EngineManager;
+import base.engine.entities.others.outputs.InputsAndOutputs;
 
 /**
  * It is a trigger volume damages entities that touch it
@@ -9,6 +10,7 @@ import base.engine.EngineManager;
  */
 public class TriggerHurt extends TriggerObjectInZone {
 
+	private static final long serialVersionUID = 5164306649515055551L;
 	/**
 	 * The amount of damage done to entities that touch this trigger
 	 * The damage is done every half-second
@@ -19,6 +21,13 @@ public class TriggerHurt extends TriggerObjectInZone {
 	public TriggerHurt(EngineManager e, String name, int xx, int yy, int w, int h) {
 		super(e,name, xx, yy, w, h);
 	}
+	
+	@Override
+	public void copy(InputsAndOutputs objetACopier){
+		super.copy(objetACopier);
+		damage = ((TriggerHurt)objetACopier).damage;
+	}
+	
 	
 	@Override
 	public void update(int delta) {

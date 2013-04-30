@@ -97,6 +97,10 @@ public class NetworkEngine extends Engine {
 						((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).remplacerArrayPartie((ArrayList<InfoPartie>) array);
 				}
 			}else if(mes instanceof LevelDrol){
+				/*
+				 * Ceci n'est plus utilise normalement mais je garde ce code au cas ou.
+				 * 
+				 */
 				//*
 				if(engineManager.getCurrentLevelUsed() == null){
 					engineManager.setCurrentLevelUsed((LevelDrol)mes);

@@ -13,11 +13,13 @@ import java.util.HashMap;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import base.engine.CollisionManager;
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
 import base.tile.Scroll;
 import base.tile.Tile;
 import base.tile.TileSet;
+import base.utils.Vector2f;
 
 public class LevelDrol extends Level {
 
@@ -37,6 +39,9 @@ public class LevelDrol extends Level {
 	protected HashMap<Integer, BasicEntity> arrayEntite = new HashMap<Integer, BasicEntity>();
 	
 	protected Tile[][] tabNiveau;
+	
+	protected int maxZombieEnMemeTemps = 10;
+	protected int nbZombie = 0;
 	
 	public LevelDrol(File file, TileSet tile, EngineManager engineManager) {
 		super(file);
@@ -262,6 +267,18 @@ public class LevelDrol extends Level {
 		arrayEntite.remove(id);
 	}
 	
+	public Vector2f trouverZoneLibre(BasicEntity entity){
+		Vector2f vec = new Vector2f((float)Math.random()*(largeurTile*largeurNiveau-1),(float) Math.random()*(hauteurTile*hauteurNiveau-1));
+		entity.setLocation(vec.x, vec.y);
+		
+		while(CollisionManager.testerCollision(0, 0, entity)){
+			vec.x = (float)Math.random()*(largeurTile*largeurNiveau-1);
+			vec.y = (float) Math.random()*(hauteurTile*hauteurNiveau-1);
+			entity.setLocation(vec.x, vec.y);
+		}
+		
+		return vec;
+	}
 	
 	public int getLargeurNiveau() {
 		return largeurNiveau;
@@ -331,6 +348,22 @@ public class LevelDrol extends Level {
 
 	public void setScroll(Scroll scroll) {
 		this.scroll = scroll;
+	}
+
+	public int getMaxZombieEnMemeTemps() {
+		return maxZombieEnMemeTemps;
+	}
+
+	public void setMaxZombieEnMemeTemps(int maxZombieEnMemeTemps) {
+		this.maxZombieEnMemeTemps = maxZombieEnMemeTemps;
+	}
+
+	public int getNbZombie() {
+		return nbZombie;
+	}
+
+	public void setNbZombie(int nbZombie) {
+		this.nbZombie = nbZombie;
 	}
 
 	

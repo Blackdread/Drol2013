@@ -33,6 +33,7 @@ public class CollisionManager{
 	    tileXMax = (int) ((e.getX() + x + e.getWidth() - 1) / lvl.getLargeurTile());
 	    tileYMax = (int) ((e.getY() + y + e.getHeight() - 1) / lvl.getHauteurTile());
 	    
+	    
 	    for(int i = tileXMin; i <= tileXMax; i++)
 	    {
 	        for(int j= tileYMin; j <= tileYMax; j++)

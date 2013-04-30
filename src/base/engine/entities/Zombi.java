@@ -15,7 +15,7 @@ public class Zombi extends Monster {
 	protected transient Animation anim_mv_g;
 	protected transient Animation anim_static;
 	protected transient Animation current_anim;
-
+	
 	public Zombi(String name, EngineManager en, int maxLife) {
 		super(name, en, maxLife);
 		shape = new Rectangle(0,0,32,56);

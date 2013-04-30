@@ -64,7 +64,7 @@ public class EngineManager{
 		tabEngine[LOGIC_ENGINE] = new LogicEngine(this);
 		tabEngine[NETWORK_ENGINE] = new NetworkEngine(this);
 		
-		ia = new IA();	// lien vers manager ?
+		ia = new IA(this);	// lien vers manager ?
 		
 		// TODO ont-ils besoin d'un lien vers l'engineManager ?
 		filterManager = new FilterManager();

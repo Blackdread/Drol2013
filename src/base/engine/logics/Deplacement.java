@@ -9,7 +9,6 @@ import base.engine.entities.BasicEntity;
 import base.engine.entities.ICollidableObject;
 import base.engine.entities.others.triggers.Trigger;
 import base.engine.entities.others.triggers.TriggerObjectInZone;
-import base.engine.levels.Level;
 import base.engine.levels.LevelDrol;
 
 /**

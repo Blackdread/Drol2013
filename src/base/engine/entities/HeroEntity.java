@@ -89,7 +89,7 @@ public class HeroEntity extends PlayableEntity {
 		current_anim.draw(x, y);
 		
 		g.setColor(Color.red);
-		g.drawString(""+id, x-5, y-5);
+		g.drawString(""+id, x+5, y-10);
 	}
 	
 	@Override
