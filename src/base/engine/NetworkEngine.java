@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 import base.views.InGameMultiView;
 import base.views.SalonView;
@@ -38,10 +40,11 @@ public class NetworkEngine extends Engine {
 	synchronized public boolean processMessage() {
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
-			if(message_queue.size() > 100){
+			//*
+			if(message_queue.size() > 200){
 				message_queue.clear();
 				System.err.println("**********\n**********\n**********\n**********\nVIDER**********\n**********\n**********\n**********\n");
-			}
+			}//*/
 			Object mes = message_queue.poll();
 			
 			if(mes instanceof MessageTchat){
@@ -55,24 +58,24 @@ public class NetworkEngine extends Engine {
 				((BasicEntity) mes).init();
 				engineManager.addEntity((BasicEntity) mes);
 				//*/
-				System.out.println(""+((BasicEntity) mes).getTargetName()+" "+((BasicEntity) mes).getId()+" "+((BasicEntity) mes).getX()+" "+((BasicEntity) mes).getY());
+				BasicEntity entity = (BasicEntity) mes;
+				
+				System.out.println(""+entity.getTargetName()+" "+entity.getId()+" "+entity.getX()+" "+entity.getY());
 				
 				BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(((BasicEntity)mes).getId());
 				
 				if(tmp == null){
-					((BasicEntity) mes).setEngineManager(engineManager);// car l'engine est celui du serveur donc on met le bon
-					((BasicEntity) mes).init();
-					Deplacement.enleverEntiteDesTiles((BasicEntity) mes);
-					engineManager.addEntity((BasicEntity) mes);
-					Deplacement.ajouterEntiteDansTiles((BasicEntity) mes);
+					entity.setEngineManager(engineManager);// car l'engine est celui du serveur donc on met le bon
+					entity.init();
+					Deplacement.enleverEntiteDesTiles(entity);
+					engineManager.addEntity(entity);
+					Deplacement.ajouterEntiteDansTiles(entity);
 					
 					System.out.println("tmp was null");
 				}else{
 					Deplacement.enleverEntiteDesTiles(tmp);
-					tmp.copy(((BasicEntity) mes));
+					tmp.copy(entity);
 					Deplacement.ajouterEntiteDansTiles(tmp);
-					
-					System.out.println(""+tmp.getTargetName()+" "+tmp.getId()+" "+tmp.getX()+" "+tmp.getY());
 				}
 				
 			}else if(mes instanceof Player){
@@ -89,6 +92,7 @@ public class NetworkEngine extends Engine {
 				//((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).setPlayer(tmp); TODO pas sur
 			
 			}else if(mes instanceof ArrayList){
+				System.out.println("array recu");
 				/*
 				 * On suppose que les ArrayList envoyer ne contiennent que des objets du meme type
 				 */
@@ -101,6 +105,24 @@ public class NetworkEngine extends Engine {
 					}
 					if(array.get(0) instanceof InfoPartie)
 						((MultiView)Game.getStateByID(Game.MULTI_VIEW_ID)).remplacerArrayPartie((ArrayList<InfoPartie>) array);
+					if(array.get(0) instanceof BasicEntity){
+						System.out.println("array basicEntity");
+						ArrayList<BasicEntity> array2 = (ArrayList<BasicEntity>) array;
+						
+						for(BasicEntity v : array2){
+							if(v != null){
+								entiteRecuDuServeur(v);
+							}
+						}
+					}
+				}
+			}else if(mes instanceof HashMap<?, ?>){
+				
+				HashMap<Integer, BasicEntity> hash = (HashMap<Integer, BasicEntity>)mes;
+				for(BasicEntity v : hash.values()){
+					if(v != null){
+						entiteRecuDuServeur(v);
+					}
 				}
 			}else if(mes instanceof LevelDrol){
 				/*
@@ -156,6 +178,28 @@ public class NetworkEngine extends Engine {
 			return false;
 		
 		return true;
+	}
+	
+	/**
+	 * 
+	 * @param v entite recu du serveur
+	 */
+	public void entiteRecuDuServeur(BasicEntity v){
+		BasicEntity tmp = engineManager.getCurrentLevelUsed().getEntity(v.getId());
+		
+		if(tmp == null){
+			v.setEngineManager(engineManager);// car l'engine est celui du serveur donc on met le bon
+			v.init();
+			Deplacement.enleverEntiteDesTiles(v);
+			engineManager.addEntity(v);
+			Deplacement.ajouterEntiteDansTiles(v);
+			
+			System.out.println("tmp was null");
+		}else{
+			Deplacement.enleverEntiteDesTiles(tmp);
+			tmp.copy(v);
+			Deplacement.ajouterEntiteDansTiles(tmp);
+		}
 	}
 	
 	public boolean creerPartie(){

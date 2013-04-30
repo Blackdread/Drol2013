@@ -254,7 +254,7 @@ public class EngineManager{
 		return filterManager;
 	}
 
-	public LevelDrol getCurrentLevelUsed() {
+	synchronized public LevelDrol getCurrentLevelUsed() {
 		return currentLevelUsed;
 	}
 
