@@ -4,7 +4,6 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
 import base.engine.EngineManager;
-import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
@@ -12,7 +11,6 @@ import base.engine.entities.others.outputs.ITeam;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
-import base.views.TestView;
 
 /**
  * 

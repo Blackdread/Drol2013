@@ -10,7 +10,7 @@ import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.engine.entities.others.outputs.PointEntity;
 
 /**
- * math_counter is a point entity available in all Source games. 
+ * math_counter is a point entity. 
  * It stores and manipulates an integer value. 
  * It can trigger on reaching user-defined maximum or minimum values, or output 
  * its value every time it changes. It also has the ability to perform simple mathematical functions.  

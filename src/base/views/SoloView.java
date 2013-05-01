@@ -25,6 +25,7 @@ import base.engine.levels.LevelManager;
 import base.utils.ResourceManager;
 import base.utils.StatsSerializable;
 import base.views.TestView;
+import base.engine.levels.LevelDrol;
 
 /**
  * 
@@ -255,6 +256,8 @@ public class SoloView extends View {
 			a2 = Integer.valueOf(""+textNbZombie.getText());
 		}catch(Exception e){}
 		engineManager.getCurrentLevelUsed().setMaxZombieEnMemeTemps(a2);
+		for(int i = 0; i < LevelManager.getInstance(engineManager).size();i++)
+		((LevelDrol)LevelManager.getInstance(engineManager).getLevel(i)).setMaxZombieEnMemeTemps(a2);
 		
 		game.enterState(Game.TEST_STATE_ID, new FadeOutTransition(), new FadeInTransition());
 	}

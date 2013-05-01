@@ -14,6 +14,7 @@ import base.engine.Game;
 import base.engine.Player;
 import base.engine.entities.HeroEntity;
 import base.engine.entities.Zombi;
+import base.engine.entities.others.brush.FuncDoor;
 import base.engine.entities.others.filters.FilterActivatorName;
 import base.engine.entities.others.info.InfoTarget;
 import base.engine.entities.others.triggers.TriggerTeleport;
@@ -84,6 +85,7 @@ public class TestView extends View{
 		}
 			
 		init();
+		
 	}
 	
 	public void init(){
@@ -145,6 +147,9 @@ public class TestView extends View{
 		System.out.println("hero : " + hero);
 		
 		player = new Player(engineManager, ""+Configuration.getPseudo(), hero.getId());
+		
+		FuncDoor d = new FuncDoor(engineManager, "door", 540, 180);
+		engineManager.addEntity(d);
 	}
 	
 	@Override

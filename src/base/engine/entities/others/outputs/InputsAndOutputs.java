@@ -8,9 +8,7 @@ import org.newdawn.slick.geom.Shape;
 import base.engine.EngineManager;
 
 /**
- * TODO Pour le moment toutes les entites herite de cette classe, plus tard certaines entites auront besoin d'une zone (comme les TriggerObjectInZone)
- * mais d'autres n'auront pas besoin de ca (brush) on pourra donc faire heriter les entiter de 2 classes filles differentes
- * l'une Brush (Tout ce qui est Trigger, etc) et l'autre PointEntity (Logic, Light, Filter, etc)
+ * Toutes les entites herite de cette classe
  * 
  * @author Yoann CAPLAIN
  */
