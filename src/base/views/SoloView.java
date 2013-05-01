@@ -3,6 +3,7 @@ package base.views;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,6 +12,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.MouseOverArea;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -19,8 +21,10 @@ import base.engine.Game;
 import base.engine.gui.ElementString;
 import base.engine.gui.Elements;
 import base.engine.gui.ListeDeroulante;
+import base.engine.levels.LevelManager;
 import base.utils.ResourceManager;
 import base.utils.StatsSerializable;
+import base.views.TestView;
 
 /**
  * 
@@ -34,6 +38,8 @@ public class SoloView extends View {
 	
 	private ListeDeroulante listeScoresKey, listeScoresValue, listeStatsKey, listeStatsValue;
 	private Rectangle shapeScore, shapeStats;
+	
+	private TextField textChoixNiveau, textNbZombie;
 	
 	private StatsSerializable stats, scores;
 	
@@ -66,11 +72,20 @@ public class SoloView extends View {
 		shapeScore = new Rectangle(MARGIN, 100, x/2 - MARGIN - 10, yBut - 100);
 		shapeStats = new Rectangle(x/2+10, 100, x/2 - MARGIN-10, yBut - 100);
 		
+		textChoixNiveau = new TextField(container, container.getDefaultFont(), (int)shapeStats.getX(), (int)shapeStats.getY()+(int)shapeStats.getHeight()+5, 50, 22);
+		textChoixNiveau.setBackgroundColor(Color.darkGray);
+		
+		textNbZombie = new TextField(container, container.getDefaultFont(), (int)textChoixNiveau.getX(), (int)textChoixNiveau.getY()+(int)textChoixNiveau.getHeight()+5, 50, 22);
+		textNbZombie.setBackgroundColor(Color.darkGray);
+		
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
+		butRetour.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butJouer = new MouseOverArea(container, tmp, tmp.getWidth() + MARGIN*2, yBut, larg, haut);
 		butJouer.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		//butJouer.setMouseOverSound(ResourceManager.getSound("butOver"));
+		butJouer.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		listeStatsKey = new ListeDeroulante(container, ResourceManager.getImage("transparent"), (int)shapeStats.getX() + MARGIN , (int)shapeStats.getY() + 2);
 		listeStatsKey.setScrolled(true);
@@ -101,7 +116,7 @@ public class SoloView extends View {
 		getStats();
 		getScores();
 	}
-
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame sbgame, Graphics g) throws SlickException {	
 		g.setColor(Color.white);
@@ -126,6 +141,12 @@ public class SoloView extends View {
 		listeScoresKey.renderString(container, g);
 		listeScoresValue.renderString(container, g);
 		g.clearClip();
+		
+		textChoixNiveau.render(container, g);
+		g.drawString("Choix du niveau (entre 0 et "+(LevelManager.getInstance(engineManager).size()-1)+")", textChoixNiveau.getX()+textChoixNiveau.getWidth()+5, textChoixNiveau.getY());
+		
+		textNbZombie.render(container, g);
+		g.drawString("Nb de zombie max dans le niveau",textNbZombie.getX()+textNbZombie.getWidth()+5, textNbZombie.getY());
 		
 		butRetour.render(container, g);
 		butJouer.render(container, g);
@@ -162,6 +183,9 @@ public class SoloView extends View {
 	 * TODO pas sur, tronquer les mots s'ils depassent de la zone d'affichage
 	 */
 	private void getStats(){
+		listeStatsKey.clearList();
+		listeStatsValue.clearList();
+		
 		stats.loadStats();
 		
 		for(Entry<String, String> v : stats.getHashStats().entrySet())
@@ -174,6 +198,9 @@ public class SoloView extends View {
 	}
 	
 	private void getScores(){
+		listeScoresKey.clearList();
+		listeScoresValue.clearList();
+		
 		scores.loadStats();
 		
 		ArrayList<Elements> arrayKey = new ArrayList<Elements>();
@@ -208,9 +235,27 @@ public class SoloView extends View {
 		
 	}
 	
+	private void getLevels(){
+		LevelManager.getInstance(engineManager).addLevels("levels/");
+		
+	}
+	
 	private void startCampaign(){
 		container.setMouseGrabbed(false);
-		((View)game.getState(Game.TEST_STATE_ID)).initResources();	// TODO temporaire
+		//((View)game.getState(Game.TEST_STATE_ID)).initResources();	// TODO temporaire
+		int a = 0;
+		try{
+			a = Integer.valueOf(""+textChoixNiveau.getText());
+		}catch(Exception e){}
+		
+		((TestView)game.getState(Game.TEST_STATE_ID)).setChoixLevel(a);
+		
+		int a2 = 60;
+		try{
+			a2 = Integer.valueOf(""+textNbZombie.getText());
+		}catch(Exception e){}
+		engineManager.getCurrentLevelUsed().setMaxZombieEnMemeTemps(a2);
+		
 		game.enterState(Game.TEST_STATE_ID, new FadeOutTransition(), new FadeInTransition());
 	}
 	
@@ -222,5 +267,8 @@ public class SoloView extends View {
 	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
 		super.enter(container, game);
 		engineManager.setPlayingMulti(false);
+		getStats();
+		getScores();
+		textNbZombie.setText(""+engineManager.getCurrentLevelUsed().getMaxZombieEnMemeTemps());
 	}
 }

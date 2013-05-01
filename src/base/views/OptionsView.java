@@ -38,7 +38,7 @@ public class OptionsView extends View {
 
 	MouseOverArea butQuitter, butFullscreen, butSonDesacti, butSonActi;
 	private ListeDeroulante listeDerTailleScreen;
-	private Slider sliderMusic;
+	private Slider sliderMusic, sliderSound;
 	private RoundedRectangle zone[] = new RoundedRectangle[3];
 	
 	private TextField textPseudo;
@@ -63,20 +63,24 @@ public class OptionsView extends View {
 		
 		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitter"), container.getWidth()/10, container.getHeight()-container.getHeight()/10 - 50, ResourceManager.getImage("MenuQuitterOver").getWidth(), ResourceManager.getImage("MenuQuitterOver").getHeight());
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitterOver"));
+		butQuitter.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		listeElement = ResourceManager.getImage("listeElement");
 		listeElementOver = ResourceManager.getImage("listeElementOver");
 		
 		butFullscreen = new MouseOverArea(container, ResourceManager.getImage("fullscreen"), 50, 50, 150, 50);
 		butFullscreen.setMouseOverImage(ResourceManager.getImage("fullscreenOver"));
+		butFullscreen.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butSonActi = new MouseOverArea(container, ResourceManager.getImage("activer"), 50, 250, 150, 50);
 		butSonActi.setMouseOverImage(ResourceManager.getImage("activerOver"));
 		butSonDesacti = new MouseOverArea(container, ResourceManager.getImage("desactiver"), 50, 250, 150, 50);
 		butSonDesacti.setMouseOverImage(ResourceManager.getImage("desactiverOver"));
+		butSonDesacti.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		listeDerTailleScreen = new ListeDeroulante((AppGameContainer)container, ResourceManager.getImage("listeDeroulante").getScaledCopy(150, 40), 250, 55);
 		listeDerTailleScreen.setMouseOverImage(ResourceManager.getImage("listeDeroulanteOver").getScaledCopy(150, 40));
+		listeDerTailleScreen.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		DisplayMode modes[] = Resolution.getAvailableResolution();
 		if(modes!=null)
@@ -89,7 +93,10 @@ public class OptionsView extends View {
 		listeDerTailleScreen.chercherElementUsed();
 		listeDerTailleScreen.applyImageOverAllElement(listeElementOver);
 		
-		sliderMusic = new Slider(container, ResourceManager.getImage("slider"), ResourceManager.getImage("sliderCursor"), container.getWidth()/14, 190, Configuration.getMusicVolume(), 0, 1, true);
+		sliderMusic = new Slider(container, ResourceManager.getImage("slider"), ResourceManager.getImage("sliderCursor"), zoneX1, 190, Configuration.getMusicVolume(), 0, 1, true);
+		sliderMusic.getCursor().setMouseOverImage( ResourceManager.getImage("sliderCursorOver"));
+		
+		sliderSound = new Slider(container, ResourceManager.getImage("slider"), ResourceManager.getImage("sliderCursor"), zoneX1, 250, Configuration.getSoundVolume(), 0, 1, true);
 		sliderMusic.getCursor().setMouseOverImage( ResourceManager.getImage("sliderCursorOver"));
 
 		textPseudo = new TextField(container, container.getDefaultFont(), zoneX2, 100, 170, 22);
@@ -114,6 +121,9 @@ public class OptionsView extends View {
 		g.setColor(Color.white);
 		sliderMusic.render(container, g);
 		g.drawString("Volume de la musique :"+sliderMusic.getValuePrecision2(), sliderMusic.getX()+10, sliderMusic.getY()-32);
+		
+		sliderSound.render(container, g);
+		g.drawString("Volume des sons :"+sliderSound.getValuePrecision2(), sliderSound.getX()+10, sliderSound.getY()-32);
 		
 		listeDerTailleScreen.render(container, g);
 		
@@ -177,6 +187,12 @@ public class OptionsView extends View {
 			m.engine = EngineManager.SOUND_ENGINE;
 			engineManager.receiveMessage(m);
 		}
+		
+		if(sliderSound.mouseReleased()){
+			Configuration.setSoundVolume(sliderSound.getValuePrecision2());
+			
+		}
+		
 		engineManager.update(0);	// forcer la prise en compte des messages
 	}
 
@@ -189,6 +205,7 @@ public class OptionsView extends View {
 	public void mouseDragged(int oldx, int oldy, int newx, int newy){
 		super.mouseDragged(oldx, oldy, newx, newy);
 		sliderMusic.isMouseGrabbed(oldx, oldy, newx, newy);
+		sliderSound.isMouseGrabbed(oldx, oldy, newx, newy);
 	}
 	
 	private void enregistrerPseudo(){

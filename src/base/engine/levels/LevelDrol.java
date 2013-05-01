@@ -40,7 +40,7 @@ public class LevelDrol extends Level {
 	
 	protected Tile[][] tabNiveau;
 	
-	protected int maxZombieEnMemeTemps = 10;
+	protected int maxZombieEnMemeTemps = 60;
 	protected int nbZombie = 0;
 	
 	public LevelDrol(File file, TileSet tile, EngineManager engineManager) {
@@ -111,6 +111,7 @@ public class LevelDrol extends Level {
 		for(int i=0;i<hauteurNiveau;i++)
 			for(int j=0;j<largeurNiveau;j++)
 				tabNiveau[i][j].clear();
+		nbZombie = 0;
 	}
 	
 	public void copy(LevelDrol level){

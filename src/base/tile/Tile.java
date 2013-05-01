@@ -25,7 +25,7 @@ public class Tile implements Serializable{
 		index = i;
 	}
 	
-	public void enleverEntite(int idEntite){
+	synchronized public void enleverEntite(int idEntite){
 		//*
 		for(int i=0;i<entiteProche.size();i++)
 			if(entiteProche.get(i).getId() == idEntite){
@@ -41,7 +41,7 @@ public class Tile implements Serializable{
 	}
 	
 	
-	public void ajouterEntite(BasicEntity a){
+	synchronized public void ajouterEntite(BasicEntity a){
 		//if(!entiteProche.contains(a))
 		entiteProche.add(a);
 		//entiteProche.put(a.getId(), a);
@@ -55,13 +55,15 @@ public class Tile implements Serializable{
 		this.index = id;
 	}
 
-	public boolean isEntiteProcheEmpty(){
+	synchronized public boolean isEntiteProcheEmpty(){
 		return entiteProche.isEmpty();
 	}
-	public BasicEntity getEntiteProcheAt(final int i){
-		return entiteProche.get(i);
+	synchronized public BasicEntity getEntiteProcheAt(final int i){
+		if(i >= 0 && i < entiteProche.size())
+			return entiteProche.get(i);
+		return entiteProche.get(0);
 	}
-	public BasicEntity getEntiteProcheID(final int id){
+	synchronized public BasicEntity getEntiteProcheID(final int id){
 		for(int i=0;i<entiteProche.size();i++)
 			if(entiteProche.get(i) != null)
 				if(entiteProche.get(i).getId() == id)
@@ -69,11 +71,11 @@ public class Tile implements Serializable{
 		return null;
 	}
 	
-	public int getEntiteProcheSize(){
+	synchronized public int getEntiteProcheSize(){
 		return entiteProche.size();
 	}
 	
-	public void clear(){
+	synchronized public void clear(){
 		entiteProche.clear();
 	}
 	

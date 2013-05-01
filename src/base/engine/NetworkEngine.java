@@ -35,6 +35,13 @@ public class NetworkEngine extends Engine {
 		super(engineManager);
 	}
 	
+	@Override
+	synchronized public void receiveMessage(Object mes){
+		if(mes instanceof BasicEntity)
+			entiteRecuDuServeur((BasicEntity) mes);
+		else
+			super.receiveMessage(mes);
+	}
 	
 	@Override
 	synchronized public boolean processMessage() {

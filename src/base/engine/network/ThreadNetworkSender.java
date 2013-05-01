@@ -19,6 +19,7 @@ public class ThreadNetworkSender implements Runnable{
 	
 
 	public ThreadNetworkSender(Socket s, NetworkEngine e) throws IOException {
+		s.setTcpNoDelay(true);
 		sock = s;
 		oos = new ObjectOutputStream(s.getOutputStream());
 		net = e;
@@ -34,6 +35,8 @@ public class ThreadNetworkSender implements Runnable{
 			{
 				try {
 					oos.writeObject(m);
+					oos.flush();
+					oos.reset();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

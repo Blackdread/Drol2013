@@ -4,10 +4,14 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.EngineManager;
+import base.engine.Game;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.ResourceManager;
+import base.views.TestView;
 
 /**
  * 
@@ -40,6 +44,7 @@ public class HeroEntity extends PlayableEntity {
 		weapon = new WeaponTirLinear(en,500);
 		init();
 		moving = false;
+		controlledByIA = false;
 	}
 
 	@Override
@@ -102,6 +107,12 @@ public class HeroEntity extends PlayableEntity {
 		{
 			timer.update(delta);
 		}
+	}
+	
+	public void kill()
+	{
+		if(!engineManager.isServer() && !engineManager.isPlayingMulti())
+			((TestView)Game.getStateByID(Game.TEST_STATE_ID)).goToEndGameSoloView();
 	}
 	
 	public void onDying()

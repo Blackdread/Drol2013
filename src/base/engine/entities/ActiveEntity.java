@@ -4,6 +4,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 
 import base.engine.EngineManager;
+import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
 import base.engine.entities.others.outputs.IActivator;
@@ -11,6 +12,7 @@ import base.engine.entities.others.outputs.ITeam;
 import base.engine.entities.others.outputs.IUpdatable;
 import base.engine.entities.others.outputs.InputsAndOutputs;
 import base.utils.Timer;
+import base.views.TestView;
 
 /**
  * 
@@ -65,7 +67,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		if(dying && timer.isTimeComplete())
 		{	
 			
-			System.out.println("COMPLETE");
+			//System.out.println("COMPLETE");
 			kill();
 		}
 	}
@@ -92,6 +94,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	//A redéfinir si on veut faire quelque chose avec sa mort
 	public void onDying()
 	{
+		
 		timer.reset();
 	}
 	
@@ -103,6 +106,8 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		mes.instruction = MessageKey.I_REMOVE_ENTITY;
 		mes.i_data.put(MessageKey.P_ID, id);
 		engineManager.receiveMessage(mes);
+		
+		((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().setScore(((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().getScore() + 10);
 	}
 
 	public boolean isAlive() {

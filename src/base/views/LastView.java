@@ -18,7 +18,7 @@ import base.utils.Timer;
  */
 public class LastView extends View{
 
-	private static final int WAIT_TIME_BEFORE_NEXTR = 4000;	// 7000
+	private static final int WAIT_TIME_BEFORE_NEXTR = 1000;
 	
 	private Image background;
 	private Timer timer;

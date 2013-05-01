@@ -60,9 +60,33 @@ public class StatsSerializable implements Serializable{
         }catch(Exception e){e.printStackTrace();}
 	}
 	
+	/**
+	 * Ajoute au hashMap le stats en ecrasant ce qui y avait avant
+	 * @param name
+	 * @param value
+	 */
 	public void addStat(String name, String value){
 		hashStats.put(name, value);
 	}
+	
+	/**
+	 * Ajoute a la valeur actuel la value passe en parametre
+	 * @param name nom du stat
+	 * @param value la valeur en int
+	 */
+	public void addStat(String name, int value){
+		//hashStats.put(name, value);
+		String val = hashStats.get(""+name);
+		
+		try{
+			if(val != null)
+				hashStats.put(""+name, ""+(Integer.valueOf(val) + value));
+			else
+				hashStats.put(""+name, ""+value);
+
+		}catch(Exception e){}
+	}
+	
 	public String getStat(String name){
 		return hashStats.get(name);
 	}

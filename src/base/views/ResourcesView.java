@@ -10,6 +10,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import base.engine.Game;
 import base.engine.gui.ProgressBarFillRect;
+import base.engine.levels.LevelManager;
 import base.utils.ResourceManager;
 import base.utils.Timer;
 

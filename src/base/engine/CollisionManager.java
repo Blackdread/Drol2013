@@ -102,8 +102,9 @@ public class CollisionManager{
 			        		
 			        		BasicEntity b = lvl.getTabNiveau()[j][i].getEntiteProcheAt(k);
 			        		
-			        		if(e.getShape().intersects(b.getShape()))
-			        			hm.put(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k).getId(), lvl.getTabNiveau()[j][i].getEntiteProcheAt(k));
+			        		if(b != null)
+			        			if(e.getShape().intersects(b.getShape()))
+			        				hm.put(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k).getId(), lvl.getTabNiveau()[j][i].getEntiteProcheAt(k));
 			        		
 			        	}
 		        	}

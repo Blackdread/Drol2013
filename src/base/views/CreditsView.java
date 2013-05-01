@@ -31,6 +31,7 @@ public class CreditsView extends View {
 		
 		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitterOver"), container.getWidth()/10, container.getHeight()-container.getHeight()/10 - 50, ResourceManager.getImage("MenuQuitterOver").getWidth(), ResourceManager.getImage("MenuQuitterOver").getHeight());
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitter"));
+		butQuitter.setMouseDownSound(ResourceManager.getSound("butClick"));
 	}
 
 

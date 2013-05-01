@@ -1,5 +1,6 @@
 package base.engine;
 
+import base.utils.StatsSerializable;
 import base.utils.Vector2f;
 import base.engine.entities.BasicEntity;
 import base.engine.entities.HeroEntity;
@@ -151,7 +152,7 @@ public class LogicEngine extends Engine {
 									
 									if(mes.o_data.containsKey(MessageKey.P_ENTITY))
 									{
-										System.out.println("Contient");
+										//System.out.println("Contient");
 										Object b = mes.o_data.get(MessageKey.P_ENTITY);
 										if(b instanceof HeroEntity)
 											t = ((HeroEntity)b).getWeapon().shoot();
@@ -168,8 +169,17 @@ public class LogicEngine extends Engine {
 										engineManager.getIA().addEntity(t);
 										engineManager.getCurrentLevelUsed().getArrayEntite().put(t.getId(), t);
 										Deplacement.deplacerEntity(engineManager,0, 0, t.getId());
-									}else
-										System.out.println("NULLLLL");
+										
+										if(!engineManager.isPlayingMulti()){
+											StatsSerializable stats = new StatsSerializable("config/statsSolo.seria");
+											stats.loadStats();
+											
+											stats.addStat("Nb de tirs", 1);
+											
+											stats.saveStats();
+										}
+									}//else
+										//System.out.println("NULLLLL");
 								}
 							}
 						}

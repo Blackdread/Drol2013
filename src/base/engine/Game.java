@@ -51,9 +51,10 @@ public class Game extends StateBasedGame {
 	public static final int SERVER_VIEW_ID = 64;
 	public static final int SALON_VIEW_ID = 128;
 	public static final int IN_GAME_MULTI_VIEW_ID = 256;
+	public static final int END_GAME_SOLO_VIEW_ID = 512;
 	
-	public static final int TRANSITION_VIEW_ID = 512;
-	public static final int LAST_VIEW_ID = 1024;
+	public static final int TRANSITION_VIEW_ID = 1024;
+	public static final int LAST_VIEW_ID = 2048;
 	
 	public static final int TEST_STATE_ID = 100;
 	
@@ -80,8 +81,10 @@ public class Game extends StateBasedGame {
 		addState(new TransitionView());
 		addState(new LastView());
 		
+		addState(new EndGameSoloView());
 		addState(new TestView());
 		addState(new InGameMultiView());
+		
 	}
 	
 	private void applyCurrentConfiguration(AppGameContainer container) throws IOException, SlickException {
@@ -89,6 +92,7 @@ public class Game extends StateBasedGame {
 		container.setDisplayMode(Configuration.getWidth(), Configuration.getHeight(), Configuration.isFullScreen());  
 		container.setTargetFrameRate(Configuration.getTargetFPS());
 		container.setSmoothDeltas(Configuration.isSmoothDeltas());
+		container.setMultiSample(4);
 		container.setVSync(Configuration.isVSynch());
 		container.setMusicVolume(Configuration.getMusicVolume());
 		container.setMusicOn(Configuration.isMusicOn());

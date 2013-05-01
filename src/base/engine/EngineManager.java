@@ -80,7 +80,8 @@ public class EngineManager{
 			if(((Message)mes).engine != Message.NO_ENGINE){
 				tabEngine[((Message)mes).engine].receiveMessage(mes);
 				if(playingMulti && !server){
-					getNetworkEngine().sendObject(mes);
+					if(((Message) mes).instruction <= 16 && ((Message) mes).instruction >= 14)
+						getNetworkEngine().sendObject(mes);
 					//System.out.println("objet envoyer EngineManager");
 				}
 			}

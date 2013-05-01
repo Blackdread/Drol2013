@@ -14,7 +14,7 @@ public class IA implements IUpdatable{
 	
 	private HashMap<Integer, ActiveEntity> updatable = new HashMap<Integer, ActiveEntity>();
 	
-	private Timer spawnZombi = new Timer(800);
+	private Timer spawnZombi = new Timer(100);
 	
 	private EngineManager engineManager;
 	
@@ -58,7 +58,7 @@ public class IA implements IUpdatable{
 				z.setLocation(vec.x, vec.y);
 				engineManager.addEntity(z);
 				
-				System.out.println("nouveau zombie");
+				//System.out.println("nouveau zombie");
 			}
 	}
 	

@@ -1,6 +1,7 @@
 package base.engine.entities.others.brush;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
@@ -9,6 +10,8 @@ public class FuncBrush extends BasicEntity {
 
 	private static final long serialVersionUID = -8607596640013462422L;
 
+	protected Image textureDuBrush;
+	
 	public FuncBrush(EngineManager e, String name) {
 		super(e, name);
 		// TODO Auto-generated constructor stub

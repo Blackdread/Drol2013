@@ -15,7 +15,10 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import base.engine.EngineManager;
 import base.engine.Game;
+import base.engine.Message;
+import base.engine.MessageKey;
 import base.engine.MessageTchat;
 import base.engine.Player;
 import base.utils.Configuration;
@@ -54,12 +57,15 @@ public class SalonView extends View {
 		
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
+		butRetour.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butLancerPartie = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg*2+MARGIN*2, yBut, larg, haut);
 		butLancerPartie.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butLancerPartie.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butTchatSend = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), textTchat.getX()+textTchat.getWidth()/2, textTchat.getY()+textTchat.getHeight()+2, larg, haut);
 		butTchatSend.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butTchatSend.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		arrayMessageTchat.clear();
 		maxMessageToDraw = (int) (shapeTchat.getHeight()/20);
@@ -137,6 +143,8 @@ public class SalonView extends View {
 			envoyerMessageTchat();
 		}else if(butLancerPartie.isMouseOver()){
 			engineManager.getNetworkEngine().lancerPartie();
+		}else if(butRetour.isMouseOver()){
+			gotoPreviousView();
 		}
 	}
 	
@@ -147,6 +155,18 @@ public class SalonView extends View {
 			textTchat.setText("");
 			textTchat.setFocus(true);
 		}
+	}
+	
+	@Override
+	public void gotoPreviousView(){
+		
+		Message m = new Message();
+		m.instruction = MessageKey.I_LEAVE_GAME;
+		m.engine = Message.NO_ENGINE;
+		
+		engineManager.getNetworkEngine().sendObject(m);
+		
+		super.gotoPreviousView();
 	}
 	
 	public void goToTransitionView(){

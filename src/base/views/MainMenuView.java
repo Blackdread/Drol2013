@@ -15,6 +15,7 @@ import base.engine.EngineManager;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.levels.LevelManager;
 import base.utils.Configuration;
 import base.utils.ResourceManager;
 
@@ -31,9 +32,10 @@ import base.utils.ResourceManager;
 public class MainMenuView extends View {
 
 	private Image background;
-	MouseOverArea butJouer, butSolo, butMulti, butOption, butQuitter, butCredits;
+	private MouseOverArea butJouer, butSolo, butMulti, butOption, butQuitter, butCredits;
 	
 	private boolean wasOverJouer = false;
+	private boolean doOnce = false;
 
 	@Override
 	public void initResources() {
@@ -49,21 +51,27 @@ public class MainMenuView extends View {
 		
 		butJouer = new MouseOverArea(container, tmp, x, y, larg, haut);
 		butJouer.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butJouer.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butSolo = new MouseOverArea(container, ResourceManager.getImage("MenuSolo"), x + tmp.getWidth(), y,  ResourceManager.getImage("MenuSolo").getWidth(),  ResourceManager.getImage("MenuSolo").getHeight());
 		butSolo.setMouseOverImage(ResourceManager.getImage("MenuSoloOver"));
+		butSolo.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butMulti = new MouseOverArea(container, ResourceManager.getImage("MenuMulti"), x + tmp.getWidth() + ResourceManager.getImage("MenuSolo").getWidth(), y, ResourceManager.getImage("MenuMulti").getWidth(), ResourceManager.getImage("MenuMulti").getHeight());
 		butMulti.setMouseOverImage(ResourceManager.getImage("MenuMultiOver"));
+		butMulti.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butOption = new MouseOverArea(container, ResourceManager.getImage("MenuOption"), x, y+haut, larg, haut);
 		butOption.setMouseOverImage(ResourceManager.getImage("MenuOptionOver"));
+		butOption.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butQuitter = new MouseOverArea(container, ResourceManager.getImage("MenuQuitter"), x, y+haut*2-25, larg, haut);
 		butQuitter.setMouseOverImage(ResourceManager.getImage("MenuQuitterOver"));
+		butQuitter.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butCredits = new MouseOverArea(container, ResourceManager.getImage("MenuCredits"), x, y+haut*3-50, larg, haut);
 		butCredits.setMouseOverImage(ResourceManager.getImage("MenuCreditsOver"));
+		butCredits.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		if(Configuration.isMusicOn()){
 			Message m = new Message();
@@ -75,7 +83,10 @@ public class MainMenuView extends View {
 			
 			engineManager.receiveMessage(m);
 		}
-		
+		if(!doOnce){
+			LevelManager.getInstance(engineManager).addLevels("levels");
+			doOnce = true;
+		}
 	}
 	
 	@Override
@@ -110,6 +121,17 @@ public class MainMenuView extends View {
 		}
 		if(butJouer.isMouseOver())
 			wasOverJouer = true;
+		
+		/*
+		if(butJouer.isMouseOver() || butSolo.isMouseOver() || butMulti.isMouseOver() || butOption.isMouseOver() || butQuitter.isMouseOver() || butCredits.isMouseOver() && !ResourceManager.getSound("butOver").playing()){
+			Message m = new Message();
+			m.instruction = MessageKey.I_PLAY_SOUND;
+			m.s_data.put(MessageKey.P_NAME, "butOver");
+			m.engine = EngineManager.SOUND_ENGINE;
+			
+			engineManager.receiveMessage(m);
+		}//*/
+		
 	}
 	
 	@Override

@@ -97,15 +97,19 @@ public class MultiView extends View {
 		
 		butRetour = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN, yBut, larg, haut);
 		butRetour.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
+		butRetour.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butRejoindreServerAvecIp = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg+MARGIN, yBut, larg, haut);
 		butRejoindreServerAvecIp.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butRejoindreServerAvecIp.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butCreerPartie = new MouseOverArea(container, ResourceManager.getImage("MenuJouer"), MARGIN+larg*2+MARGIN*2, yBut, larg, haut);
 		butCreerPartie.setMouseOverImage(ResourceManager.getImage("MenuJouerOver"));
+		butCreerPartie.setMouseDownSound(ResourceManager.getSound("butClick"));
 		
 		butRejoindrePartieAvecID = new MouseOverArea(container, ResourceManager.getImage("butRetour"), MARGIN+larg*3+MARGIN*3, yBut, larg, haut);
 		butRejoindrePartieAvecID.setMouseOverImage(ResourceManager.getImage("butRetourOver"));
+		butRejoindrePartieAvecID.setMouseDownSound(ResourceManager.getSound("butClick"));
 	}
 
 

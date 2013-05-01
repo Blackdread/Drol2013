@@ -6,6 +6,9 @@ import org.newdawn.slick.geom.Rectangle;
 
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
+import base.engine.Game;
+import base.utils.StatsSerializable;
+import base.views.TestView;
 
 public class Monster extends PlayableEntity {
 
@@ -47,15 +50,26 @@ public class Monster extends PlayableEntity {
 		
 		if(collideWith != null)
 		{
-			if(collideWith instanceof Tir)
+			if(collideWith instanceof Tir){
+				dying = true;
 				this.onDying();
-			else if(collideWith instanceof ActiveEntity)
+				((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().setScore(((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().getScore() + 10);
+				if(!engineManager.isPlayingMulti()){
+					StatsSerializable stats = new StatsSerializable("config/statsSolo.seria");
+					stats.loadStats();
+					
+					stats.addStat("Nb de monstres tués", 1);
+					
+					stats.saveStats();
+				}
+			
+			}else if(collideWith instanceof ActiveEntity)
 				((ActiveEntity)collideWith).onDying();
 		}
 		else if(CollisionManager.isEntityCollidingWithLeftOrRight(this))
 		{	
 			
-			System.out.println("Coll monstre avec mur");
+			//System.out.println("Coll monstre avec mur");
 			//Si il tape un mur il part dans le sens inverse
 			vitesse.x *= -1;
 			if(direction == BasicEntity.DROITE)

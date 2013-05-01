@@ -41,7 +41,7 @@ public class Player implements Serializable, ITeam, Cloneable{
 	 */
 	private int team = -1;
 	
-	private int score;
+	private int score = 0;
 	
 	public Player(EngineManager engineManager, String pseudo){
 		this.pseudo = pseudo;
