@@ -59,6 +59,9 @@ public class TirLinear extends Tir {
 		if(collideWith != expediteur)
 		{
 			if(collideWith instanceof ActiveEntity)
+				collideWith.onCollision(this);
+			/*
+			if(collideWith instanceof ActiveEntity)
 			{
 				Message m2 = new Message();
 				m2.instruction = MessageKey.I_REMOVE_ENTITY;
@@ -66,7 +69,7 @@ public class TirLinear extends Tir {
 				m2.engine = EngineManager.LOGIC_ENGINE;
 				
 				engineManager.receiveMessage(m2);
-			}
+			}*/
 			
 			Message m = new Message();
 			m.instruction = MessageKey.I_REMOVE_ENTITY;

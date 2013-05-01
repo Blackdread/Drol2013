@@ -16,6 +16,8 @@ import org.newdawn.slick.Graphics;
 import base.engine.CollisionManager;
 import base.engine.EngineManager;
 import base.engine.entities.BasicEntity;
+import base.engine.entities.HeroEntity;
+import base.engine.entities.ICollidableObject;
 import base.tile.Scroll;
 import base.tile.Tile;
 import base.tile.TileSet;
@@ -110,7 +112,8 @@ public class LevelDrol extends Level {
 		arrayEntite.clear();
 		for(int i=0;i<hauteurNiveau;i++)
 			for(int j=0;j<largeurNiveau;j++)
-				tabNiveau[i][j].clear();
+				if(tabNiveau[i][j] != null)
+					tabNiveau[i][j].clear();
 		nbZombie = 0;
 	}
 	
@@ -277,11 +280,20 @@ public class LevelDrol extends Level {
 		Vector2f vec = new Vector2f((float)Math.random()*(largeurTile*largeurNiveau-1),(float) Math.random()*(hauteurTile*hauteurNiveau-1));
 		entity.setLocation(vec.x, vec.y);
 		
-		while(CollisionManager.testerCollision(0, 0, entity)){
-			vec.x = (float)Math.random()*(largeurTile*largeurNiveau-1);
-			vec.y = (float) Math.random()*(hauteurTile*hauteurNiveau-1);
-			entity.setLocation(vec.x, vec.y);
+		ArrayList<HeroEntity> array = new ArrayList<HeroEntity>();
+		
+		for(BasicEntity v : arrayEntite.values()){
+			if(v != null && v instanceof HeroEntity)
+				array.add((HeroEntity) v);
 		}
+		
+		for(HeroEntity v : array)
+			if(v != null && !v.isCollidingWith((ICollidableObject) entity))
+				while(CollisionManager.testerCollision(0, 0, entity)){
+					vec.x = (float)Math.random()*(largeurTile*largeurNiveau-1);
+					vec.y = (float) Math.random()*(hauteurTile*hauteurNiveau-1);
+					entity.setLocation(vec.x, vec.y);
+				}
 		
 		return vec;
 	}

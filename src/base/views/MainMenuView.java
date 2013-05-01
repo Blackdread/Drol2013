@@ -15,6 +15,7 @@ import base.engine.EngineManager;
 import base.engine.Game;
 import base.engine.Message;
 import base.engine.MessageKey;
+import base.engine.levels.LevelDrol;
 import base.engine.levels.LevelManager;
 import base.utils.Configuration;
 import base.utils.ResourceManager;

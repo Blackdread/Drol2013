@@ -170,7 +170,8 @@ public class EngineManager{
 		triggerManager.clear();
 		outputManager.clear();
 		
-		currentLevelUsed.clear();
+		if(currentLevelUsed != null)
+			currentLevelUsed.clear();
 		
 		for(int i=0;i<NB_ENGINE;i++)
 			tabEngine[i].clear();

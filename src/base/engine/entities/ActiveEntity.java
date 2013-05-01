@@ -107,7 +107,6 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		mes.i_data.put(MessageKey.P_ID, id);
 		engineManager.receiveMessage(mes);
 		
-		((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().setScore(((TestView)Game.getStateByID(Game.TEST_STATE_ID)).getPlayer().getScore() + 10);
 	}
 
 	public boolean isAlive() {
