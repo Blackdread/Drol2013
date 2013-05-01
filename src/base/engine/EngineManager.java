@@ -80,13 +80,14 @@ public class EngineManager{
 			if(((Message)mes).engine != Message.NO_ENGINE){
 				tabEngine[((Message)mes).engine].receiveMessage(mes);
 				if(playingMulti && !server){
-					if(((Message) mes).instruction <= 16 && ((Message) mes).instruction >= 14)
+					if(((Message) mes).instruction <= 16 && ((Message) mes).instruction >= 13)
 						getNetworkEngine().sendObject(mes);
-					//System.out.println("objet envoyer EngineManager");
+					System.out.println("objet envoyer EngineManager");
 				}
 			}
 		}else
 			tabEngine[NETWORK_ENGINE].receiveMessage(mes);
+		
 		/*
 		switch(mes.engine){
 		case SOUND_ENGINE:

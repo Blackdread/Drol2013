@@ -86,6 +86,7 @@ public class MainMenuView extends View {
 		}
 		if(!doOnce){
 			LevelManager.getInstance(engineManager).addLevels("levels");
+			
 			doOnce = true;
 		}
 	}

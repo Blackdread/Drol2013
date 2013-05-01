@@ -23,7 +23,7 @@ public class IA implements IUpdatable{
 	 }
 	
 	@Override
-	public void update(int delta) {
+	synchronized public void update(int delta) {
 		/*
 		for(Entry<Integer, ActiveEntity> v : updatable.entrySet())
 			if(v != null)
@@ -48,7 +48,7 @@ public class IA implements IUpdatable{
 	/**
 	 * Spawn un zombie
 	 */
-	public void spawnZombie(){
+	synchronized public void spawnZombie(){
 		if(engineManager.getCurrentLevelUsed() != null)
 			if(engineManager.getCurrentLevelUsed().getMaxZombieEnMemeTemps() > engineManager.getCurrentLevelUsed().getNbZombie()){
 				Zombi z = new Zombi("zombi", engineManager, 10);
@@ -62,18 +62,18 @@ public class IA implements IUpdatable{
 			}
 	}
 	
-	public void addEntity(ActiveEntity entity){
+	synchronized public void addEntity(ActiveEntity entity){
 		updatable.put(entity.getId(), entity);
 		if(entity instanceof Zombi)
 			engineManager.getCurrentLevelUsed().setNbZombie(engineManager.getCurrentLevelUsed().getNbZombie()+1);
 	}
 	
-	public void removeEntity(ActiveEntity entity){
+	synchronized public void removeEntity(ActiveEntity entity){
 		updatable.remove(entity.getId());
 		if(entity instanceof Zombi)
 			engineManager.getCurrentLevelUsed().setNbZombie(engineManager.getCurrentLevelUsed().getNbZombie()-1);
 	}
-	public void removeEntity(int id){
+	synchronized public void removeEntity(int id){
 		BasicEntity tmp = updatable.remove(id);
 		
 		if(tmp != null)
@@ -81,7 +81,7 @@ public class IA implements IUpdatable{
 				engineManager.getCurrentLevelUsed().setNbZombie(engineManager.getCurrentLevelUsed().getNbZombie()-1);
 	}
 	
-	public void clear(){
+	synchronized public void clear(){
 		updatable.clear();
 	}
 	 

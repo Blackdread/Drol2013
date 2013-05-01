@@ -48,11 +48,11 @@ public class NetworkEngine extends Engine {
 		
 		//while(!this.message_queue.isEmpty()){
 		if(!this.message_queue.isEmpty()){
-			/*
+			
 			if(message_queue.size() > 200){
 				message_queue.clear();
 				System.err.println("**********\n**********\n**********\n**********\nVIDER\n**********\n**********\n**********\n**********\n");
-			}//*/
+			}//
 			Object mes = message_queue.poll();
 			System.out.println(""+message_queue.size());
 			

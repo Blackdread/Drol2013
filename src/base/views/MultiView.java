@@ -65,7 +65,7 @@ public class MultiView extends View {
 		player.setPseudo(Configuration.getPseudo());
 		
 		// ICI FAUT FAIRE GAFFE
-		engineManager.clearEverything();
+		//engineManager.clearEverything();
 	}
 	
 	@Override

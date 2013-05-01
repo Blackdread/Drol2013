@@ -27,6 +27,15 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected int life;
 	protected boolean dying;
 	protected boolean dead;
+	
+	public boolean isDying() {
+		return dying;
+	}
+
+	public void setDying(boolean dying) {
+		this.dying = dying;
+	}
+
 	protected boolean visible;
 	protected Timer timer;
 	
@@ -106,7 +115,6 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 		mes.instruction = MessageKey.I_REMOVE_ENTITY;
 		mes.i_data.put(MessageKey.P_ID, id);
 		engineManager.receiveMessage(mes);
-		
 	}
 
 	public boolean isAlive() {

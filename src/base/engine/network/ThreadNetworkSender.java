@@ -13,6 +13,7 @@ public class ThreadNetworkSender implements Runnable{
 	private Socket sock;
 	private ObjectOutputStream oos;
 	private NetworkEngine net;
+	
 	//private Queue<Message> message_queue = new LinkedList<Message>();
 	private Queue<Object> message_queue = new LinkedList<Object>();	// Je commence a donner la possibilite d'envoyer tout ce qu'on veut
 	boolean active;

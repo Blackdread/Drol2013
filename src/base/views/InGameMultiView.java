@@ -128,11 +128,11 @@ public class InGameMultiView extends View {
 			engineManager.getCurrentLevelUsed().getScroll().mettreAJourScroll(player.getIdEntityHePlays());
 		}
 		// Mettre seulement upadate si on veut une simulation sinon ceux qui y a en dessous en choisissant
-		//engineManager.update(delta);
+		engineManager.update(delta);
 		
-		while(engineManager.getNetworkEngine().processMessage());
+		//while(engineManager.getNetworkEngine().processMessage());
 		//engineManager.getLogicEngine().processMessage();
-		engineManager.getSoundEngine().processMessage();
+		//engineManager.getSoundEngine().processMessage();
 		
 	}
 	

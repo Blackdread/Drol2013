@@ -119,7 +119,21 @@ public class Player implements Serializable, ITeam, Cloneable{
 				m.engine = EngineManager.LOGIC_ENGINE;
 				
 				engineManager.receiveMessage(m);
-			}	
+			}
+			/*
+			if(Keyboard.isKeyDown(Input.KEY_RIGHT))
+			{
+				Message m = new Message();
+				m.instruction = MessageKey.I_MOVE_ENTITY;
+				
+				m.o_data.put(MessageKey.P_ENTITY, hero);
+				m.engine = EngineManager.LOGIC_ENGINE;
+				m.i_data.put(MessageKey.P_X, 2);
+				m.i_data.put(MessageKey.P_Y, 0);
+				
+				engineManager.receiveMessage(m);
+				
+			}*/
 		}
 	}
 	
@@ -135,6 +149,7 @@ public class Player implements Serializable, ITeam, Cloneable{
 					
 					engineManager.receiveMessage(m);
 					break;
+					
 				case Input.KEY_RIGHT:
 					m.instruction = MessageKey.I_START_ENTITY_MOVE;
 					m.i_data.put(MessageKey.P_ID, idEntityHePlays);
@@ -153,6 +168,8 @@ public class Player implements Serializable, ITeam, Cloneable{
 					
 					engineManager.receiveMessage(m);
 				break;
+				
+				default:
 			}
 		
 	}
