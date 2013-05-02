@@ -37,7 +37,7 @@ public abstract class ActiveEntity extends BasicEntity implements IActivator, IU
 	protected boolean visible;
 	protected Timer timer;
 	
-	protected boolean collisionON;
+	protected boolean collisionON = true;
 	
 	protected int team;
 	

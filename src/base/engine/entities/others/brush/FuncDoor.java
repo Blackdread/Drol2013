@@ -25,7 +25,7 @@ public class FuncDoor extends FuncBrush implements IUpdatable{
 	
 	public FuncDoor(EngineManager e, String name, int x, int y) {
 		super(e, name);
-		shape = new Rectangle(x,y,32,60);
+		shape = new Rectangle(x,y,20,60);
 		this.x = x;
 		this.y = y;
 		xDebutClosed = x;

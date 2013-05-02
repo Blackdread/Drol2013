@@ -6,6 +6,7 @@ import base.engine.entities.BasicEntity;
 import base.engine.entities.others.triggers.Trigger;
 import base.engine.entities.others.triggers.TriggerObjectInZone;
 import base.engine.levels.LevelDrol;
+import base.engine.entities.others.brush.FuncDoor;
 
 /**
  * Les methodes peuvent devenir static -> A voir
@@ -52,10 +53,12 @@ public class CollisionManager{
 	        for(int j= tileYMin; j <= tileYMax; j++)
 	        {
 	        	 for(int k=0;k<lvl.getTabNiveau()[j][i].getEntiteProcheSize();k++)
+	        	 {
 	        		 if(lvl.getTabNiveau()[j][i].getEntiteProcheAt(k) instanceof Trigger){
 	        			 ((TriggerObjectInZone)lvl.getTabNiveau()[j][i].getEntiteProcheAt(k)).addAnEntityToActON(e);
 	        			// System.out.println("ajouter dans Trigger");
 	        		 }
+	        	 }
 	        }
 	    }
 	   
