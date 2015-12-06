@@ -21,6 +21,9 @@ Our code is object-oriented in JAVA. We tried to use as many as possible what we
 
 Used Factory, game state pattern, ...
 
+
+Created by Yoann CAPLAIN and Nicolas DUPIN
+
 French:
 Fonctionnalités
 Nous avons réalisé un jeu de type Drol jouable en ligne lui ajoutant des
